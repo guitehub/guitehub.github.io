@@ -3,8 +3,8 @@
 for real cette fois un ti site pour bloguer mes merdes :
 mes notes, guides, .., des trucs hardware et tt la clique
 
-## 📰 Actu
-
+## 📰 Blog
+![windows logo icon](https://cdn.icon-icons.com/icons2/1488/PNG/512/5314-windows_102509.png) Windows 11 c'est de la merde [pour un tat de raison](./blog/winpoop11)
 
 ## 🖥️ Sysadm
 
