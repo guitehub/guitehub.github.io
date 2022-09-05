@@ -4,12 +4,12 @@ for real cette fois un ti site pour bloguer mes merdes :
 mes notes, guides, .., des trucs hardware et tt la clique
 
 ## 📰 Blog
-![windows logo icon](https://cdn.icon-icons.com/icons2/1488/PNG/512/5314-windows_102509.png) Windows 11 c'est de la merde [pour un tat de raison](./blog/winpoop11)
+- 🪟 Windows 11 c'est de la merde [pour un tat de raison](./blog/winpoop11) 👈
 
 ## 🖥️ Sysadm
 
 ## 🤑 Guide achat
-[Le bon NVMe 2TB pas cher](https://www.amazon.fr/gp/product/B08GVDNTGJ/ref=ppx_yo_dt_b_asin_title_o00_s00?ie=UTF8&psc=1), miam le ssd
+* [Le bon NVMe 2TB pas cher](https://www.amazon.fr/gp/product/B08GVDNTGJ/ref=ppx_yo_dt_b_asin_title_o00_s00?ie=UTF8&psc=1), miam le ssd
 
 ## 👾 Devnull keep
-[AIDA64 license keys](https://gist.github.com/thegreatestminer/af7a7d6cb3cafc0c5c146999c687d58d)
+220906. [AIDA64 license keys](https://gist.github.com/thegreatestminer/af7a7d6cb3cafc0c5c146999c687d58d)
