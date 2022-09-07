@@ -1,7 +1,7 @@
-# LaGuite's Pages - guitehub.github.io
+# LaGuite's Pages
 
-## le hub pour bloguer mes merdes, des notes, guides, du hardware etc;
-## *hésite pas à ne pas hésiter.*
+le hub pour bloguer mes merdes, des notes, guides, du hardware etc;
+*hésite pas à ne pas hésiter.*
 
 ```c
 malloc(ul);

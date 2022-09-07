@@ -1,7 +1,10 @@
 # Setup server Ubuntu
+
 Guides des premières étapes de base au premier lancement d'un nouveau système(serveur) linux  
 Valable à partie de Ubuntu >=20 environ
+
 ## 1. Premier setup 
+
 ### màj:
 ```bash
 apt get update
@@ -54,7 +57,7 @@ sinon cf : [https://www.digitalocean.com/community/tutorials/how-to-set-up-ssh-k
 nano /etc/ssh/sshd_config
 ```
 pour ajouter à la fin
-```ini
+```txt
 #...
 PasswordAuthentication no
 PubkeyAuthentication yes
@@ -72,7 +75,7 @@ all done pour la console direct sur le serveur
 code ~/.ssh/config
 ```
 
-```ini
+```txt
 Host {nom d'hôte}
     Hostname {ip ou nom d'hôte}
     IdentityFile ~/.ssh/{clé à utiliser}
