@@ -1,11 +1,19 @@
-remote_theme: pages-themes/cayman@v0.2.0
 plugins:
 - jekyll-remote-theme # add this line to the plugins list if you already have one
+remote_theme: pages-themes/cayman@v0.2.0
 
-title: Les pages de GuiteHub
-description: [A short description of your site's purpose]
+title: Le Hub de la guite
+description: mon /dev/null d'IT
 about: about
 
 email: email@contoso.com
 reddit: https://www.reddit.com/user/gchamort/submitted/
 twitter: https://twitter.com/gchamort
+
+collections:
+  blog:
+    output: true
+    permalink: /pages/blog/:article/
+
+include:
+  - "_includes"
