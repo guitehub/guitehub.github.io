@@ -1,3 +1,7 @@
+---
+title: Trucs d'adm sys.
+---
+
 ## 🪟 Windows 
 - Comment ....
 - Mes setups ....
