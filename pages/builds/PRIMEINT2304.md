@@ -1,5 +1,5 @@
 ---
-title: Workstation dIntel 13Gen - RTX 3060
+title: Workstation Intel i7 13th - RTX 3060
 ---
 
 ## Spécifications du PC :
