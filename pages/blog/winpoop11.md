@@ -2,6 +2,8 @@
 title: Windows 11 c'est de la grosse 💩
 ---
 
+{% include navbar.html %}
+
 <img src="https://cdn.icon-icons.com/icons2/1488/PNG/512/5314-windows_102509.png" width="42">
 
 ### Les problèmes et critiques connus de Windows 11 : un tour d'horizon

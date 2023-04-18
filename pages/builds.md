@@ -3,6 +3,8 @@ title: Montages de PC.
 layout: default
 ---
 
+{% include navbar.html %}
+
 # Montages
 - [The "MKBHD" (mat black everything)](https://fr.pcpartpicker.com/b/fcMv6h)
 

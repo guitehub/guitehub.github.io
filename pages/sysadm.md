@@ -2,6 +2,8 @@
 title: Trucs d'adm sys.
 ---
 
+{% include navbar.html %}
+
 ## 🪟 Windows 
 - Comment ....
 - Mes setups ....

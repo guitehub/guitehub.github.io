@@ -1,3 +1,9 @@
+---
+title: Tableau dynamique de vue des utilisateurs d'un AD.
+---
+
+{% include navbar.html %}
+
 # Tableau dynamique de vue des utilisateurs d'un AD
 
 PowerShell qui récupère une liste d'utilisateurs à partir d'Active Directory et affiche les informations dans une interface graphique basée sur WPF (Windows Presentation Foundation). Voici un résumé des principales fonctionnalités du script :

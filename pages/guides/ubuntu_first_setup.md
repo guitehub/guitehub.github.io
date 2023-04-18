@@ -1,4 +1,8 @@
-# Setup server Ubuntu
+---
+title: Setup server Ubuntu.
+---
+
+{% include navbar.html %}
 
 Guides des premières étapes de base au premier lancement d'un nouveau système(serveur) linux  
 Valable à partie de Ubuntu >=20 environ
