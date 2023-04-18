@@ -1,6 +1,7 @@
 ---
 title: Bonjour monde.
-layout: default
 ---
+
+{% include navbar.html %}
 
 Bonjour monde.
