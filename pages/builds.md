@@ -1,6 +1,5 @@
 ---
 title: Montages de PC.
-layout: default
 ---
 
 {% include navbar.html %}
