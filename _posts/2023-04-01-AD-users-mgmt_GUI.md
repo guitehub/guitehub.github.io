@@ -1,5 +1,11 @@
 ---
+layout: posts
 title: Tableau dynamique de vue des utilisateurs d'un AD.
+date: 2023-04-01
+categories:
+- sysadm
+image: f45feba6-c09f-4e6a-99ce-32b9b0c79e77.png
+icon: robot
 ---
 
 # Tableau dynamique de vue des utilisateurs d'un AD
@@ -16,6 +22,7 @@ Ajoute un événement "TextChanged" à la TextBox pour filtrer les résultats af
 Affiche la fenêtre WPF et attend que l'utilisateur la ferme.
 En résumé, ce script récupère les informations des utilisateurs à partir d'Active Directory, les stocke dans un DataTable, les affiche dans une interface graphique basée sur WPF et permet à l'utilisateur de filtrer les résultats en fonction de certaines propriétés.
 
+<code>
 ```powershell
 # Importez les assembly nécessaires pour utiliser WPF et Windows Forms
 Add-Type -AssemblyName PresentationFramework
@@ -77,3 +84,4 @@ $window.FindName("FilterBox").Add_TextChanged({
 $window.ShowDialog() | Out-Null
 
 ```
+</code>

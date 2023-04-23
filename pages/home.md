@@ -1,5 +1,4 @@
 ---
-layout: bootstrap
 ---
 
 # Bienvenu sur GuiteHub, bonne balade

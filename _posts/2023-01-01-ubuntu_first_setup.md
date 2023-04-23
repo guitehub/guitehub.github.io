@@ -1,7 +1,15 @@
 ---
-layout: bootstrap
-title: Setup server Ubuntu.
+layout: posts
+title: Setup server Ubuntu
+date: 2023-01-01
+categories:
+- guides
+- blog
+- sysadm
+image: logo-ubuntu-1024x576.png
 ---
+
+# Comment bien setup un petit server ubuntu
 
 Guides des premières étapes de base au premier lancement d'un nouveau système(serveur) linux  
 Valable à partie de Ubuntu >=20 environ

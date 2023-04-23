@@ -18,7 +18,7 @@
 # You can create any custom variable you would like, and they will be accessible
 # in the templates via {{ site.myvariable }}.
 
-title: Le Hub de la guite
+title: Le Hub de la Guite
 description: mon /dev/null d'IT
 about: à propos de ça
 
