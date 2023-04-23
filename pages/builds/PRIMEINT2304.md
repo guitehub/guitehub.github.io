@@ -2,8 +2,6 @@
 title: Workstation Intel i7 13th - RTX 3060
 ---
 
-{% include navbar.html %}
-
 ## Spécifications du PC :
 
 - Processeur : Intel Core i7-13700 13ème génération, 2,10 GHz de base, 16 cœurs, 24 processeurs logiques, 1,4 Mo de cache L1, 24 Mo de cache L2 et 30 Mo de cache L3.

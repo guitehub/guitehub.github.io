@@ -1,8 +1,6 @@
 ---
-layout: home
+layout: bootstrap
 ---
-
-{% include navbar.html %}
 
 # Bienvenu sur GuiteHub, bonne balade
 

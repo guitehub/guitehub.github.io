@@ -1,0 +1,73 @@
+.hero {
+    position: relative;
+    background-size: cover;
+    background-position: center;
+    height: 20vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .overlay {
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    background-color: rgba(0, 0, 0, 0.3);
+  }
+
+  .hero-title {
+    position: relative;
+    color: #fff;
+    font-size: 4rem;
+    text-align: center;
+    z-index: 1;
+  }
+
+  @media (max-width: 576px) {
+    .hero-title {
+      font-size: 2rem;
+    }
+  }
+  
+  .footer {
+    padding: 1rem 0;
+    background-color: #f8f9fa;
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+  }
+
+  .footer-links {
+    display: flex;
+    gap: 1rem;
+  }
+
+  .footer-link {
+    text-decoration: none;
+    color: #333;
+  }
+
+  .footer-text {
+    margin-left: 1rem;
+    color: #333;
+  }
+
+  @media (max-width: 767px) {
+    .footer {
+      position: static;
+    }
+  }
+
+  /* Ajouter les icônes Bootstrap Icons */
+  .bi {
+    display: inline-block;
+    vertical-align: -0.125em;
+    overflow: visible;
+    font-size: 1.25em;
+    width: 1em;
+    height: 1em;
+    fill: currentColor;
+    margin-right: 0.5em;
+  }
