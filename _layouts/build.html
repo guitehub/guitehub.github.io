@@ -1,8 +1,10 @@
 ---
-layout: default
+layout: posts
 ---
 
-{% include template-card-ppp.html link="https://fr.pcpartpicker.com/b/RP8J7P" title="DICOM Workstation 2" image="https://cdna.pcpartpicker.com/static/forever/images/userbuild/428044.da5e52bdf2386302ea1abefc46c31b5e.1600.jpg" image_alt="Image description" %}
+{% if page.link %}
+<a href="{{ page.link }}" target="_blank">🖥️ Le reste des détails de la configuration disponible ici</a>
+{% endif %}
 
 <div class="container">
     {{ page.content }}

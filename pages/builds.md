@@ -7,7 +7,7 @@ is_main: true
 
 # Montages
 
-Astuces, conseils et tutoriels pour vous aider à choisir les composants adaptés à vos besoins, apprendre les techniques de montage et optimiser les performances de votre machine. Que vous soyez un débutant curieux ou un bricoleur expérimenté.
+Astuces, conseils et tutoriels pour vous aider à choisir les composants adaptés à vos besoins, apprendre les techniques de montage et optimiser les performances de votre machine.
 
 ## PCPARTPICKER
 

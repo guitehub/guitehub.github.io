@@ -7,7 +7,7 @@ is_main: true
 
 # Guides.
 
-Guides et tutoriels logiciels ! Ici, retrouvez conseils, astuces et étapes pour maîtriser divers logiciels et applications. Que vous cherchiez à optimiser votre productivité, à apprendre de nouvelles compétences ou à résoudre des problèmes courants.
+Guides et tutoriels logiciels ! Ici, retrouvez conseils, astuces et étapes pour maîtriser divers logiciels et applications.
 
 <div class="row row-cols-1 row-cols-md-2 g-4">
 {% for post in site.posts %}

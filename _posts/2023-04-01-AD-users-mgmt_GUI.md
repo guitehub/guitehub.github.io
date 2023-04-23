@@ -5,7 +5,6 @@ date: 2023-04-01
 categories:
 - sysadm
 image: f45feba6-c09f-4e6a-99ce-32b9b0c79e77.png
-icon: robot
 ---
 
 # Tableau dynamique de vue des utilisateurs d'un AD

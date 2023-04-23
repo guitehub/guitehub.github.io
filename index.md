@@ -1,8 +1,13 @@
 ---
 layout: default
-titre: 127.0.0.1
+title: "/"
 ---
-<main class="container mt-5">
+
+# Bienvenu sur GuiteHub, bonne balade
+
+Ici, j'explore le monde fascinant des technologies de l'information, des logiciels aux matériels, en passant par les dernières innovations et tendances.
+
+<div class="container mt-5">
 
   <h2 class="mb-4">Categories :</h2>
   
@@ -29,13 +34,19 @@ titre: 127.0.0.1
   <!-- Les cartes pour les articles récents -->
   <div class="row row-cols-1 row-cols-md-2 g-4">
     {% assign sorted_posts = site.posts | sort: "date" | reverse %}
-    {% for post in sorted_posts limit:4 %}
+    {% for post in sorted_posts limit:6 %}
     {% include template-card.html link=post.url title=post.title image=post.image icon=post.icon %}
     {% endfor %}
   </div>
 
-<br>
-<br>
+</div>
 <br>
 
-</main>
+---
+
+### devnull keep
+- [AIDA64 license keys](https://gist.github.com/thegreatestminer/af7a7d6cb3cafc0c5c146999c687d58d)
+- [Le bon NVMe 2TB **PAS CHER**](https://www.amazon.fr/gp/product/B08GVDNTGJ/ref=ppx_yo_dt_b_asin_title_o00_s00?ie=UTF8&psc=1)
+
+<br>
+<br>

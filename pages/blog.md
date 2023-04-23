@@ -7,7 +7,7 @@ is_main: true
 
 # Bonjour Monde.
 
-Technologies émergentes, cybersécurité, réseaux, programmation, ... Découvertes, analyses et réflexions pour se tenir au courant ou donner l'inspiration. Que vous soyez un pro de l'informatique, un amateur curieux ou un débutant dans le monde de la technologie.
+Technologies émergentes, cybersécurité, réseaux, programmation, ... Découvertes, analyses et réflexions pour se tenir au courant ou donner l'inspiration.
 
 ##### basicaly du shitposting
 
