@@ -2,6 +2,7 @@
 layout: default
 title: Guides/tutos
 image: 4ba74bc3-ec0f-4fc0-98e1-643cea9c8247.png
+is_main: true
 ---
 
 # Guides.
@@ -15,3 +16,6 @@ Guides et tutoriels logiciels ! Ici, retrouvez conseils, astuces et étapes pour
   {% endif %}
 {% endfor %}
 </div>
+
+<br>
+<br>

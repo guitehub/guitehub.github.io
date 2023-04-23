@@ -2,6 +2,7 @@
 layout: default
 title: Articles
 image: 12e8ca3f-c436-49c7-9712-6b14c233272d.png
+is_main: true
 ---
 
 # Bonjour Monde.
@@ -17,3 +18,6 @@ Technologies émergentes, cybersécurité, réseaux, programmation, ... Découve
   {% endif %}
 {% endfor %}
 </div>
+
+<br>
+<br>

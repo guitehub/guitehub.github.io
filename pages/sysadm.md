@@ -1,9 +1,10 @@
 ---
 layout: default
-title: Trucs d'adm sys
+title: Sysadm toolbox
 categories:
 - sysadm
 image: 60db33f1d68e4a5665cf9d5eae393e3cf5e4b315.png
+is_main: true
 ---
 
 <main class="container mt-5">
@@ -42,3 +43,6 @@ image: 60db33f1d68e4a5665cf9d5eae393e3cf5e4b315.png
   {% endif %}
 {% endfor %}
 </div>
+
+<br>
+<br>
