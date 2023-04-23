@@ -1,3 +1,7 @@
+---
+layout: home
+---
+
 {% include navbar.html %}
 
 # Bienvenu sur GuiteHub, bonne balade
