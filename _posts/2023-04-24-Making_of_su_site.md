@@ -61,7 +61,7 @@ J'ai également créé des "cards" pour afficher les pages principales et les ar
 
 Au fur et à mesure que je développais le site, j'ai rencontré quelques problèmes, notamment des erreurs de déploiement et des problèmes de style. J'ai utilisé les logs de déploiement de GitHub Pages pour identifier et résoudre les erreurs. J'ai également ajusté le style et la mise en page pour m'assurer que mon site avait l'apparence souhaitée sur différents appareils.
 
-![ouais](/assets/images/Capture d’écran 2023-04-24 221326.png){:.rounded .mx-auto .d-block}
+![ouais](/assets/images/Capture d’écran 2023-04-24 221326.png){:.img-fluid .rounded .mx-auto .d-block}
 
 ### 5. Déployer le site avec GitHub Pages
 
