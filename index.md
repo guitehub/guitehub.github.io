@@ -26,12 +26,13 @@ Ici, j'explore le monde fascinant des technologies de l'information, des logicie
     {% endfor %}
   </div>
   <br>
+  <br>
   <h2 class="mb-4">Derniers articles :</h2>
   <!-- Les cartes pour les articles récents -->
   <div class="row row-cols-1 row-cols-lg-3 row-cols-md-2 g-4">
     {% assign sorted_posts = site.posts | sort: "date" | reverse %}
-    {% for post in sorted_posts limit:6 %}
-    {% include template-card.html link=post.url title=post.title image=post.image icon=post.icon %}
+    {% for post in sorted_posts limit:9 %}
+    {% include template-card.html link=post.url title=post.title image=post.image %}
     {% endfor %}
   </div>
 

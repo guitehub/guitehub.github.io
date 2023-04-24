@@ -47,8 +47,6 @@ Vous pouvez maintenant personnaliser votre site en ajoutant et modifiant des fic
 Consultez votre site :
 Votre site est maintenant en ligne et accessible à l'adresse suivante : "https://username.github.io" (remplacez "username" par votre nom d'utilisateur GitHub).
 
-
-
 ### 2. Configurer Jekyll
 
 J'ai créé un nouveau dépôt sur GitHub, ajouté les fichiers de base tel que le README et configuré GitHub Pages dans les paramètres du dépôt. , j'ai dû installer Ruby et Jekyll sur mon ordinateur. J'ai suivi les instructions de la documentation officielle de Jekyll pour installer Ruby, Bundler et Jekyll lui-même. Après avoir tout installé, j'ai cloné mon repos Github et l'ai transformé en projet Jekyll local en exécutant la commande `jekyll new .` depuis l'intérieur du repos.
@@ -63,7 +61,7 @@ J'ai également créé des "cards" pour afficher les pages principales et les ar
 
 Au fur et à mesure que je développais le site, j'ai rencontré quelques problèmes, notamment des erreurs de déploiement et des problèmes de style. J'ai utilisé les logs de déploiement de GitHub Pages pour identifier et résoudre les erreurs. J'ai également ajusté le style et la mise en page pour m'assurer que mon site avait l'apparence souhaitée sur différents appareils.
 
-<img src="/assets/images/Capture d’écran 2023-04-24 221326.png" class="rounded mx-auto d-block" alt="...">
+![ouais](/assets/images/Capture d’écran 2023-04-24 221326.png){:.rounded .mx-auto .d-block}
 
 ### 5. Déployer le site avec GitHub Pages
 

@@ -23,6 +23,4 @@ Astuces, conseils et tutoriels pour vous aider à choisir les composants adapté
 </div>
 
 <br>
-
-<br>
 <br>

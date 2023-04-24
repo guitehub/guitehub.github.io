@@ -47,12 +47,29 @@
     z-index: -1;
   }
 
+  .card-cover {
+    transition: transform 0.4s ease-in-out;
+  }
+
+  .card-cover:hover {
+    transform: scale(1.02);
+    box-shadow: 0 0 0.5rem black;
+  }
+
   .card-cover h3{
-    filter: drop-shadow(0 0 0.75rem black);
+    filter: drop-shadow(0 0 0.5rem black);
   }
 
   .text-bg-dark {
     filter: contrast(100%);
+  }
+
+  .badges-container {
+    position: absolute;
+    top: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    filter: drop-shadow(0 0 0.5rem black);
   }
  
   /* footer */
