@@ -1,17 +1,17 @@
-
 <div class="col">
   <a href="{{ post.url }}" class="text-decoration-none">
     <div class="card card-cover h-100 overflow-hidden text-bg-dark rounded-4 shadow-lg"
-      style="background-image: url('{{ site.baseurl }}/assets/images/{{ post.image }}'); background-size: cover;">
+      style="background-image: url('{{ site.baseurl }}/assets/images/{{ post.image }}'); background-size: cover; position: relative;">
+      
+      <!-- Ajout du conteneur pour les badges centrés en haut -->
+      <div class="badges-container">
+        {% for category in post.categories %}
+        <span class="badge bg-light text-bg-light me-2">{{ category }}</span>
+        {% endfor %}
+      </div>
+      
       <div class="d-flex flex-column h-100 p-5 pb-3 text-shadow-2">
         <h3 class="pt-5 mt-5 mb-4 display-6 lh-1 fw-bold">{{ post.title }}</h3>
-        {% if post.icon %}
-        <ul class="d-flex list-unstyled mt-auto">
-          <li class="me-auto">
-            <i class="bi bi-{{ post.icon }}"></i>
-          </li>
-        </ul>
-        {% endif %}
       </div>
     </div>
   </a>
