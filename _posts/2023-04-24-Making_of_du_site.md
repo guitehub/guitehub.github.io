@@ -1,6 +1,6 @@
 ---
 layout: post
-title: "Making of the mon site"
+title: "Making of du site"
 date: 2023-04-24
 categories:
 - blog
@@ -67,4 +67,4 @@ Au fur et à mesure que je développais le site, j'ai rencontré quelques probl�
 
 Enfin, j'ai déployé mon site web en utilisant GitHub Pages. Mon site est maintenant en ligne et accessible à tous !
 
-En conclusion, créer mon propre site web avec Jekyll et GitHub Pages a été une expérience enrichissante et éducative. J'ai appris à gérer et résoudre les problèmes, et j'ai découvert de nouvelles techniques pour personnaliser et améliorer mon site. Je suis ravi de partager mon travail et mes expériences avec le monde, et j'espère que mon site pourra inspirer d'autres personnes à créer leur propre site web.
+En conclusion, créer mon propre site web avec Jekyll et GitHub Pages a été une expérience enrichissante et éducative. J'ai découvert de nouvelles techniques pour personnaliser et améliorer un site. Je suis ravi de partager mon travail et mes expériences avec le monde, et j'espère que mon site pourra inspirer d'autres personnes à créer le leur.
