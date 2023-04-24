@@ -1,7 +1,7 @@
 ---
-layout: default
+layout: post
 title:  "Welcome to Jekyll!"
-date:   2023-04-23 11:42:20 +0200
+date:   1234-56-78 11:42:20 +0200
 categories:
 - sysadm
 - blog

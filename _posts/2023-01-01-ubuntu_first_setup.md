@@ -1,5 +1,5 @@
 ---
-layout: posts
+layout: post
 title: Setup server Ubuntu
 date: 2023-01-01
 categories:

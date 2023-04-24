@@ -46,6 +46,3 @@ malloc(ul);
 ### devnull keep
 - [AIDA64 license keys](https://gist.github.com/thegreatestminer/af7a7d6cb3cafc0c5c146999c687d58d)
 - [Le bon NVMe 2TB **PAS CHER**](https://www.amazon.fr/gp/product/B08GVDNTGJ/ref=ppx_yo_dt_b_asin_title_o00_s00?ie=UTF8&psc=1)
-
-<br>
-<br>

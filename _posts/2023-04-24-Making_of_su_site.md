@@ -1,5 +1,5 @@
 ---
-layout: posts
+layout: post
 title: "Making of the mon site"
 date: 2023-04-24
 categories:

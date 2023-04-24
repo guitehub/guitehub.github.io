@@ -1,5 +1,5 @@
 ---
-layout: posts
+layout: post
 title: Tableau dynamique de vue des utilisateurs d'un AD.
 date: 2023-04-01
 categories:

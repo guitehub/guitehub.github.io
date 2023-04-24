@@ -24,15 +24,15 @@ is_main: true
 ## Todo next :
 
 ### <i class="bi bi-windows"></i> Windows 
-- Comment ....
-- Mes setups ....
+- <i class="bi bi-patch-question"></i>Comment ....
+- <i class="bi bi-sliders2"></i>Mes setups ....
 
 ### <i class="bi bi-code-square"></i> PowerShell
-- [Smart-Copie ADUser : script (soon)]()
+- <i class="bi bi-file-earmark-code"></i>[Smart-Copie ADUser : script (soon)]()
 
-### <i class="bi bi-braces"></i> Python
-- [tuto](../py_start_guide/fu.py)
-- [NetScan]()
+### <i class="bi bi-braces"></i> Code
+- <i class="bi bi-filetype-py"></i>[tuto](https://github.com/guitehub/py_start_guide){:target="_blank"}
+- <i class="bi bi-filetype-py"></i>[NetScan]()
 
 <br>
 <br>

@@ -9,10 +9,7 @@ is_main: true
 
 Astuces, conseils et tutoriels pour vous aider à choisir les composants adaptés à vos besoins, apprendre les techniques de montage et optimiser les performances de votre machine.
 
-## PCPARTPICKER
-
-- ["do all" balanced build](https://fr.pcpartpicker.com/b/GxL2FT)
-- [DICOM Workstation](https://fr.pcpartpicker.com/b/vwcTwP)
+Plus de détails sur [pcpartpicker.com](https://fr.pcpartpicker.com/user/gchamort/builds/){:target="_blank"} <i class="bi bi-pci-card"></i>
 
 <div class="row row-cols-1 row-cols-md-2 g-4">
 {% for post in site.posts %}
