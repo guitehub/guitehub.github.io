@@ -21,7 +21,7 @@ Ajoute un événement "TextChanged" à la TextBox pour filtrer les résultats af
 Affiche la fenêtre WPF et attend que l'utilisateur la ferme.
 En résumé, ce script récupère les informations des utilisateurs à partir d'Active Directory, les stocke dans un DataTable, les affiche dans une interface graphique basée sur WPF et permet à l'utilisateur de filtrer les résultats en fonction de certaines propriétés.
 
-<code>
+
 ```powershell
 # Importez les assembly nécessaires pour utiliser WPF et Windows Forms
 Add-Type -AssemblyName PresentationFramework
@@ -83,4 +83,3 @@ $window.FindName("FilterBox").Add_TextChanged({
 $window.ShowDialog() | Out-Null
 
 ```
-</code>

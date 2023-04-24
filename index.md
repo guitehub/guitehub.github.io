@@ -8,9 +8,7 @@ title: "/"
 Ici, j'explore le monde fascinant des technologies de l'information, des logiciels aux matériels, en passant par les dernières innovations et tendances.
 
 <div class="container mt-5">
-
   <h2 class="mb-4">Categories :</h2>
-  
   <!-- Les cartes pour les pages principales -->
   <div class="row row-cols-1 row-cols-md-2 g-4">
     {% assign main_pages = site.pages | where: "is_main", true %}
@@ -28,9 +26,7 @@ Ici, j'explore le monde fascinant des technologies de l'information, des logicie
     {% endfor %}
   </div>
   <br>
-
   <h2 class="mb-4">Derniers articles :</h2>
-
   <!-- Les cartes pour les articles récents -->
   <div class="row row-cols-1 row-cols-lg-3 row-cols-md-2 g-4">
     {% assign sorted_posts = site.posts | sort: "date" | reverse %}
@@ -42,7 +38,9 @@ Ici, j'explore le monde fascinant des technologies de l'information, des logicie
 </div>
 <br>
 
----
+```
+malloc(ul);
+```
 
 ### devnull keep
 - [AIDA64 license keys](https://gist.github.com/thegreatestminer/af7a7d6cb3cafc0c5c146999c687d58d)

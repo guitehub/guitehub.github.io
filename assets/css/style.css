@@ -1,6 +1,4 @@
-  /* ###### */
   /* header */
-  /* ###### */
 .hero {
     position: relative;
     background-size: cover;
@@ -34,9 +32,7 @@
     }
   }
   
-  /* ###### */
   /* template-card */
-  /* ###### */
   .card-cover::before {
     content: '';
     position: absolute;
@@ -59,11 +55,7 @@
     filter: contrast(100%);
   }
  
-  
-  
-  /* ###### */
   /* footer */
-  /* ###### */
   .footer {
     padding: 1rem 0;
     background-color: #f8f9fa;
@@ -104,3 +96,29 @@
     fill: currentColor;
     margin-right: 0.5em;
   }
+  /**
+ * Code formatting
+ */
+pre,
+code {
+  @include relative-font-size(0.9375);
+  border: 1px solid gray;
+  border-radius: 3px;
+  background-color: #1e1e1e;
+  color: rgba(255, 254, 252, 0.945);
+}
+
+code {
+  padding: 1px 5px;
+}
+
+pre {
+  padding: 8px 12px;
+  overflow-x: auto;
+}
+
+pre code {
+  border: 0;
+  padding-right: 0;
+  padding-left: 0;
+}
