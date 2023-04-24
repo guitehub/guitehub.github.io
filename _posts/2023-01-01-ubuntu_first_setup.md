@@ -4,7 +4,6 @@ title: Setup server Ubuntu
 date: 2023-01-01
 categories:
 - guides
-- blog
 - sysadm
 image: logo-ubuntu-1024x576.png
 ---
