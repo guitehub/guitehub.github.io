@@ -4,6 +4,7 @@ title: Tableau dynamique de vue des utilisateurs d'un AD.
 date: 2023-04-01
 categories:
 - sysadm
+author: "La Guite"
 image: f45feba6-c09f-4e6a-99ce-32b9b0c79e77.png
 ---
 

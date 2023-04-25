@@ -2,10 +2,19 @@
 layout: default
 ---
 
-{% if page.link %}
-<i class="bi bi-pci-card"></i><a href="{{ page.link }}" target="_blank">Le reste des détails de la configuration disponible ici</a>
-{% endif %}
-
 <div class="container">
+    <br>
+    <div class="btn-toolbar" role="toolbar" aria-label="Toolbar with button groups">
+        <div class="input-group">
+            <div class="input-group-text">>></div>
+            <a href="{{ page.link }}" class="btn btn-warning">Configuration complète sur PC Part Picker</a>
+        </div>
+    </div>
+    <br>
+
+    {% if page.link %}
+    <a href="{{ page.link }}" target="_blank"></a>
+    {% endif %}
+
     {{ page.content }}
 </div>

@@ -5,6 +5,7 @@ date: 2023-01-01
 categories:
 - guides
 - sysadm
+author: "La Guite"
 image: logo-ubuntu-1024x576.png
 ---
 

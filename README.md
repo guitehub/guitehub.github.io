@@ -1,10 +1,21 @@
 # LaGuite's Github Pages
 
-[GuiteHub](https://guitehub.github.io)
+Link : [GuiteHub](https://guitehub.github.io)
 
-le hub pour bloguer mes merdes, des notes, guides, du hardware etc;
-*hésite pas à ne pas hésiter.*
+## Gettings started
 
-```c
-malloc(ul);
-```
+### Prerequies
+
+install ruby : https://rubyinstaller.org/downloads/
+
+### Installation :
+
+clone repos
+
+run
+`bundle install`
+
+then
+`bundle exec jekyll serve`
+
+ensuite ouvrir [http://localhost:4000](http://localhost:4000){:target="_blank"}

@@ -5,6 +5,9 @@ title: "/"
 
 # Bienvenu sur GuiteHub, bonne balade
 
+
+Le hub pour bloguer des notes, guides, du hardware etc;
+*hésite pas à ne pas hésiter.*
 Ici, j'explore le monde fascinant des technologies de l'information, des logiciels aux matériels, en passant par les dernières innovations et tendances.
 
 <div class="container mt-5">
