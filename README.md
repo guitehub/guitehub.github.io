@@ -20,7 +20,7 @@ then
 
 ensuite ouvrir [http://localhost:4000](http://localhost:4000){:target="_blank"}
 
- Todo :
+## Todo :
  - breadcrumbs
  - analytics
  - refaire page d'accueil

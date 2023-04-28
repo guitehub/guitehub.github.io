@@ -3,8 +3,9 @@ layout: default
 ---
 
 <div class="container">
+    {{ page.content }}
+    
     <div class="text-end">
         <i class="author-date">{{ page.author }} © {{ page.date | date: "%m/%Y" }}</i>
     </div>
-    {{ page.content }}
 </div>

@@ -10,7 +10,7 @@ image: "Capture d’écran 2023-04-24 213723.png"
 
 ## Mon parcours de création de mon site web avec Jekyll et GitHub Pages
 
-En à peine plus d'une journée, j'ai réaliser la création de mon propre site web avec ChatGPT comme partenaire. Mon objectif était de créer un site simple et élégant pour partager mon travail, mes connaissances et mes expériences avec le monde. Dans cet article, je vais vous guider à travers les étapes que j'ai suivies pour mettre en place mon site web en utilisant Jekyll et GitHub Pages.
+En à peine plus d'une journée, j'ai réalisé ce site web avec ChatGPT comme partenaire. Mon objectif était de créer un site simple et élégant pour partager mon travail, mes connaissances et mes expériences avec le monde. Dans cet article, je vais vous guider à travers les étapes que j'ai suivies pour mettre en place mon site web en utilisant Jekyll et GitHub Pages.
 
 ### 1. Choisir Jekyll et GitHub Pages
 
