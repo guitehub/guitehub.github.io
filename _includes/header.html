@@ -1,19 +1,17 @@
 <header class="container-fluid px-0">
     <div class="row">
-        <div class="col">
-            {% if page.image %}
-            <div class="hero" style="background-image: url('{{ site.baseurl }}/assets/images/{{ page.image }}');">
-            {% else %}
-            <div class="hero" style="background-image: url('{{ site.baseurl }}/assets/images/6d816c5b19a317e78510ac113e8190797211ab0a.png');">
-            {% endif %}
-                <div class="overlay">
-                </div>
-                {% if page.title %}
-                <h1 class="hero-title">{{ page.title }}</h1>
-                {% else %}
-                <h1 class="hero-title">{{ site.title }}</h1>
-                {% endif %}
+        {% if page.image %}
+        <div class="hero" style="background-image: url('{{ site.baseurl }}/assets/images/{{ page.image }}');">
+        {% else %}
+        <div class="hero" style="background-image: url('{{ site.baseurl }}/assets/images/6d816c5b19a317e78510ac113e8190797211ab0a.png');">
+        {% endif %}
+            <div class="overlay">
             </div>
+            {% if page.title %}
+            <h1 class="hero-title">{{ page.title }}</h1>
+            {% else %}
+            <h1 class="hero-title">{{ site.title }}</h1>
+            {% endif %}
         </div>
     </div>
-</header>  
+</header>

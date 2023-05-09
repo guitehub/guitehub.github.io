@@ -15,7 +15,7 @@
     <link rel="stylesheet" href="{{ site.baseurl }}/assets/css/style.css">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.9.0/font/bootstrap-icons.css" rel="stylesheet">
 
-<!--
+    <!--
 Un jour, un développeur web décide de se reposer et se rend au zoo. En se promenant, il remarque un panneau près de l'enclos des singes : "Notre nouvelle espèce de singe, le Singe Développeur Web !".
 Intrigué, il s'approche et voit un singe assis devant un ordinateur portable, en train de taper du code. Il y a aussi une pancarte qui décrit les capacités de ces singes : "Capables de créer des sites web et des applications !".
 Le développeur, amusé, décide de tester les compétences du singe. Il lui demande de créer un site web simple. À sa grande surprise, le singe développe un site web en quelques minutes, avec un design élégant et un code propre.
@@ -25,17 +25,19 @@ Le développeur réfléchit un instant et demande : "Est-ce qu'ils savent commen
 </head>
 
 <body>
+    <div class="page-wrapper">
+        {% include header.html %}
+        {% include nav.html %}
 
-    {% include header.html %}
-    {% include nav.html %}
+        <!-- Contenu de la page -->
+        <div class="content-wrapper">
+            <div class="container" style="padding-top: 20px;">
+                {{ content }}
+            </div>
+        </div>
 
-    <!-- Contenu de la page -->
-    <div class="container" style="padding-top: 10px;">
-        {{ content }}
+        {% include footer.html %}
     </div>
-
-    {% include footer.html %}
-
     <!-- Bootstrap JS CDN -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-ENjdO4Dr2bkBIFxQpeoTz1HIcje39Wm4jDKdf19U8gI4ddQ3GYNS7NTKfAdVQSZe"

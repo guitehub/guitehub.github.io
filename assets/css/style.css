@@ -1,4 +1,14 @@
-  /* header */
+.page-wrapper {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+.content-wrapper {
+  flex-grow: 1;
+}
+
+/* header */
   .hero {
     position: relative;
     background-size: cover;
@@ -24,6 +34,7 @@
     font-size: 4rem;
     text-align: center;
     z-index: 1;
+    filter: drop-shadow(0 0 0.4rem black);
   }
 
   @media (max-width: 576px) {
@@ -48,21 +59,21 @@
     background-color: inherit;
     background-image: inherit;
     background-size: cover;
-    filter: brightness(80%);
+    filter: brightness(84%);
     z-index: -1;
   }
 
   .card-cover {
-    transition: transform 0.4s ease-in-out;
+    transition: transform 0.3s ease-in-out;
   }
 
   .card-cover:hover {
-    transform: scale(1.02);
-    box-shadow: 0 0 0.5rem black;
+    transform: translateY(-0.3rem);
+    filter: drop-shadow(0 0 0.3rem grey);
   }
 
   .card-cover h3 {
-    filter: drop-shadow(0 0 0.5rem black);
+    filter: drop-shadow(0 0 0.3rem black);
   }
 
   .text-bg-dark {
@@ -74,10 +85,33 @@
     top: 20px;
     left: 50%;
     transform: translateX(-50%);
-    filter: drop-shadow(0 0 0.5rem black);
+    filter: drop-shadow(0 0 0.3rem grey);
+  }
+  
+  /* contenu des pages */
+  .content h1,.content h2,
+  .content h3,
+  .content h4,
+  .content h5,
+  .content h6 {
+    /* styles pour tous les éléments de titre dans la div de class .content */
+    margin-top: 30px;
+    margin-bottom: 15px;
+  }
+  @media (min-width: 720px) {
+    .content h1,
+    .content h2,
+    .content h3,
+    .content h4,
+    .content h5,
+    .content h6 {
+      /* styles pour tous les éléments de titre dans la div de class .content */
+      margin-top: 42px;
+      margin-bottom: 21px;
+    }
   }
 
-  /* footer */
+/* footer */
   .footer {
     padding: 1rem 0;
     background-color: #f8f9fa;
@@ -99,11 +133,11 @@
     color: #333;
   }
 
-  @media (max-width: 767px) {
+  /* @media (max-width: 767px) {
     .footer {
       position: static;
     }
-  }
+  } */
 
   /* Ajouter les icônes Bootstrap Icons */
   .bi {

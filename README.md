@@ -18,7 +18,7 @@ run
 then
 `bundle exec jekyll serve`
 
-ensuite ouvrir [http://localhost:4000](http://localhost:4000){:target="_blank"}
+ensuite ouvrir [http://localhost:4000](http://localhost:4000)
 
 ## Todo :
  - breadcrumbs
