@@ -1,38 +1,17 @@
 ---
-layout: default
-title: Sysadm toolbox
-categories:
-- sysadm
-image: 60db33f1d68e4a5665cf9d5eae393e3cf5e4b315.png
+layout: page
+title: Sysadm
+image: a7383b54-9649-44d5-9929-0308256110a9.jpeg
 is_main: true
+category : sysadm
 ---
 
-# Sysadming
-
-42
-
-<div class="row row-cols-1 row-cols-md-2 g-4">
-{% for post in site.posts %}
-  {% if post.categories contains "sysadm" %}
-    {% include template-card.html link=post.url title=post.title image=post.image icon=post.icon %}
-  {% endif %}
-{% endfor %}
-</div>
-
-<br>
+Ma toolbox de sysadm . 42
 
 ## Todo next :
 
-### <i class="bi bi-windows"></i> Windows 
-- <i class="bi bi-patch-question"></i>Comment ....
-- <i class="bi bi-sliders2"></i>Mes setups ....
-
-### <i class="bi bi-code-square"></i> PowerShell
-- <i class="bi bi-file-earmark-code"></i>[Smart-Copie ADUser : script (soon)]()
-
-### <i class="bi bi-braces"></i> Code
-- <i class="bi bi-filetype-py"></i>[tuto](https://github.com/guitehub/py_start_guide){:target="_blank"}
-- <i class="bi bi-filetype-py"></i>[NetScan]()
-
-<br>
-<br>
+- <i class="bi bi-patch-question"></i>Windows : comment ....
+- <i class="bi bi-sliders2"></i>Windows : Mes setups ....
+- <i class="bi bi-file-earmark-code"></i>PowerShell: Smart-Copie ADUser : (soon)
+- <i class="bi bi-filetype-py"></i>Mes pérégrination [python](https://github.com/guitehub/py_start_guide){:target="_blank"}
+- <i class="bi bi-filetype-py"></i>NetScan

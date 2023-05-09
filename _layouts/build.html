@@ -2,19 +2,13 @@
 layout: default
 ---
 
-<div class="container">
-    <br>
-    <div class="btn-toolbar" role="toolbar" aria-label="Toolbar with button groups">
-        <div class="input-group">
-            <div class="input-group-text">>></div>
-            <a href="{{ page.link }}" class="btn btn-warning">Configuration complète sur PC Part Picker</a>
-        </div>
+<br>
+<div class="btn-toolbar" role="toolbar" aria-label="Toolbar with button groups">
+    <div class="input-group">
+        <div class="input-group-text">>></div>
+        <a href="{{ page.link }}" class="btn btn-warning">Configuration complète sur PC Part Picker</a>
     </div>
-    <br>
-
-    {% if page.link %}
-    <a href="{{ page.link }}" target="_blank"></a>
-    {% endif %}
-
-    {{ page.content }}
 </div>
+<br>
+
+{{ content }}

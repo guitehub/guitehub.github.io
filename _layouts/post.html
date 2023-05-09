@@ -2,10 +2,9 @@
 layout: default
 ---
 
-<div class="container">
-    {{ page.content }}
-    
-    <div class="text-end">
-        <i class="author-date">{{ page.author }} © {{ page.date | date: "%m/%Y" }}</i>
-    </div>
+<div class="text">
+    <i class="author-date">{{ page.author }} © {{ page.date | date: "%m/%Y" }}</i>
 </div>
+<br>
+
+{{ page.content }}

@@ -3,7 +3,7 @@ layout: post
 title: Setup server Ubuntu
 date: 2023-01-01
 categories:
-- guides
+- guide
 - sysadm
 author: "La Guite"
 image: logo-ubuntu-1024x576.png
