@@ -5,7 +5,7 @@ date: 2022-10-25
 categories:
 - build
 author: "La Guite"
-image: 
+image: PXL_20230520_204617022-Grande.jpg
 link: https://github.com/lucasriondel
 ---
 
