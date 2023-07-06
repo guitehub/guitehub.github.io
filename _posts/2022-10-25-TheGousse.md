@@ -12,12 +12,12 @@ link: https://github.com/lucasriondel
 ## Spécifications du PC :
 
 Spécifications du PC :
-Processeur : AMD Ryzen 7 7700X, 4,50 GHz de base, 8 cœurs, 16 processeurs logiques, 512 KB de cache L1, 8 Mo de cache L2 et 32 Mo de cache L3.
-Mémoire : 32 Go de RAM, 6000 MHz, 2 emplacements utilisés sur 4, format DIMM. 
+- Processeur : AMD Ryzen 7 7700X, 4,50 GHz de base, 8 cœurs, 16 processeurs logiques, 512 KB de cache L1, 8 Mo de cache L2 et 32 Mo de cache L3.
+- Mémoire : 32 Go de RAM, 6000 MHz, 2 emplacements utilisés sur 4, format DIMM. 
 Stockage :
-Disque 0 (C:) : Samsung SSD 970 EVO Plus 500GB, capacité de 466 Go.
-Disque 1 (D:) : CT4000MX500SSD1, capacité de 3,6 To.
-Carte graphique : NVIDIA GeForce RTX 4090, DirectX 12, 24 Go de mémoire dédiée.
+- Disque 0 (C:) : Samsung SSD 970 EVO Plus 500GB, capacité de 466 Go.
+- Disque 1 (D:) : CT4000MX500SSD1, capacité de 3,6 To.
+- Carte graphique : NVIDIA GeForce RTX 4090, DirectX 12, 24 Go de mémoire dédiée.
 
 ## Résumé
 
@@ -45,9 +45,7 @@ En résumé, cette configuration de PC est non seulement capable de faire foncti
 
 ### Stockage
 
-1. Performances du Samsung SSD 970 EVO Plus 500GB dans cette machine. CrystalDiskMark est un outil couramment utilisé pour tester les performances de lecture et d'écriture des disques durs.
-
-Voici une réinterprétation des résultats, avec une emphase sur les vitesses et latences :
+- Performances du Samsung SSD 970 EVO Plus 500GB dans cette machine :
 
 SEQ 1MiB Read/Write: Ces tests mesurent la vitesse de lecture et d'écriture lors du transfert de gros fichiers. Le SSD affiche des vitesses de 3084.718 MB/s en lecture et 3188.064 MB/s en écriture, indiquant des performances de haut niveau. La latence de ces opérations est de 339.80 us en lecture et 328.73 us en écriture.
 
@@ -58,7 +56,7 @@ Mix Read 70%/Write 30%: Ce test mesure une charge de travail mixte, avec 70% de 
 En résumé, les résultats du test CrystalDiskMark montrent que le Samsung SSD 970 EVO Plus 500GB offre des performances de lecture et d'écriture exceptionnellement élevées ainsi que des latences faibles. Ces caractéristiques assurent un accès rapide aux données, ce qui est particulièrement bénéfique pour les applications exigeantes telles que les jeux vidéo, les logiciels de montage vidéo ou les applications de traitement de données volumineuses.
 
 
-2. Performances du disque dur CT4000MX500SSD1 de cette machine. Voyons comment il se compare en mettant l'accent sur les vitesses et latences :
+- Performances du Crucial CT4000MX500SSD1 de cette machine :
 
 SEQ 1MiB Read/Write: Ces tests indiquent la vitesse à laquelle le disque dur peut lire et écrire de grands fichiers. Le SSD a obtenu des vitesses de 459.907 MB/s en lecture et 499.541 MB/s en écriture. La latence de ces opérations est respectivement de 2279.27 us et 2098.28 us.
 
@@ -70,11 +68,13 @@ En conclusion, bien que les performances du CT4000MX500SSD1 soient nettement inf
 
 ## Photos
 
-
-
 ![gousse1](\assets\images\PXL_20221026_192255072-Grande.jpg){:.img-fluid .rounded .mx-auto .d-block}
+
 ![gousse2](\assets\images\PXL_20230520_202708748-Grande.jpg){:.img-fluid .rounded .mx-auto .d-block}
+
 ![gousse](\assets\images\PXL_20230520_204617022-Grande.jpg){:.img-fluid .rounded .mx-auto .d-block}
+
+CrystalDiskMark est un outil couramment utilisé pour tester les performances de lecture et d'écriture des disques durs
 
 ![ssgoussed](\assets\images\CrystalDiskMark_20230520224314.png){:.img-fluid .rounded .mx-auto .d-block}
 
