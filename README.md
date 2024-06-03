@@ -24,3 +24,5 @@ ensuite ouvrir [http://localhost:4000](http://localhost:4000)
  - breadcrumbs
  - analytics
  - refaire page d'accueil
+
+.BMDTU
