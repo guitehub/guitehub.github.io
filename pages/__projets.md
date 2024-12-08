@@ -1,7 +1,7 @@
 ---
 layout: page
 title: Projets
-image: 6110625a-2830-4508-bd28-e73cd0850954.jpeg
+image: bg_hero_project.jpg
 is_main: true
 category: project
 ---

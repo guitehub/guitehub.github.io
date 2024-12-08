@@ -4,7 +4,7 @@ title: "Making of du site"
 date: 2023-04-24
 categories:
 - blog
-author: "La Guite"
+author: "La Guite x GPT4"
 image: "Capture d’écran 2023-04-24 213723.png"
 ---
 
