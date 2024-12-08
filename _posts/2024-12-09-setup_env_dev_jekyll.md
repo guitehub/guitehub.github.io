@@ -6,7 +6,7 @@ categories:
 - guide
 - dev
 author: "La Guite"
-image: jekyll-logo-dark-solid.jpg
+image: "jekyll-logo-dark-solid.jpg"
 ---
 
 ### **Guide pratique : Mise en place d’un environnement de développement Jekyll**

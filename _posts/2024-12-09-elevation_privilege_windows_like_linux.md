@@ -6,7 +6,7 @@ categories:
 - guide
 - sysadm
 author: "La Guite"
-image: uac-windows-10.png
+image: "uac-windows-10.png"
 ---
 
 
