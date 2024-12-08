@@ -27,7 +27,7 @@ Pour garantir que les données restent accessibles, assurez-vous que la politiqu
     - Si FTT=1, cela signifie qu'une copie des données est disponible sur l’autre nœud (ou sur le Witness) et que le cluster peut tolérer l’arrêt d’un hôte.
 > Exemple : Une configuration stretch cluster avec Fault domain failures to tolerate = 1 est conforme pour ce scénario.
 
-![vsan storage policies](/assets/images/241208-cap1.png)
+![vsan storage policies](/assets/images/241208-cap1.png){:.img-fluid .rounded .mx-auto .d-block}
 
 ### 1.3 Vérifier et ajuster le timer des rebuilds
 Par défaut, vSAN déclenche une reconstruction des données non conformes si un hôte reste hors ligne plus de 360 minutes (6 heures).
@@ -36,9 +36,9 @@ Si l’hôte doit être éteint pour 8 heures, modifiez ce timer pour éviter un
 2. Recherchez le paramètre VSAN.ClomRepairDelay.
 3. Changez sa valeur pour 600 minutes (ou une durée supérieure à votre fenêtre de maintenance).
 
-![vsan cluster configuration](/assets/images/241208-cap2.png)
+![vsan cluster configuration](/assets/images/241208-cap2.png){:.img-fluid .rounded .mx-auto .d-block}
 
-![vsan cluster advanced options](/assets/images/241208-cap3.png)
+![vsan cluster advanced options](/assets/images/241208-cap3.png){:.img-fluid .rounded .mx-auto .d-block}
 
 ## 2. Pré-check et mise en mode maintenance
 
@@ -60,7 +60,7 @@ Que la politique FTT sera respectée (si ce n’est pas le cas, une migration ou
 4. Si le pré-check est OK, confirmez la mise en mode maintenance directement depuis cette fenêtre.
 > Note : Si le pré-check identifie des problèmes, réglez-les avant de poursuivre (par exemple, ajuster la politique de stockage ou déplacer manuellement des objets critiques).
 
-![vsan data migration pre-check](/assets/images/241208-cap4.png)
+![vsan data migration pre-check](/assets/images/241208-cap4.png){:.img-fluid .rounded .mx-auto .d-block}
 
 ## 3. Mise hors tension de l’hôte
 Une fois que l’hôte est en mode maintenance, procédez à son extinction via l’interface vSphere.
@@ -78,7 +78,7 @@ Aucune alerte critique ne survient pendant les 8 heures.
     - Le cluster reste accessible et opérationnel.
     - Aucune alerte critique ne survient pendant les 8 heures.
 
-![vsan cluster node offline](/assets/images/241208-cap4.png)
+![vsan cluster node offline](/assets/images/241208-cap4.png){:.img-fluid .rounded .mx-auto .d-block}
 
 ## 5. Remise en ligne de l’hôte
 
