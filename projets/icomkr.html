@@ -1,0 +1,462 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>icomkr — JPG/PNG → favicon .ico</title>
+<style>
+  /* =======================================================================
+     icomkr — calé sur le style « Le Hub de la Guite » (variables du blog)
+     ======================================================================= */
+  :root {
+    --bg:        #ffffff;
+    --bg-soft:   #f3f4f6;
+    --fg:        #14161a;
+    --fg-soft:   #555b63;
+    --fg-faint:  #888f98;
+    --border:    #e6e8ec;
+    --accent:    #b4531f;
+    --accent-fg: #ffffff;
+    --code-bg:   #f4f5f7;
+    --sel:       #f6dcc8;
+
+    --mono: ui-monospace, "SFMono-Regular", "JetBrains Mono", "Cascadia Code",
+            Menlo, Consolas, "Liberation Mono", monospace;
+    --sans: system-ui, -apple-system, "Segoe UI", Roboto, Helvetica, Arial,
+            "Helvetica Neue", sans-serif;
+
+    --measure: 54rem;
+    --pad: clamp(1rem, 4vw, 2rem);
+  }
+
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+      --bg:        #16181b;
+      --bg-soft:   #1f2226;
+      --fg:        #e7e9ec;
+      --fg-soft:   #a4abb3;
+      --fg-faint:  #6e757d;
+      --border:    #2b2f34;
+      --accent:    #e08b4c;
+      --accent-fg: #16181b;
+      --code-bg:   #1d2024;
+      --sel:       #3a2c1c;
+    }
+  }
+  :root[data-theme="dark"] {
+    --bg:        #16181b;
+    --bg-soft:   #1f2226;
+    --fg:        #e7e9ec;
+    --fg-soft:   #a4abb3;
+    --fg-faint:  #6e757d;
+    --border:    #2b2f34;
+    --accent:    #e08b4c;
+    --accent-fg: #16181b;
+    --code-bg:   #1d2024;
+    --sel:       #3a2c1c;
+  }
+
+  /* --- Base ------------------------------------------------------------- */
+  *, *::before, *::after { box-sizing: border-box; }
+  html { -webkit-text-size-adjust: 100%; }
+  body {
+    margin: 0;
+    background: var(--bg);
+    color: var(--fg);
+    font-family: var(--sans);
+    font-size: 1.0625rem;
+    line-height: 1.7;
+    text-rendering: optimizeLegibility;
+    -webkit-font-smoothing: antialiased;
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+  }
+  ::selection { background: var(--sel); }
+  a { color: var(--accent); text-decoration: none; }
+  a:hover { text-decoration: underline; text-underline-offset: 0.15em; }
+  code {
+    font-family: var(--mono); font-size: 0.9em;
+    background: var(--code-bg); padding: 0.12em 0.4em;
+    border-radius: 0.35em; border: 1px solid var(--border);
+  }
+
+  .wrap {
+    width: 100%; max-width: var(--measure);
+    margin-inline: auto; padding-inline: var(--pad);
+  }
+
+  /* --- Navigation (calquée sur .site-nav du blog) ----------------------- */
+  .site-nav {
+    border-bottom: 1px solid var(--border);
+    background: color-mix(in srgb, var(--bg) 88%, transparent);
+    backdrop-filter: blur(6px);
+    position: sticky; top: 0; z-index: 10;
+  }
+  .site-nav .wrap {
+    display: flex; align-items: center; gap: 1rem;
+    min-height: 3.4rem; flex-wrap: wrap;
+  }
+  .nav-brand { font-weight: 700; color: var(--fg); letter-spacing: -0.01em; }
+  .nav-brand:hover { text-decoration: none; color: var(--accent); }
+  .nav-spacer { margin-left: auto; }
+  #theme-toggle {
+    appearance: none; border: 1px solid var(--border);
+    background: var(--bg-soft); color: var(--fg-soft);
+    border-radius: 0.5rem; width: 2rem; height: 2rem;
+    display: inline-grid; place-items: center; cursor: pointer;
+    font-size: 1rem; line-height: 1; transition: color .15s, border-color .15s;
+  }
+  #theme-toggle:hover { color: var(--accent); border-color: var(--accent); }
+
+  /* --- En-tête de page (calqué sur .page-header) ------------------------ */
+  .page-header { padding-block: 2.5rem 1rem; border-bottom: 1px solid var(--border); }
+  .page-title {
+    font-size: clamp(1.8rem, 5vw, 2.6rem);
+    line-height: 1.15; letter-spacing: -0.02em; margin: 0;
+  }
+  .page-title .ext { color: var(--accent); }
+  .page-subtitle { margin: 0.6rem 0 0; color: var(--fg-soft); font-size: 1.05rem; }
+
+  main { flex: 1 0 auto; padding-block: 2rem 4rem; }
+  .app { display: flex; flex-direction: column; gap: 1.5rem; }
+
+  /* --- Zone de dépôt ---------------------------------------------------- */
+  .drop {
+    border: 2px dashed var(--border); border-radius: 0.6rem;
+    background: var(--bg-soft); padding: 2.6rem 1.5rem;
+    text-align: center; cursor: pointer;
+    transition: border-color .15s, background .15s;
+  }
+  .drop:hover { border-color: var(--accent); }
+  .drop.drag { border-color: var(--accent); background: color-mix(in srgb, var(--accent) 8%, var(--bg-soft)); }
+  .drop .icon { font-size: 2.2rem; }
+  .drop p { margin: 0.6rem 0 0.2rem; }
+  .drop small { color: var(--fg-faint); }
+  input[type=file] { display: none; }
+
+  /* --- Cartes ----------------------------------------------------------- */
+  .card { background: var(--bg); border: 1px solid var(--border); border-radius: 0.6rem; padding: 1.4rem; }
+  .card h2 {
+    font-family: var(--mono); font-size: 0.72rem; text-transform: uppercase;
+    letter-spacing: 0.1em; color: var(--fg-faint); margin: 0 0 1rem; font-weight: 600;
+  }
+
+  .row { display: flex; gap: 1.5rem; flex-wrap: wrap; align-items: flex-start; }
+  .preview-box {
+    width: 132px; height: 132px; border-radius: 0.5rem;
+    border: 1px solid var(--border);
+    background: repeating-conic-gradient(var(--bg-soft) 0% 25%, var(--bg) 0% 50%) 50% / 20px 20px;
+    display: flex; align-items: center; justify-content: center;
+    overflow: hidden; flex: none;
+  }
+  .preview-box canvas { max-width: 100%; max-height: 100%; image-rendering: auto; }
+  .controls { flex: 1; min-width: 240px; display: flex; flex-direction: column; gap: 1.1rem; }
+
+  /* --- Tailles (chips) -------------------------------------------------- */
+  .sizes { display: flex; flex-wrap: wrap; gap: 0.5rem; margin-top: 0.4rem; }
+  .chip {
+    user-select: none; font-family: var(--mono);
+    padding: 0.35rem 0.7rem; border-radius: 1rem; cursor: pointer;
+    border: 1px solid var(--border); background: var(--bg-soft);
+    color: var(--fg-soft); font-size: 0.78rem; transition: all .12s;
+  }
+  .chip:hover { border-color: var(--accent); color: var(--accent); }
+  .chip.on { background: var(--accent); border-color: var(--accent); color: var(--accent-fg); }
+  .chip.on:hover { color: var(--accent-fg); }
+
+  /* --- Segmented control ------------------------------------------------ */
+  .seg { display: inline-flex; border: 1px solid var(--border); border-radius: 0.5rem; overflow: hidden; }
+  .seg button {
+    background: var(--bg-soft); color: var(--fg-soft); border: none; cursor: pointer;
+    padding: 0.45rem 0.8rem; font-size: 0.85rem; font-family: var(--sans);
+  }
+  .seg button:hover { color: var(--accent); }
+  .seg button.on { background: var(--accent); color: var(--accent-fg); font-weight: 600; }
+
+  /* --- Champs ----------------------------------------------------------- */
+  label.field {
+    display: flex; flex-direction: column; gap: 0.4rem;
+    font-family: var(--mono); font-size: 0.72rem; text-transform: uppercase;
+    letter-spacing: 0.06em; color: var(--fg-faint);
+  }
+  .field-row { display: flex; gap: 1.4rem; align-items: center; flex-wrap: wrap; }
+  input[type=color] {
+    width: 42px; height: 32px; padding: 0; border: 1px solid var(--border);
+    border-radius: 0.4rem; background: none; cursor: pointer;
+  }
+  input[type=color]:disabled { opacity: 0.4; cursor: not-allowed; }
+  .check {
+    display: inline-flex; align-items: center; gap: 0.5rem; cursor: pointer;
+    color: var(--fg); font-size: 0.9rem; font-family: var(--sans);
+    text-transform: none; letter-spacing: 0;
+  }
+  .check input { accent-color: var(--accent); }
+
+  /* --- Action ----------------------------------------------------------- */
+  .actions { display: flex; gap: 1rem; align-items: center; flex-wrap: wrap; }
+  button.go {
+    background: var(--accent); color: var(--accent-fg);
+    border: none; border-radius: 0.5rem; cursor: pointer;
+    padding: 0.7rem 1.3rem; font-size: 1rem; font-weight: 700; font-family: var(--sans);
+    transition: filter .15s;
+  }
+  button.go:hover { filter: brightness(1.08); }
+  button.go:disabled { opacity: .4; cursor: not-allowed; }
+  .hint { color: var(--fg-soft); font-size: 0.85rem; font-family: var(--mono); }
+
+  /* --- Pied de page (calqué sur .site-footer) --------------------------- */
+  .site-footer {
+    border-top: 1px solid var(--border); color: var(--fg-soft);
+    font-size: 0.85rem; padding-block: 1.5rem; flex-shrink: 0;
+  }
+  .site-footer .wrap {
+    display: flex; flex-wrap: wrap; gap: 0.5rem 1.2rem;
+    align-items: center; justify-content: center; text-align: center;
+  }
+
+  .hidden { display: none !important; }
+</style>
+</head>
+<body>
+  <nav class="site-nav">
+    <div class="wrap">
+      <a class="nav-brand" href="/">Le Hub de la Guite</a>
+      <span class="nav-spacer"></span>
+      <button id="theme-toggle" type="button" title="Basculer clair / sombre" aria-label="Basculer le thème">◐</button>
+    </div>
+  </nav>
+
+  <header class="page-header">
+    <div class="wrap">
+      <h1 class="page-title">ico<span class="ext">mkr</span></h1>
+      <p class="page-subtitle">Transforme une image JPG/PNG en icône <strong>.ico</strong> — favicon de site ou icône de dossier Windows. Tout reste sur ta machine.</p>
+    </div>
+  </header>
+
+  <main class="wrap">
+    <div class="app">
+      <label class="drop" id="drop">
+        <div class="icon">🖼️</div>
+        <p><strong>Glisse une image ici</strong> ou clique pour choisir</p>
+        <small>JPG, PNG, WebP, GIF…</small>
+        <input type="file" id="file" accept="image/*">
+      </label>
+
+      <div class="card hidden" id="editor">
+        <h2>Réglages</h2>
+        <div class="row">
+          <div class="preview-box"><canvas id="preview" width="128" height="128"></canvas></div>
+          <div class="controls">
+            <div>
+              <label class="field">Tailles à inclure dans le .ico</label>
+              <div class="sizes" id="sizes"></div>
+            </div>
+            <div class="field-row">
+              <label class="field">
+                Image non carrée
+                <span class="seg" id="fit">
+                  <button data-fit="pad" class="on">Marges</button>
+                  <button data-fit="crop">Rogner</button>
+                </span>
+              </label>
+              <label class="field">
+                Fond (mode marges)
+                <span class="field-row" style="gap:0.7rem">
+                  <input type="color" id="bgColor" value="#ffffff" disabled>
+                  <label class="check"><input type="checkbox" id="bgTransparent" checked> Transparent</label>
+                </span>
+              </label>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="card hidden" id="exportCard">
+        <div class="actions">
+          <button class="go" id="generate">⬇️ Générer le .ico</button>
+          <span class="hint" id="status"></span>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <footer class="site-footer">
+    <div class="wrap">
+      100% navigateur — aucune image n'est envoyée. Outil maison, un seul fichier <code>icomkr.html</code>.
+    </div>
+  </footer>
+
+<script>
+// ---- Thème : toggle manuel persistant (calé sur le blog) ----
+(function () {
+  const root = document.documentElement;
+  const saved = localStorage.getItem("theme");
+  if (saved) root.setAttribute("data-theme", saved);
+  document.getElementById("theme-toggle").addEventListener("click", () => {
+    const isDark = getComputedStyle(root).getPropertyValue("--bg").trim() === "#16181b"
+      || root.getAttribute("data-theme") === "dark";
+    const next = isDark ? "light" : "dark";
+    root.setAttribute("data-theme", next);
+    localStorage.setItem("theme", next);
+  });
+})();
+
+const DEFAULT_SIZES = [16, 32, 48, 64, 128, 256];
+const state = {
+  img: null,
+  name: "favicon",
+  sizes: new Set([16, 32, 48, 256]),
+  fit: "pad",
+  bgTransparent: true,
+  bgColor: "#ffffff",
+};
+
+const $ = (id) => document.getElementById(id);
+const dropEl = $("drop"), fileEl = $("file");
+
+// ---- Chargement de l'image ----
+dropEl.addEventListener("dragover", e => { e.preventDefault(); dropEl.classList.add("drag"); });
+dropEl.addEventListener("dragleave", () => dropEl.classList.remove("drag"));
+dropEl.addEventListener("drop", e => {
+  e.preventDefault(); dropEl.classList.remove("drag");
+  if (e.dataTransfer.files[0]) loadFile(e.dataTransfer.files[0]);
+});
+fileEl.addEventListener("change", () => { if (fileEl.files[0]) loadFile(fileEl.files[0]); });
+
+function loadFile(file) {
+  if (!file.type.startsWith("image/")) { setStatus("Ce fichier n'est pas une image."); return; }
+  state.name = (file.name.replace(/\.[^.]+$/, "") || "favicon");
+  const img = new Image();
+  img.onload = () => {
+    state.img = img;
+    $("editor").classList.remove("hidden");
+    $("exportCard").classList.remove("hidden");
+    renderPreview();
+    setStatus("");
+  };
+  img.onerror = () => setStatus("Impossible de lire cette image.");
+  img.src = URL.createObjectURL(file);
+}
+
+// ---- Tailles (chips) ----
+const sizesEl = $("sizes");
+DEFAULT_SIZES.forEach(s => {
+  const chip = document.createElement("span");
+  chip.className = "chip" + (state.sizes.has(s) ? " on" : "");
+  chip.textContent = s + "px";
+  chip.onclick = () => {
+    if (state.sizes.has(s)) state.sizes.delete(s); else state.sizes.add(s);
+    chip.classList.toggle("on");
+    renderPreview();
+  };
+  sizesEl.appendChild(chip);
+});
+
+// ---- Mode marges / rogner ----
+$("fit").querySelectorAll("button").forEach(b => {
+  b.onclick = () => {
+    state.fit = b.dataset.fit;
+    $("fit").querySelectorAll("button").forEach(x => x.classList.toggle("on", x === b));
+    renderPreview();
+  };
+});
+
+// ---- Fond ----
+$("bgTransparent").onchange = e => {
+  state.bgTransparent = e.target.checked;
+  $("bgColor").disabled = e.target.checked;
+  renderPreview();
+};
+$("bgColor").oninput = e => { state.bgColor = e.target.value; renderPreview(); };
+
+// ---- Dessin carré ----
+function drawSquare(ctx, size) {
+  ctx.clearRect(0, 0, size, size);
+  if (state.fit === "pad" && !state.bgTransparent) {
+    ctx.fillStyle = state.bgColor;
+    ctx.fillRect(0, 0, size, size);
+  }
+  const iw = state.img.naturalWidth, ih = state.img.naturalHeight;
+  const scale = state.fit === "crop"
+    ? Math.max(size / iw, size / ih)
+    : Math.min(size / iw, size / ih);
+  const w = iw * scale, h = ih * scale;
+  ctx.drawImage(state.img, (size - w) / 2, (size - h) / 2, w, h);
+}
+
+function renderPreview() {
+  if (!state.img) return;
+  const c = $("preview"), ctx = c.getContext("2d");
+  drawSquare(ctx, 128);
+}
+
+// ---- Génération du fichier ICO ----
+async function pngFor(size) {
+  const c = document.createElement("canvas");
+  c.width = c.height = size;
+  drawSquare(c.getContext("2d"), size);
+  const blob = await new Promise(r => c.toBlob(r, "image/png"));
+  return new Uint8Array(await blob.arrayBuffer());
+}
+
+async function buildIco(sizes) {
+  const images = [];
+  for (const s of sizes) images.push({ size: s, data: await pngFor(s) });
+
+  const count = images.length;
+  const headerSize = 6 + 16 * count;
+  const totalSize = headerSize + images.reduce((a, p) => a + p.data.length, 0);
+  const out = new Uint8Array(totalSize);
+  const dv = new DataView(out.buffer);
+
+  dv.setUint16(0, 0, true);      // réservé
+  dv.setUint16(2, 1, true);      // type = icône
+  dv.setUint16(4, count, true);  // nombre d'images
+
+  let offset = headerSize, entry = 6;
+  for (const p of images) {
+    const dim = p.size >= 256 ? 0 : p.size; // 0 signifie 256 dans le format ICO
+    out[entry] = dim;                       // largeur
+    out[entry + 1] = dim;                   // hauteur
+    out[entry + 2] = 0;                     // palette
+    out[entry + 3] = 0;                     // réservé
+    dv.setUint16(entry + 4, 1, true);       // plans
+    dv.setUint16(entry + 6, 32, true);      // bits par pixel
+    dv.setUint32(entry + 8, p.data.length, true);  // taille des données
+    dv.setUint32(entry + 12, offset, true);        // position des données
+    out.set(p.data, offset);
+    offset += p.data.length;
+    entry += 16;
+  }
+  return new Blob([out], { type: "image/x-icon" });
+}
+
+$("generate").onclick = async () => {
+  if (!state.img) return;
+  const sizes = [...state.sizes].sort((a, b) => a - b);
+  if (!sizes.length) { setStatus("Choisis au moins une taille."); return; }
+
+  setStatus("Génération…");
+  $("generate").disabled = true;
+  try {
+    const blob = await buildIco(sizes);
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement("a");
+    a.href = url;
+    a.download = state.name + ".ico";
+    a.click();
+    setTimeout(() => URL.revokeObjectURL(url), 4000);
+    const kb = (blob.size / 1024).toFixed(1);
+    setStatus(`✓ ${state.name}.ico généré (${kb} Ko, tailles : ${sizes.join(", ")} px)`);
+  } catch (e) {
+    setStatus("Erreur : " + e.message);
+  } finally {
+    $("generate").disabled = false;
+  }
+};
+
+function setStatus(msg) { $("status").textContent = msg; }
+</script>
+</body>
+</html>

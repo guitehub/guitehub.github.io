@@ -1,18 +1,7 @@
-<footer class="footer border-top">
-    <div class="container">
-      <div class="row">
-        <div class="col d-flex justify-content-end">
-          <div class="footer-links">
-            <a href="{{ site.githubpages }}" target="_blank" rel="noopener noreferrer" class="footer-link">
-              <i class="bi bi-github"></i> Made with GitHub Pages
-            </a>
-            <a href="{{ site.chatgpt }}" target="_blank" rel="noopener noreferrer" class="footer-link">
-              <i class="bi bi-robot"></i> and ChatGPT
-            </a>
-            <span class="footer-text">by La Guite</span>
-          </div>
-        </div>
-      </div>
-    </div>
-  </footer>
-  
+<footer class="site-footer">
+  <div class="wrap">
+    <a href="{{ site.githubpages }}" target="_blank" rel="noopener noreferrer"><i class="bi bi-github"></i>Site GitHub Pages</a>
+    <span class="sep">·</span>
+    <span>© {{ site.time | date: "%Y" }} La Guite</span>
+  </div>
+</footer>

@@ -1,0 +1,17 @@
+{% comment %} Item de liste typographique. Reçoit `post` (scope hérité par la boucle appelante). {% endcomment %}
+<li>
+  <a class="post-item{% unless post.image %} no-thumb{% endunless %}" href="{{ site.baseurl }}{{ post.url }}">
+    {% if post.image %}
+    <img class="post-thumb" src="{{ site.baseurl }}/assets/images/{{ post.image }}" alt="" loading="lazy">
+    {% endif %}
+    <span class="post-body">
+      <span class="post-date">{{ post.date | date: "%Y-%m-%d" }}</span>
+      <span class="post-title-line">{{ post.title }}</span>
+      {% if post.categories %}
+      <span class="tags">
+        {% for category in post.categories %}<span class="tag">{{ category }}</span>{% endfor %}
+      </span>
+      {% endif %}
+    </span>
+  </a>
+</li>

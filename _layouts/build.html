@@ -2,15 +2,19 @@
 layout: default
 ---
 
-<br>
-<div class="btn-toolbar" role="toolbar" aria-label="Toolbar with button groups">
-    <div class="input-group">
-        <div class="input-group-text">>></div>
-        <a href="{{ page.link }}" class="btn btn-warning">Configuration complète sur PC Part Picker</a>
-    </div>
-</div>
-<br>
+{% if page.image %}
+<figure class="post-figure">
+  <img src="{{ site.baseurl }}/assets/images/{{ page.image }}" alt="{{ page.title }}">
+</figure>
+{% endif %}
 
-<div class="content">
-    {{ content }}
+{% if page.link %}
+<div class="callout">
+  <span class="callout-tag">&gt;&gt;</span>
+  <a href="{{ page.link }}" target="_blank" rel="noopener noreferrer">Configuration complète sur PC Part Picker</a>
 </div>
+{% endif %}
+
+{{ content }}
+
+<a class="back-link" href="{{ site.baseurl }}/pages/builds.html">← Retour aux builds</a>

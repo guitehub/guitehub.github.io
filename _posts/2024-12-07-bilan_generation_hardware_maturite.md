@@ -5,7 +5,7 @@ date: 2024-12-07
 categories:
 - blog
 author: "Discussion avec GPT 4o"
-image: "241208-hardware.jpg"
+image: "zlefuhzadof.png"
 ---
 
 ### **Introduction : Une génération de transition et de maturité**
