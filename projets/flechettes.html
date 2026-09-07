@@ -4,280 +4,358 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <meta name="color-scheme" content="dark">
-<meta name="theme-color" content="#111318">
-<title>Fléchettes — Scoreur</title>
+<meta name="theme-color" content="#0E1114">
+<meta name="description" content="Scoreur de fléchettes : 501, 301, cricket, horloge. Compte, applique les règles, conseille le finish. Hors ligne.">
+<title>Fléchettes — scoreur</title>
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='7' fill='%23ECE7DC'/%3E%3Cg fill='none' stroke='%230E1114' stroke-width='2.4'%3E%3Ccircle cx='16' cy='16' r='10'/%3E%3Ccircle cx='16' cy='16' r='5.5'/%3E%3C/g%3E%3Ccircle cx='16' cy='16' r='2' fill='%230E1114'/%3E%3C/svg%3E">
 <style>
-  /* ---------- Base ---------- */
-  :root {
-    --bg: #111318;
-    --panel: #1b1f27;
-    --panel2: #262c38;
-    --text: #e8eaf0;
-    --muted: #8b93a7;
-    --border: #2f3746;
-    --accent: #4f8cff;
-    --danger: #ef4444;
-    --ok: #22c55e;
-    --warn: #f59e0b;
-    --radius: 12px;
-    --largeur-libelle: 64px;
-  }
-  * { box-sizing: border-box; }
-  html, body {
-    margin: 0; padding: 0;
-    background: var(--bg); color: var(--text);
-    font-family: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
-    -webkit-text-size-adjust: 100%;
-  }
-  body { min-height: 100vh; min-height: 100dvh; overscroll-behavior: none; }
-  button, .tactile, label.toggle, .emplacement, .selectionnable {
-    touch-action: manipulation;
-    user-select: none; -webkit-user-select: none;
-    -webkit-tap-highlight-color: transparent;
-  }
-  button {
-    font: inherit; color: inherit;
-    background: var(--panel2); border: 1px solid var(--border); border-radius: var(--radius);
-    min-height: 44px; min-width: 44px; padding: 0 14px; cursor: pointer;
-    line-height: 1.2;
-  }
-  button:active { filter: brightness(1.2); }
-  button:disabled { opacity: .45; cursor: default; filter: none; }
-  button.primaire { background: var(--accent); border-color: transparent; color: #fff; font-weight: 600; }
-  button.danger { color: var(--danger); border-color: rgba(239, 68, 68, .45); }
-  button.discret { background: transparent; border-color: transparent; color: var(--muted); }
-  button.icone { padding: 0; width: 44px; font-size: 1.2rem; }
-  input[type="text"], select {
-    font: inherit; color: inherit; background: var(--panel2);
-    border: 1px solid var(--border); border-radius: var(--radius);
-    min-height: 44px; padding: 0 12px; width: 100%;
-  }
-  input[type="text"]:focus, select:focus { outline: 2px solid var(--accent); outline-offset: 1px; }
-  .num { font-variant-numeric: tabular-nums; }
-  h1 { font-size: 1.5rem; margin: 6px 0 14px; }
-  h2 { font-size: .8rem; color: var(--muted); font-weight: 700; margin: 22px 0 8px; text-transform: uppercase; letter-spacing: .06em; }
-  p { margin: 6px 0; }
-  .muted { color: var(--muted); }
-  .petit { font-size: .8rem; }
-  .ecran {
-    max-width: 640px; margin: 0 auto;
-    padding: calc(12px + env(safe-area-inset-top)) 16px calc(24px + env(safe-area-inset-bottom));
-  }
-  .entete-app { display: flex; align-items: center; justify-content: space-between; gap: 8px; }
-  .entete-app h1 { margin: 0; }
-  .carte { background: var(--panel); border: 1px solid var(--border); border-radius: var(--radius); padding: 12px 14px; margin-bottom: 12px; }
-  .pastille { display: inline-block; width: 12px; height: 12px; border-radius: 50%; vertical-align: -1px; margin-right: 6px; flex: none; }
-  .ligne { display: flex; align-items: center; gap: 10px; min-height: 44px; }
-  .ligne .etire { flex: 1; min-width: 0; }
-  .rangee-boutons { display: flex; gap: 10px; flex-wrap: wrap; margin: 10px 0; }
-  .rangee-boutons button { flex: 1; min-height: 50px; }
-  .vide { text-align: center; color: var(--muted); padding: 24px 12px; }
-  .vide .gros { font-size: 2.4rem; }
-  table.stats { width: 100%; border-collapse: collapse; }
-  table.stats th, table.stats td { padding: 8px 6px; text-align: left; border-bottom: 1px solid var(--border); }
-  table.stats th { color: var(--muted); font-weight: 600; font-size: .8rem; }
-  table.stats td.num, table.stats th.num { text-align: right; }
-  table.stats tr:last-child td { border-bottom: none; }
-  .ligne-partie { display: flex; align-items: center; gap: 10px; padding: 10px 6px; border-bottom: 1px solid var(--border); cursor: pointer; }
-  .ligne-partie:last-child { border-bottom: none; }
-  .ligne-partie .info { flex: 1; min-width: 0; }
-  .ligne-partie .date { color: var(--muted); font-size: .8rem; }
-  .pastilles .pastille { margin-right: 3px; }
-  .bandeau-stockage {
-    background: var(--warn); color: #111; font-size: .8rem; text-align: center; padding: 6px 12px;
-    padding-top: calc(6px + env(safe-area-inset-top)); font-weight: 600;
-  }
-  .selftest {
-    position: fixed; top: 0; left: 0; right: 0; z-index: 100;
-    padding: calc(8px + env(safe-area-inset-top)) 12px 8px; font-weight: 700; text-align: center; color: #fff;
-    font-size: .9rem; white-space: pre-wrap;
-  }
-  .selftest.ok { background: #15803d; }
-  .selftest.ko { background: #b91c1c; }
+/* ============================================================
+   JETONS — ardoise, filets, craie. La couleur est réservée aux joueurs.
+   ============================================================ */
+:root{
+  --bg:#0E1114;
+  --surface:#161A1F;
+  --band:#1A1F25;
+  --raise:#1F252C;
+  --rule:#2A3138;
+  --rule-2:#3C454F;
+  --chalk:#ECE7DC;
+  --muted:#8C949D;
+  --faint:#5B636C;
+  --danger:#E4665A;
 
-  /* ---------- Toggles ---------- */
-  label.toggle {
-    display: flex; align-items: center; justify-content: space-between; gap: 12px;
-    min-height: 48px; padding: 4px 0; cursor: pointer;
-  }
-  label.toggle.desactive { opacity: .45; }
-  label.toggle input { position: absolute; opacity: 0; width: 0; height: 0; }
-  label.toggle .interrupteur {
-    flex: none; width: 48px; height: 28px; border-radius: 14px; background: var(--border); position: relative; transition: background .15s;
-  }
-  label.toggle .interrupteur::after {
-    content: ""; position: absolute; top: 3px; left: 3px; width: 22px; height: 22px; border-radius: 50%; background: #fff; transition: transform .15s;
-  }
-  label.toggle input:checked + .interrupteur { background: var(--accent); }
-  label.toggle input:checked + .interrupteur::after { transform: translateX(20px); }
-  .explication { font-size: .8rem; color: var(--muted); margin: -4px 0 8px; }
+  --label-w:clamp(62px,19vw,84px);
+  --row-h:46px;
+  --head-h:100px;
 
-  /* ---------- Joueurs ---------- */
-  .liste-joueurs .ligne { border-bottom: 1px solid var(--border); padding: 4px 0; }
-  .liste-joueurs .ligne:last-child { border-bottom: none; }
-  .palette { display: grid; grid-template-columns: repeat(5, 1fr); gap: 10px; margin: 10px 0; }
-  .palette button {
-    min-height: 48px; border-radius: 10px; border: 3px solid transparent; position: relative; padding: 0;
-  }
-  .palette button.actif { border-color: #fff; }
-  .palette button.prise::after { content: "●"; position: absolute; right: 4px; bottom: 0; font-size: .7rem; color: rgba(0,0,0,.6); }
-  .avertissement { color: var(--warn); font-size: .8rem; }
-  .erreur { color: var(--danger); font-size: .85rem; min-height: 1.2em; }
+  --font:system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;
+  color-scheme:dark;
+}
 
-  /* ---------- Configuration ---------- */
-  .selection-joueurs { display: flex; flex-wrap: wrap; gap: 8px; }
-  .selection-joueurs button { border-width: 2px; }
-  .selection-joueurs button.actif { border-color: var(--c); background: var(--teinte); font-weight: 700; }
-  .file-ordre { display: flex; flex-wrap: wrap; gap: 6px; margin: 10px 0 4px; min-height: 28px; }
-  .file-ordre .puce { background: var(--panel2); border-radius: 999px; padding: 4px 10px; font-size: .85rem; display: inline-flex; align-items: center; }
-  .file-ordre .puce b { margin-right: 4px; color: var(--muted); }
+*,*::before,*::after{box-sizing:border-box}
+html,body{height:100%;margin:0;overflow:hidden;overscroll-behavior:none}
+body{
+  background:var(--bg);color:var(--chalk);font-family:var(--font);font-size:15px;line-height:1.35;
+  -webkit-text-size-adjust:100%;-webkit-tap-highlight-color:transparent;
+  -webkit-user-select:none;user-select:none;touch-action:manipulation;
+}
+[hidden]{display:none!important}
+button{font:inherit;color:inherit;background:none;border:0;margin:0;padding:0;cursor:pointer;touch-action:manipulation;-webkit-user-select:none;user-select:none}
+input,select{font:inherit;color:inherit}
+input[type=text]{-webkit-user-select:text;user-select:text}
+h1,h2,h3,p{margin:0}
+:focus{outline:none}
+:focus-visible{outline:2px solid var(--chalk);outline-offset:2px}
+.num{font-variant-numeric:tabular-nums;font-feature-settings:"tnum" 1}
+.grow{flex:1;min-width:0}
+.dim{color:var(--muted)}
+i.dot{display:inline-block;width:9px;height:9px;border-radius:50%;background:var(--pc);vertical-align:middle;margin-right:6px;flex:none}
 
-  /* ---------- Partie ---------- */
-  .partie { display: flex; flex-direction: column; height: 100vh; height: 100dvh; max-width: 640px; margin: 0 auto; }
-  .partie-haut {
-    padding: calc(8px + env(safe-area-inset-top)) 12px 6px; display: flex; justify-content: space-between; align-items: center;
-    font-size: .85rem; color: var(--muted); gap: 8px;
-  }
-  .bandeau-dernier-tour { background: var(--warn); color: #111; text-align: center; font-weight: 800; padding: 6px; font-size: .85rem; letter-spacing: .04em; }
-  .grille-conteneur {
-    flex: 1; overflow: auto; overscroll-behavior: contain; position: relative;
-    scroll-snap-type: x mandatory; scroll-padding-left: var(--largeur-libelle);
-    -webkit-overflow-scrolling: touch; border-top: 1px solid var(--border);
-  }
-  .grille { display: grid; position: relative; min-width: 100%; }
-  .cell {
-    border-bottom: 1px solid var(--border); border-right: 1px solid var(--border);
-    padding: 6px 4px; min-height: 42px; display: flex; flex-direction: column; align-items: center; justify-content: center;
-    text-align: center; background: var(--bg); overflow: hidden;
-  }
-  .cell.libelle { position: sticky; left: 0; z-index: 2; background: var(--panel); font-weight: 700; color: var(--muted); font-size: .85rem; }
-  .cell.entete { position: sticky; top: 0; z-index: 3; background: var(--panel); border-bottom: 2px solid var(--border); padding: 8px 4px; min-height: 64px; }
-  .cell.libelle.entete { z-index: 4; }
-  .cell.joueur { scroll-snap-align: start; }
-  .cell.courant { background: var(--teinte); }
-  .cell.entete.courant { box-shadow: inset 0 -3px 0 var(--c); }
-  .cell.entete.courant .nom { font-weight: 800; }
-  .cell.mort { opacity: .4; }
-  .cell.mort .marque { text-decoration: line-through; }
-  .cell .nom { font-size: .9rem; font-weight: 600; max-width: 100%; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
-  .cell .nom .pastille { width: 9px; height: 9px; margin-right: 4px; }
-  .score-gros { font-size: 2rem; font-weight: 800; line-height: 1.1; }
-  .score-moyen { font-size: 1.3rem; font-weight: 800; line-height: 1.1; }
-  .moy { font-size: .72rem; color: var(--muted); }
-  .finish { font-size: .74rem; color: var(--ok); margin-top: 3px; font-weight: 700; white-space: nowrap; }
-  .finish.aucun { color: var(--muted); font-weight: 400; }
-  .badge { font-size: .62rem; background: var(--panel2); border-radius: 6px; padding: 1px 6px; color: var(--warn); font-weight: 800; margin-top: 3px; letter-spacing: .04em; }
-  .cell .pts { font-size: 1.05rem; font-weight: 700; }
-  .cell .reste { font-size: .75rem; color: var(--muted); }
-  .cell .details { font-size: .65rem; color: var(--muted); opacity: .8; }
-  .cell .bust { color: var(--danger); font-weight: 800; font-size: .9rem; letter-spacing: .04em; }
-  .cell .marque { font-size: 1.25rem; font-weight: 700; line-height: 1; }
-  .cell .marque.ferme { color: var(--ok); }
-  .cell .coche { color: var(--ok); font-weight: 800; font-size: 1.1rem; }
-  .cell .vise { color: var(--warn); font-weight: 800; }
-  .cell.ligne-total { font-weight: 800; background: var(--panel); }
-  .cell.libelle.ligne-total { font-weight: 800; color: var(--text); }
-  .points-indicateur { display: flex; justify-content: center; gap: 6px; padding: 4px 0 6px; }
-  .points-indicateur .point { width: 7px; height: 7px; border-radius: 50%; background: var(--border); }
-  .points-indicateur .point.actif { background: var(--text); }
-  .actions {
-    display: flex; gap: 8px; padding: 8px 12px calc(8px + env(safe-area-inset-bottom));
-    background: var(--panel); border-top: 1px solid var(--border); align-items: stretch;
-  }
-  .actions .saisir { flex: 1; min-height: 54px; font-size: 1rem; font-weight: 800; color: #fff; border: none; text-shadow: 0 1px 2px rgba(0,0,0,.4); }
-  .actions .saisir .qui { display: block; font-size: .8rem; font-weight: 600; opacity: .9; }
-  .actions .secondaire { min-height: 54px; font-weight: 600; }
-  .actions .quitter { min-width: 44px; padding: 0 8px; }
+/* ============================================================
+   COQUE
+   ============================================================ */
+#app{position:fixed;inset:0;display:flex;flex-direction:column;padding-left:env(safe-area-inset-left);padding-right:env(safe-area-inset-right)}
+.screen{display:flex;flex-direction:column;flex:1;min-height:0}
+.scroll{flex:1;min-height:0;overflow-y:auto;overscroll-behavior:contain;-webkit-overflow-scrolling:touch}
+.bar{padding-top:env(safe-area-inset-top);background:var(--bg);border-bottom:1px solid var(--rule);flex:none}
+.bar-in{display:flex;align-items:center;gap:4px;height:52px;padding:0 6px}
+.brand{display:flex;align-items:center;gap:8px;padding-left:6px;font-size:17px;font-weight:700;letter-spacing:-.01em}
+.brand svg{color:var(--muted)}
+.bar-title{text-align:center;font-size:15px;font-weight:700;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.bar-sub{display:block;font-size:11.5px;font-weight:500;color:var(--muted)}
+.iconbtn{display:inline-flex;align-items:center;justify-content:center;gap:4px;min-width:44px;min-height:44px;padding:0 10px;border-radius:10px;font-size:14px;font-weight:600;color:var(--muted)}
+.iconbtn:active{background:var(--raise)}
+.iconbtn.strong{color:var(--chalk)}
 
-  /* ---------- Modale de saisie ---------- */
-  .modal {
-    position: fixed; inset: 0; z-index: 50; background: rgba(0, 0, 0, .6);
-    display: flex; align-items: flex-end; justify-content: center;
-  }
-  .feuille {
-    width: 100%; max-width: 640px; background: var(--panel);
-    border-radius: 16px 16px 0 0; border: 1px solid var(--border); border-bottom: none;
-    padding: 10px 12px calc(12px + env(safe-area-inset-bottom));
-    max-height: 94vh; max-height: 94dvh; overflow-y: auto; overscroll-behavior: contain;
-  }
-  .feuille-entete { display: flex; align-items: center; justify-content: space-between; gap: 8px; min-height: 40px; }
-  .feuille-entete .qui { font-weight: 800; font-size: 1.05rem; display: flex; align-items: center; }
-  .feuille-entete .etat { font-size: .85rem; color: var(--muted); text-align: right; }
-  .feuille-entete .etat b { color: var(--text); font-size: 1.1rem; }
-  .onglets { display: flex; gap: 6px; margin: 6px 0; }
-  .onglets button { flex: 1; min-height: 40px; background: transparent; }
-  .onglets button.actif { background: var(--panel2); font-weight: 700; border-color: var(--accent); }
-  .emplacements { display: flex; gap: 8px; margin: 8px 0; }
-  .emplacement {
-    flex: 1; min-height: 50px; border: 2px dashed var(--border); border-radius: 10px;
-    display: flex; align-items: center; justify-content: center; font-weight: 800; font-size: 1.2rem;
-    background: var(--panel2); color: var(--muted); cursor: pointer;
-  }
-  .emplacement.rempli { border-style: solid; color: var(--text); }
-  .emplacement.actif { border-color: var(--accent); box-shadow: 0 0 0 1px var(--accent); }
-  .emplacement .indice { font-size: .7rem; font-weight: 500; }
-  .mults { display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; margin: 8px 0; }
-  .mults button { min-height: 46px; font-weight: 600; }
-  .mults button.actif { background: var(--accent); color: #fff; border-color: transparent; }
-  .pave { display: grid; grid-template-columns: repeat(5, 1fr); gap: 6px; }
-  .pave button { min-height: 50px; font-size: 1.15rem; font-weight: 700; padding: 0; }
-  .pave button.attenue { opacity: .35; }
-  .pave button.cible { border-color: var(--accent); box-shadow: inset 0 0 0 1px var(--accent); }
-  .pave button.vise { border-color: var(--warn); box-shadow: inset 0 0 0 2px var(--warn); }
-  .pave button.large { grid-column: span 2; }
-  .pave button.rate { color: var(--muted); }
-  .pave-total { grid-template-columns: repeat(3, 1fr); }
-  .affichage-total { font-size: 2.4rem; text-align: center; font-weight: 800; min-height: 56px; line-height: 56px; }
-  .indication { text-align: center; min-height: 1.4em; font-size: .85rem; margin: 6px 0; color: var(--muted); }
-  .indication.finish { color: var(--ok); font-weight: 700; font-size: .95rem; }
-  .indication.erreur { color: var(--danger); font-weight: 600; }
-  .indication.avertissement { color: var(--warn); }
-  .feuille .rangee-boutons { margin: 10px 0 0; }
-  .feuille .rangee-boutons button { min-height: 52px; font-weight: 700; }
-  .confirmation { text-align: center; padding: 14px 0; }
-  .confirmation .question { font-size: 1.1rem; font-weight: 700; margin-bottom: 12px; }
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;min-height:48px;padding:0 16px;border-radius:12px;font-size:15px;font-weight:600;background:var(--raise);color:var(--chalk);border:1px solid transparent}
+.btn:active{filter:brightness(1.25)}
+.btn-primary{background:var(--chalk);color:var(--bg)}
+.btn-ghost{background:transparent;border-color:var(--rule-2);color:var(--chalk)}
+.btn-danger{background:transparent;border-color:rgba(228,102,90,.45);color:var(--danger)}
+.btn-player{background:var(--pc);color:#0E1114;flex-direction:column;gap:0;line-height:1.15}
+.btn-player small{font-size:12px;font-weight:600;opacity:.8}
+.btn-lg{width:100%;min-height:54px;font-size:16px}
+.btn:disabled{opacity:.35;cursor:default;filter:none}
 
-  /* ---------- Overlays ---------- */
-  .overlay { position: fixed; inset: 0; z-index: 60; display: flex; align-items: center; justify-content: center; pointer-events: none; }
-  .overlay .boite {
-    pointer-events: auto; background: rgba(20, 22, 28, .94); border: 2px solid var(--border); border-radius: 20px;
-    padding: 22px 30px; text-align: center; animation: pop .22s ease-out; max-width: 85vw; box-shadow: 0 10px 40px rgba(0,0,0,.5);
-  }
-  .overlay.bust .boite { border-color: var(--danger); }
-  .overlay.rencontre .boite { border-color: var(--warn); }
-  .overlay .titre { font-size: 2rem; font-weight: 900; letter-spacing: .06em; }
-  .overlay.bust .titre { color: var(--danger); }
-  .overlay.rencontre .titre { color: var(--warn); }
-  .overlay .sous { margin-top: 8px; font-size: 1rem; }
-  .overlay .sous div { margin: 2px 0; }
-  @keyframes pop { from { transform: scale(.85); opacity: 0; } to { transform: none; opacity: 1; } }
-  .toast {
-    position: fixed; left: 50%; bottom: calc(90px + env(safe-area-inset-bottom)); transform: translateX(-50%);
-    background: var(--panel2); border: 1px solid var(--border); color: var(--text); padding: 10px 16px; border-radius: 999px;
-    font-size: .9rem; z-index: 70; pointer-events: none; max-width: 90vw; text-align: center;
-  }
+.footer{flex:none;padding:12px 14px max(12px,env(safe-area-inset-bottom));border-top:1px solid var(--rule);background:var(--bg)}
+.footer .row{display:flex;gap:10px}
+.footer .row .btn{min-height:54px}
+.footer .row .grow{flex:1}
+.footer .col{display:flex;flex-direction:column;gap:10px}
+.hint{font-size:12.5px;color:var(--muted);text-align:center;padding-bottom:8px}
 
-  /* ---------- Fin de partie ---------- */
-  .classement .rang { display: flex; align-items: center; gap: 10px; padding: 10px 6px; border-bottom: 1px solid var(--border); }
-  .classement .rang:last-child { border-bottom: none; }
-  .classement .rang .position { width: 28px; font-weight: 800; color: var(--muted); }
-  .classement .rang.vainqueur { background: var(--teinte); border-radius: 10px; }
-  .classement .rang.vainqueur .position { color: var(--warn); }
-  .classement .rang .nom { flex: 1; font-weight: 600; display: flex; align-items: center; }
-  .classement .rang .detail { color: var(--muted); font-size: .85rem; }
-  .table-scroll { overflow-x: auto; overscroll-behavior: contain; }
+/* ============================================================
+   SECTIONS, LISTES, RÉGLAGES
+   ============================================================ */
+.sec{padding:18px 14px 16px;border-bottom:1px solid var(--rule)}
+.sec:last-child{border-bottom:0}
+.shead{display:flex;align-items:baseline;gap:8px;margin-bottom:10px}
+.shead h2{font-size:13px;font-weight:600;color:var(--muted)}
+.shead-x{margin-left:auto;font-size:12px;color:var(--faint)}
+.empty{font-size:14px;color:var(--muted);line-height:1.5}
+
+.resume-wrap{display:flex;align-items:stretch;border-bottom:1px solid var(--rule);background:var(--surface)}
+.resume{display:block;width:100%;text-align:left;padding:14px}
+.resume-x{flex:none;align-self:center;margin-right:6px;color:var(--danger)}
+.resume:active{background:var(--raise)}
+.resume-h{display:flex;align-items:center;gap:10px;font-size:16px;font-weight:700}
+.resume-h .chev{margin-left:auto;color:var(--muted)}
+.resume-p{display:flex;flex-wrap:wrap;align-items:center;gap:8px;margin-top:8px;font-size:13px;color:var(--muted)}
+
+.stat-line{font-size:14.5px;line-height:1.5}
+.stat-line b{font-weight:700}
+.hlist{margin-top:10px;border-top:1px solid var(--rule)}
+.hrow{display:flex;align-items:center;gap:10px;width:100%;min-height:54px;padding:6px 2px;border-bottom:1px solid var(--rule);text-align:left}
+.hrow:active{background:var(--surface)}
+.hrow .hm{flex:1;min-width:0}
+.hrow .hm b{font-size:14.5px}
+.hrow .hm span{display:block;font-size:12px;color:var(--muted);overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.hrow .hw{display:flex;align-items:center;gap:4px;font-size:13px;font-weight:600;flex:none;max-width:45%;overflow:hidden;white-space:nowrap}
+.hrow .hw i.dot{margin-right:2px}
+.hrow .chev{color:var(--faint);flex:none}
+
+.lb{margin-top:14px;border-top:1px solid var(--rule)}
+.lb-r{display:grid;grid-template-columns:1fr 44px 44px;align-items:center;gap:6px;height:38px;border-bottom:1px solid var(--rule)}
+.lb-h{height:26px;font-size:11px;color:var(--faint)}
+.lb-r>span{text-align:right}
+.lb-r>span:first-child{text-align:left;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.lb-n{display:flex;align-items:center;gap:8px;font-size:14px;font-weight:600}
+.lb-n i{width:9px;height:9px;border-radius:50%;background:var(--pc);flex:none}
+.lb-v{font-size:14px}
+
+.plist{list-style:none;margin:0;padding:0;border-top:1px solid var(--rule)}
+.prow{display:flex;align-items:stretch;border-bottom:1px solid var(--rule)}
+.prow-main{display:flex;align-items:center;gap:12px;flex:1;min-width:0;min-height:56px;padding:0 4px 0 12px;text-align:left;border-left:3px solid transparent}
+.prow-main:active{background:var(--surface)}
+.prow.on .prow-main{border-left-color:var(--pc);background-color:var(--surface);background-image:linear-gradient(var(--tint),var(--tint))}
+.swatch{width:16px;height:16px;border-radius:50%;flex:none;border:2px solid var(--pc)}
+.prow.on .swatch,.prow.plain .swatch{background:var(--pc)}
+.pname{flex:1;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;font-size:16px;font-weight:600}
+.badge{flex:none;min-width:26px;height:26px;border-radius:13px;display:inline-flex;align-items:center;justify-content:center;padding:0 7px;font-size:13px;font-weight:700;background:var(--pc);color:#0E1114}
+.prow-more{width:52px;flex:none;display:flex;align-items:center;justify-content:center;color:var(--faint)}
+.prow-more:active{color:var(--chalk)}
+.addrow{display:flex;align-items:center;gap:12px;width:100%;min-height:56px;padding:0 12px;font-size:15px;font-weight:600;color:var(--muted);border-bottom:1px solid var(--rule)}
+.addrow:active{color:var(--chalk)}
+.addrow .plus{width:16px;height:16px;display:flex;align-items:center;justify-content:center}
+
+.setting{display:flex;align-items:center;gap:14px;min-height:56px;cursor:pointer}
+.setting.off{opacity:.45}
+.setting-t{font-size:16px;font-weight:600}
+.setting-d{display:block;margin-top:2px;font-size:12.5px;color:var(--muted)}
+.sr{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap;border:0}
+.switch{position:relative;flex:none;width:50px;height:30px;border-radius:15px;background:var(--raise);border:1px solid var(--rule-2);transition:background .15s ease}
+.switch::after{content:"";position:absolute;top:3px;left:3px;width:22px;height:22px;border-radius:50%;background:var(--muted);transition:transform .15s ease,background .15s ease}
+.setting input:checked+.switch{background:var(--chalk);border-color:var(--chalk)}
+.setting input:checked+.switch::after{transform:translateX(20px);background:var(--bg)}
+.setting input:focus-visible+.switch{outline:2px solid var(--chalk);outline-offset:2px}
+
+.field{display:block;width:100%;min-height:52px;padding:0 14px;border-radius:12px;background:var(--raise);border:1px solid var(--rule-2);color:var(--chalk);font-size:17px}
+.field:focus{border-color:var(--chalk)}
+select.field{appearance:none;-webkit-appearance:none;padding-right:40px;
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%238C949D' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M6 9l6 6 6-6'/%3E%3C/svg%3E");
+  background-repeat:no-repeat;background-position:right 12px center;background-size:20px}
+.warn{font-size:12.5px;color:var(--muted);padding:8px 2px 0;min-height:20px}
+.warn.bad{color:var(--danger)}
+.swatches{display:grid;grid-template-columns:repeat(5,1fr);gap:10px;padding:14px 0 2px}
+.sw{height:48px;border-radius:12px;border:2px solid transparent;background:var(--raise);display:flex;align-items:center;justify-content:center;position:relative}
+.sw i{width:24px;height:24px;border-radius:50%;background:var(--pc)}
+.sw.sel{border-color:var(--chalk)}
+.sw.taken::after{content:"";position:absolute;right:6px;bottom:6px;width:6px;height:6px;border-radius:50%;background:var(--muted)}
+.menu{display:flex;flex-direction:column;padding-bottom:6px}
+.menu button{display:flex;align-items:center;min-height:54px;padding:0 4px;font-size:16px;font-weight:600;text-align:left;border-bottom:1px solid var(--rule)}
+.menu button:last-child{border-bottom:0}
+.menu button:disabled{color:var(--faint)}
+.menu .dang{color:var(--danger)}
+.menu small{margin-left:auto;font-size:12px;font-weight:500;color:var(--muted)}
+
+/* ============================================================
+   GRILLE DE PARTIE
+   ============================================================ */
+.turn{display:flex;align-items:center;gap:9px;flex:none;height:34px;padding:0 14px;border-bottom:1px solid var(--rule);
+  background-color:var(--bg);background-image:linear-gradient(var(--tint),var(--tint))}
+.turn i{width:9px;height:9px;border-radius:50%;background:var(--pc);flex:none}
+.turn span{font-size:13.5px;font-weight:600;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.turn .x{margin-left:auto;flex:none;font-size:12px;font-weight:600;color:var(--muted)}
+.turn .last{margin-left:auto;flex:none;font-size:11px;font-weight:700;letter-spacing:.06em;padding:2px 8px;border-radius:10px;border:1px solid var(--chalk);color:var(--chalk)}
+
+.sheet{
+  flex:1;min-height:0;display:grid;
+  grid-template-rows:var(--head-h);grid-auto-rows:var(--row-h);
+  overflow:auto;overscroll-behavior:contain;-webkit-overflow-scrolling:touch;
+  scroll-snap-type:x mandatory;scroll-padding-left:var(--label-w);
+  background:var(--surface);
+}
+.sheet.x01{--row-h:62px}
+.sheet.cricket{--head-h:84px;--row-h:48px}
+.sheet.horloge{--head-h:84px;--row-h:40px}
+.cell{position:relative;border-bottom:1px solid var(--rule);border-right:1px solid var(--rule);background-color:var(--surface);min-width:0}
+.cell.band{background-color:var(--band)}
+.cell.col-active{background-image:linear-gradient(var(--tint),var(--tint))}
+
+.lab,.corner,.totlab{position:sticky;left:0;z-index:3;border-right:1px solid var(--rule-2)}
+.corner{top:0;z-index:6;display:flex;flex-direction:column;align-items:flex-start;justify-content:center;padding:0 10px;border-bottom:1px solid var(--rule-2)}
+.corner .k{font-size:10.5px;color:var(--faint)}
+.corner .v{font-size:15px;font-weight:700}
+.phead{position:sticky;top:0;z-index:4;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:1px;padding:8px 6px 6px;border-bottom:1px solid var(--rule-2);overflow:hidden;text-align:center}
+.phead::before{content:"";position:absolute;left:0;right:0;top:0;height:3px;background:var(--pc);opacity:.3}
+.phead.col-active::before{opacity:1}
+.phead .pn{max-width:100%;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;font-size:14px;font-weight:700;color:var(--pc)}
+.phead .big{font-size:30px;font-weight:700;line-height:1.05;letter-spacing:-.02em}
+.phead .big small{font-size:14px;font-weight:600;color:var(--muted)}
+.phead .pt{font-size:11.5px;color:var(--muted)}
+.phead .fin{font-size:11.5px;font-weight:600;color:var(--chalk);white-space:nowrap;max-width:100%;overflow:hidden;text-overflow:ellipsis}
+.phead .fin.none{color:var(--faint);font-weight:500}
+.tag{display:inline-block;font-size:10.5px;font-weight:700;letter-spacing:.05em;padding:1px 7px;border-radius:10px;border:1px solid var(--rule-2);color:var(--muted)}
+.tag.on{border-color:var(--chalk);color:var(--chalk)}
+
+.lab{display:flex;align-items:center;gap:6px;padding:0 8px 0 10px}
+.lab .lname{font-size:13px;font-weight:500;line-height:1.05}
+.lab.dead .lname{color:var(--faint);text-decoration:line-through}
+.lab.strong .lname{font-weight:700}
+
+.val{display:flex;flex-direction:column;align-items:center;justify-content:center;scroll-snap-align:start;font-variant-numeric:tabular-nums;font-feature-settings:"tnum" 1;line-height:1.15}
+.val .v{font-size:19px;font-weight:600}
+.val .r{font-size:11.5px;color:var(--muted)}
+.val .d{font-size:10.5px;color:var(--faint);max-width:100%;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.val .bust{font-size:13px;font-weight:700;color:var(--danger);letter-spacing:.05em}
+.val .mk{font-size:22px;font-weight:600;line-height:1}
+.val .mk.closed{color:var(--pc)}
+.val.dead .mk{color:var(--faint)}
+.val .ok{color:var(--pc);font-weight:700;font-size:18px}
+.val .aim{color:var(--chalk);opacity:.5;font-size:16px}
+.val .pts{font-size:15px;font-weight:600;color:var(--muted)}
+
+.totlab{bottom:0;z-index:6;border-top:2px solid var(--rule-2)}
+.totlab .lname{font-weight:700}
+.tot{position:sticky;bottom:0;z-index:4;display:flex;align-items:center;justify-content:center;border-top:2px solid var(--rule-2);font-size:22px;font-weight:700;color:var(--pc);scroll-snap-align:start}
+
+.dots{flex:none;display:flex;align-items:center;justify-content:center;gap:6px;padding:8px 0;background:var(--bg)}
+.dots i{width:18px;height:3px;border-radius:2px;background:var(--pc);opacity:.22;transition:opacity .15s ease}
+.dots i.on{opacity:1}
+
+/* ============================================================
+   RÉSUMÉ
+   ============================================================ */
+.sum{padding:16px 14px 20px}
+.sum-h{font-size:22px;font-weight:700;margin-bottom:2px}
+.sum-s{font-size:13.5px;color:var(--muted);margin-bottom:18px}
+.rank{display:flex;gap:12px;padding:14px 0;border-top:1px solid var(--rule)}
+.rank:last-of-type{border-bottom:1px solid var(--rule)}
+.rank.win{background-image:linear-gradient(var(--tint),var(--tint))}
+.rank-n{flex:none;width:26px;font-size:15px;font-weight:700;color:var(--muted);padding-top:2px}
+.rank-b{flex:none;width:3px;border-radius:2px;background:var(--pc)}
+.rank-m{flex:1;min-width:0}
+.rank-t{display:flex;align-items:baseline;gap:8px}
+.rank-t .nm{font-size:17px;font-weight:700;color:var(--pc);overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.rank-t .sc{margin-left:auto;font-size:24px;font-weight:700;font-variant-numeric:tabular-nums}
+.rank-t .sc small{font-size:13px;color:var(--muted);font-weight:600}
+.rank-d{margin-top:4px;font-size:12.5px;color:var(--muted)}
+.tags{display:flex;flex-wrap:wrap;gap:6px;margin-top:7px}
+.tags .tag{font-size:11.5px;letter-spacing:0;padding:3px 8px;border-radius:20px;color:var(--chalk)}
+.tags .tag.gold{border-color:var(--chalk)}
+.stats-wrap{margin-top:22px;overflow-x:auto;overscroll-behavior:contain}
+.stats{width:100%;min-width:100%;border-collapse:collapse}
+.stats th,.stats td{padding:9px 6px;border-bottom:1px solid var(--rule);text-align:right;white-space:nowrap;font-size:14px}
+.stats th{font-size:11px;font-weight:600;color:var(--faint)}
+.stats th:first-child,.stats td:first-child{text-align:left;color:var(--muted);font-weight:500;position:sticky;left:0;background:var(--bg)}
+.stats th.pn{color:var(--pc);font-size:12.5px;font-weight:700}
+.sum-a{display:flex;flex-direction:column;gap:10px;margin-top:22px}
+
+/* ============================================================
+   FEUILLES, DIALOGUES, SAISIE
+   ============================================================ */
+#modal{position:fixed;inset:0;z-index:100;display:none}
+#modal.open{display:block}
+.scrim{position:absolute;inset:0;background:rgba(6,8,10,.66)}
+.sheetp{
+  position:absolute;left:0;right:0;bottom:0;display:flex;flex-direction:column;max-height:92%;
+  background:var(--surface);border-top:1px solid var(--rule-2);border-radius:16px 16px 0 0;
+  padding-bottom:max(14px,env(safe-area-inset-bottom));
+  padding-left:env(safe-area-inset-left);padding-right:env(safe-area-inset-right);
+  animation:sheetUp .2s cubic-bezier(.2,.8,.3,1);
+}
+@keyframes sheetUp{from{transform:translateY(100%)}to{transform:translateY(0)}}
+.grab{width:38px;height:4px;border-radius:2px;background:var(--rule-2);margin:8px auto 2px}
+.mhead{flex:none;padding:0 6px 6px}
+.mhead-row{display:flex;align-items:flex-start;gap:8px;padding:4px 4px 0 12px}
+.mtitle{font-size:18px;font-weight:700;display:flex;align-items:center}
+.msub{font-size:13px;color:var(--muted);margin-top:2px}
+.msub b{color:var(--chalk);font-weight:700}
+.mbody{overflow-y:auto;overscroll-behavior:contain;padding:4px 14px 0}
+.mactions{flex:none;display:flex;gap:10px;padding:12px 14px 0;margin-top:12px;border-top:1px solid var(--rule)}
+.mactions .btn{flex:1}
+
+.tabs{display:grid;grid-template-columns:1fr 1fr;gap:4px;padding:3px;border-radius:12px;background:var(--raise);margin-bottom:12px}
+.tab{min-height:38px;border-radius:9px;font-size:14px;font-weight:600;color:var(--muted)}
+.tab.sel{background:var(--surface);color:var(--chalk)}
+.slots{display:grid;grid-template-columns:repeat(3,1fr);gap:8px}
+.slot{min-height:52px;border-radius:12px;border:1px dashed var(--rule-2);display:flex;align-items:center;justify-content:center;font-size:20px;font-weight:700;color:var(--faint)}
+.slot.full{border-style:solid;background:var(--raise);color:var(--chalk)}
+.slot.cur{border-color:var(--chalk)}
+.seg{display:grid;grid-template-columns:repeat(3,1fr);gap:7px;margin:10px 0}
+.pill{display:flex;align-items:center;justify-content:center;min-height:44px;border-radius:12px;background:var(--raise);font-size:15px;font-weight:600;color:var(--chalk);border:1px solid transparent}
+.pill:active{filter:brightness(1.3)}
+.pill.sel{background:var(--chalk);color:var(--bg)}
+.pill:disabled{opacity:.35;filter:none}
+.keys{display:grid;grid-template-columns:repeat(5,1fr);gap:7px}
+.key{display:flex;align-items:center;justify-content:center;min-height:50px;border-radius:12px;background:var(--raise);font-size:19px;font-weight:600;color:var(--chalk);border:1px solid transparent}
+.key:active{filter:brightness(1.3)}
+.key:disabled{opacity:.3;filter:none}
+.key.faint{color:var(--faint);background:var(--band)}
+.key.hot{border-color:var(--pc);box-shadow:inset 0 0 0 1px var(--pc)}
+.key.miss{font-size:15px;color:var(--muted)}
+.key.span2{grid-column:span 2}
+.keys.k3{grid-template-columns:repeat(3,1fr)}
+.tdisp{font-size:46px;font-weight:700;text-align:center;min-height:66px;line-height:66px;letter-spacing:-.02em}
+.tdisp .ph{color:var(--faint)}
+.note{min-height:22px;text-align:center;font-size:13.5px;color:var(--muted);padding:10px 0 4px}
+.note.good{color:var(--chalk);font-weight:600}
+.note.bad{color:var(--danger);font-weight:600}
+.ask{text-align:center;padding:10px 0 4px}
+.ask h3{font-size:19px;font-weight:700;margin-bottom:14px}
+.ask .row{display:flex;gap:10px}
+.ask .btn{flex:1;min-height:54px}
+
+.dlg{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);width:min(340px,calc(100% - 36px));background:var(--surface);border:1px solid var(--rule-2);border-radius:14px;padding:18px 18px 14px}
+.dlg h3{font-size:17px;font-weight:700;margin-bottom:8px}
+.dlg p{font-size:14px;color:var(--muted);line-height:1.5}
+.dlg-a{display:flex;gap:10px;margin-top:18px}
+.dlg-a .btn{flex:1}
+
+.toast{position:fixed;left:50%;bottom:calc(84px + env(safe-area-inset-bottom));transform:translateX(-50%);z-index:200;
+  max-width:82%;padding:11px 15px;border-radius:11px;background:var(--raise);border:1px solid var(--rule-2);
+  font-size:13.5px;font-weight:500;text-align:center;animation:toastIn .16s ease-out;pointer-events:none}
+@keyframes toastIn{from{opacity:0;transform:translate(-50%,8px)}to{opacity:1;transform:translate(-50%,0)}}
+
+/* Plein écran éphémère : CASSÉ ! / RENCONTRE ! */
+.flash{position:fixed;inset:0;z-index:300;display:grid;place-items:center;background:rgba(11,14,17,.95);animation:flashPop .1s ease-out;
+  padding:20px calc(20px + env(safe-area-inset-right)) calc(20px + env(safe-area-inset-bottom)) calc(20px + env(safe-area-inset-left))}
+.flash .in{text-align:center}
+.flash b{display:block;font-size:clamp(44px,15vw,130px);font-weight:800;letter-spacing:-.035em;line-height:.92;transform:rotate(-4deg);color:var(--chalk)}
+.flash.bust b{color:var(--danger)}
+.flash .names{margin-top:22px;display:flex;flex-wrap:wrap;justify-content:center;gap:8px 16px;font-size:17px;font-weight:600;color:var(--muted)}
+.flash .names span{display:inline-flex;align-items:center}
+@keyframes flashPop{from{opacity:0;transform:scale(.94)}to{opacity:1;transform:scale(1)}}
+
+.selftest{position:fixed;top:0;left:0;right:0;z-index:400;padding:calc(8px + env(safe-area-inset-top)) 12px 8px;font-weight:700;text-align:center;font-size:13px;white-space:pre-wrap;color:#0E1114}
+.selftest.ok{background:#7BC67E}
+.selftest.ko{background:var(--danger)}
+.storage-warn{flex:none;background:var(--raise);color:var(--muted);font-size:12px;text-align:center;padding:5px 12px;border-bottom:1px solid var(--rule)}
+
+@media (prefers-reduced-motion:reduce){
+  *,*::before,*::after{animation-duration:.001ms!important;animation-iteration-count:1!important;transition-duration:.001ms!important;scroll-behavior:auto!important}
+}
 </style>
 </head>
 <body>
-<div id="bandeau-stockage" class="bandeau-stockage" hidden>Stockage indisponible : la partie ne sera pas sauvegardée.</div>
-<div id="selftest" class="selftest" hidden></div>
-<main id="app"></main>
-<div id="modal" class="modal" hidden></div>
-<div id="overlay" class="overlay" hidden></div>
+<div id="app"></div>
+<div id="modal"></div>
+<div id="flash" hidden></div>
 <div id="toast" class="toast" hidden></div>
+<div id="selftest" class="selftest" hidden></div>
+<input type="file" id="fichier-import" accept="application/json,.json" data-change="fichier-import" hidden>
 <script>
 'use strict';
-
 /* =====================================================================
    1. CONSTANTES — modes de jeu, cibles, couleurs, libellés
    ===================================================================== */
@@ -301,16 +379,16 @@ const SEQUENCE_HORLOGE = [...Array.from({ length: 20 }, (_, i) => i + 1), 25, 50
 const NUMEROS_PAVE = Array.from({ length: 20 }, (_, i) => i + 1);
 
 const PALETTE = [
-  { hex: '#ef4444', nom: 'Rouge' },
-  { hex: '#f97316', nom: 'Orange' },
-  { hex: '#eab308', nom: 'Jaune' },
-  { hex: '#22c55e', nom: 'Vert' },
-  { hex: '#14b8a6', nom: 'Turquoise' },
-  { hex: '#3b82f6', nom: 'Bleu' },
-  { hex: '#a855f7', nom: 'Violet' },
-  { hex: '#ec4899', nom: 'Rose' },
-  { hex: '#a3e635', nom: 'Citron' },
-  { hex: '#e7e5e4', nom: 'Blanc' },
+  { hex: '#E5564B', nom: 'Rouge' },
+  { hex: '#EE8B3F', nom: 'Orange' },
+  { hex: '#E7BC3E', nom: 'Jaune' },
+  { hex: '#A8CC52', nom: 'Citron' },
+  { hex: '#3FC08D', nom: 'Vert' },
+  { hex: '#3FBBD0', nom: 'Turquoise' },
+  { hex: '#5B9BF0', nom: 'Bleu' },
+  { hex: '#A78BFA', nom: 'Violet' },
+  { hex: '#E86AB8', nom: 'Rose' },
+  { hex: '#C9AE8C', nom: 'Sable' },
 ];
 
 // Totaux de volée inatteignables avec 3 fléchettes (en plus de tout ce qui dépasse 180).
@@ -405,6 +483,9 @@ const app = {
   saisie: null,
   edition: null,
   fin: null,
+  feuille: null,
+  dialogue: null,
+  dernierJoueurAffiche: null,
   minuteurSauvegarde: null,
 };
 
@@ -425,10 +506,6 @@ function supprimerStockage(cle) {
 }
 function signalerStockageIndisponible() {
   app.stockageOk = false;
-  try {
-    const b = document.getElementById('bandeau-stockage');
-    if (b) b.hidden = false;
-  } catch (e) { /* hors DOM */ }
 }
 
 function joueurValide(j) {
@@ -826,14 +903,39 @@ function statsJoueurPartie(etat, j) {
    6. RENDU — fonctions render* par écran, DOM impératif
    Le rendu est toujours render(calculerEtat(...)) : aucune règle ici.
    ===================================================================== */
-function pastille(couleur) { return `<span class="pastille" style="background:${h(couleur)}"></span>`; }
-function styleTeinte(couleur, alpha = 0.18) { return `style="--c:${h(couleur)};--teinte:${hexVersRgba(couleur, alpha)}"`; }
+const IC = {
+  back: '<path d="M15 5l-7 7 7 7"/>',
+  chev: '<path d="M9 5l7 7-7 7"/>',
+  more: '<circle cx="5" cy="12" r="1.6" fill="currentColor" stroke="none"/><circle cx="12" cy="12" r="1.6" fill="currentColor" stroke="none"/><circle cx="19" cy="12" r="1.6" fill="currentColor" stroke="none"/>',
+  close: '<path d="M6 6l12 12M18 6L6 18"/>',
+  plus: '<path d="M12 5v14M5 12h14"/>',
+};
+function icone(d, taille = 20) {
+  return `<svg width="${taille}" height="${taille}" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">${d}</svg>`;
+}
+function iconeCible(taille = 22) {
+  return `<svg width="${taille}" height="${taille}" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="12" cy="12" r="9.5"/><circle cx="12" cy="12" r="5.5"/><circle cx="12" cy="12" r="1.7" fill="currentColor" stroke="none"/></svg>`;
+}
+function styleJoueur(couleur, alpha = 0.10) { return `style="--pc:${h(couleur)};--tint:${hexVersRgba(couleur, alpha)}"`; }
+function puce(couleur) { return `<i class="dot" style="background:${h(couleur)}"></i>`; }
 function joueurParId(id) { return app.joueurs.find(j => j.id === id) || null; }
 function etatCourant() {
   const p = app.partie;
   return p ? calculerEtat(p.mode, p.options, p.joueurs, p.volees) : null;
 }
-function nomsJoueurs(joueurs) { return joueurs.map(j => h(j.nom)).join(', '); }
+function pluriel(n, mot, plurielMot) { return n + ' ' + (n > 1 ? (plurielMot || mot + 's') : mot); }
+
+function barre(gauche, centre, droite) {
+  return `<header class="bar"><div class="bar-in">${gauche || ''}<div class="grow">${centre || ''}</div>${droite || ''}</div></header>`;
+}
+function boutonRetour(ecran = 'accueil', libelle = 'Accueil') {
+  return `<button class="iconbtn" data-action="aller" data-ecran="${ecran}">${icone(IC.back)}${libelle}</button>`;
+}
+function marque() { return `<div class="brand">${iconeCible()}<span>Fléchettes</span></div>`; }
+function ecranHtml(barreHtml, corps, pied) {
+  const avert = app.stockageOk ? '' : `<div class="storage-warn">Stockage indisponible : la partie ne sera pas sauvegardée.</div>`;
+  return `<div class="screen">${barreHtml}${avert}<div class="scroll">${corps}</div>${pied || ''}</div>`;
+}
 
 function render() {
   const racine = document.getElementById('app');
@@ -846,7 +948,6 @@ function render() {
     case 'config': html = renderConfig(); break;
     case 'partie': html = renderPartie(); break;
     case 'fin': html = renderFin(); break;
-    case 'reglages': html = renderReglages(); break;
     default: html = renderAccueil();
   }
   racine.innerHTML = html;
@@ -856,90 +957,68 @@ function render() {
 
 /* ---- 5.1 Accueil ---- */
 function renderAccueil() {
-  let html = `<div class="ecran">
-    <header class="entete-app"><h1>🎯 Fléchettes</h1>
-      <button class="discret icone" data-action="aller" data-ecran="reglages" aria-label="Réglages" title="Réglages">⚙️</button></header>`;
+  let corps = '';
   if (app.partie) {
     const p = app.partie;
-    html += `<div class="carte" ${styleTeinte('#f59e0b', 0.12)} style="border-color:var(--warn);background:var(--teinte)">
-      <div><b>Reprendre la partie en cours</b></div>
-      <div class="petit muted">${h(MODES[p.mode].libelle)} · ${h(libelleOptions(p.mode, p.options))}</div>
-      <div class="petit">${p.joueurs.map(j => pastille(j.couleur) + h(j.nom)).join(' · ')}</div>
-      <div class="petit muted">Commencée le ${h(formaterDate(p.dateDebut))} · ${p.volees.length} volée${p.volees.length > 1 ? 's' : ''}</div>
-      <div class="rangee-boutons"><button class="primaire" data-action="reprendre">Reprendre</button>
-        <button class="danger" data-action="abandonner-courante">Abandonner</button></div>
-    </div>`;
+    corps += `<div class="resume-wrap">
+      <button class="resume grow" data-action="reprendre">
+        <div class="resume-h">Reprendre la partie<span class="chev">${icone(IC.chev)}</span></div>
+        <div class="resume-p"><span>${h(MODES[p.mode].libelle)} · ${h(libelleOptions(p.mode, p.options))}</span>
+          ${p.joueurs.map(j => `<span>${puce(j.couleur)}${h(j.nom)}</span>`).join('')}
+          <span class="dim">${h(formaterDate(p.dateDebut))} · ${pluriel(p.volees.length, 'volée')}</span></div>
+      </button>
+      <button class="iconbtn resume-x" data-action="abandonner-courante">Abandonner</button></div>`;
   }
-  html += `<div class="rangee-boutons">
-    <button data-action="aller" data-ecran="joueurs">Joueurs</button>
-    <button class="primaire" data-action="nouvelle-partie">Nouvelle partie</button></div>`;
-
   const s = statsAccueil(app.games, app.joueurs);
+  corps += `<div class="sec"><div class="shead"><h2>Statistiques</h2>${s.total ? `<span class="shead-x">${pluriel(s.total, 'partie')}</span>` : ''}</div>`;
   if (s.total === 0) {
-    html += `<div class="carte vide"><div class="gros">🎯</div><p>Aucune partie jouée pour l'instant.</p>
-      <p class="petit">Crée des joueurs, lance une partie, et les statistiques apparaîtront ici.</p></div>`;
+    corps += `<p class="empty">Aucune partie enregistrée. Créer des joueurs, lancer la première : les statistiques s'écrivent toutes seules.</p>`;
   } else {
-    html += `<h2>${s.total} partie${s.total > 1 ? 's' : ''} jouée${s.total > 1 ? 's' : ''}</h2><div class="carte">`;
+    corps += `<p class="stat-line num"><b>${s.total}</b> ${s.total > 1 ? 'parties jouées' : 'partie jouée'}. Les cinq dernières :</p><div class="hlist">`;
     s.dernieres.forEach(g => {
       const vainqueurs = g.joueurs.filter(j => (g.vainqueurs || []).includes(j.id));
-      html += `<div class="ligne-partie tactile" data-action="ouvrir-resume" data-id="${h(g.id)}">
-        <div class="info"><div><b>${h(MODES[g.mode].libelle)}</b> <span class="muted petit">${h(libelleOptions(g.mode, g.options))}</span></div>
-          <div class="date">${h(formaterDate(g.dateFin || g.dateDebut))}</div></div>
-        <div class="pastilles">${g.joueurs.map(j => pastille(j.couleur)).join('')}</div>
-        <div class="petit">🏆 ${vainqueurs.length ? nomsJoueurs(vainqueurs) : '—'}</div></div>`;
+      corps += `<button class="hrow" data-action="ouvrir-resume" data-id="${h(g.id)}">
+        <div class="hm"><b>${h(MODES[g.mode].libelle)}</b> <span class="dim" style="display:inline">${h(libelleOptions(g.mode, g.options))}</span>
+          <span>${h(formaterDate(g.dateFin || g.dateDebut))} · ${g.joueurs.map(j => puce(j.couleur)).join('')}${pluriel(g.joueurs.length, 'joueur')}</span></div>
+        <div class="hw">${vainqueurs.length ? vainqueurs.map(j => puce(j.couleur) + h(j.nom)).join(' ') : '<span class="dim">—</span>'}</div>
+        <span class="chev">${icone(IC.chev, 18)}</span></button>`;
     });
-    html += `</div>`;
+    corps += `</div>`;
     if (s.victoires.length) {
-      html += `<h2>Victoires par joueur</h2><div class="carte"><table class="stats"><thead><tr><th>Joueur</th><th class="num">Victoires</th><th class="num">Parties</th></tr></thead><tbody>`;
+      corps += `<div class="lb"><div class="lb-r lb-h"><span>Victoires par joueur</span><span>V</span><span>P</span></div>`;
       s.victoires.forEach(v => {
-        html += `<tr><td>${pastille(v.joueur.couleur)}${h(v.joueur.nom)}</td><td class="num">${v.victoires}</td><td class="num">${v.parties}</td></tr>`;
+        corps += `<div class="lb-r" ${styleJoueur(v.joueur.couleur)}><span class="lb-n"><i></i><span>${h(v.joueur.nom)}</span></span>
+          <span class="lb-v num">${v.victoires}</span><span class="lb-v num dim">${v.parties}</span></div>`;
       });
-      html += `</tbody></table></div>`;
+      corps += `</div>`;
     }
   }
-  return html + `</div>`;
+  corps += `</div>`;
+  const pied = `<div class="footer"><div class="col">
+    <button class="btn btn-primary btn-lg" data-action="nouvelle-partie">Nouvelle partie</button>
+    <button class="btn btn-ghost btn-lg" data-action="aller" data-ecran="joueurs">Joueurs</button></div></div>`;
+  return ecranHtml(barre(marque(), '', `<button class="iconbtn" data-action="menu-reglages" aria-label="Réglages">${icone(IC.more)}</button>`), corps, pied);
 }
 
 /* ---- 5.2 Joueurs ---- */
 function renderJoueurs() {
-  const e = app.edition;
-  let html = `<div class="ecran"><header class="entete-app"><h1>Joueurs</h1>
-    <button class="discret" data-action="aller" data-ecran="accueil">Accueil</button></header>`;
-  if (e) {
-    const couleursPrises = new Set(app.joueurs.filter(j => j.id !== e.id).map(j => j.couleur));
-    html += `<div class="carte"><b>${e.id ? 'Modifier le joueur' : 'Nouveau joueur'}</b>
-      <div style="margin:10px 0"><input type="text" maxlength="20" placeholder="Nom (1 à 20 caractères)" value="${h(e.nom)}" data-input="nom-joueur" autocomplete="off" enterkeyhint="done"></div>
-      <div class="palette">${PALETTE.map(c => `<button class="${c.hex === e.couleur ? 'actif' : ''} ${couleursPrises.has(c.hex) ? 'prise' : ''}" style="background:${c.hex}" data-action="choisir-couleur" data-hex="${c.hex}" aria-label="${c.nom}" title="${c.nom}"></button>`).join('')}</div>
-      ${couleursPrises.has(e.couleur) ? `<div class="avertissement">Cette couleur est déjà utilisée par un autre joueur.</div>` : ''}
-      <div class="erreur">${h(e.erreur || '')}</div>
-      <div class="rangee-boutons"><button data-action="annuler-edition">Annuler</button>
-        <button class="primaire" data-action="enregistrer-joueur">Enregistrer</button></div>
-      ${e.id ? `<button class="danger" style="width:100%" data-action="supprimer-joueur" data-id="${h(e.id)}">Supprimer ce joueur</button>` : ''}
-    </div>`;
-  } else {
-    html += `<button class="primaire" style="width:100%;min-height:50px" data-action="nouveau-joueur">+ Nouveau joueur</button>`;
-  }
-  if (!app.joueurs.length) {
-    html += `<div class="carte vide"><div class="gros">👥</div><p>Aucun joueur enregistré.</p></div>`;
-  } else {
-    html += `<div class="carte liste-joueurs">`;
-    app.joueurs.forEach(j => {
-      html += `<div class="ligne"><span class="etire">${pastille(j.couleur)}${h(j.nom)}</span>
-        <button data-action="editer-joueur" data-id="${h(j.id)}">Modifier</button></div>`;
-    });
-    html += `</div>`;
-  }
-  return html + `</div>`;
+  let corps = `<div class="sec"><div class="shead"><h2>Joueurs</h2><span class="shead-x">${app.joueurs.length ? pluriel(app.joueurs.length, 'joueur') : ''}</span></div>`;
+  if (!app.joueurs.length) corps += `<p class="empty">Personne pour l'instant. Créer un premier joueur pour commencer.</p>`;
+  corps += `<ul class="plist">` + app.joueurs.map(j => `<li class="prow plain" ${styleJoueur(j.couleur)}>
+      <button class="prow-main" data-action="editer-joueur" data-id="${h(j.id)}"><span class="swatch"></span><span class="pname">${h(j.nom)}</span></button>
+      <button class="prow-more" data-action="menu-joueur" data-id="${h(j.id)}" aria-label="Options pour ${h(j.nom)}">${icone(IC.more)}</button></li>`).join('') + `</ul>`;
+  corps += `<button class="addrow" data-action="nouveau-joueur"><span class="plus">${icone(IC.plus, 16)}</span>Ajouter un joueur</button></div>`;
+  return ecranHtml(barre(boutonRetour(), `<div class="bar-title">Joueurs</div>`, `<span style="width:44px"></span>`), corps);
 }
 
 /* ---- 5.3 Configuration ---- */
-function toggleHtml(libelle, cle, coche, desactive, dataChange = 'option') {
-  return `<label class="toggle ${desactive ? 'desactive' : ''}"><span>${h(libelle)}</span>
-    <input type="checkbox" data-change="${dataChange}" data-cle="${cle}" ${coche ? 'checked' : ''} ${desactive ? 'disabled' : ''}><span class="interrupteur"></span></label>`;
+function reglage(titre, desc, cle, coche, desactive, dataChange = 'option') {
+  return `<label class="setting ${desactive ? 'off' : ''}"><span class="grow"><span class="setting-t">${h(titre)}</span><span class="setting-d">${h(desc)}</span></span>
+    <input type="checkbox" class="sr" data-change="${dataChange}" data-cle="${cle}" ${coche ? 'checked' : ''} ${desactive ? 'disabled' : ''}><span class="switch" aria-hidden="true"></span></label>`;
 }
 function validerConfig(c) {
-  if (!app.joueurs.length) return 'Crée d\'abord des joueurs.';
-  if (c.selection.length < 1) return 'Sélectionne au moins un joueur.';
+  if (!app.joueurs.length) return 'Créer d\'abord des joueurs.';
+  if (c.selection.length < 1) return 'Choisir au moins un joueur dans la liste. Le premier choisi commence.';
   if (c.selection.length > MAX_JOUEURS_PARTIE) return `Maximum ${MAX_JOUEURS_PARTIE} joueurs par partie.`;
   return '';
 }
@@ -947,47 +1026,41 @@ function renderConfig() {
   const c = app.config;
   const type = MODES[c.mode].type;
   const erreur = validerConfig(c);
-  let html = `<div class="ecran"><header class="entete-app"><h1>Nouvelle partie</h1>
-    <button class="discret" data-action="aller" data-ecran="accueil">Accueil</button></header>`;
+  const n = c.selection.length;
 
-  html += `<h2>Joueurs (dans l'ordre d'ajout)</h2><div class="carte">`;
-  if (!app.joueurs.length) {
-    html += `<p class="muted">Aucun joueur enregistré.</p><button data-action="aller" data-ecran="joueurs" style="width:100%">Créer des joueurs</button>`;
-  } else {
-    html += `<div class="selection-joueurs">` + app.joueurs.map(j => {
-      const pos = c.selection.indexOf(j.id);
-      return `<button class="${pos >= 0 ? 'actif' : ''}" ${styleTeinte(j.couleur)} data-action="basculer-joueur" data-id="${h(j.id)}">${pastille(j.couleur)}${h(j.nom)}</button>`;
-    }).join('') + `</div>`;
-    html += `<div class="file-ordre">` + (c.selection.length
-      ? c.selection.map((id, i) => { const j = joueurParId(id); return j ? `<span class="puce"><b>${i + 1}.</b>${pastille(j.couleur)}${h(j.nom)}</span>` : ''; }).join('')
-      : `<span class="muted petit">Touche un joueur pour l'ajouter. Le premier ajouté commence.</span>`) + `</div>`;
-  }
-  html += `</div>`;
+  let corps = `<div class="sec"><div class="shead"><h2>Joueurs, dans l'ordre de jeu</h2>
+    <span class="shead-x">${n ? pluriel(n, 'sélectionné') : 'Appuyer pour sélectionner'}</span></div>`;
+  if (!app.joueurs.length) corps += `<p class="empty">Aucun joueur enregistré.</p>`;
+  corps += `<ul class="plist">` + app.joueurs.map(j => {
+    const pos = c.selection.indexOf(j.id);
+    return `<li class="prow ${pos >= 0 ? 'on' : ''}" ${styleJoueur(j.couleur, 0.07)}>
+      <button class="prow-main" data-action="basculer-joueur" data-id="${h(j.id)}" aria-pressed="${pos >= 0}">
+        <span class="swatch"></span><span class="pname">${h(j.nom)}</span>${pos >= 0 ? `<span class="badge num">${pos + 1}</span>` : ''}</button></li>`;
+  }).join('') + `</ul>`;
+  if (!app.joueurs.length) corps += `<button class="addrow" data-action="aller" data-ecran="joueurs"><span class="plus">${icone(IC.plus, 16)}</span>Créer un joueur</button>`;
+  corps += `</div>`;
 
-  html += `<h2>Mode</h2><div class="carte"><select data-change="mode">${ORDRE_MODES.map(m => `<option value="${m}" ${m === c.mode ? 'selected' : ''}>${h(MODES[m].libelle)}</option>`).join('')}</select>`;
+  corps += `<div class="sec"><div class="shead"><h2>Mode de jeu</h2></div>
+    <select class="field" data-change="mode" aria-label="Mode de jeu">${ORDRE_MODES.map(m => `<option value="${m}" ${m === c.mode ? 'selected' : ''}>${h(MODES[m].libelle)}</option>`).join('')}</select>`;
   if (type === 'x01') {
-    html += toggleHtml('Double in', 'doubleIn', c.options.doubleIn, false)
-      + `<div class="explication">Il faut un double pour commencer à compter.</div>`
-      + toggleHtml('Double out', 'doubleOut', c.options.doubleOut, false)
-      + `<div class="explication">Il faut finir sur un double (la bulle compte). Sinon : straight out.</div>`;
+    corps += reglage('Double in', 'Il faut un double pour commencer à compter.', 'doubleIn', c.options.doubleIn, false)
+      + reglage('Double out', 'Il faut finir sur un double, la bulle compte. Sinon : straight out.', 'doubleOut', c.options.doubleOut, false);
   } else if (type === 'cricket') {
-    html += toggleHtml('Avec points', 'avecPoints', c.options.avecPoints, c.options.cutThroat)
-      + `<div class="explication">Les marques en trop sur une cible fermée rapportent des points.</div>`
-      + toggleHtml('Cut throat', 'cutThroat', c.options.cutThroat, false)
-      + `<div class="explication">Les points vont aux adversaires. Le score le plus bas gagne.</div>`;
+    corps += reglage('Avec points', 'Les marques en trop sur une cible fermée rapportent des points.', 'avecPoints', c.options.avecPoints, c.options.cutThroat)
+      + reglage('Cut throat', 'Les points vont aux adversaires. Le score le plus bas gagne.', 'cutThroat', c.options.cutThroat, false);
   } else {
-    html += `<div class="explication" style="margin-top:8px">Toucher 1, 2, … 20, puis la demi-bulle, puis la bulle. Tout multiplicateur valide.</div>`;
+    corps += `<p class="empty" style="padding-top:12px">Toucher 1, 2, … 20, puis la demi-bulle, puis la bulle. Tout multiplicateur valide.</p>`;
   }
-  html += `</div>`;
-
-  html += `<div class="erreur" style="text-align:center">${h(erreur)}</div>
-    <button class="primaire" style="width:100%;min-height:54px;font-size:1.05rem" data-action="lancer-partie" ${erreur ? 'disabled' : ''}>Lancer la partie</button>`;
+  corps += `</div>`;
 
   const cutThroat = type === 'cricket' && c.options.cutThroat;
-  html += `<div class="carte" style="margin-top:16px" data-action="${cutThroat ? 'expliquer-rencontre' : ''}">`
-    + toggleHtml('Rencontre', 'rencontre', cutThroat ? false : c.rencontre, cutThroat, 'rencontre')
-    + `<div class="explication">Affiche « Rencontre ! » quand deux joueurs se retrouvent exactement au même score.${cutThroat ? ' Sans objet en cut throat.' : ''}</div></div>`;
-  return html + `</div>`;
+  corps += `<div class="sec" ${cutThroat ? 'data-action="expliquer-rencontre"' : ''}>`
+    + reglage('Rencontre', cutThroat ? 'Sans objet en cut throat : on donne ses points aux autres.' : 'Affiche « Rencontre ! » quand deux joueurs se retrouvent exactement au même score. Sans effet sur le jeu.', 'rencontre', cutThroat ? false : c.rencontre, cutThroat, 'rencontre')
+    + `</div>`;
+
+  const pied = `<div class="footer">${erreur ? `<p class="hint">${h(erreur)}</p>` : ''}
+    <button class="btn btn-primary btn-lg" data-action="lancer-partie" ${erreur ? 'disabled' : ''}>${n ? `Lancer la partie · ${pluriel(n, 'joueur')}` : 'Lancer la partie'}</button></div>`;
+  return ecranHtml(barre(boutonRetour(), `<div class="bar-title">Nouvelle partie</div>`, `<span style="width:44px"></span>`), corps, pied);
 }
 
 /* ---- 5.4 Écran de partie ---- */
@@ -999,62 +1072,66 @@ function celluleEnteteJoueur(etat, j) {
   const courant = etat.joueurCourant === j.index;
   let corps = '';
   if (etat.type === 'x01') {
-    corps = `<div class="score-gros num">${j.score}</div><div class="moy num">moy. ${formaterNombre(moyenneVolee(j))}</div>`;
-    if (!j.ouvert) corps += `<span class="badge">DOUBLE IN</span>`;
-    if (courant && j.score > 0) {
+    corps = `<span class="big num">${j.score}</span><span class="pt num">moy. ${formaterNombre(moyenneVolee(j))}</span>`;
+    if (!j.ouvert) corps += `<span class="tag">DOUBLE IN</span>`;
+    else if (courant && j.score > 0) {
       const ch = checkout(j.score, 3, !!p.options.doubleOut);
-      if (ch) corps += `<div class="finish num">${h(texteCheckout(ch))}</div>`;
-      else if (j.score <= 170) corps += `<div class="finish aucun">pas de finish</div>`;
+      if (ch) corps += `<span class="fin num">${h(texteCheckout(ch))}</span>`;
+      else if (j.score <= 170) corps += `<span class="fin none">pas de finish</span>`;
     }
   } else if (etat.type === 'cricket') {
     corps = p.options.avecPoints
-      ? `<div class="score-gros num">${j.score}</div><div class="moy num">${nbFermees(j)}/7 fermées</div>`
-      : `<div class="score-gros num">${nbFermees(j)}<span class="moy">/7</span></div><div class="moy num">${formaterNombre(moyenneMarques(j))} m/volée</div>`;
+      ? `<span class="big num">${j.score}</span><span class="pt num">${nbFermees(j)}/7 fermées</span>`
+      : `<span class="big num">${nbFermees(j)}<small>/7</small></span><span class="pt num">${formaterNombre(moyenneMarques(j))} marques/volée</span>`;
   } else {
     const fini = j.cible >= SEQUENCE_HORLOGE.length;
-    corps = `<div class="score-gros num">${fini ? '✓' : SEQUENCE_HORLOGE[j.cible]}</div><div class="moy">${fini ? 'terminé' : 'à viser'}</div>`;
+    corps = `<span class="big num">${fini ? '✓' : SEQUENCE_HORLOGE[j.cible]}</span><span class="pt">${fini ? 'terminé' : 'à viser'}</span>`;
   }
-  return `<div class="cell entete joueur ${courant ? 'courant' : ''}" ${styleTeinte(j.couleur)} data-col="${j.index}">
-    <div class="nom">${pastille(j.couleur)}${h(j.nom)}</div>${corps}</div>`;
+  return `<div class="cell phead ${courant ? 'col-active' : ''}" ${styleJoueur(j.couleur)} data-col="${j.index}"><span class="pn">${h(j.nom)}</span>${corps}</div>`;
 }
 
+function celluleVal(etat, j, contenu, classes = '') {
+  return `<div class="cell val ${etat.joueurCourant === j.index ? 'col-active' : ''} ${classes}" ${styleJoueur(j.couleur)}>${contenu}</div>`;
+}
 function lignesX01(etat) {
   let html = '';
   for (let t = etat.nbTours - 1; t >= 0; t--) {
-    html += `<div class="cell libelle num">V${t + 1}</div>`;
+    const band = t % 2 === 1 ? 'band' : '';
+    html += `<div class="cell lab ${band}"><span class="lname num">V${t + 1}</span></div>`;
     etat.joueurs.forEach(j => {
       const d = j.volees[t];
       let contenu = '';
       if (d) {
-        if (d.bust) contenu = `<div class="bust">BUST</div><div class="reste num">${d.scoreApres}</div>`;
-        else contenu = `<div class="pts num">${d.total}</div><div class="reste num">→ ${d.scoreApres}</div>`;
-        contenu += `<div class="details">${d.totalDirect != null ? 'total direct' : h(d.flechettes.map(notation).join(' '))}</div>`;
+        contenu = d.bust
+          ? `<span class="bust">BUST</span><span class="r num">${d.scoreApres}</span>`
+          : `<span class="v num">${d.total}</span><span class="r num">→ ${d.scoreApres}</span>`;
+        contenu += `<span class="d">${d.totalDirect != null ? 'total direct' : h(d.flechettes.map(notation).join(' '))}</span>`;
       }
-      html += `<div class="cell joueur ${etat.joueurCourant === j.index ? 'courant' : ''}" ${styleTeinte(j.couleur, 0.1)}>${contenu}</div>`;
+      html += celluleVal(etat, j, contenu, band);
     });
   }
   return html;
 }
 function lignesCricket(etat) {
   let html = '';
-  CIBLES_CRICKET.forEach(c => {
+  CIBLES_CRICKET.forEach((c, i) => {
     const morte = etat.joueurs.every(j => j.marques[c] >= 3);
-    html += `<div class="cell libelle num ${morte ? 'mort' : ''}">${libelleCibleCricket(c)}</div>`;
+    const band = i % 2 === 1 ? 'band' : '';
+    html += `<div class="cell lab ${band} ${morte ? 'dead' : ''}"><span class="lname num">${libelleCibleCricket(c)}</span></div>`;
     etat.joueurs.forEach(j => {
       const m = j.marques[c];
-      html += `<div class="cell joueur ${etat.joueurCourant === j.index ? 'courant' : ''} ${morte ? 'mort' : ''}" ${styleTeinte(j.couleur, 0.1)}>
-        <span class="marque ${m >= 3 ? 'ferme' : ''}">${symboleMarques(m)}</span></div>`;
+      html += celluleVal(etat, j, `<span class="mk ${m >= 3 ? 'closed' : ''}">${symboleMarques(m)}</span>`, `${band} ${morte ? 'dead' : ''}`);
     });
   });
   if (etat.options.avecPoints) {
-    html += `<div class="cell libelle">Points</div>`;
+    html += `<div class="cell lab"><span class="lname">Points</span></div>`;
     etat.joueurs.forEach(j => {
       const d = j.volees[j.volees.length - 1];
-      html += `<div class="cell joueur num ${etat.joueurCourant === j.index ? 'courant' : ''}" ${styleTeinte(j.couleur, 0.1)}>${d ? (d.points ? '+' + d.points : '—') : ''}</div>`;
+      html += celluleVal(etat, j, `<span class="pts num">${d ? (d.points ? '+' + d.points : '—') : ''}</span>`);
     });
-    html += `<div class="cell libelle ligne-total">Total</div>`;
+    html += `<div class="cell lab totlab"><span class="lname">Total</span></div>`;
     etat.joueurs.forEach(j => {
-      html += `<div class="cell joueur ligne-total num ${etat.joueurCourant === j.index ? 'courant' : ''}" ${styleTeinte(j.couleur, 0.1)}>${j.score}</div>`;
+      html += `<div class="cell tot num ${etat.joueurCourant === j.index ? 'col-active' : ''}" ${styleJoueur(j.couleur)}>${j.score}</div>`;
     });
   }
   return html;
@@ -1062,10 +1139,11 @@ function lignesCricket(etat) {
 function lignesHorloge(etat) {
   let html = '';
   SEQUENCE_HORLOGE.forEach((num, idx) => {
-    html += `<div class="cell libelle num" data-ligne="${idx}">${num === 25 ? '25' : num === 50 ? 'Bulle' : num}</div>`;
+    const band = idx % 2 === 1 ? 'band' : '';
+    html += `<div class="cell lab ${band}" data-ligne="${idx}"><span class="lname num">${num === 50 ? 'Bulle' : num}</span></div>`;
     etat.joueurs.forEach(j => {
-      const contenu = j.cible > idx ? `<span class="coche">✓</span>` : j.cible === idx ? `<span class="vise">◎</span>` : '';
-      html += `<div class="cell joueur ${etat.joueurCourant === j.index ? 'courant' : ''}" ${styleTeinte(j.couleur, 0.1)}>${contenu}</div>`;
+      const contenu = j.cible > idx ? `<span class="ok">✓</span>` : j.cible === idx ? `<span class="aim">◎</span>` : '';
+      html += celluleVal(etat, j, contenu, band);
     });
   });
   return html;
@@ -1076,29 +1154,29 @@ function renderPartie() {
   if (!p) { app.ecran = 'accueil'; return renderAccueil(); }
   const etat = etatCourant();
   const n = p.joueurs.length;
-  const colonnes = n === 1
-    ? 'var(--largeur-libelle) calc(100% - var(--largeur-libelle))'
-    : `var(--largeur-libelle) repeat(${n}, calc((100% - var(--largeur-libelle)) / 2))`;
+  const colonnes = `var(--label-w) repeat(${n}, calc((100% - var(--label-w)) / ${Math.min(2, n)}))`;
   const courant = etat.joueurCourant != null ? etat.joueurs[etat.joueurCourant] : null;
 
-  let html = `<div class="partie">
-    <div class="partie-haut"><span><b>${h(MODES[p.mode].libelle)}</b> · ${h(libelleOptions(p.mode, p.options))}</span><span class="num">Tour ${etat.tour}</span></div>`;
-  if (etat.dernierTour) html += `<div class="bandeau-dernier-tour">DERNIER TOUR</div>`;
-  if (n > 2) html += `<div class="points-indicateur" id="points-indicateur">${etat.joueurs.map(j => `<span class="point" data-point="${j.index}"></span>`).join('')}</div>`;
-  html += `<div class="grille-conteneur" id="grille"><div class="grille" style="grid-template-columns:${colonnes}">`;
-  html += `<div class="cell libelle entete">${etat.type === 'x01' ? 'Volée' : etat.type === 'cricket' ? 'Cible' : 'N°'}</div>`;
-  etat.joueurs.forEach(j => { html += celluleEnteteJoueur(etat, j); });
-  if (etat.type === 'x01') html += lignesX01(etat);
-  else if (etat.type === 'cricket') html += lignesCricket(etat);
-  else html += lignesHorloge(etat);
-  html += `</div></div>`;
+  let corps = `<div class="turn" ${styleJoueur(courant ? courant.couleur : '#8C949D', 0.16)}><i></i><span>${courant ? 'Au tour de ' + h(courant.nom) : ''}</span>
+    ${etat.dernierTour ? `<span class="last">DERNIER TOUR</span>` : `<span class="x num">Tour ${etat.tour}</span>`}</div>`;
+  corps += `<div class="sheet ${etat.type}" id="grille" style="grid-template-columns:${colonnes}" aria-label="Feuille de score">`;
+  corps += `<div class="cell corner"><span class="k">${etat.type === 'x01' ? 'Volée' : etat.type === 'cricket' ? 'Cible' : 'Numéro'}</span><span class="v num">Tour ${etat.tour}</span></div>`;
+  etat.joueurs.forEach(j => { corps += celluleEnteteJoueur(etat, j); });
+  if (etat.type === 'x01') corps += lignesX01(etat);
+  else if (etat.type === 'cricket') corps += lignesCricket(etat);
+  else corps += lignesHorloge(etat);
+  corps += `</div>`;
+  if (n > 2) corps += `<div class="dots" id="points-indicateur">${etat.joueurs.map(j => `<i data-point="${j.index}" style="--pc:${h(j.couleur)}"></i>`).join('')}</div>`;
 
-  html += `<div class="actions">
-    <button class="quitter discret" data-action="quitter" aria-label="Quitter la partie" title="Quitter">✕</button>
-    <button class="secondaire" data-action="annuler-volee" ${p.volees.length ? '' : 'disabled'}>Annuler</button>
-    <button class="saisir" data-action="ouvrir-saisie" ${courant ? `style="background:${h(courant.couleur)}"` : 'disabled'}>Saisir la volée<span class="qui">${courant ? h(courant.nom) : ''}</span></button>
+  const pied = `<div class="footer"><div class="row">
+    <button class="btn btn-ghost" data-action="annuler-volee" ${p.volees.length ? '' : 'disabled'}>Annuler</button>
+    <button class="btn btn-player grow" data-action="ouvrir-saisie" ${courant ? styleJoueur(courant.couleur) : 'disabled'}>Saisir la volée<small>${courant ? h(courant.nom) : ''}</small></button>
   </div></div>`;
-  return html;
+  const centre = `<div class="bar-title">${h(MODES[p.mode].libelle)}<span class="bar-sub">${h(libelleOptions(p.mode, p.options))}</span></div>`;
+  const droite = `<button class="iconbtn" data-action="menu-partie" aria-label="Options de la partie">${icone(IC.more)}</button>`;
+  // Le corps de cet écran n'est pas un .scroll : la grille est son propre défilement.
+  const avert = app.stockageOk ? '' : `<div class="storage-warn">Stockage indisponible : la partie ne sera pas sauvegardée.</div>`;
+  return `<div class="screen">${barre(boutonRetour(), centre, droite)}${avert}${corps}${pied}</div>`;
 }
 
 function apresRenderPartie(scroll) {
@@ -1108,8 +1186,8 @@ function apresRenderPartie(scroll) {
   if (scroll) { g.scrollLeft = scroll.left; g.scrollTop = scroll.top; }
   const n = etat.joueurs.length;
   const idx = etat.joueurCourant;
-  const largeurLibelle = (g.querySelector('.cell.libelle') || {}).offsetWidth || 64;
-  const colonne = g.querySelector('.cell.joueur');
+  const largeurLibelle = (g.querySelector('.lab') || {}).offsetWidth || 64;
+  const colonne = g.querySelector('.val');
   const largeurCol = colonne ? colonne.offsetWidth : 0;
 
   // Défilement horizontal vers la colonne du joueur courant si elle n'est pas visible.
@@ -1126,8 +1204,8 @@ function apresRenderPartie(scroll) {
   if (etat.type === 'horloge' && idx != null) {
     const j = etat.joueurs[idx];
     const ligne = g.querySelector(`[data-ligne="${Math.min(j.cible, SEQUENCE_HORLOGE.length - 1)}"]`);
-    const entete = g.querySelector('.cell.entete');
-    if (ligne && entete) {
+    const entete = g.querySelector('.phead');
+    if (ligne && entete && ligne.offsetHeight) {
       const haut = ligne.offsetTop - entete.offsetHeight, bas = ligne.offsetTop + ligne.offsetHeight;
       if (haut < g.scrollTop || bas > g.scrollTop + g.clientHeight) {
         g.scrollTo({ top: Math.max(0, haut - g.clientHeight / 3), behavior: scroll ? 'smooth' : 'auto' });
@@ -1140,16 +1218,16 @@ function majIndicateurPoints() {
   const g = document.getElementById('grille');
   const ind = document.getElementById('points-indicateur');
   if (!g || !ind) return;
-  const colonne = g.querySelector('.cell.joueur');
+  const colonne = g.querySelector('.val');
   if (!colonne || !colonne.offsetWidth) return;
   const premier = Math.round(g.scrollLeft / colonne.offsetWidth);
-  ind.querySelectorAll('.point').forEach(pt => {
+  ind.querySelectorAll('i').forEach(pt => {
     const i = Number(pt.dataset.point);
-    pt.classList.toggle('actif', i === premier || i === premier + 1);
+    pt.classList.toggle('on', i === premier || i === premier + 1);
   });
 }
 
-/* ---- 5.5 Modale de saisie ---- */
+/* ---- 5.5 Feuilles : saisie, formulaire joueur, menus, dialogues ---- */
 function flechettesSaisies() { return app.saisie ? app.saisie.flechettes.filter(Boolean) : []; }
 // État provisoire : la partie rejouée avec la volée en cours de saisie.
 function etatProvisoire() {
@@ -1159,108 +1237,174 @@ function etatProvisoire() {
   return calculerEtat(p.mode, p.options, p.joueurs, volees);
 }
 
+function feuilleHtml(titre, sous, corps, actions, fermer = 'fermer-feuille') {
+  return `<div class="scrim" data-action="${fermer}"></div>
+    <div class="sheetp" role="dialog" aria-modal="true">
+      <div class="mhead"><div class="grab"></div><div class="mhead-row"><div class="grow"><div class="mtitle">${titre}</div>${sous ? `<div class="msub">${sous}</div>` : ''}</div>
+        <button class="iconbtn" data-action="${fermer}" aria-label="Fermer">${icone(IC.close)}</button></div></div>
+      <div class="mbody">${corps}</div>${actions ? `<div class="mactions">${actions}</div>` : ''}</div>`;
+}
+
 function renderModal() {
   const m = document.getElementById('modal');
-  const s = app.saisie;
-  if (!s || !app.partie) { m.hidden = true; m.innerHTML = ''; return; }
-  const p = app.partie;
+  let html = '';
+  if (app.dialogue) html = renderDialogue();
+  else if (app.saisie && app.partie) html = renderSaisie();
+  else if (app.edition) html = renderFormulaireJoueur();
+  else if (app.feuille) html = renderMenu();
+  m.innerHTML = html;
+  m.classList.toggle('open', !!html);
+  if (app.edition && app.edition.focus) {
+    app.edition.focus = false;
+    const inp = m.querySelector('input[data-input="nom-joueur"]');
+    if (inp) { try { inp.focus(); } catch (e) { /* */ } }
+  }
+}
+
+function renderDialogue() {
+  const d = app.dialogue;
+  return `<div class="scrim" data-action="dlg-annuler"></div><div class="dlg" role="alertdialog" aria-modal="true"><h3>${h(d.titre)}</h3><p>${h(d.texte)}</p>
+    <div class="dlg-a"><button class="btn btn-ghost" data-action="dlg-annuler">Annuler</button>
+    <button class="btn ${d.danger ? 'btn-danger' : 'btn-primary'}" data-action="dlg-ok">${h(d.ok || 'OK')}</button></div></div>`;
+}
+
+function renderMenu() {
+  const f = app.feuille;
+  if (f.type === 'reglages') {
+    const corps = `<div class="menu">
+      <button data-action="exporter">Exporter les données<small>fichier .json</small></button>
+      <button data-action="importer">Importer un fichier<small>fusion par identifiant</small></button>
+      ${app.partie ? `<button class="dang" data-action="abandonner-courante">Abandonner la partie en cours</button>` : ''}
+      <button class="dang" data-action="purger" ${app.games.length ? '' : 'disabled'}>Purger l'historique</button></div>
+      <p class="warn">Tout reste dans ce navigateur, hors ligne. Safari iOS efface les données d'un site non visité depuis 7 jours : exporter de temps en temps.</p>`;
+    return feuilleHtml('Réglages', `${pluriel(app.joueurs.length, 'joueur')} · ${pluriel(app.games.length, 'partie')} en historique`, corps);
+  }
+  if (f.type === 'joueur') {
+    const j = joueurParId(f.id);
+    if (!j) return '';
+    const corps = `<div class="menu"><button data-action="editer-joueur" data-id="${h(j.id)}">Modifier le nom ou la couleur</button>
+      <button class="dang" data-action="supprimer-joueur" data-id="${h(j.id)}">Supprimer ce joueur</button></div>`;
+    return feuilleHtml(`${puce(j.couleur)}${h(j.nom)}`, 'Ses parties passées restent dans l\'historique.', corps);
+  }
+  if (f.type === 'partie' && app.partie) {
+    const p = app.partie;
+    const corps = `<div class="menu"><button data-action="annuler-volee" ${p.volees.length ? '' : 'disabled'}>Annuler la dernière volée<small>${pluriel(p.volees.length, 'volée')}</small></button>
+      <button data-action="aller" data-ecran="accueil">Mettre en pause<small>reprise depuis l'accueil</small></button>
+      <button class="dang" data-action="quitter">Abandonner la partie</button></div>`;
+    return feuilleHtml('Partie en cours', `${h(MODES[p.mode].libelle)} · ${h(libelleOptions(p.mode, p.options))}`, corps);
+  }
+  return '';
+}
+
+function renderFormulaireJoueur() {
+  const e = app.edition;
+  const prises = new Set(app.joueurs.filter(j => j.id !== e.id).map(j => j.couleur));
+  let avert = e.erreur ? `<div class="warn bad">${h(e.erreur)}</div>` : prises.has(e.couleur) ? `<div class="warn">Cette couleur est déjà celle d'un autre joueur.</div>` : `<div class="warn"></div>`;
+  const corps = `<input type="text" class="field" maxlength="20" placeholder="Nom du joueur" value="${h(e.nom)}" data-input="nom-joueur" autocomplete="off" autocapitalize="words" enterkeyhint="done">
+    <div class="swatches">${PALETTE.map(c => `<button class="sw ${c.hex === e.couleur ? 'sel' : ''} ${prises.has(c.hex) ? 'taken' : ''}" style="--pc:${c.hex}" data-action="choisir-couleur" data-hex="${c.hex}" aria-label="${c.nom}"><i></i></button>`).join('')}</div>${avert}`;
+  const actions = `<button class="btn btn-ghost" data-action="annuler-edition">Annuler</button><button class="btn btn-primary" data-action="enregistrer-joueur">${e.id ? 'Enregistrer' : 'Créer'}</button>`;
+  return feuilleHtml(e.id ? 'Modifier le joueur' : 'Nouveau joueur', '1 à 20 caractères, nom unique.', corps, actions, 'annuler-edition');
+}
+
+function renderSaisie() {
+  const s = app.saisie, p = app.partie;
   const type = MODES[p.mode].type;
   const etat = etatProvisoire();
   const j = etat.joueurs[s.joueurIndex];
   const fl = flechettesSaisies();
   const restantes = 3 - fl.length;
 
-  let etatTxt = '';
-  if (type === 'x01') etatTxt = `Reste <b class="num">${j.score}</b>`;
-  else if (type === 'cricket') etatTxt = p.options.avecPoints ? `<b class="num">${j.score}</b> pts · ${nbFermees(j)}/7` : `${nbFermees(j)}/7 fermées`;
-  else etatTxt = j.cible >= SEQUENCE_HORLOGE.length ? 'Terminé' : `Vise le <b class="num">${SEQUENCE_HORLOGE[j.cible]}</b>`;
-
-  let html = `<div class="feuille"><div class="feuille-entete"><span class="qui">${pastille(j.couleur)}${h(j.nom)}</span><span class="etat">${etatTxt}</span></div>`;
+  let sous = '';
   if (type === 'x01') {
-    html += `<div class="onglets"><button class="${s.onglet === 'flechettes' ? 'actif' : ''}" data-action="onglet" data-onglet="flechettes">Fléchettes</button>
-      <button class="${s.onglet === 'total' ? 'actif' : ''}" data-action="onglet" data-onglet="total">Total</button></div>`;
+    sous = `Reste <b class="num">${j.score}</b>`;
+    if (restantes > 0 && j.score > 0 && j.ouvert) {
+      const ch = checkout(j.score, restantes, !!p.options.doubleOut);
+      if (ch) sous += ` · Finish <b class="num">${h(texteCheckout(ch))}</b>`;
+      else if (j.score <= 170 && restantes === 3) sous += ' · pas de finish';
+    }
+  } else if (type === 'cricket') sous = p.options.avecPoints ? `<b class="num">${j.score}</b> pts · ${nbFermees(j)}/7 fermées` : `${nbFermees(j)}/7 fermées`;
+  else sous = j.cible >= SEQUENCE_HORLOGE.length ? 'Horloge terminée' : `Vise le <b class="num">${SEQUENCE_HORLOGE[j.cible]}</b>`;
+  const titre = `${puce(j.couleur)}${h(j.nom)}`;
+
+  let corps = '';
+  if (type === 'x01') {
+    corps += `<div class="tabs"><button class="tab ${s.onglet === 'flechettes' ? 'sel' : ''}" data-action="onglet" data-onglet="flechettes">Fléchettes</button>
+      <button class="tab ${s.onglet === 'total' ? 'sel' : ''}" data-action="onglet" data-onglet="total">Total</button></div>`;
   }
 
   if (s.onglet === 'total' && type === 'x01') {
     if (s.confirmDouble) {
-      html += `<div class="confirmation"><div class="question">Terminé sur un double ?</div>
-        <div class="rangee-boutons"><button class="danger" data-action="confirmer-double" data-reponse="non">Non (bust)</button>
-        <button class="primaire" data-action="confirmer-double" data-reponse="oui">Oui, gagné !</button></div></div>`;
-    } else {
-      const total = s.total === '' ? null : Number(s.total);
-      let indication = '', classe = '';
-      if (total != null) {
-        if (total > 180 || TOTAUX_IMPOSSIBLES.has(total)) { indication = 'Total impossible avec 3 fléchettes'; classe = 'erreur'; }
-        else if (p.options.doubleIn && !j.ouvert) { indication = 'Double in non ouvert : un total direct ne peut pas ouvrir (compte 0).'; classe = 'avertissement'; }
-        else if (j.score - total < 0 || (p.options.doubleOut && j.score - total === 1)) { indication = 'Bust : ' + (j.score - total < 0 ? 'dépassement' : 'reste 1'); classe = 'avertissement'; }
-        else if (j.score - total === 0) { indication = p.options.doubleOut ? 'Arrivée à 0 : confirmation demandée' : 'Terminé !'; classe = 'finish'; }
-        else indication = `→ reste ${j.score - total}`;
-      }
-      const valide = total != null && total <= 180 && !TOTAUX_IMPOSSIBLES.has(total);
-      html += `<div class="affichage-total num">${s.total === '' ? '<span class="muted">0</span>' : h(s.total)}</div>
-        <div class="indication ${classe}">${h(indication)}</div>
-        <div class="pave pave-total">${[1, 2, 3, 4, 5, 6, 7, 8, 9].map(d => `<button data-action="chiffre" data-chiffre="${d}">${d}</button>`).join('')}
-          <button data-action="effacer-total">⌫</button><button data-action="chiffre" data-chiffre="0">0</button><button data-action="chiffre" data-chiffre="00">00</button></div>
-        <div class="rangee-boutons"><button data-action="fermer-saisie">Retour</button>
-          <button class="primaire" data-action="valider-total" ${valide ? '' : 'disabled'}>Valider</button></div>`;
+      corps += `<div class="ask"><h3>Terminé sur un double ?</h3><div class="row">
+        <button class="btn btn-danger" data-action="confirmer-double" data-reponse="non">Non, c'est cassé</button>
+        <button class="btn btn-primary" data-action="confirmer-double" data-reponse="oui">Oui, gagné</button></div></div>`;
+      return feuilleHtml(titre, sous, corps, '', 'fermer-saisie');
     }
-    return void (m.innerHTML = html + `</div>`, m.hidden = false);
+    const total = s.total === '' ? null : Number(s.total);
+    let note = '', classe = '';
+    if (total != null) {
+      if (total > 180 || TOTAUX_IMPOSSIBLES.has(total)) { note = 'Total impossible avec 3 fléchettes'; classe = 'bad'; }
+      else if (p.options.doubleIn && !j.ouvert) { note = 'Double in non ouvert : un total direct ne peut pas ouvrir, il comptera 0.'; }
+      else if (j.score - total < 0 || (p.options.doubleOut && j.score - total === 1)) { note = 'Cassé : ' + (j.score - total < 0 ? 'dépassement' : 'il resterait 1'); classe = 'bad'; }
+      else if (j.score - total === 0) { note = p.options.doubleOut ? 'Arrivée à 0 : on demandera si c\'était un double' : 'Terminé !'; classe = 'good'; }
+      else { note = `Il restera ${j.score - total}`; classe = 'good'; }
+    }
+    const valide = total != null && total <= 180 && !TOTAUX_IMPOSSIBLES.has(total);
+    corps += `<div class="tdisp num">${s.total === '' ? '<span class="ph">0</span>' : h(s.total)}</div><div class="note ${classe}">${h(note)}</div>
+      <div class="keys k3">${[1, 2, 3, 4, 5, 6, 7, 8, 9].map(d => `<button class="key num" data-action="chiffre" data-chiffre="${d}">${d}</button>`).join('')}
+        <button class="key miss" data-action="effacer-total" aria-label="Effacer">⌫</button><button class="key num" data-action="chiffre" data-chiffre="0">0</button><button class="key num" data-action="chiffre" data-chiffre="00">00</button></div>`;
+    const actions = `<button class="btn btn-ghost" data-action="fermer-saisie">Retour</button><button class="btn btn-primary" data-action="valider-total" ${valide ? '' : 'disabled'}>Valider</button>`;
+    return feuilleHtml(titre, sous, corps, actions, 'fermer-saisie');
   }
 
   // Onglet Fléchettes
-  html += `<div class="emplacements">` + [0, 1, 2].map(i => {
+  corps += `<div class="slots">` + [0, 1, 2].map(i => {
     const f = s.flechettes[i];
-    return `<div class="emplacement ${f ? 'rempli' : ''} ${s.curseur === i ? 'actif' : ''}" data-action="emplacement" data-index="${i}">${f ? h(notation(f)) : `<span class="indice">${i + 1}</span>`}</div>`;
+    return `<button class="slot ${f ? 'full' : ''} ${s.curseur === i ? 'cur' : ''}" data-action="emplacement" data-index="${i}" aria-label="Fléchette ${i + 1}">${f ? h(notation(f)) : i + 1}</button>`;
   }).join('') + `</div>`;
-  html += `<div class="mults">${[[1, 'Simple'], [2, 'Double'], [3, 'Triple']].map(([v, l]) => `<button class="${s.mult === v ? 'actif' : ''}" data-action="mult" data-mult="${v}">${l}</button>`).join('')}</div>`;
+  corps += `<div class="seg">${[[1, 'Simple'], [2, 'Double'], [3, 'Triple']].map(([v, l]) => `<button class="pill ${s.mult === v ? 'sel' : ''}" data-action="mult" data-mult="${v}">${l}</button>`).join('')}</div>`;
 
   const plein = s.curseur >= 3;
   let classeNum = () => '';
-  if (type === 'cricket') classeNum = n => (CIBLES_CRICKET.includes(n) || n === 50) ? 'cible' : 'attenue';
-  else if (type === 'horloge') classeNum = n => (j.cible < SEQUENCE_HORLOGE.length && SEQUENCE_HORLOGE[j.cible] === n) ? 'vise' : '';
-  html += `<div class="pave">${NUMEROS_PAVE.map(n => `<button class="num ${classeNum(n)}" data-action="secteur" data-secteur="${n}" ${plein ? 'disabled' : ''}>${n}</button>`).join('')}
-    <button class="num ${classeNum(25) === 'attenue' ? '' : classeNum(25)}" data-action="secteur" data-secteur="25" ${plein ? 'disabled' : ''}>25</button>
-    <button class="num ${classeNum(50) === 'attenue' ? '' : classeNum(50)}" data-action="secteur" data-secteur="50" ${plein ? 'disabled' : ''}>50</button>
-    <button class="large rate" data-action="secteur" data-secteur="0" ${plein ? 'disabled' : ''}>Raté</button></div>`;
+  if (type === 'cricket') classeNum = n => (CIBLES_CRICKET.includes(n) || n === 50) ? 'hot' : 'faint';
+  else if (type === 'horloge') classeNum = n => (j.cible < SEQUENCE_HORLOGE.length && SEQUENCE_HORLOGE[j.cible] === n) ? 'hot' : '';
+  const touche = (n, libelle, extra = '') => `<button class="key num ${classeNum(n)} ${extra}" data-action="secteur" data-secteur="${n}" ${plein ? 'disabled' : ''}>${libelle}</button>`;
+  corps += `<div class="keys" ${styleJoueur(j.couleur)}>${NUMEROS_PAVE.map(n => touche(n, n)).join('')}
+    ${touche(25, '25')}${touche(50, '50')}<button class="key miss span2" data-action="secteur" data-secteur="0" ${plein ? 'disabled' : ''}>Raté</button><span></span></div>`;
 
-  let indication = '', classe = '';
+  let note = '', classe = '';
   if (type === 'x01') {
-    if (restantes > 0 && j.score > 0) {
-      const ch = checkout(j.score, restantes, !!p.options.doubleOut);
-      if (ch) { indication = 'Finish : ' + texteCheckout(ch); classe = 'finish'; }
-      else if (j.score <= 170 && restantes === 3) indication = 'Pas de finish en 3 fléchettes';
-      else indication = `${restantes} fléchette${restantes > 1 ? 's' : ''} restante${restantes > 1 ? 's' : ''}`;
-    }
-    if (p.options.doubleIn && !j.ouvert) indication = 'Double in : il faut un double pour ouvrir. ' + indication;
+    if (p.options.doubleIn && !j.ouvert) note = 'Double in : il faut un double pour ouvrir.';
+    else if (fl.length) note = `${restantes ? pluriel(restantes, 'fléchette restante', 'fléchettes restantes') : 'Volée complète'}`;
+    else note = 'Multiplicateur puis numéro. Le multiplicateur revient à Simple après chaque fléchette.';
   } else if (type === 'cricket') {
     const d = etat.volees[etat.volees.length - 1];
-    indication = fl.length && d && d.joueurIndex === s.joueurIndex && etat.volees.length > p.volees.length
-      ? `${d.marques} marque${d.marques > 1 ? 's' : ''}${p.options.avecPoints && d.points ? ` · ${p.options.cutThroat ? '+' + d.points + ' aux adversaires' : '+' + d.points + ' pts'}` : ''}`
-      : 'Cibles : 20 à 15 et la bulle';
+    if (fl.length && d && etat.volees.length > p.volees.length) {
+      note = pluriel(d.marques, 'marque');
+      if (p.options.avecPoints && d.points) note += p.options.cutThroat ? ` · +${d.points} aux adversaires` : ` · +${d.points} points`;
+      classe = 'good';
+    } else note = 'Cibles : 20 à 15 et la bulle. Le reste ne compte pas.';
   } else {
-    indication = j.cible >= SEQUENCE_HORLOGE.length ? 'Horloge terminée !' : `Vise le ${SEQUENCE_HORLOGE[j.cible]}`;
+    note = j.cible >= SEQUENCE_HORLOGE.length ? 'Horloge terminée !' : `Vise le ${SEQUENCE_HORLOGE[j.cible]} — tout multiplicateur valide`;
   }
-  html += `<div class="indication ${classe}">${h(indication)}</div>
-    <div class="rangee-boutons"><button data-action="fermer-saisie">Retour</button>
-      <button class="primaire" data-action="valider-volee" ${fl.length ? '' : 'disabled'}>Valider${fl.length && fl.length < 3 ? ` (${fl.length} fl.)` : ''}</button></div>`;
-  m.innerHTML = html + `</div>`;
-  m.hidden = false;
+  corps += `<div class="note ${classe}">${h(note)}</div>`;
+  const actions = `<button class="btn btn-ghost" data-action="fermer-saisie">Retour</button>
+    <button class="btn btn-primary" data-action="valider-volee" ${fl.length ? '' : 'disabled'}>Valider${fl.length && fl.length < 3 ? ` · ${fl.length} fl.` : ''}</button>`;
+  return feuilleHtml(titre, sous, corps, actions, 'fermer-saisie');
 }
 
-/* ---- Overlays et toast ---- */
-let minuteurOverlay = null;
-function afficherOverlay(classe, titre, sousHtml, duree) {
-  const o = document.getElementById('overlay');
-  if (minuteurOverlay) clearTimeout(minuteurOverlay);
-  o.className = 'overlay ' + classe;
-  o.innerHTML = `<div class="boite" data-action="fermer-overlay"><div class="titre">${h(titre)}</div>${sousHtml ? `<div class="sous">${sousHtml}</div>` : ''}</div>`;
-  o.hidden = false;
-  minuteurOverlay = setTimeout(cacherOverlay, duree);
+/* ---- Plein écran éphémère et message ---- */
+let minuteurFlash = null;
+function afficherFlash(classe, mot, nomsHtml, duree) {
+  const f = document.getElementById('flash');
+  if (minuteurFlash) clearTimeout(minuteurFlash);
+  f.innerHTML = `<div class="flash ${classe}" data-action="fermer-flash" role="alert"><div class="in"><b>${h(mot)}</b>${nomsHtml ? `<div class="names">${nomsHtml}</div>` : ''}</div></div>`;
+  f.hidden = false;
+  minuteurFlash = setTimeout(cacherFlash, duree);
 }
-function cacherOverlay() {
-  const o = document.getElementById('overlay');
-  if (minuteurOverlay) { clearTimeout(minuteurOverlay); minuteurOverlay = null; }
-  o.hidden = true; o.innerHTML = '';
+function cacherFlash() {
+  const f = document.getElementById('flash');
+  if (minuteurFlash) { clearTimeout(minuteurFlash); minuteurFlash = null; }
+  f.hidden = true; f.innerHTML = '';
 }
 let minuteurToast = null;
 function toast(msg, duree = 2200) {
@@ -1277,64 +1421,61 @@ function renderFin() {
   const g = f.partie;
   const etat = calculerEtat(g.mode, g.options, g.joueurs, g.volees);
   const vainqueurs = new Set(g.vainqueurs || etat.vainqueurs.map(i => g.joueurs[i].id));
-  let html = `<div class="ecran"><header class="entete-app"><h1>${f.historique ? 'Résumé' : 'Fin de partie'}</h1>
-    <button class="discret" data-action="accueil">Accueil</button></header>
-    <p class="muted petit">${h(MODES[g.mode].libelle)} · ${h(libelleOptions(g.mode, g.options))} · ${h(formaterDate(g.dateFin || g.dateDebut))} · ${etat.nbTours} tour${etat.nbTours > 1 ? 's' : ''}</p>`;
+  const nomsVainqueurs = etat.joueurs.filter(j => vainqueurs.has(j.id)).map(j => j.nom);
+  const sousTitre = !nomsVainqueurs.length ? 'Partie sans vainqueur.'
+    : nomsVainqueurs.length > 1 ? `Égalité en tête : ${nomsVainqueurs.join(' et ')}.` : `Bravo ${nomsVainqueurs[0]}.`;
 
-  html += `<h2>Classement</h2><div class="carte classement">`;
+  let corps = `<div class="sum"><h1 class="sum-h">${f.historique ? 'Résumé' : 'Partie terminée'}</h1>
+    <p class="sum-s">${h(sousTitre)} ${h(MODES[g.mode].libelle)} · ${h(libelleOptions(g.mode, g.options))} · ${h(formaterDate(g.dateFin || g.dateDebut))} · ${pluriel(etat.nbTours, 'tour')}.</p>`;
+
   etat.classement.forEach((idx, pos) => {
     const j = etat.joueurs[idx];
-    const gagnant = vainqueurs.has(j.id);
-    let detail = '';
-    if (etat.type === 'x01') detail = j.score === 0 ? `fini en ${j.flechettes} fl.` : `reste ${j.score} · moy. ${formaterNombre(moyenneVolee(j))}`;
-    else if (etat.type === 'cricket') detail = `${nbFermees(j)}/7 fermées` + (g.options.avecPoints ? ` · ${j.score} pts` : '');
-    else detail = (j.cible >= SEQUENCE_HORLOGE.length ? 'terminé' : `arrivé au ${SEQUENCE_HORLOGE[j.cible]}`) + ` · ${j.flechettes} fl.`;
-    html += `<div class="rang ${gagnant ? 'vainqueur' : ''}" ${styleTeinte(j.couleur, 0.15)}><span class="position num">${gagnant ? '🏆' : (pos + 1) + '.'}</span>
-      <span class="nom">${pastille(j.couleur)}${h(j.nom)}</span><span class="detail num">${h(detail)}</span></div>`;
+    let score = '', detail = '';
+    const tags = [];
+    if (etat.type === 'x01') {
+      score = j.score === 0 ? `0` : `${j.score}<small> restants</small>`;
+      detail = `Moyenne ${formaterNombre(moyenneVolee(j))} · ${pluriel(j.flechettes, 'fléchette')}`;
+      if (j.meilleurCheckout) tags.push(`Checkout ${j.meilleurCheckout}`);
+      if (j.volees180) tags.push(`180 ×${j.volees180}`);
+      if (j.volees100) tags.push(`100+ ×${j.volees100}`);
+      if (j.meilleureVolee) tags.push(`Meilleure volée ${j.meilleureVolee}`);
+    } else if (etat.type === 'cricket') {
+      score = g.options.avecPoints ? `${j.score}<small> pts</small>` : `${nbFermees(j)}<small>/7</small>`;
+      detail = `${nbFermees(j)}/7 cibles fermées · ${formaterNombre(moyenneMarques(j))} marques par volée`;
+      if (j.meilleureVoleeMarques) tags.push(`Meilleure volée ${pluriel(j.meilleureVoleeMarques, 'marque')}`);
+    } else {
+      score = j.cible >= SEQUENCE_HORLOGE.length ? '✓' : `${SEQUENCE_HORLOGE[j.cible]}<small> à viser</small>`;
+      detail = `${pluriel(j.flechettes, 'fléchette')} · ${formaterNombre(moyenneProgression(j))} numéros par volée`;
+      if (j.meilleureVoleeProgression) tags.push(`Meilleure volée ${pluriel(j.meilleureVoleeProgression, 'numéro')}`);
+    }
+    if (vainqueurs.has(j.id)) tags.unshift('Vainqueur');
+    corps += `<div class="rank ${vainqueurs.has(j.id) ? 'win' : ''}" ${styleJoueur(j.couleur)}><div class="rank-n num">${pos + 1}</div><div class="rank-b"></div>
+      <div class="rank-m"><div class="rank-t"><span class="nm">${h(j.nom)}</span><span class="sc num">${score}</span></div>
+      <div class="rank-d num">${h(detail)}</div>
+      ${tags.length ? `<div class="tags">${tags.map((t, i) => `<span class="tag ${i === 0 && vainqueurs.has(j.id) ? 'gold' : ''} num">${h(t)}</span>`).join('')}</div>` : ''}</div></div>`;
   });
-  if (!vainqueurs.size) html += `<p class="muted petit" style="text-align:center">Partie sans vainqueur.</p>`;
-  html += `</div>`;
 
-  html += `<h2>Statistiques</h2><div class="carte table-scroll"><table class="stats"><thead><tr><th></th>${etat.joueurs.map(j => `<th class="num">${pastille(j.couleur)}${h(j.nom)}</th>`).join('')}</tr></thead><tbody>`;
   const lignes = etat.joueurs.map(j => statsJoueurPartie(etat, j));
-  lignes[0].forEach((l, i) => {
-    html += `<tr><td>${h(l[0])}</td>${lignes.map(lj => `<td class="num">${h(lj[i][1])}</td>`).join('')}</tr>`;
-  });
-  if (g.options.rencontre) html += `<tr><td>Rencontres</td><td class="num" colspan="${etat.joueurs.length}">${etat.rencontres}</td></tr>`;
-  html += `</tbody></table></div>`;
+  corps += `<div class="stats-wrap"><table class="stats"><thead><tr><th></th>${etat.joueurs.map(j => `<th class="pn" style="--pc:${h(j.couleur)}">${h(j.nom)}</th>`).join('')}</tr></thead><tbody>`;
+  lignes[0].forEach((l, i) => { corps += `<tr><td>${h(l[0])}</td>${lignes.map(lj => `<td class="num">${h(lj[i][1])}</td>`).join('')}</tr>`; });
+  if (g.options.rencontre) corps += `<tr><td>Rencontres</td><td class="num" colspan="${etat.joueurs.length}">${etat.rencontres}</td></tr>`;
+  corps += `</tbody></table></div>`;
 
-  if (f.historique) {
-    html += `<div class="rangee-boutons"><button class="primaire" data-action="accueil">Accueil</button></div>`;
-  } else {
-    html += `<div class="rangee-boutons"><button class="primaire" data-action="rejouer">Rejouer</button>
-      <button data-action="nouvelle-partie-config">Nouvelle partie</button><button data-action="accueil">Accueil</button></div>`;
-  }
-  return html + `</div>`;
-}
-
-/* ---- Réglages ---- */
-function renderReglages() {
-  return `<div class="ecran"><header class="entete-app"><h1>Réglages</h1>
-    <button class="discret" data-action="aller" data-ecran="accueil">Accueil</button></header>
-    <div class="carte"><b>Sauvegarde</b>
-      <p class="petit muted">${app.stockageOk ? 'Les données sont conservées dans ce navigateur.' : 'Stockage indisponible : rien ne sera conservé après la fermeture.'}
-      Exporte régulièrement un fichier de secours (Safari iOS purge les données après ~7 jours sans visite).</p>
-      <div class="rangee-boutons"><button data-action="exporter">Exporter</button><button data-action="importer">Importer</button></div>
-      <input type="file" accept="application/json,.json" data-change="fichier-import" hidden>
-      <p class="petit muted num">${app.joueurs.length} joueur${app.joueurs.length > 1 ? 's' : ''} · ${app.games.length} partie${app.games.length > 1 ? 's' : ''} en historique</p>
-    </div>
-    <div class="carte"><b>Historique</b>
-      <p class="petit muted">Supprime toutes les parties terminées. Les joueurs sont conservés.</p>
-      <button class="danger" style="width:100%" data-action="purger" ${app.games.length ? '' : 'disabled'}>Purger l'historique</button>
-    </div>
-    <p class="petit muted" style="text-align:center">Fonctionne hors ligne, sans serveur. Ajoute <code>?selftest=1</code> à l'adresse pour lancer les tests.</p>
-  </div>`;
+  corps += `<div class="sum-a">` + (f.historique
+    ? `<button class="btn btn-ghost btn-lg" data-action="accueil">Revenir à l'accueil</button>`
+    : `<button class="btn btn-primary btn-lg" data-action="rejouer">Rejouer avec les mêmes joueurs</button>
+       <button class="btn btn-ghost btn-lg" data-action="nouvelle-partie-config">Nouvelle partie</button>
+       <button class="btn btn-ghost btn-lg" data-action="accueil">Revenir à l'accueil</button>`) + `</div></div>`;
+  return ecranHtml(barre(f.historique ? `<button class="iconbtn" data-action="accueil">${icone(IC.back)}Accueil</button>` : marque()), corps);
 }
 
 /* =====================================================================
    7. ÉVÉNEMENTS — délégation d'événements, routeur d'écrans
    ===================================================================== */
-function aller(ecran) { app.ecran = ecran; app.edition = null; render(); try { window.scrollTo(0, 0); } catch (e) { /* */ } }
+function aller(ecran) { app.ecran = ecran; app.edition = null; app.feuille = null; app.dialogue = null; render(); }
+function fermerFeuille() { app.feuille = null; app.dialogue = null; renderModal(); }
+// Dialogue de confirmation dessiné par l'app (pas de confirm() natif).
+function confirmer(cfg, onOk) { app.dialogue = { ...cfg, onOk }; renderModal(); }
 
 function nouvelleConfig(base) {
   const mode = base && MODES[base.mode] ? base.mode : '501';
@@ -1397,14 +1538,14 @@ function ajouterVolee(volee) {
   const etat = etatCourant();
   const d = etat.volees[etat.volees.length - 1];
   const bust = !!(d && d.bust);
-  if (bust) { afficherOverlay('bust', 'CASSÉ !', `${h(p.joueurs[volee.joueurIndex].nom)} reste à ${d.scoreApres}`, 1300); vibrer([90, 50, 90]); }
+  if (bust) { afficherFlash('bust', 'CASSÉ !', `<span>${puce(p.joueurs[volee.joueurIndex].couleur)}${h(p.joueurs[volee.joueurIndex].nom)} reste à ${d.scoreApres}</span>`, 1300); vibrer([90, 50, 90]); }
   else vibrer(25);
   if (p.options.rencontre && etat.rencontreVolee === p.volees.length - 1) {
-    const sous = etat.rencontreGroupes.map(g => `<div>${g.indices.map(i => pastille(p.joueurs[i].couleur) + h(p.joueurs[i].nom)).join(' & ')}</div>`).join('');
-    const montrer = () => { afficherOverlay('rencontre', 'RENCONTRE !', sous, 2000); vibrer([40, 40, 40]); };
+    const noms = etat.rencontreGroupes.map(g => g.indices.map(i => `<span>${puce(p.joueurs[i].couleur)}${h(p.joueurs[i].nom)}</span>`).join('')).join('');
+    const montrer = () => { afficherFlash('rencontre', 'RENCONTRE !', noms, 2000); vibrer([40, 40, 40]); };
     if (bust) setTimeout(montrer, 1300); else montrer();
   }
-  fermerSaisie();
+  app.saisie = null;
   if (etat.termine) terminerPartie(etat);
   else { sauvegarderDifferee(); render(); }
 }
@@ -1443,9 +1584,9 @@ function enregistrerJoueur() {
   const e = app.edition;
   if (!e) return;
   const nom = (e.nom || '').trim();
-  if (nom.length < 1 || nom.length > 20) { e.erreur = 'Le nom doit faire entre 1 et 20 caractères.'; render(); return; }
+  if (nom.length < 1 || nom.length > 20) { e.erreur = 'Le nom doit faire entre 1 et 20 caractères.'; renderModal(); return; }
   const doublon = app.joueurs.find(j => j.id !== e.id && j.nom.toLowerCase() === nom.toLowerCase());
-  if (doublon) { e.erreur = 'Ce nom existe déjà.'; render(); return; }
+  if (doublon) { e.erreur = 'Ce nom existe déjà.'; renderModal(); return; }
   if (e.id) {
     const j = joueurParId(e.id);
     if (j) { j.nom = nom; j.couleur = e.couleur; }
@@ -1458,7 +1599,12 @@ function enregistrerJoueur() {
 }
 function couleurLibre() {
   const prises = new Set(app.joueurs.map(j => j.couleur));
-  return (PALETTE.find(c => !prises.has(c.hex)) || PALETTE[0]).hex;
+  return (PALETTE.find(c => !prises.has(c.hex)) || PALETTE[app.joueurs.length % PALETTE.length]).hex;
+}
+function abandonnerPartie() {
+  app.partie = null; app.saisie = null; app.feuille = null; app.dialogue = null;
+  sauvegarderMaintenant();
+  aller('accueil');
 }
 
 const ACTIONS = {
@@ -1468,8 +1614,7 @@ const ACTIONS = {
   'reprendre': () => { if (app.partie) { app.dernierJoueurAffiche = null; aller('partie'); } },
   'abandonner-courante': () => {
     if (!app.partie) return;
-    if (!confirm('Abandonner la partie en cours ? Elle ne sera pas enregistrée.')) return;
-    app.partie = null; sauvegarderMaintenant(); render();
+    confirmer({ titre: 'Abandonner la partie ?', texte: 'Elle ne sera pas enregistrée dans l\'historique.', ok: 'Abandonner', danger: true }, abandonnerPartie);
   },
   'ouvrir-resume': el => {
     const g = app.games.find(x => x.id === el.dataset.id);
@@ -1478,17 +1623,24 @@ const ACTIONS = {
     aller('fin');
   },
   // Joueurs
-  'nouveau-joueur': () => { app.edition = { id: null, nom: '', couleur: couleurLibre(), erreur: '' }; render(); },
-  'editer-joueur': el => { const j = joueurParId(el.dataset.id); if (j) { app.edition = { id: j.id, nom: j.nom, couleur: j.couleur, erreur: '' }; render(); } },
-  'choisir-couleur': el => { if (app.edition) { app.edition.couleur = el.dataset.hex; render(); } },
+  'nouveau-joueur': () => { app.feuille = null; app.edition = { id: null, nom: '', couleur: couleurLibre(), erreur: '', focus: true }; renderModal(); },
+  'editer-joueur': el => {
+    const j = joueurParId(el.dataset.id);
+    if (j) { app.feuille = null; app.edition = { id: j.id, nom: j.nom, couleur: j.couleur, erreur: '', focus: true }; renderModal(); }
+  },
+  'menu-joueur': el => { app.feuille = { type: 'joueur', id: el.dataset.id }; renderModal(); },
+  'choisir-couleur': el => { if (app.edition) { app.edition.couleur = el.dataset.hex; renderModal(); } },
   'enregistrer-joueur': enregistrerJoueur,
-  'annuler-edition': () => { app.edition = null; render(); },
+  'annuler-edition': () => { app.edition = null; renderModal(); },
   'supprimer-joueur': el => {
     const j = joueurParId(el.dataset.id);
     if (!j) return;
-    if (!confirm(`Supprimer ${j.nom} ? Ses parties passées restent dans l'historique.`)) return;
-    app.joueurs = app.joueurs.filter(x => x.id !== j.id);
-    app.edition = null; sauvegarderMaintenant(); render();
+    confirmer({ titre: `Supprimer ${j.nom} ?`, texte: 'Ses parties passées restent dans l\'historique, mais il disparaît du tableau des victoires.', ok: 'Supprimer', danger: true }, () => {
+      app.joueurs = app.joueurs.filter(x => x.id !== j.id);
+      if (app.config) app.config.selection = app.config.selection.filter(id => id !== j.id);
+      app.edition = null; app.feuille = null; app.dialogue = null;
+      sauvegarderMaintenant(); render();
+    });
   },
   // Configuration
   'basculer-joueur': el => {
@@ -1502,23 +1654,25 @@ const ACTIONS = {
   'lancer-partie': demarrerPartie,
   'expliquer-rencontre': () => toast('Rencontre indisponible en cut throat : on donne ses points aux autres.'),
   // Partie
+  'menu-partie': () => { app.feuille = { type: 'partie' }; renderModal(); },
+  'menu-reglages': () => { app.feuille = { type: 'reglages' }; renderModal(); },
+  'fermer-feuille': fermerFeuille,
   'ouvrir-saisie': ouvrirSaisie,
   'annuler-volee': () => {
     const p = app.partie;
     if (!p || !p.volees.length) return;
     p.volees.pop();
-    app.saisie = null;
-    cacherOverlay();
+    app.saisie = null; app.feuille = null;
+    cacherFlash();
     sauvegarderDifferee();
     vibrer(15);
     render();
   },
   'quitter': () => {
     if (!app.partie) return;
-    if (!confirm('Quitter et abandonner la partie ? Elle ne sera pas enregistrée.')) return;
-    app.partie = null; app.saisie = null; sauvegarderMaintenant(); aller('accueil');
+    confirmer({ titre: 'Abandonner la partie ?', texte: 'Elle ne sera pas enregistrée dans l\'historique. Pour la reprendre plus tard, préférer « Mettre en pause ».', ok: 'Abandonner', danger: true }, abandonnerPartie);
   },
-  // Modale
+  // Saisie
   'onglet': el => { if (app.saisie) { app.saisie.onglet = el.dataset.onglet; app.saisie.confirmDouble = false; renderModal(); } },
   'emplacement': el => {
     const s = app.saisie; if (!s) return;
@@ -1546,17 +1700,27 @@ const ACTIONS = {
   },
   'confirmer-double': el => validerVoleeTotal(el.dataset.reponse === 'oui'),
   // Fin
-  'rejouer': () => { if (app.fin) { app.config = nouvelleConfig(app.fin.partie); app.fin = null; if (validerConfig(app.config)) aller('config'); else demarrerPartie(); } },
+  'rejouer': () => {
+    if (!app.fin) return;
+    app.config = nouvelleConfig(app.fin.partie); app.fin = null;
+    if (validerConfig(app.config)) aller('config'); else demarrerPartie();
+  },
   'nouvelle-partie-config': () => { app.config = nouvelleConfig(app.fin ? app.fin.partie : null); app.fin = null; aller('config'); },
   // Réglages
-  'exporter': () => { try { exporterJson(); } catch (e) { toast('Export impossible'); } },
-  'importer': () => { const inp = document.querySelector('input[data-change="fichier-import"]'); if (inp) inp.click(); },
+  'exporter': () => { try { exporterJson(); fermerFeuille(); } catch (e) { toast('Export impossible'); } },
+  'importer': () => { const inp = document.getElementById('fichier-import'); if (inp) inp.click(); },
   'purger': () => {
-    if (!confirm('Purger tout l\'historique des parties ?')) return;
-    if (!confirm('Vraiment ? Cette action est définitive.')) return;
-    app.games = []; sauvegarderMaintenant(); toast('Historique purgé'); render();
+    confirmer({ titre: 'Purger l\'historique ?', texte: 'Toutes les parties terminées seront supprimées. Les joueurs sont conservés.', ok: 'Continuer', danger: true }, () => {
+      confirmer({ titre: 'Vraiment ?', texte: 'Cette action est définitive. Un export préalable est le seul moyen de revenir en arrière.', ok: 'Purger', danger: true }, () => {
+        app.games = []; app.feuille = null; app.dialogue = null;
+        sauvegarderMaintenant(); toast('Historique purgé'); render();
+      });
+    });
   },
-  'fermer-overlay': cacherOverlay,
+  // Dialogues et plein écran
+  'dlg-ok': () => { const d = app.dialogue; app.dialogue = null; if (d && d.onOk) d.onOk(); else renderModal(); },
+  'dlg-annuler': () => { app.dialogue = null; renderModal(); },
+  'fermer-flash': cacherFlash,
 };
 
 const CHANGEMENTS = {
@@ -1573,16 +1737,20 @@ const CHANGEMENTS = {
     if (!fichier) return;
     const lecteur = new FileReader();
     lecteur.onload = () => {
-      try {
-        const donnees = JSON.parse(lecteur.result);
-        const joueurs = Array.isArray(donnees.players) ? donnees.players.filter(joueurValide).length : 0;
-        const games = Array.isArray(donnees.games) ? donnees.games.filter(partieValide).length : 0;
-        if (!confirm(`Importer ${joueurs} joueur${joueurs > 1 ? 's' : ''} et ${games} partie${games > 1 ? 's' : ''} ? Les éléments déjà présents sont conservés.`)) return;
-        const r = fusionnerImport(donnees);
-        sauvegarderMaintenant();
-        toast(`Importé : ${r.joueurs} joueur${r.joueurs > 1 ? 's' : ''}, ${r.games} partie${r.games > 1 ? 's' : ''}`);
-        render();
-      } catch (e) { toast('Fichier invalide'); }
+      let donnees;
+      try { donnees = JSON.parse(lecteur.result); } catch (e) { toast('Fichier invalide'); return; }
+      const joueurs = donnees && Array.isArray(donnees.players) ? donnees.players.filter(joueurValide).length : 0;
+      const games = donnees && Array.isArray(donnees.games) ? donnees.games.filter(partieValide).length : 0;
+      if (!joueurs && !games) { toast('Aucune donnée reconnue dans ce fichier'); return; }
+      confirmer({ titre: 'Importer ce fichier ?', texte: `${pluriel(joueurs, 'joueur')} et ${pluriel(games, 'partie')}. Les éléments déjà présents sont conservés.`, ok: 'Importer' }, () => {
+        try {
+          const r = fusionnerImport(donnees);
+          sauvegarderMaintenant();
+          app.feuille = null;
+          toast(`Importé : ${pluriel(r.joueurs, 'joueur')}, ${pluriel(r.games, 'partie')}`);
+          render();
+        } catch (e) { toast('Import impossible'); }
+      });
     };
     lecteur.onerror = () => toast('Lecture impossible');
     lecteur.readAsText(fichier);
@@ -1607,14 +1775,14 @@ function installerEvenements() {
   });
   document.addEventListener('input', ev => {
     const el = ev.target;
-    if (el && el.dataset && el.dataset.input === 'nom-joueur' && app.edition) app.edition.nom = el.value;
+    if (el && el.dataset && el.dataset.input === 'nom-joueur' && app.edition) { app.edition.nom = el.value; app.edition.erreur = ''; }
   });
   document.addEventListener('keydown', ev => {
     if (ev.key === 'Enter' && ev.target && ev.target.dataset && ev.target.dataset.input === 'nom-joueur') { ev.preventDefault(); enregistrerJoueur(); }
-    if (ev.key === 'Escape') { if (app.saisie) fermerSaisie(); cacherOverlay(); }
+    if (ev.key === 'Escape') { if (app.saisie) fermerSaisie(); else if (app.edition) { app.edition = null; renderModal(); } else fermerFeuille(); cacherFlash(); }
   });
-  // Un tap n'importe où fait disparaître l'overlay plus tôt (sans bloquer le jeu derrière).
-  document.addEventListener('pointerdown', () => { if (!document.getElementById('overlay').hidden) cacherOverlay(); }, true);
+  // Un tap n'importe où fait disparaître le plein écran plus tôt.
+  document.addEventListener('pointerdown', () => { if (!document.getElementById('flash').hidden) cacherFlash(); }, true);
   // Indicateur de position des colonnes (délégué : la grille est recréée à chaque rendu).
   document.addEventListener('scroll', ev => { if (ev.target && ev.target.id === 'grille') majIndicateurPoints(); }, true);
   // Sauvegarde immédiate quand l'onglet est fermé ou mis en arrière-plan.
@@ -1625,13 +1793,14 @@ function installerEvenements() {
 function demarrer() {
   chargerTout();
   app.config = nouvelleConfig(null);
+  app.feuille = null; app.dialogue = null;
   installerEvenements();
   render();
   if (/[?&]selftest=1/.test(location.search)) {
     const r = selfTest();
     const b = document.getElementById('selftest');
     b.className = 'selftest ' + (r.echecs.length ? 'ko' : 'ok');
-    b.textContent = `Self-test : ${r.reussis}/${r.total}` + (r.echecs.length ? '\n' + r.echecs.join('\n') : ' ✔');
+    b.textContent = `Self-test : ${r.reussis}/${r.total}` + (r.echecs.length ? '\n' + r.echecs.join('\n') : ' ✔ (toucher pour fermer)');
     b.hidden = false;
     b.onclick = () => { b.hidden = true; };
   }
@@ -1766,6 +1935,11 @@ function selfTest() {
   return r;
 }
 
+if (typeof document !== 'undefined') {
+  window.dartsSelfTest = selfTest;
+  if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', demarrer);
+  else demarrer();
+}
 if (typeof document !== 'undefined') {
   window.dartsSelfTest = selfTest;
   if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', demarrer);
