@@ -1,0 +1,1475 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="color-scheme" content="dark">
+<meta name="theme-color" content="#0E1114">
+<meta name="description" content="Feuille de score Yam's : totaux calculés, historique léger, hors ligne.">
+<title>Yam's — feuille de score</title>
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='7' fill='%23ECE7DC'/%3E%3Cg fill='%230E1114'%3E%3Ccircle cx='10' cy='10' r='3'/%3E%3Ccircle cx='22' cy='10' r='3'/%3E%3Ccircle cx='16' cy='16' r='3'/%3E%3Ccircle cx='10' cy='22' r='3'/%3E%3Ccircle cx='22' cy='22' r='3'/%3E%3C/g%3E%3C/svg%3E">
+<style>
+/* ============================================================
+   JETONS — ardoise, filets, craie. La couleur est réservée aux joueurs.
+   ============================================================ */
+:root{
+  --bg:#0E1114;
+  --surface:#161A1F;
+  --band:#1A1F25;
+  --raise:#1F252C;
+  --rule:#2A3138;
+  --rule-2:#3C454F;
+  --chalk:#ECE7DC;
+  --muted:#8C949D;
+  --faint:#5B636C;
+  --danger:#E4665A;
+
+  --label-w:clamp(78px,26vw,108px);
+  --row-h:46px;
+  --head-h:58px;
+  --tot-h:54px;
+
+  --font:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif;
+  color-scheme:dark;
+}
+
+*,*::before,*::after{box-sizing:border-box}
+html,body{height:100%;margin:0;overflow:hidden;overscroll-behavior:none}
+body{
+  background:var(--bg);color:var(--chalk);font-family:var(--font);font-size:15px;line-height:1.35;
+  -webkit-text-size-adjust:100%;-webkit-tap-highlight-color:transparent;
+  -webkit-user-select:none;user-select:none;touch-action:manipulation;
+}
+button{font:inherit;color:inherit;background:none;border:0;margin:0;padding:0;cursor:pointer;touch-action:manipulation}
+input{font:inherit;-webkit-user-select:text;user-select:text}
+h1,h2,h3,p{margin:0}
+:focus{outline:none}
+:focus-visible{outline:2px solid var(--chalk);outline-offset:2px}
+.num{font-variant-numeric:tabular-nums;font-feature-settings:"tnum" 1}
+.grow{flex:1}
+.sr{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap;border:0}
+
+/* ============================================================
+   COQUE
+   ============================================================ */
+#app{
+  position:fixed;inset:0;display:flex;flex-direction:column;
+  padding-left:env(safe-area-inset-left);padding-right:env(safe-area-inset-right);
+}
+.screen{display:flex;flex-direction:column;flex:1;min-height:0}
+.scroll{flex:1;min-height:0;overflow-y:auto;overscroll-behavior:contain;-webkit-overflow-scrolling:touch}
+
+.bar{padding-top:env(safe-area-inset-top);background:var(--bg);border-bottom:1px solid var(--rule);flex:none}
+.bar-in{display:flex;align-items:center;gap:4px;height:52px;padding:0 6px}
+.brand{display:flex;align-items:center;gap:8px;padding-left:6px;font-size:17px;font-weight:700;letter-spacing:-.01em}
+.brand svg{color:var(--muted)}
+.iconbtn{display:inline-flex;align-items:center;justify-content:center;gap:4px;min-width:44px;min-height:44px;padding:0 10px;border-radius:10px;font-size:14px;font-weight:600;color:var(--muted)}
+.iconbtn:active{background:var(--raise)}
+.iconbtn.strong{color:var(--chalk)}
+
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;min-height:48px;padding:0 16px;border-radius:12px;font-size:15px;font-weight:600;background:var(--raise);color:var(--chalk);border:1px solid transparent}
+.btn:active{filter:brightness(1.25)}
+.btn-primary{background:var(--chalk);color:var(--bg)}
+.btn-ghost{background:transparent;border-color:var(--rule-2);color:var(--chalk)}
+.btn-danger{background:transparent;border-color:rgba(228,102,90,.45);color:var(--danger)}
+.btn-lg{width:100%;min-height:54px;font-size:16px}
+.btn:disabled{opacity:.35;cursor:default}
+
+.footer{flex:none;padding:12px 14px max(12px,env(safe-area-inset-bottom));border-top:1px solid var(--rule);background:var(--bg)}
+.hint{font-size:12.5px;color:var(--muted);text-align:center;padding-bottom:8px}
+
+/* ============================================================
+   ACCUEIL
+   ============================================================ */
+.home{padding-bottom:8px}
+.sec{padding:18px 14px 16px;border-bottom:1px solid var(--rule)}
+.sec:last-child{border-bottom:0}
+.shead{display:flex;align-items:baseline;gap:8px;margin-bottom:10px}
+.shead h2{font-size:13px;font-weight:600;color:var(--muted)}
+.shead-x{margin-left:auto;font-size:12px;color:var(--faint)}
+
+.empty{font-size:14px;color:var(--muted);line-height:1.5}
+
+.resume{display:block;width:100%;text-align:left;padding:14px;border-bottom:1px solid var(--rule);background:var(--surface)}
+.resume:active{background:var(--raise)}
+.resume-h{display:flex;align-items:center;gap:10px;font-size:16px;font-weight:700}
+.resume-h .chev{margin-left:auto;color:var(--muted)}
+.resume-p{display:flex;flex-wrap:wrap;align-items:center;gap:8px;margin-top:8px;font-size:13px;color:var(--muted)}
+.resume-p i{display:inline-block;width:8px;height:8px;border-radius:50%;background:var(--pc);margin-right:4px;vertical-align:middle}
+
+.stat-line{font-size:14.5px;color:var(--chalk);line-height:1.5}
+.stat-line b{font-weight:700}
+.record{margin-top:6px;font-size:14.5px;color:var(--muted)}
+.record b{font-size:19px;font-weight:700;color:var(--chalk)}
+.record .who{font-weight:600;color:var(--pc,var(--chalk))}
+
+.lb{margin-top:14px;border-top:1px solid var(--rule)}
+.lb-r{display:grid;grid-template-columns:1fr 34px 34px 56px;align-items:center;gap:6px;height:38px;border-bottom:1px solid var(--rule)}
+.lb-h{height:26px;font-size:11px;color:var(--faint)}
+.lb-r>span{text-align:right}
+.lb-r>span:first-child{text-align:left;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.lb-n{display:flex;align-items:center;gap:8px;font-size:14px;font-weight:600}
+.lb-n i{width:9px;height:9px;border-radius:50%;background:var(--pc);flex:none}
+.lb-v{font-size:14px}
+.lb-r .dim{color:var(--muted)}
+
+.plist{list-style:none;margin:0;padding:0;border-top:1px solid var(--rule)}
+.prow{display:flex;align-items:stretch;border-bottom:1px solid var(--rule)}
+.prow-main{display:flex;align-items:center;gap:12px;flex:1;min-width:0;min-height:56px;padding:0 4px 0 12px;text-align:left;border-left:3px solid transparent}
+.prow-main:active{background:var(--surface)}
+.prow.on .prow-main{border-left-color:var(--pc);background-color:var(--surface);background-image:linear-gradient(rgb(var(--pc-rgb)/.07),rgb(var(--pc-rgb)/.07))}
+.swatch{width:16px;height:16px;border-radius:50%;flex:none;border:2px solid var(--pc)}
+.prow.on .swatch{background:var(--pc)}
+.pname{flex:1;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;font-size:16px;font-weight:600}
+.badge{flex:none;min-width:26px;height:26px;border-radius:13px;display:inline-flex;align-items:center;justify-content:center;padding:0 7px;font-size:13px;font-weight:700;background:var(--pc);color:#0E1114}
+.prow-more{width:52px;flex:none;display:flex;align-items:center;justify-content:center;color:var(--faint)}
+.prow-more:active{color:var(--chalk)}
+.addrow{display:flex;align-items:center;gap:12px;width:100%;min-height:56px;padding:0 12px;font-size:15px;font-weight:600;color:var(--muted);border-bottom:1px solid var(--rule)}
+.addrow:active{color:var(--chalk)}
+.addrow .plus{width:16px;height:16px;display:flex;align-items:center;justify-content:center;color:var(--muted)}
+
+.setting{display:flex;align-items:center;gap:14px;min-height:56px;cursor:pointer}
+.setting-t{font-size:16px;font-weight:600}
+.setting-d{display:block;margin-top:2px;font-size:12.5px;color:var(--muted)}
+.switch{position:relative;flex:none;width:50px;height:30px;border-radius:15px;background:var(--raise);border:1px solid var(--rule-2);transition:background .15s ease}
+.switch::after{content:"";position:absolute;top:3px;left:3px;width:22px;height:22px;border-radius:50%;background:var(--muted);transition:transform .15s ease,background .15s ease}
+.setting input:checked+.switch{background:var(--chalk);border-color:var(--chalk)}
+.setting input:checked+.switch::after{transform:translateX(20px);background:var(--bg)}
+.setting input:focus-visible+.switch{outline:2px solid var(--chalk);outline-offset:2px}
+
+/* ============================================================
+   GRILLE DE PARTIE
+   ============================================================ */
+.turn{display:flex;align-items:center;gap:9px;flex:none;height:34px;padding:0 14px;border-bottom:1px solid var(--rule);
+  background-color:var(--bg);background-image:linear-gradient(rgb(var(--pc-rgb)/.16),rgb(var(--pc-rgb)/.16))}
+.turn i{width:9px;height:9px;border-radius:50%;background:var(--pc);flex:none}
+.turn span{font-size:13.5px;font-weight:600;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+
+.sheet{
+  flex:1;min-height:0;display:grid;
+  grid-template-rows:var(--head-h) repeat(15,var(--row-h)) var(--tot-h);
+  overflow:auto;overscroll-behavior:contain;-webkit-overflow-scrolling:touch;
+  scroll-snap-type:x mandatory;scroll-padding-left:var(--label-w);
+  background:var(--surface);
+}
+.cell{position:relative;border-bottom:1px solid var(--rule);border-right:1px solid var(--rule);background-color:var(--surface)}
+.cell.band{background-color:var(--band)}
+.cell.col-active{background-image:linear-gradient(rgb(var(--pc-rgb)/.10),rgb(var(--pc-rgb)/.10))}
+
+.lab,.corner,.totlab{position:sticky;left:0;z-index:3;border-right:1px solid var(--rule-2)}
+.corner{top:0;z-index:6;display:flex;flex-direction:column;align-items:flex-start;justify-content:center;padding:0 10px;border-bottom:1px solid var(--rule-2)}
+.corner .k{font-size:10.5px;color:var(--faint)}
+.corner .v{font-size:15px;font-weight:700}
+.phead{position:sticky;top:0;z-index:4;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:1px;padding:6px 6px 0;border-bottom:1px solid var(--rule-2);overflow:hidden}
+.phead::before{content:"";position:absolute;left:0;right:0;top:0;height:3px;background:var(--pc);opacity:.3}
+.phead.col-active::before{opacity:1}
+.phead .pn{max-width:100%;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;font-size:14.5px;font-weight:700;color:var(--pc)}
+.phead .pt{font-size:12px;color:var(--muted)}
+
+.lab{display:flex;align-items:center;gap:6px;padding:0 8px 0 10px}
+.lab .lname{font-size:13px;font-weight:500;line-height:1.05}
+.lab .lhint{margin-left:auto;font-size:10.5px;color:var(--muted);flex:none}
+.lab .die{color:var(--chalk);flex:none}
+.sub .lname{font-size:12px;color:var(--muted);padding-left:10px}
+
+.val{display:flex;align-items:center;justify-content:center;font-size:19px;font-weight:600;color:var(--chalk);
+  font-variant-numeric:tabular-nums;font-feature-settings:"tnum" 1;scroll-snap-align:start}
+.val .v{position:relative;z-index:1}
+.val.empty::after{content:"";position:absolute;left:32%;right:32%;bottom:32%;height:1px;background:var(--faint);opacity:.55}
+.val.zero{color:var(--muted)}
+.val.zero::after{content:"";position:absolute;left:26%;right:26%;top:50%;height:1px;background:currentColor;opacity:.5;transform:rotate(-16deg)}
+.val.sub-line{font-size:16px}
+
+/* ligne calculée : bonus mineure — c'est aussi la césure entre mineure et majeure */
+.brow{border-bottom:2px solid var(--rule-2)}
+.blab{background-color:var(--band)}
+.bcell{display:flex;align-items:center;justify-content:center;background-color:var(--band);scroll-snap-align:start;font-size:12.5px;color:var(--muted)}
+.bcell.got{font-size:17px;font-weight:700;color:var(--chalk)}
+
+.totlab{bottom:0;z-index:6;border-top:2px solid var(--rule-2)}
+.totlab .lname{font-size:13px;font-weight:700}
+.tot{position:sticky;bottom:0;z-index:4;display:flex;align-items:center;justify-content:center;border-top:2px solid var(--rule-2);font-size:22px;font-weight:700;color:var(--pc)}
+
+.dots{flex:none;display:flex;align-items:center;justify-content:center;gap:6px;padding:8px 0 max(8px,env(safe-area-inset-bottom));background:var(--bg)}
+.dots i{width:18px;height:3px;border-radius:2px;background:var(--pc);opacity:.22;transition:opacity .15s ease}
+.dots i.on{opacity:1}
+
+/* ============================================================
+   RÉSUMÉ
+   ============================================================ */
+.sum{padding:16px 14px 20px}
+.sum-h{font-size:22px;font-weight:700;margin-bottom:2px}
+.sum-s{font-size:13.5px;color:var(--muted);margin-bottom:18px}
+.rank{display:flex;gap:12px;padding:14px 0;border-top:1px solid var(--rule)}
+.rank:last-of-type{border-bottom:1px solid var(--rule)}
+.rank-n{flex:none;width:26px;font-size:15px;font-weight:700;color:var(--muted);padding-top:2px}
+.rank-b{flex:none;width:3px;border-radius:2px;background:var(--pc)}
+.rank-m{flex:1;min-width:0}
+.rank-t{display:flex;align-items:baseline;gap:8px}
+.rank-t .nm{font-size:17px;font-weight:700;color:var(--pc);overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.rank-t .sc{margin-left:auto;font-size:24px;font-weight:700;font-variant-numeric:tabular-nums}
+.rank-d{margin-top:4px;font-size:12.5px;color:var(--muted)}
+.tags{display:flex;flex-wrap:wrap;gap:6px;margin-top:7px}
+.tag{font-size:11.5px;font-weight:600;padding:3px 8px;border-radius:20px;border:1px solid var(--rule-2);color:var(--chalk)}
+.tag.gold{border-color:var(--chalk)}
+.sum-a{display:flex;flex-direction:column;gap:10px;margin-top:22px}
+
+/* ============================================================
+   FEUILLES ET DIALOGUES
+   ============================================================ */
+#modal{position:fixed;inset:0;z-index:100;display:none}
+#modal.open{display:block}
+.scrim{position:absolute;inset:0;background:rgba(6,8,10,.66)}
+.sheetp{
+  position:absolute;left:0;right:0;bottom:0;display:flex;flex-direction:column;max-height:88%;
+  background:var(--surface);border-top:1px solid var(--rule-2);border-radius:16px 16px 0 0;
+  padding-bottom:max(14px,env(safe-area-inset-bottom));
+  padding-left:env(safe-area-inset-left);padding-right:env(safe-area-inset-right);
+  transform:translateY(calc(var(--drag,0px) - var(--kb,0px)));
+  animation:sheetUp .2s cubic-bezier(.2,.8,.3,1);
+}
+@keyframes sheetUp{from{transform:translateY(100%)}to{transform:translateY(0)}}
+.grab{width:38px;height:4px;border-radius:2px;background:var(--rule-2);margin:8px auto 2px}
+.mhead{flex:none;padding:0 6px 8px}
+.mhead-row{display:flex;align-items:flex-start;gap:8px;padding:4px 4px 0 12px}
+.mtitle{font-size:18px;font-weight:700}
+.msub{font-size:13px;color:var(--muted);margin-top:2px}
+.mbody{overflow-y:auto;overscroll-behavior:contain;padding:4px 14px 0}
+.mactions{flex:none;display:flex;gap:10px;padding:12px 14px 0;margin-top:12px;border-top:1px solid var(--rule)}
+.mactions .btn{flex:1}
+.lock{font-size:14px;color:var(--muted);line-height:1.5;padding:2px 0 14px}
+
+.pills{display:grid;gap:8px;padding-bottom:4px}
+.pills.long{max-height:min(44vh,320px);overflow-y:auto;overscroll-behavior:contain;padding-right:2px}
+.pill{display:flex;align-items:center;justify-content:center;min-height:56px;border-radius:12px;background:var(--raise);font-size:19px;font-weight:600;color:var(--chalk);border:1px solid transparent}
+.pills.long .pill{min-height:48px;font-size:17px}
+.pill:active{filter:brightness(1.3)}
+.pill.sel{background:var(--chalk);color:var(--bg)}
+.strike{position:relative;color:var(--muted);background:transparent;border:1px dashed var(--rule-2);font-size:15px}
+.strike.sel{background:var(--raise);color:var(--chalk);border-style:solid;border-color:var(--chalk)}
+
+.dlg{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);width:min(340px,calc(100% - 36px));background:var(--surface);border:1px solid var(--rule-2);border-radius:14px;padding:18px 18px 14px}
+.dlg h3{font-size:17px;font-weight:700;margin-bottom:8px}
+.dlg p{font-size:14px;color:var(--muted);line-height:1.5}
+.dlg-a{display:flex;gap:10px;margin-top:18px}
+.dlg-a .btn{flex:1}
+
+.field{display:block;width:100%;min-height:52px;padding:0 14px;border-radius:12px;background:var(--raise);border:1px solid var(--rule-2);color:var(--chalk);font-size:17px}
+.field:focus{border-color:var(--chalk)}
+.warn{font-size:12.5px;color:var(--muted);padding:8px 2px 0;min-height:20px}
+.swatches{display:grid;grid-template-columns:repeat(5,1fr);gap:10px;padding:14px 0 2px}
+.sw{height:48px;border-radius:12px;border:2px solid transparent;background:var(--raise);display:flex;align-items:center;justify-content:center}
+.sw i{width:24px;height:24px;border-radius:50%;background:var(--pc)}
+.sw.sel{border-color:var(--chalk)}
+.menu{display:flex;flex-direction:column;padding-bottom:6px}
+.menu button{display:flex;align-items:center;min-height:54px;padding:0 4px;font-size:16px;font-weight:600;text-align:left;border-bottom:1px solid var(--rule)}
+.menu button:last-child{border-bottom:0}
+.menu .dang{color:var(--danger)}
+
+.toast{position:fixed;left:50%;bottom:calc(84px + env(safe-area-inset-bottom));transform:translateX(-50%);z-index:200;
+  max-width:82%;padding:11px 15px;border-radius:11px;background:var(--raise);border:1px solid var(--rule-2);
+  font-size:13.5px;font-weight:500;text-align:center;animation:toastIn .16s ease-out}
+@keyframes toastIn{from{opacity:0;transform:translate(-50%,8px)}to{opacity:1;transform:translate(-50%,0)}}
+
+/* ============================================================
+   IMENTO
+   ============================================================ */
+.imento{position:fixed;inset:0;z-index:300;display:grid;place-items:center;background:#0B0E11;animation:imentoPop .1s ease-out;
+  padding:20px calc(20px + env(safe-area-inset-right)) calc(20px + env(safe-area-inset-bottom)) calc(20px + env(safe-area-inset-left))}
+.imento b{display:block;text-align:center;font-size:clamp(52px,19vw,150px);font-weight:800;letter-spacing:-.035em;line-height:.92;transform:rotate(-4deg);color:var(--chalk)}
+@keyframes imentoPop{from{opacity:0;transform:scale(.9)}to{opacity:1;transform:scale(1)}}
+
+@media (prefers-reduced-motion:reduce){
+  *,*::before,*::after{animation-duration:.001ms!important;animation-iteration-count:1!important;transition-duration:.001ms!important;scroll-behavior:auto!important}
+}
+</style>
+</head>
+<body>
+<div id="app"></div>
+<div id="modal"></div>
+<script>
+"use strict";
+/* ============================================================
+   CONSTANTES / RÈGLES
+   ============================================================ */
+
+const SCHEMA_VERSION = 1;
+const PREFIX = "yams:";
+const K = {
+  schema:    PREFIX + "schemaVersion",
+  players:   PREFIX + "players",
+  selection: PREFIX + "selection",
+  settings:  PREFIX + "settings",
+  game:      PREFIX + "currentGame",
+  history:   PREFIX + "history"
+};
+
+const MAX_PLAYERS = 6;
+const MAX_NAME = 14;
+const HISTORY_CAP = 200;          // borne la taille du stockage, sans écran d'historique détaillé
+
+/* Palette fixe : 10 teintes, toutes ≥ 4,5:1 sur le fond ardoise. */
+const PALETTE = ["#E5564B","#EE8B3F","#E7BC3E","#A8CC52","#3FC08D","#3FBBD0","#5B9BF0","#A78BFA","#E86AB8","#C9AE8C"];
+
+/* Suite d'entiers, bornes comprises. */
+function seq(from, to, step){ const a = []; for (let v = from; v <= to; v += (step || 1)) a.push(v); return a; }
+
+/* Somme des 5 dés : 0 (barré) puis tous les entiers de 5 à 30. */
+const SUM5 = [0].concat(seq(5, 30));
+
+/* Les lignes, dans l'ordre d'affichage. `sec` sert à la césure mineure / majeure. */
+const LINES = [
+  { id:"ones",        sec:"up",  die:1, label:"Somme des 1",   values:seq(0, 5,  1) },
+  { id:"twos",        sec:"up",  die:2, label:"Somme des 2",   values:seq(0, 10, 2) },
+  { id:"threes",      sec:"up",  die:3, label:"Somme des 3",   values:seq(0, 15, 3) },
+  { id:"fours",       sec:"up",  die:4, label:"Somme des 4",   values:seq(0, 20, 4) },
+  { id:"fives",       sec:"up",  die:5, label:"Somme des 5",   values:seq(0, 25, 5) },
+  { id:"sixes",       sec:"up",  die:6, label:"Somme des 6",   values:seq(0, 30, 6) },
+  { id:"brelan",      sec:"low", label:"Brelan",        hint:"5 dés", sub:"somme des 5 dés", values:SUM5 },
+  { id:"carre",       sec:"low", label:"Carré",         hint:"5 dés", sub:"somme des 5 dés", values:SUM5 },
+  { id:"full",        sec:"low", label:"Full",          hint:"25",  values:[0, 25] },
+  { id:"petiteSuite", sec:"low", label:"Petite suite",  hint:"30",  values:[0, 30] },
+  { id:"grandeSuite", sec:"low", label:"Grande suite",  hint:"40",  values:[0, 40] },
+  { id:"yams",        sec:"low", label:"Yam's",         hint:"50",  values:[0, 50] },
+  { id:"bonusYams",   sec:"low", label:"Bonus Yam's",   hint:"+100", bonus:true,
+    sub:"100 par Yam's supplémentaire", values:[0, 100, 200, 300, 400] },
+  { id:"chance",      sec:"low", label:"Chance",        hint:"5 dés", sub:"somme des 5 dés", values:SUM5 }
+];
+const LINE_BY_ID = {};
+LINES.forEach(l => { LINE_BY_ID[l.id] = l; });
+
+const UPPER_IDS = LINES.filter(l => l.sec === "up").map(l => l.id);
+const LOWER_IDS = LINES.filter(l => l.sec === "low" && !l.bonus).map(l => l.id);
+/* Les 13 figures qui décident de la fin de partie. `bonusYams` en est exclue. */
+const SCORE_IDS = UPPER_IDS.concat(LOWER_IDS);
+
+const UPPER_TARGET = 63;
+const UPPER_BONUS  = 35;
+
+const IMENTO_MIN_MS = 6 * 60000;
+const IMENTO_MAX_MS = 21 * 60000;
+const IMENTO_OPEN_CHANCE = 0.10;      // affichage ~1,5 s après le lancement
+const IMENTO_OPEN_DELAY = 1500;
+const IMENTO_HOLD_MS = 2500;          // fermeture automatique
+const IMENTO_DEFER_MS = 10000;        // report si une feuille de saisie est ouverte
+const IMENTO_WORDS = ["ITO !", "TIT'MENTE !"];
+
+const reduceMotion = window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+/* --- petits utilitaires --- */
+function uid(p){ return p + "_" + Math.random().toString(36).slice(2, 9) + Date.now().toString(36).slice(-3); }
+function randInt(a, b){ return a + Math.floor(Math.random() * (b - a)); }
+function hexToRgb(hex){
+  const m = /^#([0-9a-f]{6})$/i.exec(hex || "");
+  const n = m ? parseInt(m[1], 16) : 0;
+  return (n >> 16) + " " + ((n >> 8) & 255) + " " + (n & 255);
+}
+function h(tag, props){
+  const e = document.createElement(tag);
+  if (props) for (const k in props){
+    const v = props[k];
+    if (v === null || v === undefined || v === false) continue;
+    if (k === "class") e.className = v;
+    else if (k === "text") e.textContent = v;
+    else if (k === "html") e.innerHTML = v;
+    else if (k.slice(0, 2) === "on") e.addEventListener(k.slice(2), v);
+    else if (k === "style"){ for (const p in v) e.style.setProperty(p, v[p]); }
+    else if (v === true) e.setAttribute(k, "");
+    else e.setAttribute(k, v);
+  }
+  for (let i = 2; i < arguments.length; i++){
+    const kid = arguments[i];
+    if (kid === null || kid === undefined || kid === false) continue;
+    if (Array.isArray(kid)) kid.forEach(c => { if (c) e.append(c); });
+    else e.append(kid.nodeType ? kid : document.createTextNode(String(kid)));
+  }
+  return e;
+}
+/* Face de dé dessinée : plus lisible qu'un libellé, et c'est l'objet posé sur la table. */
+const DIE_PIPS = {1:[[1,1]],2:[[0,0],[2,2]],3:[[0,0],[1,1],[2,2]],4:[[0,0],[2,0],[0,2],[2,2]],
+                  5:[[0,0],[2,0],[1,1],[0,2],[2,2]],6:[[0,0],[2,0],[0,1],[2,1],[0,2],[2,2]]};
+function dieSVG(n, size){
+  const s = size || 24;
+  const pips = DIE_PIPS[n].map(p => '<circle cx="' + (6 + p[0] * 7) + '" cy="' + (6 + p[1] * 7) + '" r="2.6"/>').join("");
+  return '<svg class="die" viewBox="0 0 26 26" width="' + s + '" height="' + s + '" aria-hidden="true">' +
+         '<rect x="1.4" y="1.4" width="23.2" height="23.2" rx="5.5" fill="none" stroke="currentColor" stroke-width="1.3" opacity=".5"/>' +
+         '<g fill="currentColor">' + pips + "</g></svg>";
+}
+function icon(d, size){
+  return h("span", { class:"ico", html:'<svg viewBox="0 0 24 24" width="' + (size || 20) + '" height="' + (size || 20) +
+    '" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">' + d + "</svg>",
+    style:{ display:"flex" } });
+}
+const IC_CHEV_L = '<path d="M15 5l-7 7 7 7"/>';
+const IC_CHEV_R = '<path d="M9 5l7 7-7 7"/>';
+const IC_MORE   = '<circle cx="5" cy="12" r="1.6" fill="currentColor" stroke="none"/><circle cx="12" cy="12" r="1.6" fill="currentColor" stroke="none"/><circle cx="19" cy="12" r="1.6" fill="currentColor" stroke="none"/>';
+const IC_CLOSE  = '<path d="M6 6l12 12M18 6L6 18"/>';
+const IC_PLUS   = '<path d="M12 5v14M5 12h14"/>';
+
+/* ============================================================
+   STOCKAGE
+   Toutes les clés sont préfixées `yams:` — l'origine est partagée.
+   Chaque lecture est isolée : une donnée cassée retombe sur son défaut.
+   ============================================================ */
+
+const memStore = new Map();     // repli quand localStorage est absent ou plein (mode privé iOS)
+let lsAvailable = (function(){
+  try { localStorage.setItem(PREFIX + "__probe", "1"); localStorage.removeItem(PREFIX + "__probe"); return true; }
+  catch (e){ return false; }
+})();
+
+function rawGet(key){
+  if (lsAvailable){
+    try { const v = localStorage.getItem(key); if (v !== null) return v; }
+    catch (e){ lsAvailable = false; }
+  }
+  return memStore.has(key) ? memStore.get(key) : null;
+}
+function rawSet(key, value){
+  memStore.set(key, value);
+  if (!lsAvailable) return;
+  try { localStorage.setItem(key, value); }
+  catch (e){ /* quota atteint : la session continue en mémoire */ }
+}
+function rawDel(key){
+  memStore.delete(key);
+  if (!lsAvailable) return;
+  try { localStorage.removeItem(key); } catch (e){}
+}
+function wipeOurKeys(){
+  memStore.clear();
+  if (!lsAvailable) return;
+  try {
+    const doomed = [];
+    for (let i = 0; i < localStorage.length; i++){
+      const k = localStorage.key(i);
+      if (k && k.indexOf(PREFIX) === 0) doomed.push(k);
+    }
+    doomed.forEach(k => localStorage.removeItem(k));
+  } catch (e){}
+}
+/* Lit, parse, valide. `sanitize` renvoie une valeur propre, ou null si irrécupérable. */
+function load(key, sanitize, fallback){
+  try {
+    const raw = rawGet(key);
+    if (raw === null) return fallback();
+    const parsed = JSON.parse(raw);
+    const clean = sanitize(parsed);
+    return clean === null || clean === undefined ? fallback() : clean;
+  } catch (e){ return fallback(); }
+}
+function store(key, value){ try { rawSet(key, JSON.stringify(value)); } catch (e){} }
+
+const isNum = v => typeof v === "number" && isFinite(v);
+const isStr = v => typeof v === "string";
+
+function sanPlayers(v){
+  if (!Array.isArray(v)) return null;
+  const out = [], seen = new Set();
+  for (const p of v){
+    if (!p || typeof p !== "object") continue;
+    if (!isStr(p.id) || !p.id || seen.has(p.id)) continue;
+    const name = isStr(p.name) ? p.name.trim().slice(0, MAX_NAME) : "";
+    if (!name) continue;
+    seen.add(p.id);
+    out.push({
+      id: p.id,
+      name: name,
+      color: (isStr(p.color) && PALETTE.indexOf(p.color) >= 0) ? p.color : PALETTE[out.length % PALETTE.length],
+      createdAt: isNum(p.createdAt) ? p.createdAt : Date.now()
+    });
+  }
+  return out;
+}
+function sanSelection(v){
+  if (!Array.isArray(v)) return null;
+  const out = [];
+  for (const id of v) if (isStr(id) && out.indexOf(id) < 0) out.push(id);
+  return out.slice(0, MAX_PLAYERS);
+}
+function sanSettings(v){
+  if (!v || typeof v !== "object") return null;
+  return { imento: v.imento === true };
+}
+function sanSnapshot(p, i){
+  if (!p || typeof p !== "object" || !isStr(p.id) || !p.id) return null;
+  const name = isStr(p.name) ? p.name.trim().slice(0, MAX_NAME) : "";
+  if (!name) return null;
+  return { id:p.id, name:name, color:(isStr(p.color) && PALETTE.indexOf(p.color) >= 0) ? p.color : PALETTE[i % PALETTE.length] };
+}
+function sanGame(v){
+  if (!v || typeof v !== "object" || !isStr(v.id) || !Array.isArray(v.players)) return null;
+  const players = [], seen = new Set();
+  for (let i = 0; i < v.players.length; i++){
+    const p = sanSnapshot(v.players[i], i);
+    if (p && !seen.has(p.id)){ seen.add(p.id); players.push(p); }
+  }
+  if (players.length < 1 || players.length > MAX_PLAYERS) return null;
+  const scores = {};
+  const src = (v.scores && typeof v.scores === "object") ? v.scores : {};
+  for (const p of players){
+    const row = {}, from = (src[p.id] && typeof src[p.id] === "object") ? src[p.id] : {};
+    for (const line of LINES){
+      const val = from[line.id];
+      row[line.id] = (isNum(val) && line.values.indexOf(val) >= 0) ? val : null;
+    }
+    scores[p.id] = row;
+  }
+  let turn = isNum(v.turnIndex) ? Math.floor(v.turnIndex) : 0;
+  if (turn < 0 || turn >= players.length) turn = 0;
+  const imento = v.imento === true;
+  return {
+    id: v.id,
+    startedAt: isNum(v.startedAt) ? v.startedAt : Date.now(),
+    imento: imento,
+    nextImentoAt: (imento && isNum(v.nextImentoAt)) ? v.nextImentoAt : null,
+    turnIndex: turn,
+    players: players,
+    scores: scores
+  };
+}
+function sanHistory(v){
+  if (!Array.isArray(v)) return null;
+  const out = [];
+  for (const e of v){
+    if (!e || typeof e !== "object" || !isStr(e.id) || !Array.isArray(e.results)) continue;
+    const results = [];
+    for (let i = 0; i < e.results.length; i++){
+      const r = e.results[i];
+      if (!r || typeof r !== "object" || !isStr(r.playerId) || !isNum(r.total)) continue;
+      results.push({
+        playerId: r.playerId,
+        name: isStr(r.name) ? r.name.slice(0, MAX_NAME) : "?",
+        color: (isStr(r.color) && PALETTE.indexOf(r.color) >= 0) ? r.color : PALETTE[i % PALETTE.length],
+        total: Math.round(r.total),
+        upperSubtotal: isNum(r.upperSubtotal) ? Math.round(r.upperSubtotal) : 0,
+        hadBonus: r.hadBonus === true
+      });
+    }
+    if (!results.length) continue;
+    const winners = Array.isArray(e.winnerIds) ? e.winnerIds.filter(isStr) : [];
+    out.push({
+      id: e.id,
+      endedAt: isNum(e.endedAt) ? e.endedAt : 0,
+      imento: e.imento === true,
+      results: results,
+      winnerIds: winners
+    });
+    if (out.length >= HISTORY_CAP) break;
+  }
+  return out;
+}
+
+function savePlayers(){ store(K.players, state.players); }
+function saveSelection(){ store(K.selection, state.selection); }
+function saveSettings(){ store(K.settings, state.settings); }
+function saveHistory(){ store(K.history, state.history); }
+function saveGame(){ if (state.game) store(K.game, state.game); else rawDel(K.game); }
+
+/* ============================================================
+   ÉTAT
+   Un seul objet en mémoire. Toute mutation : persister puis rendre.
+   ============================================================ */
+
+const state = {
+  screen: "home",      // "home" | "game" | "summary"
+  players: [],
+  selection: [],
+  settings: { imento: false },
+  game: null,
+  history: [],
+  summary: null        // résumé de fin de partie, non persisté
+};
+
+function loadAll(){
+  const v = load(K.schema, x => (isNum(x) ? x : null), () => null);
+  if (v !== SCHEMA_VERSION){
+    wipeOurKeys();                       // version inconnue : on repart propre, pas de migration
+    store(K.schema, SCHEMA_VERSION);
+  }
+  state.players   = load(K.players,   sanPlayers,   () => []);
+  state.selection = load(K.selection, sanSelection, () => []);
+  state.settings  = load(K.settings,  sanSettings,  () => ({ imento:false }));
+  state.game      = load(K.game,      sanGame,      () => null);
+  state.history   = load(K.history,   sanHistory,   () => []);
+  pruneSelection();
+}
+/* La sélection ne référence que des joueurs existants. */
+function pruneSelection(){
+  const ids = new Set(state.players.map(p => p.id));
+  const kept = state.selection.filter(id => ids.has(id));
+  if (kept.length !== state.selection.length){ state.selection = kept; saveSelection(); }
+}
+function findPlayer(id){ return state.players.find(p => p.id === id) || null; }
+
+/* ============================================================
+   CALCUL DES SCORES
+   Case vide = null (non jouée) ; case barrée = 0 (jouée). Les deux
+   comptent pour 0 dans les totaux, mais seule la seconde clôt la ligne.
+   ============================================================ */
+
+function upperSubtotal(sc){ let t = 0; for (const id of UPPER_IDS) t += sc[id] || 0; return t; }
+function upperBonus(sc){ return upperSubtotal(sc) >= UPPER_TARGET ? UPPER_BONUS : 0; }
+function upperTotal(sc){ return upperSubtotal(sc) + upperBonus(sc); }
+function lowerTotal(sc){ let t = 0; for (const id of LOWER_IDS) t += sc[id] || 0; return t + (sc.bonusYams || 0); }
+function grandTotal(sc){ return upperTotal(sc) + lowerTotal(sc); }
+
+/* Partie terminée : les 13 figures de tous les joueurs sont jouées. */
+function isComplete(game){
+  return game.players.every(p => SCORE_IDS.every(id => game.scores[p.id][id] !== null));
+}
+function filledCount(sc){ let n = 0; for (const id of SCORE_IDS) if (sc[id] !== null) n++; return n; }
+/* Tour n/13 du joueur actif. */
+function turnNumber(game){
+  const p = game.players[game.turnIndex];
+  return Math.min(13, filledCount(game.scores[p.id]) + 1);
+}
+/* Le bonus Yam's n'est ouvert que si la ligne Yam's du joueur vaut 50. */
+function bonusYamsOpen(game, playerId){ return game.scores[playerId].yams === 50; }
+
+/* ============================================================
+   RENDU
+   ============================================================ */
+
+const appEl = document.getElementById("app");
+const modalEl = document.getElementById("modal");
+
+function render(){
+  if (state.screen === "game" && state.game) renderGame();
+  else if (state.screen === "summary" && state.summary) renderSummary();
+  else { state.screen = "home"; renderHome(); }
+}
+
+/* --- accueil ------------------------------------------------ */
+
+function renderHome(){
+  gridBuiltFor = null;
+  const scroll = h("div", { class:"scroll home" });
+
+  /* 5.2 — reprise, en tête d'écran pour être vue en rouvrant l'app */
+  if (state.game){
+    const g = state.game;
+    const names = [];
+    g.players.forEach((p, i) => {
+      names.push(h("span", { style:{ "--pc":p.color } }, h("i", {}), p.name));
+      if (i < g.players.length - 1) names.push(h("span", { text:"·", class:"dim" }));
+    });
+    scroll.append(h("button", { class:"resume", onclick:resumeGame },
+      h("div", { class:"resume-h" }, "Reprendre la partie", icon(IC_CHEV_R, 20)),
+      h("div", { class:"resume-p" }, names)
+    ));
+  }
+
+  /* 5.1 — statistiques */
+  const st = computeStats();
+  const secStats = h("div", { class:"sec" }, h("div", { class:"shead" }, h("h2", { text:"Statistiques" })));
+  if (st.games === 0){
+    secStats.append(h("p", { class:"empty", text:"Aucune partie enregistrée. Choisir des joueurs, lancer la première : le classement s'écrit tout seul." }));
+  } else {
+    secStats.append(h("p", { class:"stat-line num" },
+      h("b", { text:String(st.games) }), st.games > 1 ? " parties jouées, " : " partie jouée, ",
+      h("b", { text:String(st.avg) }), " points de moyenne."
+    ));
+    secStats.append(h("p", { class:"record num", style:{ "--pc":st.best.color } },
+      "Record — ", h("b", { text:String(st.best.total) }), " par ", h("span", { class:"who", text:st.best.name })
+    ));
+    if (st.board.length){
+      const lb = h("div", { class:"lb" },
+        h("div", { class:"lb-r lb-h" }, h("span", { text:"Joueur" }), h("span", { text:"V" }), h("span", { text:"P" }), h("span", { text:"Record" })));
+      st.board.forEach(function(row){
+        lb.append(h("div", { class:"lb-r", style:{ "--pc":row.color } },
+          h("span", { class:"lb-n" }, h("i", {}), h("span", { text:row.name })),
+          h("span", { class:"lb-v num", text:String(row.wins) }),
+          h("span", { class:"lb-v num dim", text:String(row.games) }),
+          h("span", { class:"lb-v num", text:String(row.best) })
+        ));
+      });
+      secStats.append(lb);
+    }
+  }
+  scroll.append(secStats);
+
+  /* 5.3 — joueurs : gestion et sélection dans une seule liste */
+  const secPlayers = h("div", { class:"sec" },
+    h("div", { class:"shead" },
+      h("h2", { text:"Joueurs" }),
+      h("span", { class:"shead-x", text: state.selection.length ? state.selection.length + " sélectionné" + (state.selection.length > 1 ? "s" : "") : "Appuyer pour sélectionner" })));
+
+  if (!state.players.length){
+    secPlayers.append(h("p", { class:"empty", text:"Personne pour l'instant. Créer un premier joueur pour commencer." }));
+  }
+  const list = h("ul", { class:"plist" });
+  state.players.forEach(function(p){
+    const rank = state.selection.indexOf(p.id);
+    const on = rank >= 0;
+    list.append(h("li", { class:"prow" + (on ? " on" : ""), style:{ "--pc":p.color, "--pc-rgb":hexToRgb(p.color) } },
+      h("button", { class:"prow-main", "aria-pressed": on ? "true" : "false",
+                    "aria-label": p.name + (on ? ", sélectionné en position " + (rank + 1) : ", non sélectionné"),
+                    onclick:function(){ toggleSelection(p.id); } },
+        h("span", { class:"swatch" }),
+        h("span", { class:"pname", text:p.name }),
+        on ? h("span", { class:"badge num", text:String(rank + 1) }) : null
+      ),
+      h("button", { class:"prow-more", "aria-label":"Options pour " + p.name, onclick:function(){ openPlayerMenu(p.id); } }, icon(IC_MORE, 20))
+    ));
+  });
+  secPlayers.append(list);
+  secPlayers.append(h("button", { class:"addrow", onclick:function(){ openPlayerForm(null); } },
+    h("span", { class:"plus" }, icon(IC_PLUS, 16)), "Ajouter un joueur"));
+  scroll.append(secPlayers);
+
+  /* 5.4 — imento */
+  const cb = h("input", { type:"checkbox", class:"sr", checked: state.settings.imento === true,
+    onchange:function(e){ state.settings.imento = e.target.checked; saveSettings(); } });
+  scroll.append(h("div", { class:"sec" },
+    h("label", { class:"setting" },
+      h("span", { class:"grow" },
+        h("span", { class:"setting-t", text:"imento" }),
+        h("span", { class:"setting-d", text:"Interruptions surprises pendant la partie, sans aucun effet sur les scores." })),
+      cb, h("span", { class:"switch", "aria-hidden":"true" })
+    )));
+
+  /* 5.5 — lancer */
+  const n = state.selection.length;
+  const footer = h("div", { class:"footer" });
+  if (!n) footer.append(h("p", { class:"hint", text:"Choisir au moins un joueur dans la liste." }));
+  footer.append(h("button", { class:"btn btn-primary btn-lg", disabled: n === 0, onclick:onLaunch },
+    n ? "Lancer la partie · " + n + " joueur" + (n > 1 ? "s" : "") : "Lancer la partie"));
+
+  appEl.replaceChildren(h("div", { class:"screen" },
+    h("header", { class:"bar" }, h("div", { class:"bar-in" },
+      h("div", { class:"brand" }, h("span", { html:dieSVG(5, 22) }), h("span", { text:"Yam's" })))),
+    scroll, footer));
+}
+
+/* Statistiques d'accueil. Le classement ne nomme que les joueurs
+   encore présents au référentiel ; les records restent dénormalisés. */
+function computeStats(){
+  const all = [];
+  state.history.forEach(e => e.results.forEach(r => all.push({ r:r, e:e })));
+  if (!all.length) return { games:0 };
+  let best = all[0].r, sum = 0;
+  all.forEach(function(x){
+    sum += x.r.total;
+    if (x.r.total > best.total) best = x.r;
+  });
+  const byId = new Map();
+  all.forEach(function(x){
+    const cur = findPlayer(x.r.playerId);
+    if (!cur) return;
+    let s = byId.get(cur.id);
+    if (!s){ s = { id:cur.id, name:cur.name, color:cur.color, games:0, wins:0, best:0 }; byId.set(cur.id, s); }
+    s.games++;
+    if (x.r.total > s.best) s.best = x.r.total;
+    if (x.e.winnerIds.indexOf(cur.id) >= 0) s.wins++;
+  });
+  const board = Array.from(byId.values()).sort((a, b) => (b.wins - a.wins) || (b.best - a.best));
+  return { games:state.history.length, avg:Math.round(sum / all.length), best:best, board:board };
+}
+
+/* --- partie : la grille est construite une fois, puis patchée --- */
+
+let gridBuiltFor = null;   // id de la partie dont la grille est en place
+let sheetEl = null;
+let refs = null;           // références des cellules pour la mise à jour
+
+function renderGame(){
+  if (gridBuiltFor !== state.game.id || !sheetEl || !document.contains(sheetEl)) buildGame();
+  updateGame();
+}
+
+function buildGame(){
+  const g = state.game;
+  const n = g.players.length;
+  refs = { heads:{}, totals:{}, headTotals:{}, cells:{}, bonus:{}, cols:{}, dots:[] };
+  g.players.forEach(function(p){ refs.cells[p.id] = {}; refs.cols[p.id] = []; });
+
+  const sheet = h("div", { class:"sheet", "aria-label":"Feuille de score" });
+  /* Trois colonnes visibles : libellés figés + exactement 2 colonnes de joueurs
+     (une seule si la partie est en solo, pour ne pas laisser un vide). */
+  sheet.style.gridTemplateColumns =
+    "var(--label-w) repeat(" + n + ", calc((100% - var(--label-w)) / " + Math.min(2, n) + "))";
+
+  /* en-tête */
+  const corner = h("div", { class:"cell corner" }, h("span", { class:"k", text:"Tour" }), h("span", { class:"v num", text:"1/13" }));
+  refs.corner = corner.lastChild;
+  sheet.append(corner);
+  g.players.forEach(function(p){
+    const total = h("span", { class:"pt num", text:"0" });
+    const head = h("button", { class:"cell phead", style:{ "--pc":p.color, "--pc-rgb":hexToRgb(p.color) },
+      "aria-label":"Colonne de " + p.name + ", rendre ce joueur actif",
+      onclick:function(){ setActivePlayer(p.id); } },
+      h("span", { class:"pn", text:p.name }), total);
+    refs.heads[p.id] = head; refs.headTotals[p.id] = total; refs.cols[p.id].push(head);
+    sheet.append(head);
+  });
+
+  /* lignes de figures, avec la césure mineure / majeure sur la ligne de bonus */
+  let rowIndex = 0;
+  const emitLine = function(line){
+    const band = (rowIndex % 2) === 1;
+    rowIndex++;
+    const lab = h("div", { class:"cell lab" + (band ? " band" : "") + (line.bonus ? " sub" : "") });
+    if (line.die) lab.append(h("span", { class:"lname", html:dieSVG(line.die, 24), role:"img", "aria-label":line.label }));
+    else lab.append(h("span", { class:"lname", text:line.label }));
+    if (line.hint) lab.append(h("span", { class:"lhint num", text:line.hint }));
+    sheet.append(lab);
+    g.players.forEach(function(p){
+      const cell = h("button", { class:"cell val" + (band ? " band" : "") + (line.bonus ? " sub-line" : ""),
+        style:{ "--pc":p.color, "--pc-rgb":hexToRgb(p.color) },
+        onclick:function(){ openScoreSheet(p.id, line.id); } }, h("span", { class:"v" }));
+      refs.cells[p.id][line.id] = cell; refs.cols[p.id].push(cell);
+      sheet.append(cell);
+    });
+  };
+
+  LINES.filter(l => l.sec === "up").forEach(emitLine);
+
+  /* ligne calculée : bonus mineure (non cliquable) */
+  rowIndex++;
+  sheet.append(h("div", { class:"cell lab blab brow" },
+    h("span", { class:"lname", text:"Bonus" }), h("span", { class:"lhint num", text:"63" })));
+  g.players.forEach(function(p){
+    const c = h("div", { class:"cell bcell brow num", style:{ "--pc":p.color, "--pc-rgb":hexToRgb(p.color) } });
+    refs.bonus[p.id] = c; refs.cols[p.id].push(c);
+    sheet.append(c);
+  });
+
+  LINES.filter(l => l.sec === "low").forEach(emitLine);
+
+  /* ligne calculée : total général, figée en bas */
+  sheet.append(h("div", { class:"cell lab totlab" }, h("span", { class:"lname", text:"Total" })));
+  g.players.forEach(function(p){
+    const c = h("div", { class:"cell tot num", style:{ "--pc":p.color, "--pc-rgb":hexToRgb(p.color) }, text:"0" });
+    refs.totals[p.id] = c; refs.cols[p.id].push(c);
+    sheet.append(c);
+  });
+
+  sheet.addEventListener("scroll", updateDots, { passive:true });
+
+  /* bandeau du joueur actif + indicateur de colonnes */
+  const turn = h("div", { class:"turn" }, h("i", {}), h("span", {}));
+  refs.turnBar = turn; refs.turnName = turn.lastChild;
+
+  const dots = h("div", { class:"dots" });
+  if (n > 2){
+    g.players.forEach(function(p){
+      const d = h("i", { style:{ "--pc":p.color } });
+      refs.dots.push(d); dots.append(d);
+    });
+  }
+
+  appEl.replaceChildren(h("div", { class:"screen" },
+    h("header", { class:"bar" }, h("div", { class:"bar-in" },
+      h("button", { class:"iconbtn", onclick:goHome }, icon(IC_CHEV_L, 20), "Accueil"),
+      h("div", { class:"grow" }),
+      h("button", { class:"iconbtn", "aria-label":"Options de la partie", onclick:openGameMenu }, icon(IC_MORE, 20)))),
+    turn, sheet, dots));
+
+  sheetEl = sheet;
+  gridBuiltFor = g.id;
+  requestAnimationFrame(function(){ ensureActiveVisible(false); updateDots(); });
+}
+
+function updateGame(){
+  const g = state.game;
+  if (!g || !refs) return;
+  const active = g.players[g.turnIndex];
+
+  refs.corner.textContent = turnNumber(g) + "/13";
+  refs.turnBar.style.setProperty("--pc", active.color);
+  refs.turnBar.style.setProperty("--pc-rgb", hexToRgb(active.color));
+  refs.turnName.textContent = "Au tour de " + active.name;
+
+  g.players.forEach(function(p){
+    const sc = g.scores[p.id];
+    const isActive = p.id === active.id;
+
+    LINES.forEach(function(line){
+      const cell = refs.cells[p.id][line.id];
+      const v = sc[line.id];
+      cell.firstChild.textContent = v === null ? "" : String(v);
+      cell.classList.toggle("empty", v === null);
+      cell.classList.toggle("zero", v === 0);
+      cell.setAttribute("aria-label",
+        line.label + ", " + p.name + ", " + (v === null ? "vide" : (v === 0 ? "barré" : v + " points")));
+    });
+
+    const sub = upperSubtotal(sc), got = sub >= UPPER_TARGET;
+    const bc = refs.bonus[p.id];
+    bc.textContent = got ? "+" + UPPER_BONUS : sub + "/" + UPPER_TARGET;
+    bc.classList.toggle("got", got);
+
+    const tot = grandTotal(sc);
+    refs.totals[p.id].textContent = String(tot);
+    refs.headTotals[p.id].textContent = String(tot);
+
+    refs.cols[p.id].forEach(function(el){ el.classList.toggle("col-active", isActive); });
+  });
+  updateDots();
+}
+
+/* Géométrie du défilement horizontal : largeur d'une colonne de joueur. */
+function colMetrics(){
+  if (!sheetEl) return null;
+  const n = state.game.players.length;
+  const labelW = sheetEl.firstChild.offsetWidth;
+  const colW = (sheetEl.scrollWidth - labelW) / n;
+  return { labelW:labelW, colW:colW, n:n, visible:Math.min(2, n) };
+}
+function updateDots(){
+  if (!refs || !refs.dots.length) return;
+  const m = colMetrics();
+  if (!m || !m.colW) return;
+  const first = Math.round(sheetEl.scrollLeft / m.colW);
+  refs.dots.forEach(function(d, i){ d.classList.toggle("on", i >= first && i < first + m.visible); });
+}
+/* Si la colonne du joueur actif n'est pas entièrement visible, on y va. */
+function ensureActiveVisible(smooth){
+  if (!sheetEl || !state.game) return;
+  const m = colMetrics();
+  if (!m || !m.colW) return;
+  const idx = state.game.turnIndex;
+  const left = idx * m.colW;                       // position de la colonne dans la zone défilante
+  const view = sheetEl.clientWidth - m.labelW;
+  const sl = sheetEl.scrollLeft;
+  if (left >= sl - 1 && left + m.colW <= sl + view + 1) return;
+  const target = Math.max(0, Math.min(left, m.colW * m.n - view));
+  if (smooth && !reduceMotion) sheetEl.scrollTo({ left:target, behavior:"smooth" });
+  else sheetEl.scrollLeft = target;
+}
+
+/* --- résumé de fin de partie -------------------------------- */
+
+function renderSummary(){
+  gridBuiltFor = null;
+  const s = state.summary, e = s.entry;
+  const ranked = e.results.slice().sort((a, b) => b.total - a.total);
+
+  const scroll = h("div", { class:"scroll" });
+  const box = h("div", { class:"sum" },
+    h("h1", { class:"sum-h", text:"Partie terminée" }),
+    h("p", { class:"sum-s", text: e.winnerIds.length > 1
+        ? "Égalité en tête, personne ne range la feuille."
+        : "Bravo " + ranked[0].name + "." }));
+
+  ranked.forEach(function(r, i){
+    /* les ex æquo partagent le même rang */
+    let rank = i + 1;
+    for (let j = 0; j < i; j++) if (ranked[j].total === r.total){ rank = j + 1; break; }
+    const detail = s.detail[r.playerId];
+    const tags = h("div", { class:"tags" });
+    if (s.records.allTime.indexOf(r.playerId) >= 0) tags.append(h("span", { class:"tag gold", text:"Meilleur score de tous les temps" }));
+    else if (s.records.personal.indexOf(r.playerId) >= 0) tags.append(h("span", { class:"tag", text:"Record personnel" }));
+    if (detail.bonusYams > 0) tags.append(h("span", { class:"tag num", text:"Bonus Yam's +" + detail.bonusYams }));
+
+    box.append(h("div", { class:"rank", style:{ "--pc":r.color } },
+      h("div", { class:"rank-n num", text:String(rank) }),
+      h("div", { class:"rank-b" }),
+      h("div", { class:"rank-m" },
+        h("div", { class:"rank-t" },
+          h("span", { class:"nm", text:r.name }),
+          h("span", { class:"sc num", text:String(r.total) })),
+        h("div", { class:"rank-d num",
+          text:"Mineure " + r.upperSubtotal + (r.hadBonus ? " + 35" : " (pas de bonus)") + " · Majeure " + detail.lower }),
+        tags.childNodes.length ? tags : null
+      )));
+  });
+
+  box.append(h("div", { class:"sum-a" },
+    h("button", { class:"btn btn-primary btn-lg", onclick:replaySameLineup }, "Rejouer avec les mêmes joueurs"),
+    h("button", { class:"btn btn-ghost btn-lg", onclick:function(){ state.summary = null; goHome(); } }, "Revenir à l'accueil")));
+
+  scroll.append(box);
+  appEl.replaceChildren(h("div", { class:"screen" },
+    h("header", { class:"bar" }, h("div", { class:"bar-in" },
+      h("div", { class:"brand" }, h("span", { html:dieSVG(5, 22) }), h("span", { text:"Yam's" })))),
+    scroll));
+}
+
+/* --- feuilles, dialogues, message éphémère ------------------- */
+
+let modalOpen = false;
+let toastTimer = null;
+
+function openModal(node){
+  modalEl.replaceChildren(node);
+  modalEl.classList.add("open");
+  modalOpen = true;
+  bindKeyboardInset();
+}
+function closeModal(){
+  if (!modalOpen) return;
+  modalEl.replaceChildren();
+  modalEl.classList.remove("open");
+  modalEl.style.removeProperty("--kb");
+  modalOpen = false;
+  unbindKeyboardInset();
+}
+function toast(msg){
+  const old = document.querySelector(".toast");
+  if (old) old.remove();
+  clearTimeout(toastTimer);
+  const t = h("div", { class:"toast", role:"status", text:msg });
+  document.body.append(t);
+  toastTimer = setTimeout(function(){ t.remove(); }, 2200);
+}
+
+/* Le clavier logiciel ne doit pas passer sous la feuille (iOS ne
+   redimensionne pas la fenêtre : on suit le viewport visuel). */
+function onViewportResize(){
+  const vv = window.visualViewport;
+  if (!vv) return;
+  const kb = Math.max(0, window.innerHeight - (vv.height + vv.offsetTop));
+  modalEl.style.setProperty("--kb", kb + "px");
+}
+function bindKeyboardInset(){
+  if (!window.visualViewport) return;
+  window.visualViewport.addEventListener("resize", onViewportResize);
+  window.visualViewport.addEventListener("scroll", onViewportResize);
+}
+function unbindKeyboardInset(){
+  if (!window.visualViewport) return;
+  window.visualViewport.removeEventListener("resize", onViewportResize);
+  window.visualViewport.removeEventListener("scroll", onViewportResize);
+}
+
+/* Feuille remontant du bas : fermable au geste bas, hors zone, ou au bouton. */
+function sheetPanel(cfg){
+  const panel = h("div", { class:"sheetp", role:"dialog", "aria-modal":"true", "aria-label":cfg.title });
+  const head = h("div", { class:"mhead" },
+    h("div", { class:"grab" }),
+    h("div", { class:"mhead-row" },
+      h("div", { class:"grow" },
+        h("div", { class:"mtitle", text:cfg.title }),
+        cfg.sub ? h("div", { class:"msub", text:cfg.sub }) : null),
+      h("button", { class:"iconbtn", "aria-label":"Fermer", onclick:closeModal }, icon(IC_CLOSE, 20))));
+  attachDrag(head, panel);
+  panel.append(head, h("div", { class:"mbody" }, cfg.body));
+  if (cfg.actions && cfg.actions.length) panel.append(h("div", { class:"mactions" }, cfg.actions));
+  return h("div", {}, h("div", { class:"scrim", onclick:closeModal }), panel);
+}
+function attachDrag(handle, panel){
+  let start = null;
+  handle.addEventListener("touchstart", function(e){
+    start = e.touches[0].clientY;
+    panel.style.transition = "none";
+  }, { passive:true });
+  handle.addEventListener("touchmove", function(e){
+    if (start === null) return;
+    const dy = Math.max(0, e.touches[0].clientY - start);
+    panel.style.setProperty("--drag", dy + "px");
+  }, { passive:true });
+  handle.addEventListener("touchend", function(){
+    if (start === null) return;
+    const dy = parseFloat(panel.style.getPropertyValue("--drag")) || 0;
+    panel.style.transition = "";
+    start = null;
+    if (dy > 80) closeModal();
+    else panel.style.setProperty("--drag", "0px");
+  });
+}
+function confirmDialog(cfg){
+  const dlg = h("div", { class:"dlg", role:"dialog", "aria-modal":"true" },
+    h("h3", { text:cfg.title }),
+    h("p", { text:cfg.message }),
+    h("div", { class:"dlg-a" },
+      h("button", { class:"btn btn-ghost", onclick:closeModal }, cfg.cancel || "Annuler"),
+      h("button", { class:"btn " + (cfg.danger ? "btn-danger" : "btn-primary"),
+        onclick:function(){ closeModal(); cfg.onConfirm(); } }, cfg.confirm)));
+  openModal(h("div", {}, h("div", { class:"scrim", onclick:closeModal }), dlg));
+}
+
+/* ============================================================
+   ÉVÉNEMENTS
+   ============================================================ */
+
+/* --- sélection et référentiel des joueurs --- */
+
+/* L'ordre est celui de l'ajout : retirer puis remettre renvoie en fin de liste. */
+function toggleSelection(id){
+  const i = state.selection.indexOf(id);
+  if (i >= 0) state.selection.splice(i, 1);
+  else {
+    if (state.selection.length >= MAX_PLAYERS){ toast("6 joueurs au maximum."); return; }
+    state.selection.push(id);
+  }
+  saveSelection();
+  renderHome();
+}
+function defaultColor(){
+  const used = new Set(state.players.map(p => p.color));
+  return PALETTE.find(c => !used.has(c)) || PALETTE[state.players.length % PALETTE.length];
+}
+function openPlayerForm(playerId){
+  const existing = playerId ? findPlayer(playerId) : null;
+  let color = existing ? existing.color : defaultColor();
+
+  const input = h("input", { class:"field", type:"text", maxlength:String(MAX_NAME), value: existing ? existing.name : "",
+    placeholder:"Prénom", autocomplete:"off", autocapitalize:"words", autocorrect:"off", spellcheck:"false",
+    enterkeyhint:"done", "aria-label":"Nom du joueur" });
+  const warn = h("div", { class:"warn" });
+  const swatches = h("div", { class:"swatches" });
+  const submit = h("button", { class:"btn btn-primary", onclick:save }, existing ? "Renommer" : "Créer");
+
+  PALETTE.forEach(function(c){
+    const b = h("button", { class:"sw" + (c === color ? " sel" : ""), style:{ "--pc":c }, "aria-label":"Couleur " + c,
+      onclick:function(){ color = c; Array.from(swatches.children).forEach(function(x, i){ x.classList.toggle("sel", PALETTE[i] === color); }); } },
+      h("i", {}));
+    swatches.append(b);
+  });
+
+  function check(){
+    const name = input.value.trim();
+    submit.disabled = name.length === 0;
+    const dup = state.players.some(p => p.id !== playerId && p.name.toLowerCase() === name.toLowerCase());
+    warn.textContent = (name && dup) ? "Un joueur porte déjà ce nom. C'est permis." : "";
+  }
+  input.addEventListener("input", check);
+  input.addEventListener("keydown", function(e){ if (e.key === "Enter") save(); });
+
+  function save(){
+    const name = input.value.trim().slice(0, MAX_NAME);
+    if (!name) return;
+    if (existing){
+      existing.name = name;
+      existing.color = color;
+    } else {
+      state.players.push({ id:uid("p"), name:name, color:color, createdAt:Date.now() });
+    }
+    savePlayers();
+    closeModal();
+    renderHome();
+  }
+
+  openModal(sheetPanel({
+    title: existing ? "Renommer le joueur" : "Nouveau joueur",
+    sub: "14 caractères au plus, une couleur pour la colonne.",
+    body: [input, warn, swatches],
+    actions: [submit]
+  }));
+  check();
+  setTimeout(function(){ input.focus(); }, 60);
+}
+function openPlayerMenu(playerId){
+  const p = findPlayer(playerId);
+  if (!p) return;
+  openModal(sheetPanel({
+    title: p.name,
+    body: [h("div", { class:"menu" },
+      h("button", { onclick:function(){ closeModal(); openPlayerForm(playerId); } }, "Renommer ou changer la couleur"),
+      h("button", { class:"dang", onclick:function(){ closeModal(); askDelete(playerId); } }, "Supprimer le joueur"))]
+  }));
+}
+function askDelete(playerId){
+  const p = findPlayer(playerId);
+  if (!p) return;
+  confirmDialog({
+    title: "Supprimer " + p.name + " ?",
+    message: "Le joueur quitte la liste et le classement. Les parties déjà enregistrées ne changent pas, et une partie en cours n'est pas interrompue.",
+    confirm: "Supprimer", danger: true,
+    onConfirm: function(){
+      state.players = state.players.filter(x => x.id !== playerId);
+      savePlayers();
+      pruneSelection();
+      renderHome();
+    }
+  });
+}
+
+/* --- cycle de vie d'une partie --- */
+
+function onLaunch(){
+  if (!state.selection.length) return;
+  if (state.game){
+    confirmDialog({
+      title: "Lancer une nouvelle partie ?",
+      message: "La partie en cours sera perdue : elle n'est pas enregistrée dans l'historique.",
+      confirm: "Lancer quand même", danger: true,
+      onConfirm: function(){ startGame(state.selection.slice()); }
+    });
+    return;
+  }
+  startGame(state.selection.slice());
+}
+function startGame(ids, snapshot){
+  const players = snapshot || ids.map(function(id){
+    const p = findPlayer(id);
+    return { id:p.id, name:p.name, color:p.color };
+  });
+  const scores = {};
+  players.forEach(function(p){
+    const row = {};
+    LINES.forEach(function(l){ row[l.id] = null; });
+    scores[p.id] = row;
+  });
+  state.game = {
+    id: uid("g"),
+    startedAt: Date.now(),
+    imento: state.settings.imento === true,
+    nextImentoAt: null,
+    turnIndex: 0,
+    players: players,
+    scores: scores
+  };
+  if (state.game.imento){
+    state.game.nextImentoAt = Date.now() +
+      (Math.random() < IMENTO_OPEN_CHANCE ? IMENTO_OPEN_DELAY : randInt(IMENTO_MIN_MS, IMENTO_MAX_MS));
+  }
+  state.summary = null;
+  gridBuiltFor = null;
+  saveGame();
+  state.screen = "game";
+  render();
+  imentoStart();
+}
+function resumeGame(){
+  if (!state.game) return;
+  state.screen = "game";
+  render();
+  imentoStart();
+}
+function goHome(){
+  state.screen = "home";
+  render();
+}
+function openGameMenu(){
+  openModal(sheetPanel({
+    title: "Partie en cours",
+    sub: "La feuille est conservée tant qu'elle n'est pas abandonnée.",
+    body: [h("div", { class:"menu" },
+      h("button", { onclick:function(){ closeModal(); goHome(); } }, "Revenir à l'accueil"),
+      h("button", { class:"dang", onclick:function(){ closeModal(); askAbandon(); } }, "Abandonner la partie"))]
+  }));
+}
+function askAbandon(){
+  confirmDialog({
+    title: "Abandonner la partie ?",
+    message: "La feuille est effacée sans être enregistrée dans l'historique.",
+    confirm: "Abandonner", danger: true,
+    onConfirm: function(){
+      imentoStop();
+      state.game = null;
+      saveGame();
+      gridBuiltFor = null;
+      goHome();
+    }
+  });
+}
+function setActivePlayer(playerId){
+  const g = state.game;
+  const i = g.players.findIndex(p => p.id === playerId);
+  if (i < 0 || i === g.turnIndex) { ensureActiveVisible(true); return; }
+  g.turnIndex = i;
+  saveGame();
+  updateGame();
+  ensureActiveVisible(true);
+}
+
+/* --- saisie d'un score --- */
+
+function openScoreSheet(playerId, lineId){
+  const g = state.game;
+  const line = LINE_BY_ID[lineId];
+  const p = g.players.find(x => x.id === playerId);
+  const current = g.scores[playerId][lineId];
+
+  /* Le bonus Yam's reste fermé tant que la ligne Yam's ne vaut pas 50. */
+  if (line.bonus && !bonusYamsOpen(g, playerId)){
+    openModal(sheetPanel({
+      title: "Bonus Yam's",
+      sub: p.name,
+      body: [h("p", { class:"lock", text:"Ce bonus ne s'ouvre qu'après un Yam's marqué à 50. La ligne Yam's de "
+        + p.name + " n'est pas à 50 : une ligne barrée ne rapporte plus rien." })],
+      actions: [h("button", { class:"btn btn-ghost", onclick:closeModal }, "Fermer")]
+    }));
+    return;
+  }
+
+  const positives = line.values.filter(v => v !== 0);
+  const long = positives.length >= 10;
+  const cols = long ? 6 : Math.min(positives.length, 5);
+  const pills = h("div", { class:"pills" + (long ? " long" : ""), style:{ "grid-template-columns":"repeat(" + cols + ",1fr)" } });
+  positives.forEach(function(v){
+    pills.append(h("button", { class:"pill num" + (current === v ? " sel" : ""),
+      onclick:function(){ closeModal(); setValue(playerId, lineId, v); } }, String(v)));
+  });
+
+  const actions = [h("button", { class:"btn strike" + (current === 0 ? " sel" : ""),
+    onclick:function(){ closeModal(); setValue(playerId, lineId, 0); } }, "Barrer")];
+  if (current !== null){
+    actions.push(h("button", { class:"btn btn-ghost", onclick:function(){ closeModal(); setValue(playerId, lineId, null); } }, "Effacer"));
+  }
+
+  openModal(sheetPanel({
+    title: line.label,
+    sub: p.name + (line.sub ? " · " + line.sub : ""),
+    body: [pills],
+    actions: actions
+  }));
+}
+
+/* Saisir dans la colonne du joueur actif fait avancer le tour.
+   Effacer, ou saisir ailleurs, ne le fait pas. Le bonus Yam's non plus :
+   ce n'est pas une des 13 figures, le joueur doit encore en remplir une. */
+function setValue(playerId, lineId, value){
+  const g = state.game;
+  if (!g) return;
+  g.scores[playerId][lineId] = value;
+
+  /* Un Yam's dégradé referme le bonus : on ne garde pas de points orphelins. */
+  if (lineId === "yams" && value !== 50 && g.scores[playerId].bonusYams !== null){
+    g.scores[playerId].bonusYams = null;
+    toast("Bonus Yam's effacé : la ligne Yam's n'est plus à 50.");
+  }
+
+  const isActive = g.players[g.turnIndex].id === playerId;
+  if (value !== null && isActive && lineId !== "bonusYams"){
+    g.turnIndex = (g.turnIndex + 1) % g.players.length;
+  }
+  saveGame();
+
+  if (isComplete(g)){ finishGame(); return; }
+  updateGame();
+  ensureActiveVisible(true);
+}
+
+function finishGame(){
+  const g = state.game;
+
+  /* Records mesurés avant l'ajout de cette partie à l'historique. */
+  let prevAllTime = null;
+  const prevPersonal = {};
+  state.history.forEach(function(e){
+    e.results.forEach(function(r){
+      if (prevAllTime === null || r.total > prevAllTime) prevAllTime = r.total;
+      if (prevPersonal[r.playerId] === undefined || r.total > prevPersonal[r.playerId]) prevPersonal[r.playerId] = r.total;
+    });
+  });
+
+  const results = [], detail = {};
+  let best = -1;
+  g.players.forEach(function(p){
+    const sc = g.scores[p.id];
+    const sub = upperSubtotal(sc);
+    const total = grandTotal(sc);
+    if (total > best) best = total;
+    results.push({ playerId:p.id, name:p.name, color:p.color, total:total, upperSubtotal:sub, hadBonus:sub >= UPPER_TARGET });
+    detail[p.id] = { lower:lowerTotal(sc), bonusYams:sc.bonusYams || 0 };
+  });
+  const entry = {
+    id: g.id,
+    endedAt: Date.now(),
+    imento: g.imento === true,
+    results: results,
+    winnerIds: results.filter(r => r.total === best).map(r => r.playerId)
+  };
+
+  const records = { allTime:[], personal:[] };
+  results.forEach(function(r){
+    if (prevAllTime !== null && r.total > prevAllTime) records.allTime.push(r.playerId);
+    else if (prevPersonal[r.playerId] !== undefined && r.total > prevPersonal[r.playerId]) records.personal.push(r.playerId);
+  });
+
+  state.history.unshift(entry);
+  if (state.history.length > HISTORY_CAP) state.history.length = HISTORY_CAP;
+  saveHistory();
+
+  imentoStop();                       // le mode imento s'arrête à l'affichage du résumé
+  state.summary = { entry:entry, detail:detail, records:records, lineup:g.players.slice() };
+  state.game = null;
+  saveGame();
+  gridBuiltFor = null;
+  state.screen = "summary";
+  render();
+}
+function replaySameLineup(){
+  const lineup = state.summary ? state.summary.lineup.slice() : null;
+  if (!lineup) { goHome(); return; }
+  /* La sélection d'accueil suit, pour les joueurs encore au référentiel. */
+  const known = new Set(state.players.map(p => p.id));
+  state.selection = lineup.map(p => p.id).filter(id => known.has(id));
+  saveSelection();
+  state.summary = null;
+  startGame(null, lineup);
+}
+
+/* Fermeture au clavier — le focus visible fait partie du plancher de qualité. */
+document.addEventListener("keydown", function(e){
+  if (e.key === "Escape" && modalOpen) closeModal();
+});
+
+/* ============================================================
+   MODE IMENTO
+   Blague interne. L'échéance est un timestamp absolu rangé dans la
+   partie : ni le rechargement, ni la veille, ni le changement d'onglet
+   ne la remettent à zéro. Mode inactif = aucun timer, aucun overlay.
+   ============================================================ */
+
+let imentoTimer = null;
+let imentoEl = null;
+let imentoHold = null;
+
+function imentoActive(){ return !!(state.game && state.game.imento); }
+
+function imentoStart(){
+  if (!imentoActive() || imentoTimer) return;
+  imentoTimer = setInterval(imentoTick, 1000);
+  document.addEventListener("visibilitychange", imentoTick);
+}
+function imentoStop(){
+  if (imentoTimer){ clearInterval(imentoTimer); imentoTimer = null; }
+  document.removeEventListener("visibilitychange", imentoTick);
+  clearTimeout(imentoHold);
+  imentoHold = null;
+  if (imentoEl){ imentoEl.remove(); imentoEl = null; }
+}
+function imentoTick(){
+  const g = state.game;
+  if (!g || !g.imento || !g.nextImentoAt){ return; }
+  if (document.hidden || imentoEl) return;
+  if (Date.now() < g.nextImentoAt) return;
+  /* Une feuille de saisie ouverte ne doit jamais perdre un appui. */
+  if (modalOpen){
+    g.nextImentoAt = Date.now() + IMENTO_DEFER_MS;
+    saveGame();
+    return;
+  }
+  imentoShow();
+}
+function imentoShow(){
+  const word = IMENTO_WORDS[Math.random() < 0.5 ? 0 : 1];
+  imentoEl = h("div", { class:"imento", role:"alertdialog", "aria-label":word, onpointerdown:imentoClose },
+    h("b", { text:word }));
+  document.body.append(imentoEl);
+  try { if (navigator.vibrate) navigator.vibrate(200); } catch (e){}
+  clearTimeout(imentoHold);
+  imentoHold = setTimeout(imentoClose, IMENTO_HOLD_MS);
+}
+function imentoClose(){
+  clearTimeout(imentoHold);
+  imentoHold = null;
+  if (imentoEl){ imentoEl.remove(); imentoEl = null; }
+  /* La planification suivante démarre à la fermeture : pas de rattrapage cumulé. */
+  if (state.game && state.game.imento){
+    state.game.nextImentoAt = Date.now() + randInt(IMENTO_MIN_MS, IMENTO_MAX_MS);
+    saveGame();
+  }
+}
+
+/* ============================================================
+   INIT
+   ============================================================ */
+
+loadAll();
+state.screen = "home";     // on rouvre toujours sur l'accueil, avec le bouton de reprise en tete
+render();
+if (imentoActive()) imentoStart();
+
+/* Recalcule la géométrie du défilement quand l'écran tourne. */
+window.addEventListener("resize", function(){
+  if (state.screen === "game" && sheetEl) requestAnimationFrame(function(){ ensureActiveVisible(false); updateDots(); });
+});
+</script>
+</body>
+</html>
