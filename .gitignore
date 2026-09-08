@@ -4,3 +4,6 @@ _site
 .jekyll-metadata
 vendor
 .bundle
+
+# Flux NTFS "Mark of the Web" materialises par WSL lors de copies depuis Windows
+*:Zone.Identifier

@@ -11,7 +11,7 @@ categories:
 #  - sysadm
   - project
 
-# image: "flechettes.png"
+image: "vignette-flechettes.ico"
 ---
 
 # Fléchettes — scoreur
