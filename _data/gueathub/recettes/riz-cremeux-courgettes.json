@@ -1,0 +1,31 @@
+{
+  "schema": 1,
+  "id": "riz-cremeux-courgettes",
+  "titre": "Riz crémeux aux courgettes façon risotto",
+  "description": "Riz arborio nacré puis cuit par ajouts d'eau successifs, avec des courgettes encore fermes et de la crème.",
+  "type": "plat",
+  "portions": 4,
+  "temps": { "preparation": 10, "cuisson": 24, "repos": 0 },
+  "difficulte": "facile",
+  "tags": ["vegetarien", "sans-gluten", "ete"],
+  "ingredients": [
+    { "nom": "riz arborio", "quantite": 333, "unite": "g", "categorie": "epicerie-salee" },
+    { "nom": "huile d'olive", "quantite": 1, "unite": "cas", "categorie": "condiments-epices", "placard": true },
+    { "nom": "beurre", "quantite": 20, "unite": "g", "categorie": "cremerie" },
+    { "nom": "courgette", "quantite": 2, "unite": "piece", "categorie": "fruits-legumes", "precision": "en dés de 1 cm" },
+    { "nom": "crème liquide entière", "quantite": 20, "unite": "cl", "categorie": "cremerie" },
+    { "nom": "sel", "quantite": null, "unite": null, "categorie": "condiments-epices", "placard": true },
+    { "nom": "poivre", "quantite": null, "unite": null, "categorie": "condiments-epices", "placard": true }
+  ],
+  "etapes": [
+    { "texte": "Mesurer le riz dans un gobelet pour repérer son volume : ce repère sert à doser l'eau pendant toute la cuisson. Faire chauffer de l'eau et couper les courgettes en dés de 1 cm." },
+    { "texte": "Chauffer l'huile d'olive et le beurre dans une grande casserole à feu moyen. Ajouter le riz à sec et remuer jusqu'à ce que les grains deviennent translucides sur les bords.", "minuteur": 3 },
+    { "texte": "Verser un volume d'eau chaude égal au volume de riz, saler et cuire à frémissement en remuant de temps en temps, jusqu'à absorption complète.", "minuteur": 8 },
+    { "texte": "Ajouter un peu moins d'un volume d'eau chaude et poursuivre la cuisson en remuant, jusqu'à ce que le riz soit presque cuit mais encore ferme au cœur.", "minuteur": 7 },
+    { "texte": "Ajouter un peu moins d'un volume d'eau chaude, puis les courgettes, et incorporer la crème progressivement en remuant doucement." },
+    { "texte": "Laisser mijoter jusqu'à ce que le riz soit tendre et crémeux et les courgettes encore légèrement fermes.", "minuteur": 6 },
+    { "texte": "Rectifier l'assaisonnement en sel et poivre, puis servir aussitôt." }
+  ],
+  "source": "Recette familiale",
+  "notes": "Le repère au volume fonctionne pour toute quantité de riz. L'eau chaude évite de casser la cuisson ; un bouillon de légumes donne plus de goût. Ne pas prolonger la cuisson des courgettes pour qu'elles restent fermes."
+}

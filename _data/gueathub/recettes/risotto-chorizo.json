@@ -1,0 +1,31 @@
+{
+  "schema": 1,
+  "id": "risotto-chorizo",
+  "titre": "Risotto crémeux au chorizo",
+  "description": "Riz arborio nacré puis cuit en trois ajouts d'eau, avec du chorizo et de la crème ajoutés en fin de cuisson.",
+  "type": "plat",
+  "portions": 4,
+  "temps": { "preparation": 10, "cuisson": 25, "repos": 0 },
+  "difficulte": "facile",
+  "tags": ["automne", "hiver"],
+  "ingredients": [
+    { "nom": "riz arborio", "quantite": 333, "unite": "g", "categorie": "epicerie-salee" },
+    { "nom": "huile d'olive", "quantite": 1, "unite": "cas", "categorie": "condiments-epices", "placard": true },
+    { "nom": "beurre", "quantite": 20, "unite": "g", "categorie": "cremerie" },
+    { "nom": "chorizo", "quantite": 225, "unite": "g", "categorie": "frais", "precision": "pelé, en demi-rondelles fines" },
+    { "nom": "crème liquide entière", "quantite": 20, "unite": "cl", "categorie": "cremerie" },
+    { "nom": "sel", "quantite": null, "unite": null, "categorie": "condiments-epices", "placard": true },
+    { "nom": "poivre", "quantite": null, "unite": null, "categorie": "condiments-epices", "placard": true }
+  ],
+  "etapes": [
+    { "texte": "Mesurer le riz dans un gobelet pour repérer son volume : ce repère sert à doser l'eau pendant toute la cuisson. Faire chauffer de l'eau. Peler le chorizo et le couper en demi-rondelles fines." },
+    { "texte": "Chauffer l'huile d'olive et le beurre dans une grande casserole à feu moyen. Ajouter le riz à sec et remuer jusqu'à ce que les grains deviennent translucides sur les bords.", "minuteur": 3 },
+    { "texte": "Verser un volume d'eau chaude égal au volume de riz, saler légèrement et cuire à frémissement en remuant de temps en temps, jusqu'à absorption complète.", "minuteur": 8 },
+    { "texte": "Ajouter un deuxième volume d'eau chaude et poursuivre la cuisson en remuant, jusqu'à ce que le riz soit presque cuit mais encore ferme au cœur.", "minuteur": 7 },
+    { "texte": "Ajouter le troisième volume d'eau chaude, puis le chorizo, et incorporer la crème progressivement en remuant doucement." },
+    { "texte": "Laisser mijoter jusqu'à ce que le riz soit tendre et crémeux et que le chorizo ait coloré la sauce.", "minuteur": 7 },
+    { "texte": "Goûter avant de saler davantage, poivrer, puis servir aussitôt." }
+  ],
+  "source": "Recette familiale",
+  "notes": "Le chorizo est déjà salé : saler peu au départ et ajuster à la fin. Pour plus de goût, faire revenir le chorizo seul quelques minutes au début, le réserver, puis nacrer le riz dans sa graisse avant de le remettre en fin de cuisson."
+}

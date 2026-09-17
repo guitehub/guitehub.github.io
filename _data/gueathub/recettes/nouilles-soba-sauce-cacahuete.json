@@ -1,0 +1,34 @@
+{
+  "schema": 1,
+  "id": "nouilles-soba-sauce-cacahuete",
+  "titre": "Nouilles soba, sauce crémeuse à la cacahuète",
+  "description": "Nouilles de sarrasin enrobées d'une sauce mixée au tofu soyeux, cacahuète, paprika fumé et citron.",
+  "type": "plat",
+  "portions": 4,
+  "temps": { "preparation": 15, "cuisson": 17, "repos": 0 },
+  "difficulte": "facile",
+  "tags": ["vegetarien", "vegan"],
+  "ingredients": [
+    { "nom": "nouilles soba", "quantite": 400, "unite": "g", "categorie": "saveurs-du-monde", "groupe": "Nouilles" },
+    { "nom": "huile neutre", "quantite": 2, "unite": "cas", "categorie": "condiments-epices", "groupe": "Sauce", "placard": true },
+    { "nom": "oignon", "quantite": 2, "unite": "piece", "categorie": "fruits-legumes", "precision": "finement ciselé", "groupe": "Sauce" },
+    { "nom": "ail", "quantite": 2, "unite": "gousse", "categorie": "fruits-legumes", "precision": "émincé", "groupe": "Sauce" },
+    { "nom": "paprika fumé", "quantite": 2, "unite": "cac", "categorie": "condiments-epices", "groupe": "Sauce", "placard": true },
+    { "nom": "cacahuète", "quantite": 100, "unite": "g", "categorie": "epicerie-sucree", "precision": "nature, non salée", "groupe": "Sauce" },
+    { "nom": "tofu soyeux", "quantite": 600, "unite": "g", "categorie": "frais", "groupe": "Sauce" },
+    { "nom": "levure maltée", "quantite": 4, "unite": "cas", "categorie": "condiments-epices", "groupe": "Sauce" },
+    { "nom": "concentré de tomate", "quantite": 2, "unite": "cas", "categorie": "conserves", "groupe": "Sauce" },
+    { "nom": "citron", "quantite": 1, "unite": "piece", "categorie": "fruits-legumes", "precision": "pressé", "groupe": "Sauce" },
+    { "nom": "coriandre", "quantite": 0.5, "unite": "botte", "categorie": "fruits-legumes", "precision": "ciselée", "groupe": "Topping" },
+    { "nom": "cacahuète", "quantite": 60, "unite": "g", "categorie": "epicerie-sucree", "precision": "concassée", "groupe": "Topping" }
+  ],
+  "etapes": [
+    { "texte": "Faire revenir l'oignon, l'ail et le paprika fumé dans l'huile, à feu moyen, jusqu'à ce qu'ils soient dorés et parfumés.", "minuteur": 7 },
+    { "texte": "Transférer dans un mixeur avec les cacahuètes de la sauce, le tofu soyeux, la levure maltée, le concentré de tomate et le jus de citron. Mixer jusqu'à obtenir une pâte lisse et homogène." },
+    { "texte": "Reverser la sauce dans la même poêle et la chauffer à feu doux en remuant, pour que les saveurs se mêlent.", "minuteur": 5 },
+    { "texte": "Pendant ce temps, cuire les nouilles soba dans une grande casserole d'eau bouillante selon les indications du paquet. Prélever un bol d'eau de cuisson, puis égoutter.", "minuteur": 5 },
+    { "texte": "Plonger les nouilles dans la sauce chaude et mélanger pour bien les enrober. Détendre avec un peu d'eau de cuisson réservée si la sauce est trop épaisse." },
+    { "texte": "Répartir dans les assiettes, parsemer de coriandre et de cacahuètes concassées. Servir aussitôt." }
+  ],
+  "notes": "À déguster avec des baguettes. Torréfier les cacahuètes du topping 2 à 3 minutes à sec dans la poêle avant de les concasser : elles seront plus croquantes et parfumées. La sauce se garde 2 jours au frais et se détend avec un peu d'eau chaude. Variantes : ajouter des légumes sautés (carotte en julienne, pak choï, brocoli, edamame) ; ajouter des dés de tofu fumé ou de tempeh dorés à la poêle pour plus de protéines ; relever la sauce avec un peu de sriracha, de piment ou de gingembre frais râpé ; remplacer les cacahuètes de la sauce par du beurre de cacahuète pour une texture plus lisse ; ajouter un trait de sauce soja ou de vinaigre de riz pour plus de peps ; remplacer les cacahuètes du topping par des graines de sésame et de la cébette ; servir froid en salade, les nouilles rincées à l'eau froide ; utiliser des soba 100 % sarrasin pour une version sans gluten."
+}
