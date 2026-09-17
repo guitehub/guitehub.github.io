@@ -61,6 +61,16 @@ test("pre-commit : photo déposée directement convertie si besoin, laissée tel
     const before = readFileSync(renamed);
     assert.equal((await optimizeRecipePhoto(renamed)).converted, false);
     assert.ok(readFileSync(renamed).equals(before), "photo conforme non retouchée");
+
+    // WebP lourd mais à la bonne taille : jamais réencodé (pas de perte à chaque commit).
+    const heavy = join(dir, "lourde.webp");
+    const noise = Buffer.alloc(1200 * 900 * 3);
+    for (let i = 0; i < noise.length; i += 1) noise[i] = (i * 2654435761) >>> 24;
+    await sharp(noise, { raw: { width: 1200, height: 900, channels: 3 } }).webp({ quality: 100 }).toFile(heavy);
+    const heavyBefore = readFileSync(heavy);
+    assert.ok(heavyBefore.length > 300 * 1024);
+    assert.equal((await optimizeRecipePhoto(heavy)).converted, false);
+    assert.ok(readFileSync(heavy).equals(heavyBefore));
   } finally {
     rmSync(dir, { recursive: true, force: true });
   }

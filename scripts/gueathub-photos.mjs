@@ -62,15 +62,16 @@ export async function convertPhotos({
 }
 
 /**
- * Photo déjà déposée dans assets/gueathub/recettes/ (hook pre-commit) : si ce n'est pas un vrai WebP,
- * ou si elle dépasse 1200 px ou 300 Ko, elle est convertie sur place comme par `npm run photos`.
- * Retourne { converted, bytes } ; une photo déjà conforme n'est pas touchée.
+ * Photo déjà déposée dans assets/gueathub/recettes/ (hook pre-commit) : si ce n'est pas un vrai WebP
+ * ou si elle dépasse 1200 px, elle est convertie sur place comme par `npm run photos`.
+ * Retourne { converted, bytes } ; un WebP de 1200 px au plus n'est jamais réencodé (pas de perte de
+ * qualité à chaque commit) : s'il pèse plus de 300 Ko, `npm run check` le signale.
  */
 export async function optimizeRecipePhoto(file) {
   const input = readFileSync(file);
   const isWebp = input.toString("latin1", 0, 4) === "RIFF" && input.toString("latin1", 8, 12) === "WEBP";
   const { width } = await sharp(input).metadata();
-  if (isWebp && width <= MAX_WIDTH && input.length <= MAX_BYTES) return { converted: false, bytes: input.length };
+  if (isWebp && width <= MAX_WIDTH) return { converted: false, bytes: input.length };
   const output = await sharp(input)
     .rotate()
     .resize({ width: MAX_WIDTH, withoutEnlargement: true })
