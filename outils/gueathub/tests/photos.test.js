@@ -1,11 +1,11 @@
 import { test } from "node:test";
 import assert from "node:assert/strict";
-import { existsSync, mkdirSync, mkdtempSync, rmSync, writeFileSync } from "node:fs";
+import { existsSync, mkdirSync, mkdtempSync, readFileSync, rmSync, writeFileSync } from "node:fs";
 import { tmpdir } from "node:os";
 import { join } from "node:path";
 import sharp from "sharp";
 
-import { MAX_WIDTH, convertPhotos } from "../../../scripts/gueathub-photos.mjs";
+import { MAX_WIDTH, convertPhotos, optimizeRecipePhoto } from "../../../scripts/gueathub-photos.mjs";
 
 test("npm run photos : WebP de 1200 px au plus, sans métadonnées, noms vérifiés", async () => {
   const root = mkdtempSync(join(tmpdir(), "gueathub-photos-"));
@@ -45,5 +45,23 @@ test("npm run photos : WebP de 1200 px au plus, sans métadonnées, noms vérifi
     assert.equal(await convertPhotos({ inputDir: join(root, "absent"), outputDir, recipesDir }), null);
   } finally {
     rmSync(root, { recursive: true, force: true });
+  }
+});
+
+test("pre-commit : photo déposée directement convertie si besoin, laissée telle quelle sinon", async () => {
+  const dir = mkdtempSync(join(tmpdir(), "gueathub-optimize-"));
+  try {
+    const renamed = join(dir, "renommee.webp");
+    await sharp({ create: { width: 2000, height: 1500, channels: 3, background: "#963" } }).jpeg().toFile(renamed);
+    const first = await optimizeRecipePhoto(renamed);
+    assert.equal(first.converted, true);
+    const meta = await sharp(renamed).metadata();
+    assert.deepEqual([meta.format, meta.width], ["webp", MAX_WIDTH]);
+
+    const before = readFileSync(renamed);
+    assert.equal((await optimizeRecipePhoto(renamed)).converted, false);
+    assert.ok(readFileSync(renamed).equals(before), "photo conforme non retouchée");
+  } finally {
+    rmSync(dir, { recursive: true, force: true });
   }
 });

@@ -1,4 +1,4 @@
-# Validation des données et tests de gueathub.
+# Validation des données et tests de gueathub, et absence de métadonnées dans les images du site.
 # Indépendant du déploiement GitHub Pages : un échec signale le problème
 # mais ne bloque pas la publication.
 name: gueathub-check
@@ -7,7 +7,7 @@ on:
   push:
     paths:
       - "_data/gueathub/**"
-      - "assets/gueathub/**"
+      - "assets/**"
       - "outils/gueathub/**"
       - "scripts/**"
       - "package.json"
@@ -16,7 +16,7 @@ on:
   pull_request:
     paths:
       - "_data/gueathub/**"
-      - "assets/gueathub/**"
+      - "assets/**"
       - "outils/gueathub/**"
       - "scripts/**"
       - "package.json"
@@ -37,6 +37,8 @@ jobs:
           cache: npm
       - run: npm ci
       - run: npm run check
+      - name: Images sans métadonnées (EXIF, GPS…)
+        run: npm run strip-metadata -- --check
       - run: npm test
       - name: app.css et icons.js commités à jour
         run: |

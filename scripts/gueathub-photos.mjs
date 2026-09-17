@@ -7,7 +7,7 @@
 // Les métadonnées (EXIF, dont la position GPS des photos de téléphone) ne sont pas recopiées.
 // Le dossier _photos/ n'est ni versionné (.gitignore) ni publié (dossier « _ »).
 
-import { existsSync, mkdirSync, readdirSync, statSync } from "node:fs";
+import { existsSync, mkdirSync, readFileSync, readdirSync, statSync, writeFileSync } from "node:fs";
 import { basename, extname, join, relative, resolve } from "node:path";
 import { fileURLToPath, pathToFileURL } from "node:url";
 import sharp from "sharp";
@@ -59,6 +59,25 @@ export async function convertPhotos({
     }
   }
   return results;
+}
+
+/**
+ * Photo déjà déposée dans assets/gueathub/recettes/ (hook pre-commit) : si ce n'est pas un vrai WebP,
+ * ou si elle dépasse 1200 px ou 300 Ko, elle est convertie sur place comme par `npm run photos`.
+ * Retourne { converted, bytes } ; une photo déjà conforme n'est pas touchée.
+ */
+export async function optimizeRecipePhoto(file) {
+  const input = readFileSync(file);
+  const isWebp = input.toString("latin1", 0, 4) === "RIFF" && input.toString("latin1", 8, 12) === "WEBP";
+  const { width } = await sharp(input).metadata();
+  if (isWebp && width <= MAX_WIDTH && input.length <= MAX_BYTES) return { converted: false, bytes: input.length };
+  const output = await sharp(input)
+    .rotate()
+    .resize({ width: MAX_WIDTH, withoutEnlargement: true })
+    .webp({ quality: QUALITY })
+    .toBuffer();
+  writeFileSync(file, output);
+  return { converted: true, bytes: output.length };
 }
 
 async function main() {

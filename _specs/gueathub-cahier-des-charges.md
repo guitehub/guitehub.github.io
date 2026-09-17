@@ -1,5 +1,9 @@
 # gueathub — cahier des charges
 
+> **Note.** Plusieurs points ont été arbitrés autrement pendant la réalisation (notamment §4, §9.1 et §11 :
+> page Outils existante, article en catégorie `tool`, jetons chargés par `<link>`). La référence à jour est
+> [`outils/gueathub/DECISIONS.md`](../outils/gueathub/DECISIONS.md).
+
 Nom de l'app : **gueathub**, toujours écrit en minuscules (comme guitehub), dans l'interface, le manifest, les titres et les chemins.
 
 Outil du site « Le Hub de la Guite » (repo `guitehub/guitehub.github.io`), servi à `/outils/gueathub/`.

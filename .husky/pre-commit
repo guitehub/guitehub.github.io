@@ -1,0 +1,4 @@
+# Photos (conversion, métadonnées), fichiers générés et vérification des recettes.
+# Contourner exceptionnellement : HUSKY=0 git commit …
+command -v node >/dev/null 2>&1 || { [ -s "$HOME/.nvm/nvm.sh" ] && . "$HOME/.nvm/nvm.sh"; }
+node scripts/hooks/pre-commit.mjs
