@@ -8,7 +8,7 @@
   },
   "scripts": {
     "check": "node scripts/gueathub-check.mjs",
-    "test": "node --test \"outils/gueathub/tests/**/*.test.js\""
+    "test": "node --test --experimental-test-coverage --test-coverage-include=\"outils/gueathub/js/domain/**\" --test-coverage-lines=100 --test-coverage-branches=100 --test-coverage-functions=100 \"outils/gueathub/tests/**/*.test.js\""
   },
   "devDependencies": {
     "ajv": "^8.20.0"

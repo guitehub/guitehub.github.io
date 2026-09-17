@@ -55,3 +55,48 @@ ne tranchait pas ou a été arbitré. Fichier non publié (exclu dans `_config.y
   `actions/checkout@v5`, `actions/setup-node@v5`, `node-version: lts/*`.
 - **Node.** `package.json` à la racine en `"type": "module"`, `engines.node >= 22` (motifs de fichiers pour
   `node --test`). En local : Node 24 LTS via nvm.
+
+## Phase 2 — domaine
+
+- **Fiche recette aux portions d'origine : quantités telles qu'écrites.** Quand les portions affichées
+  sont celles de la recette (facteur 1), chaque quantité est montrée exactement comme dans les données
+  (« 12 g », « 100 ml », « 4 c. à c. »), sans arrondi métier. L'arrondi au plus proche du §6.3
+  s'applique dès que les portions changent. Sinon, 12 g de beurre s'afficheraient « 10 g » alors que la
+  recette dit 12 g (« l'app fait confiance aux données »).
+- **Jamais d'arrondi à zéro.** Au plus proche, une petite quantité qui s'arrondirait à 0 (2 g, 0,2 c. à c.)
+  reste affichée telle quelle. Les dénombrables gardent leur minimum de 0,5 (§6.3).
+- **Unité d'affichage choisie après l'arrondi.** 995 g arrondis vers le haut donnent 1000 g, affichés
+  « 1 kg » ; 97 ml donnent « 10 cl ». Le pas d'arrondi, lui, dépend de la valeur avant arrondi.
+- **Cuillères.** Si la valeur arrondie atteint 3 c. à c., on repart de la quantité exacte, convertie en
+  c. à s. et arrondie au 0,5 c. à s. (4 c. à c. → « 1,5 c. à s. », et non « 1,33 c. à s. »).
+- **Libellés.** Aucun pluriel pour les symboles (g, kg, ml, cl, l, c. à c., c. à s.). « boîte » prend son
+  accent à l'affichage ; « rouleau » fait « rouleaux ».
+- **Familles mixtes.** Les quantités sont listées dans l'ordre où leur famille apparaît dans la sélection,
+  séparées par « + ».
+- **Placard.** Côté données, une ligne est « placard » seulement si toutes ses occurrences le sont
+  (comme `optionnel`). En cas de doute, l'article reste dans la liste à acheter.
+- **Sources.** Une entrée par occurrence d'ingrédient, avec son `groupe` : une recette qui utilise du beurre
+  pour la pâte et pour la garniture donne deux sources. `quantiteAffichee` est celle de la fiche recette
+  (au plus proche, ou telle qu'écrite aux portions d'origine).
+- **Coches.** La signature est la quantité affichée dans la liste (chaîne vide pour « au goût »). Une coche
+  dont la signature ne correspond plus donne l'état `stale` (« quantité modifiée »), affiché non coché ;
+  recocher la ligne met la signature à jour. Si la quantité revient à la valeur cochée, la ligne redevient
+  cochée. Les ajouts manuels gardent leur propre `coche` et ne passent pas par les signatures.
+- **Rayons.** L'ordre perso est nettoyé (rayons inconnus et doublons retirés), puis complété par les rayons
+  manquants dans l'ordre par défaut. Une ligne dont le rayon n'existe plus va dans « autre ».
+- **Tri dans un rayon.** Non cochés (y compris « quantité modifiée ») d'abord, cochés en fin, puis ordre
+  alphabétique français (`Intl.Collator`, casse et accents ignorés : « œuf » se range comme « oeuf »).
+- **Progression et badge.** Ils comptent les lignes des rayons et les ajouts, **hors** section
+  « À vérifier au placard » (repliée par défaut).
+- **Texte copié.** Un bloc par rayon (libellé, puis `- nom : quantité`, suivi de « (facultatif) » si besoin),
+  blocs séparés par une ligne vide, « À vérifier au placard » en dernier ; rayons dont tout est coché omis.
+- **Recherche.** Tous les mots de la requête doivent apparaître dans le titre ou les noms d'ingrédients.
+  Les ligatures sont dépliées (« oeuf » trouve « œuf »). Les tags sélectionnés sont cumulatifs (ET).
+  Tri « temps » : temps total croissant, puis titre.
+- **Fonctions en plus des 4 prévues au §6.** `text.js` porte aussi le filtre et le tri des recettes,
+  `scale.js` le regroupement des ingrédients de la fiche, `aggregate.js` les coches, les rayons, la
+  progression et le texte copié : tout ce qui est calculable sans DOM est testé ici.
+- **Script de validation.** Il réutilise `normalize` et `nearDuplicateKey` de `text.js` (plus de copie).
+- **Couverture.** `npm test` impose 100 % des lignes, branches et fonctions de `js/domain/`
+  (`--experimental-test-coverage`, Node ≥ 22.8). L'exemple du §6.5 est testé sur une copie figée des deux
+  recettes (`tests/fixtures/reference/`), pour que modifier les vraies recettes ne casse pas le test.

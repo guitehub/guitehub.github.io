@@ -1,0 +1,28 @@
+{
+  "schema": 1,
+  "id": "quiche-lorraine",
+  "titre": "Quiche lorraine",
+  "description": "La classique : lardons, œufs et crème sur une pâte brisée, sans fromage.",
+  "type": "plat",
+  "portions": 6,
+  "temps": { "preparation": 15, "cuisson": 40, "repos": 5 },
+  "difficulte": "facile",
+  "tags": ["four"],
+  "ingredients": [
+    { "nom": "pâte brisée", "quantite": 1, "unite": "rouleau", "categorie": "frais" },
+    { "nom": "lardons", "quantite": 200, "unite": "g", "categorie": "frais" },
+    { "nom": "œuf", "quantite": 3, "unite": "piece", "categorie": "cremerie" },
+    { "nom": "crème liquide entière", "quantite": 20, "unite": "cl", "categorie": "cremerie" },
+    { "nom": "lait entier", "quantite": 100, "unite": "ml", "categorie": "cremerie" },
+    { "nom": "noix de muscade", "quantite": 1, "unite": "pincee", "categorie": "condiments-epices", "placard": true }
+  ],
+  "etapes": [
+    { "texte": "Préchauffer le four à 180 °C. Dérouler la pâte dans un moule à tarte et la piquer à la fourchette." },
+    { "texte": "Faire revenir les lardons à la poêle sans matière grasse, puis les égoutter.", "minuteur": 5 },
+    { "texte": "Battre les œufs avec la crème, le lait et la muscade." },
+    { "texte": "Répartir les lardons sur la pâte et verser l'appareil par-dessus." },
+    { "texte": "Enfourner jusqu'à ce que la quiche soit dorée et prise.", "minuteur": 35 },
+    { "texte": "Laisser tiédir quelques minutes avant de démouler.", "minuteur": 5 }
+  ],
+  "notes": "Les lardons sont déjà salés : inutile de saler l'appareil."
+}

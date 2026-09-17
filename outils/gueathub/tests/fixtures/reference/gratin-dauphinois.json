@@ -1,0 +1,30 @@
+{
+  "schema": 1,
+  "id": "gratin-dauphinois",
+  "titre": "Gratin dauphinois",
+  "description": "Pommes de terre fondantes cuites lentement dans le lait et la crème.",
+  "type": "accompagnement",
+  "portions": 4,
+  "temps": { "preparation": 20, "cuisson": 75, "repos": 10 },
+  "difficulte": "facile",
+  "tags": ["vegetarien", "four", "automne", "hiver"],
+  "ingredients": [
+    { "nom": "pomme de terre", "quantite": 1, "unite": "kg", "categorie": "fruits-legumes", "precision": "à chair ferme" },
+    { "nom": "lait entier", "quantite": 50, "unite": "cl", "categorie": "cremerie" },
+    { "nom": "crème liquide entière", "quantite": 25, "unite": "cl", "categorie": "cremerie" },
+    { "nom": "ail", "quantite": 1, "unite": "gousse", "categorie": "fruits-legumes" },
+    { "nom": "beurre", "quantite": 10, "unite": "g", "categorie": "cremerie", "precision": "pour le plat" },
+    { "nom": "noix de muscade", "quantite": 1, "unite": "pincee", "categorie": "condiments-epices", "precision": "râpée", "placard": true },
+    { "nom": "sel", "quantite": null, "unite": null, "categorie": "condiments-epices", "placard": true },
+    { "nom": "poivre", "quantite": null, "unite": null, "categorie": "condiments-epices", "placard": true }
+  ],
+  "etapes": [
+    { "texte": "Préchauffer le four à 150 °C. Éplucher les pommes de terre et les couper en rondelles fines, sans les laver." },
+    { "texte": "Porter le lait à frémissement avec l'ail écrasé, la muscade, le sel et le poivre. Ajouter les pommes de terre et cuire en remuant délicatement.", "minuteur": 10 },
+    { "texte": "Beurrer le plat, y verser les pommes de terre et leur lait, puis napper de crème." },
+    { "texte": "Enfourner jusqu'à ce que le dessus soit doré.", "minuteur": 65 },
+    { "texte": "Laisser reposer avant de servir.", "minuteur": 10 }
+  ],
+  "source": "Recette familiale",
+  "notes": "Ne pas rincer les rondelles : l'amidon lie la sauce."
+}

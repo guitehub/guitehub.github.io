@@ -11,6 +11,8 @@ import { basename, join, relative, resolve } from "node:path";
 import { fileURLToPath, pathToFileURL } from "node:url";
 import Ajv2020 from "ajv/dist/2020.js";
 
+import { nearDuplicateKey, normalize } from "../outils/gueathub/js/domain/text.js";
+
 const ROOT = resolve(fileURLToPath(new URL("..", import.meta.url)));
 
 export const DEFAULT_PATHS = {
@@ -41,21 +43,6 @@ const CATEGORIES_SCHEMA = {
     },
   },
 };
-
-// Clé d'agrégation : trim, minuscules, espaces réduits, NFC (accents conservés).
-function normalizeName(name) {
-  return name.normalize("NFC").trim().toLowerCase().replace(/\s+/g, " ");
-}
-
-// Pour repérer les quasi-doublons : sans accents et sans s/x final à chaque mot.
-function foldName(name) {
-  return normalizeName(name)
-    .normalize("NFD")
-    .replace(/\p{M}/gu, "")
-    .split(" ")
-    .map((word) => word.replace(/[sx]$/, ""))
-    .join(" ");
-}
 
 function readJson(file) {
   return JSON.parse(readFileSync(file, "utf8"));
@@ -207,7 +194,7 @@ export function checkData(options = {}) {
   for (const { file, recipe } of recipes) {
     for (const ingredient of Array.isArray(recipe.ingredients) ? recipe.ingredients : []) {
       if (typeof ingredient?.nom !== "string") continue;
-      const key = normalizeName(ingredient.nom);
+      const key = normalize(ingredient.nom);
       if (!byKey.has(key)) byKey.set(key, []);
       byKey.get(key).push({
         file,
@@ -232,7 +219,7 @@ export function checkData(options = {}) {
 
   const byFold = new Map();
   for (const key of byKey.keys()) {
-    const folded = foldName(key);
+    const folded = nearDuplicateKey(key);
     if (!byFold.has(folded)) byFold.set(folded, []);
     byFold.get(folded).push(key);
   }
