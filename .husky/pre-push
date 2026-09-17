@@ -1,11 +1,24 @@
 # Tests, recettes, métadonnées des images et build Jekyll avant d'envoyer.
 # Contourner exceptionnellement : HUSKY=0 git push …
 command -v node >/dev/null 2>&1 || { [ -s "$HOME/.nvm/nvm.sh" ] && . "$HOME/.nvm/nvm.sh"; }
-npm test --silent
-npm run --silent check
-npm run --silent strip-metadata -- --check
+
+# Affiche la sortie d'une étape seulement si elle échoue.
+step() {
+  label="$1"; shift
+  if out=$("$@" 2>&1); then
+    echo "pre-push : $label ✔"
+  else
+    echo "$out"
+    echo "pre-push : $label ✘ (push annulé)"
+    exit 1
+  fi
+}
+
+step "tests" npm test --silent
+step "recettes" npm run --silent check
+step "images sans métadonnées" npm run --silent strip-metadata -- --check
 if command -v bundle >/dev/null 2>&1; then
-  bundle exec jekyll build --quiet
+  step "build Jekyll" bundle exec jekyll build --quiet
 else
   echo "pre-push : bundle introuvable, build Jekyll non vérifié"
 fi

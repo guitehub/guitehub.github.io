@@ -245,3 +245,16 @@ ne tranchait pas ou a été arbitré. Fichier non publié (exclu dans `_config.y
   sont pas ceux attendus.
 - **Procédure vérifiée** sur une copie du repo : nouvelle recette + photo en suivant le README seul →
   `npm run check` sans erreur, recette et photo présentes dans `recettes.json`, nom dans `ingredients.txt`.
+
+## Après la phase 6 — hooks et métadonnées
+
+- **Métadonnées des images.** `scripts/strip-metadata.mjs` retire EXIF, XMP, IPTC, commentaires et données
+  collées après l'image, **sans réencoder** (pixels identiques vérifiés, profil ICC conservé). Seule
+  exception : une orientation EXIF autre que « normale » impose un réencodage avec rotation, sinon la photo
+  s'afficherait couchée. Appliqué aux images existantes du blog ; la CI échoue s'il en reste.
+- **Hooks husky.** pre-commit (photos, métadonnées, fichiers générés, check) et pre-push (tests, check,
+  métadonnées, build Jekyll). Les hooks chargent nvm s'il est installé et que `node` n'est pas dans le
+  PATH (commit depuis un éditeur). Une photo de recette déjà en WebP de 1200 px au plus n'est jamais
+  réencodée par le hook, même au-dessus de 300 Ko (pas de perte de qualité à chaque commit).
+- **Nettoyage.** `url` en https dans `_config.yml` (liens du flux RSS), variables inutilisées retirées,
+  thème minima retiré du Gemfile, `.pages.yml` vide et billet modèle de Jekyll supprimés.

@@ -12,7 +12,7 @@
 
 import { execFileSync } from "node:child_process";
 import { readFileSync, writeFileSync } from "node:fs";
-import { resolve } from "node:path";
+import { relative, resolve } from "node:path";
 import { fileURLToPath, pathToFileURL } from "node:url";
 import sharp from "sharp";
 
@@ -202,8 +202,9 @@ async function main(argv) {
     if (!result.changed) continue;
     dirty += 1;
     const what = result.removed.join(", ");
-    if (check) console.log(`  ✘ ${file} : ${what}`);
-    else console.log(`  ✔ ${file} : ${what} retiré(s)${result.reencoded ? " (réencodée : orientation appliquée)" : ""}`);
+    const name = relative(process.cwd(), file) || file;
+    if (check) console.log(`  ✘ ${name} : ${what}`);
+    else console.log(`  ✔ ${name} : ${what} retiré(s)${result.reencoded ? " (réencodée : orientation appliquée)" : ""}`);
   }
   if (check && dirty > 0) {
     console.log(`${dirty} image(s) avec métadonnées : lancer npm run strip-metadata`);
