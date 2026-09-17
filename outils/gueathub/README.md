@@ -51,7 +51,7 @@ bundle exec jekyll serve      # http://localhost:4000/outils/gueathub/
 | `npm run icons` | Régénère `js/ui/icons.js` (après ajout d'une icône ou d'un rayon). |
 | `npm run pwa-icons` | Régénère les icônes de l'app installable (`icons/`). |
 | `npm run photos` | Convertit `_photos/` vers `assets/gueathub/recettes/`. |
-| `npm run strip-metadata` | Retire les métadonnées (EXIF, GPS…) des images du site, sans réencoder. `-- --check` : vérifie seulement. |
+| `npm run strip-metadata` | Retire les métadonnées (EXIF, GPS…) des images du site, sans réencoder. `-- --check` : vérifie seulement les images suivies. |
 
 Organisation :
 

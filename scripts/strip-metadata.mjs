@@ -5,7 +5,8 @@
 //
 //   npm run strip-metadata                   images de assets/ et outils/ (suivies ou nouvelles)
 //   npm run strip-metadata -- a.jpg b.png    fichiers donnés (hook pre-commit)
-//   npm run strip-metadata -- --check        ne modifie rien ; code 1 s'il reste des métadonnées
+//   npm run strip-metadata -- --check        images suivies par git (ce qui est poussé) : ne modifie rien,
+//                                            code 1 s'il reste des métadonnées (pre-push, CI)
 //
 // Exception : une photo avec une orientation EXIF (ex. prise en portrait) est réencodée avec la rotation
 // appliquée, sinon elle s'afficherait couchée une fois l'EXIF retiré.
@@ -184,8 +185,9 @@ export async function stripFile(file, { check = false } = {}) {
   return { file, format: result.format, removed: result.removed, reencoded: result.reencoded, changed };
 }
 
-function defaultFiles() {
-  return execFileSync("git", ["ls-files", "--cached", "--others", "--exclude-standard", "-z", "--", "assets", "outils"], { cwd: ROOT })
+function defaultFiles({ includeUntracked }) {
+  const scope = includeUntracked ? ["--cached", "--others", "--exclude-standard"] : ["--cached"];
+  return execFileSync("git", ["ls-files", ...scope, "-z", "--", "assets", "outils"], { cwd: ROOT })
     .toString()
     .split("\0")
     .filter((file) => IMAGE_EXTENSIONS.test(file))
@@ -195,7 +197,7 @@ function defaultFiles() {
 async function main(argv) {
   const check = argv.includes("--check");
   const args = argv.filter((arg) => arg !== "--check");
-  const files = args.length > 0 ? args.filter((file) => IMAGE_EXTENSIONS.test(file)) : defaultFiles();
+  const files = args.length > 0 ? args.filter((file) => IMAGE_EXTENSIONS.test(file)) : defaultFiles({ includeUntracked: !check });
   let dirty = 0;
   for (const file of files) {
     const result = await stripFile(file, { check });
