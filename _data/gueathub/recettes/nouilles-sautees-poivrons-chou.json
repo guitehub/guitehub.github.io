@@ -1,0 +1,36 @@
+{
+  "schema": 1,
+  "id": "nouilles-sautees-poivrons-chou",
+  "titre": "Nouilles sautées aux poivrons et chou râpé",
+  "description": "Sauté express de nouilles, poivrons et chou râpé, saisis à la graisse de canard et laqués à la sauce soja.",
+  "type": "plat",
+  "portions": 4,
+  "temps": { "preparation": 15, "cuisson": 12, "repos": 0 },
+  "difficulte": "facile",
+  "tags": ["rapide"],
+  "ingredients": [
+    { "nom": "nouilles chinoises", "quantite": 400, "unite": "g", "categorie": "saveurs-du-monde" },
+    { "nom": "poivron", "quantite": 3, "unite": "piece", "categorie": "fruits-legumes", "precision": "émincé en lanières" },
+    { "nom": "carotte", "quantite": 125, "unite": "g", "categorie": "fruits-legumes", "precision": "râpée" },
+    { "nom": "chou blanc", "quantite": 125, "unite": "g", "categorie": "fruits-legumes", "precision": "râpé" },
+    { "nom": "oignon rouge", "quantite": 1, "unite": "piece", "categorie": "fruits-legumes", "precision": "émincé" },
+    { "nom": "ail", "quantite": 3, "unite": "gousse", "categorie": "fruits-legumes", "precision": "haché" },
+    { "nom": "graisse de canard", "quantite": 2, "unite": "cas", "categorie": "conserves" },
+    { "nom": "œuf", "quantite": 4, "unite": "piece", "categorie": "cremerie" },
+    { "nom": "sauce soja", "quantite": 4, "unite": "cas", "categorie": "saveurs-du-monde", "placard": true },
+    { "nom": "vinaigre de riz", "quantite": 1, "unite": "cas", "categorie": "condiments-epices", "placard": true },
+    { "nom": "miel", "quantite": 1, "unite": "cac", "categorie": "epicerie-sucree" },
+    { "nom": "huile de sésame", "quantite": 1, "unite": "cac", "categorie": "condiments-epices", "precision": "grillé" },
+    { "nom": "poivre", "quantite": null, "unite": null, "categorie": "condiments-epices", "placard": true }
+  ],
+  "etapes": [
+    { "texte": "Mélanger dans un bol la sauce soja, le vinaigre de riz, le miel, l'huile de sésame, un peu d'eau et le poivre. Réserver à portée de main : une fois la poêle lancée, tout va très vite." },
+    { "texte": "Cuire les nouilles une minute de moins que le temps indiqué sur le paquet. Égoutter, rincer à l'eau froide, puis mélanger avec un filet d'huile pour éviter qu'elles collent.", "minuteur": 4 },
+    { "texte": "Battre les œufs. Les verser dans la poêle très chaude avec un peu de graisse de canard, laisser prendre sans remuer, puis brouiller grossièrement en gros morceaux. Réserver.", "minuteur": 2 },
+    { "texte": "Faire fondre le reste de graisse de canard dans la poêle bien chaude. Y jeter l'oignon rouge et le poivron, les étaler et les laisser colorer sans y toucher avant de remuer. Ils doivent rester fermes, avec quelques bords grillés.", "minuteur": 3 },
+    { "texte": "Ajouter la carotte et le chou râpés, faire sauter à feu vif en remuant sans arrêt. Ajouter l'ail sur les dernières secondes seulement, pour qu'il parfume sans brûler.", "minuteur": 2 },
+    { "texte": "Ajouter les nouilles, verser la sauce sur les bords chauds de la poêle et faire sauter en soulevant à la spatule jusqu'à ce que tout soit brillant et enrobé. Remettre les œufs et mélanger.", "minuteur": 1 },
+    { "texte": "Goûter, rectifier en sauce soja et servir aussitôt." }
+  ],
+  "notes": "Ne pas surcharger la poêle : procéder en deux fois si besoin, sinon les légumes rendent leur eau au lieu de sauter. Servir avec de la coriandre ciselée, des cacahuètes concassées ou un trait de sauce piquante."
+}

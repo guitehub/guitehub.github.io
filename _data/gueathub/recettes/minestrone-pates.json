@@ -1,0 +1,40 @@
+{
+  "schema": 1,
+  "id": "minestrone-pates",
+  "titre": "Minestrone aux pâtes",
+  "description": "Soupe italienne de légumes mijotés avec pois chiches et petites pâtes, servie avec des herbes fraîches.",
+  "type": "plat",
+  "portions": 4,
+  "temps": { "preparation": 20, "cuisson": 42, "repos": 0 },
+  "difficulte": "facile",
+  "tags": ["vegetarien", "vegan", "automne"],
+  "ingredients": [
+    { "nom": "oignon", "quantite": 1, "unite": "piece", "categorie": "fruits-legumes", "precision": "haché" },
+    { "nom": "ail", "quantite": 2, "unite": "gousse", "categorie": "fruits-legumes", "precision": "émincé" },
+    { "nom": "carotte", "quantite": 2, "unite": "piece", "categorie": "fruits-legumes", "precision": "en dés" },
+    { "nom": "céleri branche", "quantite": 2, "unite": "piece", "categorie": "fruits-legumes", "precision": "émincé" },
+    { "nom": "courgette", "quantite": 1, "unite": "piece", "categorie": "fruits-legumes", "precision": "en dés" },
+    { "nom": "poivron rouge", "quantite": 1, "unite": "piece", "categorie": "fruits-legumes", "precision": "en dés" },
+    { "nom": "concentré de tomate", "quantite": 2, "unite": "cas", "categorie": "conserves" },
+    { "nom": "tomates concassées", "quantite": 400, "unite": "g", "categorie": "conserves" },
+    { "nom": "pois chiche", "quantite": 400, "unite": "g", "categorie": "conserves", "precision": "en conserve, égoutté" },
+    { "nom": "pâtes", "quantite": 150, "unite": "g", "categorie": "epicerie-salee", "precision": "courtes" },
+    { "nom": "bouillon de légumes", "quantite": 1.5, "unite": "l", "categorie": "condiments-epices", "placard": true },
+    { "nom": "laurier", "quantite": 2, "unite": "feuille", "categorie": "condiments-epices", "placard": true },
+    { "nom": "romarin", "quantite": 1, "unite": "brin", "categorie": "fruits-legumes" },
+    { "nom": "huile d'olive", "quantite": 1, "unite": "cas", "categorie": "condiments-epices", "placard": true },
+    { "nom": "basilic", "quantite": 1, "unite": "botte", "categorie": "fruits-legumes", "precision": "ciselé" },
+    { "nom": "persil", "quantite": 0.5, "unite": "botte", "categorie": "fruits-legumes", "precision": "ciselé" },
+    { "nom": "sel", "quantite": null, "unite": null, "categorie": "condiments-epices", "placard": true },
+    { "nom": "poivre", "quantite": null, "unite": null, "categorie": "condiments-epices", "placard": true }
+  ],
+  "etapes": [
+    { "texte": "Chauffer l'huile d'olive dans un grand faitout, faire revenir l'oignon jusqu'à ce qu'il devienne translucide, puis ajouter l'ail et poursuivre une minute.", "minuteur": 5 },
+    { "texte": "Ajouter la carotte et le céleri et les faire suer, puis incorporer le poivron et la courgette.", "minuteur": 8 },
+    { "texte": "Ajouter le concentré de tomate et mélanger pour bien enrober les légumes." },
+    { "texte": "Verser les tomates concassées et le bouillon, ajouter le laurier et le romarin, porter à ébullition puis laisser mijoter à couvert jusqu'à ce que les légumes soient tendres.", "minuteur": 20 },
+    { "texte": "Ajouter les pois chiches et les pâtes, puis cuire selon le temps indiqué sur le paquet.", "minuteur": 9 },
+    { "texte": "Retirer le laurier et le romarin, rectifier en sel et poivre, puis servir parsemé de basilic et de persil." }
+  ],
+  "notes": "Pour une préparation à l'avance, cuire les pâtes à part et ne les ajouter qu'au moment de réchauffer. Sans céleri, le fenouil ou le panais font un bon remplacement."
+}
