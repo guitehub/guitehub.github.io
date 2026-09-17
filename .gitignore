@@ -10,3 +10,6 @@ vendor
 
 # Dépendances de développement (npm)
 node_modules/
+
+# Photos de recettes avant conversion (npm run photos)
+_photos/

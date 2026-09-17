@@ -45,7 +45,8 @@ ne tranchait pas ou a été arbitré. Fichier non publié (exclu dans `_config.y
 - **Codes de problème.** Chaque erreur ou avertissement du script porte un code stable
   (`schema`, `json`, `id-fichier`, `id-doublon`, `categorie-inconnue`, `categorie-conflit`,
   `quantite-unite`, `nom-non-canonique`, `categories` ; `photo-manquante`, `photo-lourde`, `nom-proche`,
-  `placard-conflit`, `tag-hors-vocabulaire`, `fichier-ignore`). Les tests s'appuient dessus.
+  `placard-conflit`, `tag-hors-vocabulaire`, `fichier-ignore`, et `photo-format` depuis la phase 6).
+  Les tests s'appuient dessus.
 - **`ingredients.txt`** est trié par le `sort` de Liquid, octet par octet : les noms qui commencent par une
   lettre accentuée ou « œ » arrivent en fin de liste. Sans importance pour le convertisseur.
 - **Recettes d'exemple.** La quiche suit exactement la fixture du §6.5, y compris « lardons » au pluriel.
@@ -54,7 +55,7 @@ ne tranchait pas ou a été arbitré. Fichier non publié (exclu dans `_config.y
 - **CI.** Le workflow se déclenche aussi sur `package.json`, `package-lock.json` et sur lui-même.
   `actions/checkout@v5`, `actions/setup-node@v5`, `node-version: lts/*`.
 - **Node.** `package.json` à la racine en `"type": "module"`, `engines.node >= 22` (motifs de fichiers pour
-  `node --test`). En local : Node 24 LTS via nvm.
+  `node --test`).
 
 ## Phase 2 — domaine
 
@@ -229,3 +230,18 @@ ne tranchait pas ou a été arbitré. Fichier non publié (exclu dans `_config.y
   ligne `tokens.css`) : 62 fichiers identiques ; différences attendues uniquement : `/pages/outils.html`
   devenu `/outils/` (avec l'entrée gueathub), accueil (nouvel article en tête, le plus ancien des 8 sort de
   la liste), `feed.xml` (nouvel article), nouvel article, `README.md`, et `style.css` (jetons, phase 3).
+
+## Phase 6 — documentation
+
+- **`README.md` de l'app** (non publié) : ajouter une recette en 4 étapes, règles essentielles du contrat,
+  commandes de développement. Volontairement court : le détail reste dans le schéma et ce fichier.
+- **`npm run photos`** (option du §12, retenue) : `_photos/<id>.jpg|jpeg|png|webp` →
+  `assets/gueathub/recettes/<id>.webp`, 1200 px de large au plus (jamais agrandie), WebP qualité 80,
+  orientation EXIF appliquée. Les **métadonnées ne sont pas recopiées** (EXIF, position GPS des photos de
+  téléphone). Nom de fichier ≠ id valide : photo ignorée, code de sortie 1 ; id sans recette : avertissement.
+  `_photos/` est dans `.gitignore` et, commençant par « _ », n'est pas publié par Jekyll.
+- **Photo mal formatée.** `npm run check` avertit (`photo-format`) quand un `.webp` n'a pas la signature
+  WebP (par exemple un JPEG simplement renommé) : les navigateurs l'affichent, mais le poids et le format ne
+  sont pas ceux attendus.
+- **Procédure vérifiée** sur une copie du repo : nouvelle recette + photo en suivant le README seul →
+  `npm run check` sans erreur, recette et photo présentes dans `recettes.json`, nom dans `ingredients.txt`.

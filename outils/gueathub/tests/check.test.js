@@ -48,12 +48,18 @@ test("photos : présente et légère sans avertissement, trop lourde signalée",
   // Recettes figées (fixtures/reference) : le test ne dépend pas des vraies recettes.
   const photosDir = mkdtempSync(join(tmpdir(), "gueathub-photos-"));
   try {
-    writeFileSync(join(photosDir, "gratin-dauphinois.webp"), Buffer.alloc(1024));
-    writeFileSync(join(photosDir, "quiche-lorraine.webp"), Buffer.alloc(301 * 1024));
+    const webp = (bytes) => Buffer.concat([Buffer.from("RIFF\0\0\0\0WEBP", "latin1"), Buffer.alloc(bytes)]);
+    writeFileSync(join(photosDir, "gratin-dauphinois.webp"), webp(1024));
+    writeFileSync(join(photosDir, "quiche-lorraine.webp"), webp(301 * 1024));
     const { warnings } = checkData({ recipesDir: REFERENCE, photosDir });
     const about = (file) => warnings.filter((w) => w.file === file).map((w) => w.code);
     assert.deepEqual(about("gratin-dauphinois.json"), []);
     assert.deepEqual(about("quiche-lorraine.json"), ["photo-lourde"]);
+
+    // Un JPEG simplement renommé en .webp est signalé.
+    writeFileSync(join(photosDir, "gratin-dauphinois.webp"), Buffer.concat([Buffer.from([0xff, 0xd8, 0xff, 0xe0]), Buffer.alloc(1024)]));
+    const renamed = checkData({ recipesDir: REFERENCE, photosDir }).warnings;
+    assert.deepEqual(renamed.filter((w) => w.file === "gratin-dauphinois.json").map((w) => w.code), ["photo-format"]);
   } finally {
     rmSync(photosDir, { recursive: true, force: true });
   }

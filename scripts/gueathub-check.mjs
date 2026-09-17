@@ -6,7 +6,7 @@
 //
 // Code de sortie 1 s'il y a au moins une erreur. Les avertissements ne bloquent pas.
 
-import { readdirSync, readFileSync, statSync, existsSync } from "node:fs";
+import { closeSync, existsSync, openSync, readSync, readdirSync, readFileSync, statSync } from "node:fs";
 import { basename, join, relative, resolve } from "node:path";
 import { fileURLToPath, pathToFileURL } from "node:url";
 import Ajv2020 from "ajv/dist/2020.js";
@@ -44,6 +44,18 @@ const CATEGORIES_SCHEMA = {
     },
   },
 };
+
+/** Vrai si le fichier commence par la signature WebP (« RIFF » … « WEBP »). */
+function isWebp(file) {
+  const header = Buffer.alloc(12);
+  const fd = openSync(file, "r");
+  try {
+    readSync(fd, header, 0, 12, 0);
+  } finally {
+    closeSync(fd);
+  }
+  return header.toString("latin1", 0, 4) === "RIFF" && header.toString("latin1", 8, 12) === "WEBP";
+}
 
 function readJson(file) {
   return JSON.parse(readFileSync(file, "utf8"));
@@ -181,8 +193,13 @@ export function checkData(options = {}) {
       const photoLabel = relative(ROOT, photo);
       if (!existsSync(photo)) {
         warn("photo-manquante", file, `photo manquante (${photoLabel})`);
-      } else if (statSync(photo).size > PHOTO_MAX_BYTES) {
-        warn("photo-lourde", file, `photo de ${Math.round(statSync(photo).size / 1024)} Ko, plus de 300 Ko (${photoLabel})`);
+      } else {
+        if (statSync(photo).size > PHOTO_MAX_BYTES) {
+          warn("photo-lourde", file, `photo de ${Math.round(statSync(photo).size / 1024)} Ko, plus de 300 Ko (${photoLabel})`);
+        }
+        if (!isWebp(photo)) {
+          warn("photo-format", file, `${photoLabel} n'est pas au format WebP (seulement renommée ?) : utiliser npm run photos`);
+        }
       }
     }
 

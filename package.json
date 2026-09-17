@@ -12,7 +12,8 @@
     "css:build": "tailwindcss -i outils/gueathub/src/app.css -o outils/gueathub/app.css --minify",
     "css:watch": "tailwindcss -i outils/gueathub/src/app.css -o outils/gueathub/app.css --watch",
     "icons": "node scripts/gueathub-icons.mjs",
-    "pwa-icons": "node scripts/gueathub-pwa-icons.mjs"
+    "pwa-icons": "node scripts/gueathub-pwa-icons.mjs",
+    "photos": "node scripts/gueathub-photos.mjs"
   },
   "devDependencies": {
     "@tailwindcss/cli": "^4.3.3",
