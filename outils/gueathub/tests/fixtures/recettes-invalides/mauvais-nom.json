@@ -1,0 +1,16 @@
+{
+  "schema": 1,
+  "id": "tomates-farcies",
+  "titre": "Id différent du nom de fichier et déjà pris",
+  "type": "plat",
+  "portions": 4,
+  "temps": { "preparation": 20, "cuisson": 45, "repos": 0 },
+  "difficulte": "moyen",
+  "tags": ["four", "maison"],
+  "ingredients": [
+    { "nom": "tomate", "quantite": 4, "unite": "piece", "categorie": "fruits-legumes" },
+    { "nom": "chair à saucisse", "quantite": 300, "unite": null, "categorie": "boucherie-poissonnerie" },
+    { "nom": "sel", "quantite": null, "unite": "pincee", "categorie": "rayon-inconnu" }
+  ],
+  "etapes": [{ "texte": "Farcir les tomates.", "minuteur": 45 }]
+}

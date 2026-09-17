@@ -1,0 +1,15 @@
+{
+  "schema": 2,
+  "id": "champ-inconnu",
+  "titre": "Recette avec des champs invalides",
+  "type": "brunch",
+  "portions": 0,
+  "temps": { "preparation": 10, "cuisson": 0 },
+  "difficulte": "facile",
+  "tags": ["Rapide"],
+  "calories": 450,
+  "ingredients": [
+    { "nom": "Tomate ", "quantite": -1, "unite": "poignee", "categorie": "fruits-legumes" }
+  ],
+  "etapes": []
+}

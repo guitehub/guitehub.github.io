@@ -1,0 +1,16 @@
+[
+  { "id": "fruits-legumes", "libelle": "Fruits & légumes", "icone": "apple" },
+  { "id": "boulangerie", "libelle": "Boulangerie", "icone": "basket2" },
+  { "id": "boucherie-poissonnerie", "libelle": "Boucherie & poissonnerie", "icone": "shop" },
+  { "id": "cremerie", "libelle": "Crèmerie & œufs", "icone": "egg" },
+  { "id": "frais", "libelle": "Frais & traiteur", "icone": "thermometer-low" },
+  { "id": "epicerie-salee", "libelle": "Épicerie salée", "icone": "box-seam" },
+  { "id": "conserves", "libelle": "Conserves & bocaux", "icone": "archive" },
+  { "id": "condiments-epices", "libelle": "Huiles, condiments & épices", "icone": "droplet" },
+  { "id": "saveurs-du-monde", "libelle": "Saveurs du monde", "icone": "globe-europe-africa" },
+  { "id": "epicerie-sucree", "libelle": "Épicerie sucrée & pâtisserie", "icone": "cake2" },
+  { "id": "surgeles", "libelle": "Surgelés", "icone": "snow" },
+  { "id": "boissons", "libelle": "Boissons", "icone": "cup-straw" },
+  { "id": "maison", "libelle": "Maison & hygiène", "icone": "house" },
+  { "id": "autre", "libelle": "Autre", "icone": "three-dots" }
+]

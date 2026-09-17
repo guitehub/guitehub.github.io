@@ -1,0 +1,40 @@
+# Validation des données et tests de gueathub.
+# Indépendant du déploiement GitHub Pages : un échec signale le problème
+# mais ne bloque pas la publication.
+name: gueathub-check
+
+on:
+  push:
+    paths:
+      - "_data/gueathub/**"
+      - "assets/gueathub/**"
+      - "outils/gueathub/**"
+      - "scripts/**"
+      - "package.json"
+      - "package-lock.json"
+      - ".github/workflows/gueathub-check.yml"
+  pull_request:
+    paths:
+      - "_data/gueathub/**"
+      - "assets/gueathub/**"
+      - "outils/gueathub/**"
+      - "scripts/**"
+      - "package.json"
+      - "package-lock.json"
+      - ".github/workflows/gueathub-check.yml"
+
+permissions:
+  contents: read
+
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v5
+      - uses: actions/setup-node@v5
+        with:
+          node-version: lts/*
+          cache: npm
+      - run: npm ci
+      - run: npm run check
+      - run: npm test

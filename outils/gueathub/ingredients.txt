@@ -1,0 +1,15 @@
+---
+layout: null
+permalink: /outils/gueathub/ingredients.txt
+---
+{%- assign lines = "" | split: "" -%}
+{%- for pair in site.data.gueathub.recettes -%}
+  {%- for ingredient in pair[1].ingredients -%}
+    {%- assign line = ingredient.nom | append: " | " | append: ingredient.categorie | split: "@@@" -%}
+    {%- assign lines = lines | concat: line -%}
+  {%- endfor -%}
+{%- endfor -%}
+{%- assign lines = lines | uniq | sort -%}
+{%- for line in lines -%}
+{{ line }}
+{% endfor -%}

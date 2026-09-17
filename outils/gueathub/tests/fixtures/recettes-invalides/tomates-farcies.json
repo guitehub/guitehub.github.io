@@ -1,0 +1,16 @@
+{
+  "schema": 1,
+  "id": "tomates-farcies",
+  "titre": "Mêmes noms, rayons et placard différents",
+  "type": "plat",
+  "portions": 4,
+  "temps": { "preparation": 20, "cuisson": 45, "repos": 0 },
+  "difficulte": "moyen",
+  "tags": [],
+  "ingredients": [
+    { "nom": "tomate", "quantite": 400, "unite": "g", "categorie": "conserves", "placard": true },
+    { "nom": "tomates", "quantite": 2, "unite": "piece", "categorie": "fruits-legumes" },
+    { "nom": "crème liquide entière", "quantite": 20, "unite": "cl", "categorie": "cremerie" }
+  ],
+  "etapes": [{ "texte": "Cuire." }]
+}

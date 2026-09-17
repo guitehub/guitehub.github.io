@@ -37,3 +37,19 @@ github: https://github.com/
 githubpages: https://pages.github.com/
 guitehub: https://github.com/guitehub
 chatgpt: https://openai.com/blog/chatgpt
+
+# Non publiés : outillage de développement (gueathub).
+# Les exclusions par défaut de Jekyll sont reprises explicitement, car sous
+# Jekyll 3.10 (build classique de GitHub Pages) cette liste peut les remplacer.
+exclude:
+  - Gemfile
+  - Gemfile.lock
+  - node_modules
+  - vendor
+  - package.json
+  - package-lock.json
+  - scripts
+  - outils/gueathub/src
+  - outils/gueathub/tests
+  - outils/gueathub/README.md
+  - outils/gueathub/DECISIONS.md

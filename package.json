@@ -1,0 +1,16 @@
+{
+  "name": "guitehub-github-io",
+  "private": true,
+  "description": "Outillage de développement du site (gueathub : validation des données, tests). Rien ici n'est publié.",
+  "type": "module",
+  "engines": {
+    "node": ">=22"
+  },
+  "scripts": {
+    "check": "node scripts/gueathub-check.mjs",
+    "test": "node --test \"outils/gueathub/tests/**/*.test.js\""
+  },
+  "devDependencies": {
+    "ajv": "^8.20.0"
+  }
+}

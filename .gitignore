@@ -7,3 +7,6 @@ vendor
 
 # Flux NTFS "Mark of the Web" materialises par WSL lors de copies depuis Windows
 *:Zone.Identifier
+
+# Dépendances de développement (npm)
+node_modules/

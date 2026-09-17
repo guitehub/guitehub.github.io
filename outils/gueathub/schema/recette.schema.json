@@ -1,0 +1,100 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://guitehub.github.io/outils/gueathub/schema/recette.schema.json",
+  "title": "Recette gueathub",
+  "description": "Contrat de données d'une recette (_data/gueathub/recettes/<id>.json). Les règles qui dépendent d'autres fichiers (id = nom du fichier, catégories existantes, cohérence entre recettes) sont vérifiées par scripts/gueathub-check.mjs.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schema", "id", "titre", "type", "portions", "temps", "difficulte", "tags", "ingredients", "etapes"],
+  "properties": {
+    "schema": { "const": 1 },
+    "id": { "$ref": "#/$defs/kebab" },
+    "titre": { "type": "string", "$ref": "#/$defs/texte", "maxLength": 80 },
+    "description": { "type": "string", "$ref": "#/$defs/texte", "maxLength": 160 },
+    "type": {
+      "enum": ["entree", "plat", "accompagnement", "dessert", "petit-dejeuner", "gouter", "apero", "sauce", "boisson"]
+    },
+    "portions": { "type": "integer", "minimum": 1, "maximum": 50 },
+    "portionsUnite": { "type": "string", "$ref": "#/$defs/texte", "maxLength": 30 },
+    "temps": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["preparation", "cuisson", "repos"],
+      "properties": {
+        "preparation": { "$ref": "#/$defs/minutes" },
+        "cuisson": { "$ref": "#/$defs/minutes" },
+        "repos": { "$ref": "#/$defs/minutes" }
+      }
+    },
+    "difficulte": { "enum": ["facile", "moyen", "difficile"] },
+    "tags": {
+      "type": "array",
+      "uniqueItems": true,
+      "items": { "$ref": "#/$defs/kebab" }
+    },
+    "ingredients": {
+      "type": "array",
+      "minItems": 1,
+      "items": { "$ref": "#/$defs/ingredient" }
+    },
+    "etapes": {
+      "type": "array",
+      "minItems": 1,
+      "items": { "$ref": "#/$defs/etape" }
+    },
+    "source": { "$ref": "#/$defs/texte" },
+    "notes": { "$ref": "#/$defs/texte" }
+  },
+  "$defs": {
+    "kebab": {
+      "type": "string",
+      "pattern": "^[a-z0-9]+(-[a-z0-9]+)*$"
+    },
+    "texte": {
+      "type": "string",
+      "minLength": 1,
+      "pattern": "^\\S(.*\\S)?$"
+    },
+    "minutes": { "type": "integer", "minimum": 0 },
+    "ingredient": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["nom", "quantite", "unite", "categorie"],
+      "properties": {
+        "nom": {
+          "description": "Nom canonique : singulier, minuscules, sans espace en trop.",
+          "type": "string",
+          "pattern": "^(?!.*\\p{Lu})(?!.*\\s\\s)\\S(.*\\S)?$"
+        },
+        "quantite": {
+          "type": ["number", "null"],
+          "exclusiveMinimum": 0
+        },
+        "unite": {
+          "enum": [
+            "g", "kg",
+            "ml", "cl", "l",
+            "cac", "cas",
+            "pincee",
+            "piece", "gousse", "tranche", "botte", "brin", "feuille", "sachet", "boite", "pot", "rouleau",
+            null
+          ]
+        },
+        "categorie": { "$ref": "#/$defs/kebab" },
+        "precision": { "$ref": "#/$defs/texte" },
+        "groupe": { "$ref": "#/$defs/texte" },
+        "optionnel": { "type": "boolean" },
+        "placard": { "type": "boolean" }
+      }
+    },
+    "etape": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["texte"],
+      "properties": {
+        "texte": { "$ref": "#/$defs/texte" },
+        "minuteur": { "type": "integer", "minimum": 1 }
+      }
+    }
+  }
+}
