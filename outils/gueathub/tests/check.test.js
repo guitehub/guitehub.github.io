@@ -63,3 +63,16 @@ test("le script sort en 0 sur les vraies données et en 1 sur la fixture", () =>
   assert.equal(spawnSync(process.execPath, [SCRIPT], { encoding: "utf8" }).status, 0);
   assert.equal(spawnSync(process.execPath, [SCRIPT, INVALID], { encoding: "utf8" }).status, 1);
 });
+
+test("rayons : icône inconnue et rayon « autre » manquant signalés", () => {
+  const dir = mkdtempSync(join(tmpdir(), "gueathub-categories-"));
+  try {
+    const categoriesFile = join(dir, "categories.json");
+    writeFileSync(categoriesFile, JSON.stringify([{ id: "fruits-legumes", libelle: "Fruits", icone: "icone-inexistante" }]));
+    const messages = checkData({ categoriesFile }).errors.filter((e) => e.code === "categories").map((e) => e.message);
+    assert.ok(messages.some((m) => m.includes("icone-inexistante")));
+    assert.ok(messages.some((m) => m.includes("« autre »")));
+  } finally {
+    rmSync(dir, { recursive: true, force: true });
+  }
+});

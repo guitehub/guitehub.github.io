@@ -100,3 +100,71 @@ ne tranchait pas ou a été arbitré. Fichier non publié (exclu dans `_config.y
 - **Couverture.** `npm test` impose 100 % des lignes, branches et fonctions de `js/domain/`
   (`--experimental-test-coverage`, Node ≥ 22.8). L'exemple du §6.5 est testé sur une copie figée des deux
   recettes (`tests/fixtures/reference/`), pour que modifier les vraies recettes ne casse pas le test.
+
+## Phase 3 — interface
+
+### Blog
+- **Jetons.** Les trois blocs de variables de `style.css` (`:root`, `prefers-color-scheme`, `[data-theme="dark"]`)
+  sont déplacés tels quels dans `assets/css/tokens.css`, chargé par un `<link>` juste avant `style.css` dans
+  `_layouts/default.html` (arbitrage : pas d'`@import`). `--measure` et `--pad` font partie du bloc `:root`
+  et suivent. Contrôle, en Jekyll 4.3 et 3.10, par rapport au build de `3791e2e` : les 24 pages HTML ne
+  diffèrent que par cette ligne, et `tokens.css` + `style.css` redonnent exactement l'ancien `style.css`
+  (commentaires mis à part). icomkr, Fléchettes et Yam's gardent leurs variables en ligne : inchangés.
+
+### Structure
+- **Fichiers en plus de l'arborescence du §4** : `js/actions.js` (toutes les modifications d'état, avec
+  « Annuler »), `js/labels.js` (libellés et icônes des types, tags, difficultés), `js/views/parts.js`
+  (boutons, puces, compteur, photo), `js/ui/theme.js`, `js/ui/wakelock.js`, `scripts/gueathub-icons.mjs`.
+- **Icônes générées.** `js/ui/icons.js` est produit par `npm run icons` depuis le paquet `bootstrap-icons`
+  (devDependency) : icônes de l'interface + toutes les `icone` de `categories.json`. `npm run check`
+  signale une icône de rayon absente. La CI vérifie que `icons.js` et `app.css` commités sont à jour.
+- **Tailwind.** `@import "tailwindcss" source(none)` puis `@source` explicites : sans cela, Tailwind
+  scannerait tout le blog. `color-scheme` suit le thème (cases à cocher, listes et barres de défilement
+  natives en sombre). Focus visible global : contour `--accent` de 2 px.
+- **`--watch`.** `npm run css:watch` s'utilise dans un terminal : sans terminal attaché (script, CI), la CLI
+  Tailwind s'arrête aussitôt ; utiliser alors `--watch=always`. L'avertissement npm sur le script
+  d'installation de `@parcel/watcher` est sans effet : le binaire précompilé est utilisé.
+- **Version de l'app** : constante `APP_VERSION` dans `js/main.js` (1.0.0), à incrémenter à la main.
+  La date de génération des recettes (`genere`) est affichée à côté.
+- **Rendu.** Gabarits `html` avec échappement systématique, rendu par `innerHTML` qui restaure le focus
+  (attribut `data-focus`) et le défilement. Recherche : seuls filtres, compteur et grille sont redessinés,
+  le champ n'est jamais remplacé (pas de perte de saisie ni de composition d'accents). Cochage : seuls la
+  section du rayon, le placard et la progression sont redessinés (et le focus reste sur la case) ; si les
+  articles cochés sont masqués, rendu complet et focus sur la ligne voisine.
+
+### Écrans
+- **Recettes.** Types proposés : seulement ceux présents dans les données (masqués s'il n'y en a qu'un).
+  Sur mobile, chaque rangée de puces défile horizontalement dans sa propre bande (la page, elle, ne
+  défile jamais en largeur). Carte : tout le cadre ouvre la fiche (lien étiré) ; le bouton « Ajouter »
+  ajoute les portions de la recette. Descendre sous 1 retire la recette (toast « Annuler »).
+- **Fiche.** Sans photo, un simple bandeau avec l'icône du type (la place 4:3 est réservée aux cartes et
+  aux vraies photos). Temps à 0 non affichés ; « Total » toujours affiché. Quantité `null` : « au goût ».
+  Singulier des portions : le `s` final de l'unité est retiré sous 2 (« 1 personne », « 1 crêpe »).
+- **Écran allumé.** Relâché en quittant la fiche ; redemandé au retour sur l'onglet tant qu'il est actif.
+  En cas de refus du navigateur, l'interrupteur revient à « off » avec un toast.
+- **Minuteurs.** Non conservés au rechargement. Calculés depuis l'heure de fin (justes même onglet en veille).
+  Fin : vibration, trois bips (Web Audio, déverrouillé au lancement du minuteur) et toast de 15 s.
+- **Liste.** Les ajouts manuels ont un bouton « Supprimer » à la place de « détails ». Le formulaire
+  d'ajout reste disponible quand la liste est vide. Les boutons « détails » ouvrent la quantité totale,
+  les sources et l'action placard ; revenir à la valeur des données efface la préférence.
+  « Tout décocher » et la suppression d'un ajout proposent aussi « Annuler » (5 s).
+- **Copier la liste.** Web Share API si disponible, sinon presse-papiers (puis ancienne méthode
+  `execCommand`). Pas de toast après un partage réussi (le système a sa propre interface) ; « Liste copiée »
+  après une copie.
+- **Réglages.** « Effacer les données de l'app sur cet appareil » : toast « Annuler » plutôt qu'une
+  confirmation, comme « Vider la liste ». La clé `theme` du blog n'est pas effacée. Choisir « Système »
+  retire la clé `theme` (comportement du blog quand aucun choix n'est fait).
+- **Navigation.** Changement d'écran : défilement en haut et focus sur le titre de l'écran (sans contour).
+  Le badge compte les articles restants hors placard (voir phase 2). Lien « Le Hub » vers `/outils/`
+  (la page Outils y sera servie en phase 5).
+
+### Robustesse
+- **Recettes indisponibles** (premier chargement hors ligne, erreur serveur) : message et bouton « Réessayer ».
+- **Bandeau hors ligne** : affiché si la réponse de `recettes.json` porte l'en-tête `X-Gueathub-Cache: 1`,
+  que le service worker ajoutera en phase 4 quand il sert la copie en cache.
+- **Stockage.** Sélection limitée à 99 portions par recette. Écriture forcée à `pagehide` et quand l'onglet
+  passe en arrière-plan. Un état écrit par une version plus récente de l'app (champ `version` supérieur)
+  n'est jamais écrasé : l'app travaille alors en mémoire.
+- **Tests d'interface.** Routeur, store (migration, purge, écriture différée, mode mémoire) et gabarits
+  (échappement) sont testés dans Node. Les parcours du §13 ont été validés dans Chromium (Playwright,
+  hors repo) à 320, 375 et 1280 px, en clair et en sombre.

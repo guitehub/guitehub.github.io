@@ -12,6 +12,7 @@ import { fileURLToPath, pathToFileURL } from "node:url";
 import Ajv2020 from "ajv/dist/2020.js";
 
 import { nearDuplicateKey, normalize } from "../outils/gueathub/js/domain/text.js";
+import { ICONS } from "../outils/gueathub/js/ui/icons.js";
 
 const ROOT = resolve(fileURLToPath(new URL("..", import.meta.url)));
 
@@ -107,6 +108,11 @@ export function checkData(options = {}) {
       if (typeof category?.id !== "string") continue;
       if (categoryIds.has(category.id)) error("categories", categoriesName, `rayon « ${category.id} » en double`);
       categoryIds.add(category.id);
+    }
+    for (const category of categories) {
+      if (typeof category?.icone === "string" && !Object.hasOwn(ICONS, category.icone)) {
+        error("categories", categoriesName, `icône « ${category.icone} » (rayon « ${category.id} ») absente de js/ui/icons.js : lancer npm run icons`);
+      }
     }
     if (!categoryIds.has("autre")) {
       error("categories", categoriesName, "le rayon « autre » est obligatoire (rayon par défaut des ajouts manuels)");

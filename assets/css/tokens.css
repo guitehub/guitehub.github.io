@@ -1,0 +1,58 @@
+/* =========================================================================
+   Le Hub de la Guite — jetons de design (couleurs, polices, mesures)
+   Source unique, partagée par le blog (_layouts/default.html) et les outils
+   (outils/gueathub/). Clair par défaut, sombre automatique + bascule manuelle
+   via data-theme="light" | "dark" sur <html>.
+   ========================================================================= */
+
+/* --- Thème : variables ---------------------------------------------------- */
+:root {
+  --bg:        #ffffff;
+  --bg-soft:   #f3f4f6;
+  --fg:        #14161a;
+  --fg-soft:   #555b63;
+  --fg-faint:  #888f98;
+  --border:    #e6e8ec;
+  --accent:    #b4531f;
+  --accent-fg: #ffffff;
+  --code-bg:   #f4f5f7;
+  --sel:       #f6dcc8;
+
+  --mono: ui-monospace, "SFMono-Regular", "JetBrains Mono", "Cascadia Code",
+          Menlo, Consolas, "Liberation Mono", monospace;
+  --sans: system-ui, -apple-system, "Segoe UI", Roboto, Helvetica, Arial,
+          "Helvetica Neue", sans-serif;
+
+  --measure: 54rem;
+  --pad: clamp(1rem, 4vw, 2rem);
+}
+
+/* Dark auto, sauf si l'utilisateur a forcé "light" */
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --bg:        #16181b;
+    --bg-soft:   #1f2226;
+    --fg:        #e7e9ec;
+    --fg-soft:   #a4abb3;
+    --fg-faint:  #6e757d;
+    --border:    #2b2f34;
+    --accent:    #e08b4c;
+    --accent-fg: #16181b;
+    --code-bg:   #1d2024;
+    --sel:       #3a2c1c;
+  }
+}
+
+/* Toggle manuel : surcharge la préférence système */
+:root[data-theme="dark"] {
+  --bg:        #16181b;
+  --bg-soft:   #1f2226;
+  --fg:        #e7e9ec;
+  --fg-soft:   #a4abb3;
+  --fg-faint:  #6e757d;
+  --border:    #2b2f34;
+  --accent:    #e08b4c;
+  --accent-fg: #16181b;
+  --code-bg:   #1d2024;
+  --sel:       #3a2c1c;
+}

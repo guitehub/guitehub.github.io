@@ -38,3 +38,8 @@ jobs:
       - run: npm ci
       - run: npm run check
       - run: npm test
+      - name: app.css et icons.js commités à jour
+        run: |
+          npm run icons
+          npm run css:build
+          git diff --exit-code -- outils/gueathub/app.css outils/gueathub/js/ui/icons.js

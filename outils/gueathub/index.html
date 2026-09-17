@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>gueathub</title>
+  <meta name="description" content="gueathub : choisis des recettes et des portions, la liste de courses se compose toute seule, rangée par rayon.">
+  <meta name="theme-color" content="#ffffff">
+
+  <!-- Anti-FOUC : applique le thème mémorisé avant le rendu (copié de _layouts/default.html) -->
+  <script>
+    (function () {
+      try {
+        var t = localStorage.getItem('theme');
+        if (t) document.documentElement.setAttribute('data-theme', t);
+      } catch (e) {}
+    })();
+  </script>
+
+  <!-- Jetons partagés avec le blog, puis styles de l'app (Tailwind compilé) -->
+  <link rel="stylesheet" href="/assets/css/tokens.css">
+  <link rel="stylesheet" href="app.css">
+  <script type="module" src="js/main.js"></script>
+</head>
+<body class="min-h-dvh bg-page font-sans text-ink antialiased">
+  <a href="#main" class="sr-only rounded-full bg-accent px-4 py-2 text-on-accent focus:not-sr-only focus:fixed focus:top-2 focus:left-2 focus:z-50">Aller au contenu</a>
+
+  <header class="sticky top-0 z-20 border-b border-line bg-page/90 pt-[env(safe-area-inset-top)] backdrop-blur">
+    <div class="mx-auto flex h-14 max-w-6xl items-center gap-2 px-4 sm:px-6">
+      <a href="#/" class="-ml-2 inline-flex min-h-11 items-center rounded-full px-2 text-lg font-bold tracking-tight">gueathub</a>
+      <nav id="nav-top" aria-label="Navigation principale" class="ml-auto hidden items-center gap-1 sm:flex"></nav>
+      <a href="/outils/" class="ml-auto inline-flex min-h-11 items-center rounded-full px-3 text-sm text-ink-soft hover:text-ink sm:ml-2">Le Hub</a>
+    </div>
+  </header>
+
+  <div id="banners"></div>
+
+  <main id="main" tabindex="-1" class="pb-[var(--bottom-space,0px)] focus:outline-none">
+    <div id="view">
+      <p class="mx-auto max-w-2xl px-4 py-10 text-center text-ink-soft" role="status">Chargement des recettes…</p>
+    </div>
+  </main>
+
+  <div id="bottom" class="fixed inset-x-0 bottom-0 z-30">
+    <div id="toasts" class="pointer-events-none absolute inset-x-0 bottom-full flex justify-center px-4 pb-3" aria-live="polite" aria-atomic="true"></div>
+    <div id="timers" class="border-t border-line bg-page/95 backdrop-blur" hidden></div>
+    <nav id="nav-bottom" aria-label="Navigation" class="grid grid-cols-3 border-t border-line bg-page pb-[env(safe-area-inset-bottom)] sm:hidden"></nav>
+  </div>
+
+  <dialog id="sheet" aria-labelledby="sheet-title"
+    class="fixed inset-x-0 top-auto bottom-0 m-0 max-h-[85dvh] w-full max-w-none rounded-t-2xl border border-line bg-page p-0 text-ink shadow-xl sm:inset-0 sm:m-auto sm:h-fit sm:max-h-[80dvh] sm:max-w-md sm:rounded-2xl"></dialog>
+
+  <noscript>
+    <p class="p-6 text-center">gueathub a besoin de JavaScript pour fonctionner.</p>
+  </noscript>
+</body>
+</html>

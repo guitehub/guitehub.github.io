@@ -1,0 +1,69 @@
+/* outils/gueathub/src/app.css — entrée Tailwind (non publiée).
+   Compilé vers outils/gueathub/app.css : npm run css:build (ou css:watch).
+   Les couleurs viennent des jetons du blog (assets/css/tokens.css, chargé avant app.css) :
+   elles basculent seules en sombre, donc aucune variante dark: pour les couleurs. */
+
+@import "tailwindcss" source(none);
+@source "../js";
+@source "../index.html";
+
+@theme inline {
+  --color-page: var(--bg);
+  --color-soft: var(--bg-soft);
+  --color-ink: var(--fg);
+  --color-ink-soft: var(--fg-soft);
+  --color-ink-faint: var(--fg-faint);
+  --color-line: var(--border);
+  --color-accent: var(--accent);
+  --color-on-accent: var(--accent-fg);
+  --font-sans: var(--sans);
+  --font-mono: var(--mono);
+}
+
+@layer base {
+  /* Contrôles natifs (cases, listes, barres de défilement) accordés au thème. */
+  :root {
+    color-scheme: light;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+      color-scheme: dark;
+    }
+  }
+  :root[data-theme="dark"] {
+    color-scheme: dark;
+  }
+
+  html {
+    -webkit-tap-highlight-color: transparent;
+  }
+
+  ::selection {
+    background: var(--sel);
+  }
+
+  :focus-visible {
+    outline: 2px solid var(--accent);
+    outline-offset: 2px;
+  }
+
+  [hidden] {
+    display: none !important;
+  }
+
+  dialog::backdrop {
+    background: rgb(0 0 0 / 0.45);
+  }
+}
+
+/* Mouvement réduit : pas de transition. */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
