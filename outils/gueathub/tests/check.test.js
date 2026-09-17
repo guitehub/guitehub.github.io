@@ -10,6 +10,7 @@ import { checkData } from "../../../scripts/gueathub-check.mjs";
 
 const SCRIPT = fileURLToPath(new URL("../../../scripts/gueathub-check.mjs", import.meta.url));
 const INVALID = fileURLToPath(new URL("./fixtures/recettes-invalides", import.meta.url));
+const REFERENCE = fileURLToPath(new URL("./fixtures/reference", import.meta.url));
 
 const codes = (issues) => new Set(issues.map((issue) => issue.code));
 
@@ -44,16 +45,15 @@ test("la fixture invalide déclenche les avertissements attendus", () => {
 });
 
 test("photos : présente et légère sans avertissement, trop lourde signalée", () => {
+  // Recettes figées (fixtures/reference) : le test ne dépend pas des vraies recettes.
   const photosDir = mkdtempSync(join(tmpdir(), "gueathub-photos-"));
   try {
-    writeFileSync(join(photosDir, "crepes.webp"), Buffer.alloc(1024));
-    writeFileSync(join(photosDir, "gratin-dauphinois.webp"), Buffer.alloc(301 * 1024));
-    const { warnings } = checkData({ photosDir });
+    writeFileSync(join(photosDir, "gratin-dauphinois.webp"), Buffer.alloc(1024));
+    writeFileSync(join(photosDir, "quiche-lorraine.webp"), Buffer.alloc(301 * 1024));
+    const { warnings } = checkData({ recipesDir: REFERENCE, photosDir });
     const about = (file) => warnings.filter((w) => w.file === file).map((w) => w.code);
-    assert.ok(!about("crepes.json").includes("photo-manquante"));
-    assert.ok(!about("crepes.json").includes("photo-lourde"));
-    assert.ok(about("gratin-dauphinois.json").includes("photo-lourde"));
-    assert.ok(about("quiche-lorraine.json").includes("photo-manquante"));
+    assert.deepEqual(about("gratin-dauphinois.json"), []);
+    assert.deepEqual(about("quiche-lorraine.json"), ["photo-lourde"]);
   } finally {
     rmSync(photosDir, { recursive: true, force: true });
   }
