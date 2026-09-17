@@ -208,3 +208,24 @@ ne tranchait pas ou a été arbitré. Fichier non publié (exclu dans `_config.y
   aucune erreur d'installabilité (CDP), pré-cache, limite des 80 photos, mode avion (ouverture, recettes,
   bandeau, photo déjà vue, coches, rechargement), mise à jour avec « Recharger » et nettoyage des caches.
   Les parcours de la phase 3 repassent avec le service worker actif.
+
+## Phase 5 — intégration au Hub
+
+- **Vraies recettes.** Les recettes d'exemple (crêpes, quiche lorraine) ont été remplacées par les vraies
+  (commit à part). Les tests ne dépendent plus d'aucune vraie recette : l'exemple du §6.5 et le test des
+  photos utilisent les copies figées de `tests/fixtures/reference/`.
+- **Page Outils (option A).** Seul changement : `permalink: /outils/` dans `pages/outils.md`. Pas de
+  `_data/outils.yml` ni de nouvelle page. `/pages/outils.html` n'existe plus (404) : rien dans le repo n'y
+  pointait et la nav suit d'elle-même ; pas de redirection ajoutée.
+- **Article.** `_posts/2026-09-17-gueathub.md`, catégorie `tool`, calqué sur celui d'icomkr (titres en
+  capitales soulignés, sections « À quoi ça sert », « Comment on l'utilise », « Sur quelle techno c'est
+  bâti », « Ajouter une recette »). Chemins de fichiers en `code` pour que Markdown ne transforme pas les
+  `_` en italique. Liens vers le schéma et `ingredients.txt`.
+- **Vignette.** `image: "vignette-gueathub.ico"` : le fichier `assets/images/vignette-gueathub.ico` doit
+  être ajouté avant de publier (sinon image cassée sur l'accueil, la page Outils et l'article).
+- **README du repo.** gueathub ajouté au tableau « Existant » (outil, dossier, `outils/gueathub/`).
+- **Exclusions.** Déjà en place depuis la phase 1.
+- **Contrôle du blog** (Jekyll 4.3 et 3.10, référence `3791e2e`, après normalisation du lien Outils et de la
+  ligne `tokens.css`) : 62 fichiers identiques ; différences attendues uniquement : `/pages/outils.html`
+  devenu `/outils/` (avec l'entrée gueathub), accueil (nouvel article en tête, le plus ancien des 8 sort de
+  la liste), `feed.xml` (nouvel article), nouvel article, `README.md`, et `style.css` (jetons, phase 3).

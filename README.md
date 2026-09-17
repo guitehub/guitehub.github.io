@@ -77,6 +77,7 @@ Existant :
 | App        | Nature | Forme   | Chemin                    |
 |------------|--------|---------|---------------------------|
 | icomkr     | outil  | fichier | `outils/icomkr.html`      |
+| gueathub   | outil  | dossier | `outils/gueathub/`        |
 | Fléchettes | projet | fichier | `projets/flechettes.html` |
 | Yam's      | projet | fichier | `projets/yams.html`       |
 
