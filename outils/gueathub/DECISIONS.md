@@ -168,3 +168,43 @@ ne tranchait pas ou a été arbitré. Fichier non publié (exclu dans `_config.y
 - **Tests d'interface.** Routeur, store (migration, purge, écriture différée, mode mémoire) et gabarits
   (échappement) sont testés dans Node. Les parcours du §13 ont été validés dans Chromium (Playwright,
   hors repo) à 320, 375 et 1280 px, en clair et en sombre.
+
+## Phase 4 — PWA
+
+- **Icônes.** Générées par `npm run pwa-icons` (sharp, devDependency) : panier plein de Bootstrap Icons en
+  blanc sur l'accent du blog (`#b4531f`). `icon-192.png` et `icon-512.png` (carré arrondi, « any »),
+  `icon-maskable-512.png` (fond plein, pictogramme dans la zone sûre de 80 %), `apple-touch-icon.png`
+  (180 px, fond plein : iOS n'utilise pas les icônes du manifest) et `icon.svg` (favicon). Le script est la
+  source : pas de fichier SVG maître à maintenir. Pas de vérification « à jour » en CI pour ces PNG (le rendu
+  de sharp peut varier d'une version à l'autre).
+- **Manifest.** `id`, `start_url` et `scope` à `/outils/gueathub/`. Couleurs claires (`#ffffff`) : le
+  manifest ne peut pas suivre le thème ; la barre du navigateur, elle, suit `theme-color` ajusté en direct.
+  Pas d'`orientation` imposée (tablette, ordinateur). Raccourci « Liste de courses » (`#/liste`).
+- **Caches versionnés.** `gueathub-<site.time>` pour la coquille et `gueathub-photos-<site.time>` pour les
+  photos. Toute l'ancienne version est supprimée à l'activation, photos comprises : une photo remplacée sous
+  le même nom est ainsi rafraîchie à la version suivante, au prix d'un nouveau téléchargement au fil des
+  consultations.
+- **Pré-cache.** `cache: "reload"` pour contourner le cache HTTP de GitHub Pages (10 min) et ne pas mélanger
+  deux versions. La coquille est servie depuis le cache de *sa* version (jamais `caches.match` global, qui
+  pourrait mélanger ancienne et nouvelle version pendant l'attente).
+- **Navigations.** Seules `/outils/gueathub/` et `/outils/gueathub/index.html` sont servies depuis le cache ;
+  les autres adresses du dossier (ex. `ingredients.txt`) passent par le réseau.
+- **`recettes.json`.** Réseau d'abord ; la copie en cache est servie si le réseau échoue, répond en erreur
+  ou met plus de **4 s** (connexion faible en magasin). Dans ce dernier cas la requête continue en
+  arrière-plan et met le cache à jour. La copie servie porte l'en-tête `X-Gueathub-Cache: 1`, d'où le
+  bandeau « Hors ligne — recettes du JJ/MM ».
+- **Photos.** Cache d'abord, 80 entrées au plus (les plus anciennes sont retirées). Photo jamais vue et hors
+  ligne : réponse 504 vide (image absente, sans icône cassée grâce à `alt=""`).
+- **Mise à jour.** Pas de `skipWaiting` automatique : le toast « Nouvelle version disponible » (sans limite
+  de temps, et qui revient si un autre message passe devant) propose « Recharger ». Première installation :
+  `clients.claim()` pour fonctionner hors ligne tout de suite, sans recharger la page. Recherche de mise à
+  jour à chaque retour au premier plan (app installée laissée ouverte).
+- **« Effacer les données de l'app »** ne vide pas les caches hors ligne (arbitrage : ce ne sont pas des
+  données personnelles, et ils se renouvellent à chaque version).
+- **Développement local.** Avec `jekyll serve`, chaque régénération change `site.time`, donc la version :
+  le toast de mise à jour apparaît après chaque modification. Pratique pour tester ; sinon, cocher « Update
+  on reload » dans l'onglet Application des outils de développement.
+- **Tests.** Validé dans Chromium (Playwright, hors repo, contexte persistant) : manifest sans erreur et
+  aucune erreur d'installabilité (CDP), pré-cache, limite des 80 photos, mode avion (ouverture, recettes,
+  bandeau, photo déjà vue, coches, rechargement), mise à jour avec « Recharger » et nettoyage des caches.
+  Les parcours de la phase 3 repassent avec le service worker actif.

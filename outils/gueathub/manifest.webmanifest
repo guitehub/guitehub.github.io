@@ -1,0 +1,27 @@
+{
+  "id": "/outils/gueathub/",
+  "name": "gueathub — Le Hub de la Guite",
+  "short_name": "gueathub",
+  "description": "Choisis des recettes et des portions : la liste de courses se compose toute seule, rangée par rayon.",
+  "lang": "fr",
+  "dir": "ltr",
+  "start_url": "/outils/gueathub/",
+  "scope": "/outils/gueathub/",
+  "display": "standalone",
+  "background_color": "#ffffff",
+  "theme_color": "#ffffff",
+  "categories": ["food", "lifestyle", "shopping"],
+  "icons": [
+    { "src": "icons/icon-192.png", "sizes": "192x192", "type": "image/png", "purpose": "any" },
+    { "src": "icons/icon-512.png", "sizes": "512x512", "type": "image/png", "purpose": "any" },
+    { "src": "icons/icon-maskable-512.png", "sizes": "512x512", "type": "image/png", "purpose": "maskable" },
+    { "src": "icons/icon.svg", "sizes": "any", "type": "image/svg+xml", "purpose": "any" }
+  ],
+  "shortcuts": [
+    {
+      "name": "Liste de courses",
+      "url": "/outils/gueathub/#/liste",
+      "icons": [{ "src": "icons/icon-192.png", "sizes": "192x192", "type": "image/png" }]
+    }
+  ]
+}

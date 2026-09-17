@@ -1,4 +1,6 @@
 // Toasts : un message à la fois, action facultative (« Annuler »), annoncé par aria-live.
+// Un toast `persistent` (« Nouvelle version disponible ») reste affiché sans limite de temps ;
+// s'il est recouvert par un autre message, il revient quand celui-ci disparaît.
 
 import { html, icon } from "./dom.js";
 
@@ -7,12 +9,17 @@ export function createToaster(container) {
   let remaining = 0;
   let startedAt = 0;
   let action = null;
+  let current = null;
+  let persistent = null;
 
   function hide() {
     clearTimeout(timer);
     timer = null;
     action = null;
     container.replaceChildren();
+    if (current === persistent) persistent = null;
+    current = null;
+    if (persistent) render(persistent);
   }
 
   function schedule(duration) {
@@ -22,10 +29,20 @@ export function createToaster(container) {
     timer = setTimeout(hide, duration);
   }
 
-  /** show("Liste copiée") ; show("Liste vidée", { action: { label: "Annuler", run }, duration: 5000 }). */
+  /**
+   * show("Liste copiée") ; show("Liste vidée", { action: { label: "Annuler", run }, duration: 5000 }) ;
+   * show("Nouvelle version disponible", { action, persistent: true }).
+   */
   function show(message, options = {}) {
-    const { duration = 4000 } = options;
-    action = options.action ?? null;
+    const toast = { message, ...options };
+    if (toast.persistent) persistent = toast;
+    render(toast);
+  }
+
+  function render(toast) {
+    const { message, duration = 4000 } = toast;
+    current = toast;
+    action = toast.action ?? null;
     container.innerHTML = String(html`
       <div class="pointer-events-auto flex w-full max-w-md items-center gap-2 rounded-xl bg-ink py-2 pr-2 pl-4 text-sm text-page shadow-lg transition-[opacity,translate] duration-200 starting:translate-y-2 starting:opacity-0">
         <p class="min-w-0 flex-1 py-1.5">${message}</p>
@@ -36,7 +53,9 @@ export function createToaster(container) {
           ${icon("x-lg", "size-4")}
         </button>
       </div>`);
-    schedule(duration);
+    clearTimeout(timer);
+    timer = null;
+    if (!toast.persistent) schedule(duration);
   }
 
   container.addEventListener("click", (event) => {
@@ -49,13 +68,13 @@ export function createToaster(container) {
 
   // Le temps s'arrête tant que le message est survolé ou a le focus (pour avoir le temps d'annuler).
   const pause = () => {
-    if (!timer) return;
+    if (!timer || current?.persistent) return;
     clearTimeout(timer);
     timer = null;
     remaining -= Date.now() - startedAt;
   };
   const resume = () => {
-    if (timer || !container.firstElementChild) return;
+    if (timer || !container.firstElementChild || current?.persistent) return;
     schedule(Math.max(remaining, 1500));
   };
   container.addEventListener("pointerenter", pause);

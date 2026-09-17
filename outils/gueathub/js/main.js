@@ -9,6 +9,7 @@ import { focusByKey, html, icon, renderInto } from "./ui/dom.js";
 import { createSheet } from "./ui/sheet.js";
 import { applyTheme, watchTheme } from "./ui/theme.js";
 import { createTimers } from "./ui/timers.js";
+import { registerServiceWorker } from "./ui/pwa.js";
 import { createToaster } from "./ui/toast.js";
 import { listView } from "./views/list.js";
 import { BUTTON_PRIMARY, container } from "./views/parts.js";
@@ -239,3 +240,4 @@ async function start() {
 }
 
 start();
+registerServiceWorker(app);

@@ -11,12 +11,14 @@
     "test": "node --test --experimental-test-coverage --test-coverage-include=\"outils/gueathub/js/domain/**\" --test-coverage-lines=100 --test-coverage-branches=100 --test-coverage-functions=100 \"outils/gueathub/tests/**/*.test.js\"",
     "css:build": "tailwindcss -i outils/gueathub/src/app.css -o outils/gueathub/app.css --minify",
     "css:watch": "tailwindcss -i outils/gueathub/src/app.css -o outils/gueathub/app.css --watch",
-    "icons": "node scripts/gueathub-icons.mjs"
+    "icons": "node scripts/gueathub-icons.mjs",
+    "pwa-icons": "node scripts/gueathub-pwa-icons.mjs"
   },
   "devDependencies": {
     "@tailwindcss/cli": "^4.3.3",
     "ajv": "^8.20.0",
     "bootstrap-icons": "^1.13.1",
+    "sharp": "^0.35.4",
     "tailwindcss": "^4.3.3"
   }
 }
