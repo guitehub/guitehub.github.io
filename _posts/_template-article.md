@@ -26,9 +26,9 @@ categories:
 # image: "mon-image.jpg"                          # miniature (liste) + visuel d'en-tête, depuis assets/images/
 # link: "https://fr.pcpartpicker.com/b/xxxxxx"    # uniquement pour "layout: build"
 #
-# --- Pour un projet / outil : lien vers l'app dans le corps de l'article -----
-#     fichier unique : [Nom](/outils/nom.html)
-#     dossier        : [Nom](/outils/nom/)
+# --- Pour un projet / outil : bouton vers l'app, juste sous le titre ----------
+#     fichier unique : [Ouvrir Nom <i class="bi bi-arrow-right"></i>](/outils/nom.html){: .app-button}
+#     dossier        : [Ouvrir Nom <i class="bi bi-arrow-right"></i>](/outils/nom/){: .app-button}
 ---
 
 Le contenu de l'article, en **Markdown**.

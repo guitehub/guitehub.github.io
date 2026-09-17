@@ -16,7 +16,7 @@ image: "vignette-flechettes.ico"
 
 # Fléchettes — scoreur
 
-[Fléchettes](/projets/flechettes.html)
+[Ouvrir Fléchettes <i class="bi bi-arrow-right"></i>](/projets/flechettes.html){: .app-button}
 
 À QUOI ÇA SERT
 --------------

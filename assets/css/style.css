@@ -329,6 +329,24 @@ pre code {
   font-weight: 600;
 }
 
+/* --- Bouton « Ouvrir l'app » (articles projets / outils) ------------------- */
+/* Markdown : [Ouvrir Nom <i class="bi bi-arrow-right"></i>](/outils/nom.html){: .app-button} */
+.app-button {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.6rem 1.15rem;
+  border-radius: 0.5rem;
+  background: var(--accent);
+  color: var(--accent-fg);
+  font-weight: 600;
+  line-height: 1.3;
+  transition: opacity .15s;
+}
+.app-button:hover { color: var(--accent-fg); text-decoration: none; opacity: 0.9; }
+.app-button:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+.app-button .bi { margin: 0; }
+
 /* --- Pied de page --------------------------------------------------------- */
 .site-footer {
   border-top: 1px solid var(--border);
