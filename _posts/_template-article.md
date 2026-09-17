@@ -19,11 +19,16 @@ categories:
 #  - build
 #  - guide
 #  - sysadm
-#  - project
+#  - project        # app dans projets/ (voir README « Projets et outils »)
+#  - tool           # app dans outils/
 
 # --- Optionnel --------------------------------------------------------------
 # image: "mon-image.jpg"                          # miniature (liste) + visuel d'en-tête, depuis assets/images/
 # link: "https://fr.pcpartpicker.com/b/xxxxxx"    # uniquement pour "layout: build"
+#
+# --- Pour un projet / outil : lien vers l'app dans le corps de l'article -----
+#     fichier unique : [Nom](/outils/nom.html)
+#     dossier        : [Nom](/outils/nom/)
 ---
 
 Le contenu de l'article, en **Markdown**.
