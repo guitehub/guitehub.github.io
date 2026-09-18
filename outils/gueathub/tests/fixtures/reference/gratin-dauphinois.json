@@ -7,7 +7,7 @@
   "portions": 4,
   "temps": { "preparation": 20, "cuisson": 75, "repos": 10 },
   "difficulte": "facile",
-  "tags": ["vegetarien", "four", "automne", "hiver"],
+  "tags": ["vegetarien", "four"],
   "ingredients": [
     { "nom": "pomme de terre", "quantite": 1, "unite": "kg", "categorie": "fruits-legumes", "precision": "à chair ferme" },
     { "nom": "lait entier", "quantite": 50, "unite": "cl", "categorie": "cremerie" },

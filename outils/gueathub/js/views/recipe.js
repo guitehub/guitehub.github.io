@@ -185,13 +185,13 @@ export function recipeView(app, { id }) {
       </header>
       ${portionsBlock()}
       ${ingredientsBlock()}
-      ${stepsBlock()}
       ${recipe.notes
         ? html`<section class="mt-8 rounded-xl bg-soft p-4" aria-labelledby="notes-title">
             <h2 id="notes-title" class="${SECTION_TITLE}">Notes</h2>
             <p class="mt-1 whitespace-pre-line">${recipe.notes}</p>
           </section>`
         : ""}
+      ${stepsBlock()}
       <p class="mt-10 text-center">
         <button type="button" class="inline-flex min-h-11 items-center gap-1.5 rounded-full px-3 text-sm text-ink-soft hover:text-ink" data-action="copy-link" data-focus="copy-link">
           ${icon("link-45deg", "size-4")} Copier le lien de la recette

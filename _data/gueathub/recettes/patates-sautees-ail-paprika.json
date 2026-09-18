@@ -3,11 +3,11 @@
   "id": "patates-sautees-ail-paprika",
   "titre": "Patates sautées à l'ail, paprika et graisse de canard",
   "description": "Pommes de terre dorées et croustillantes, parfumées à l'ail et au paprika fumé, cuites dans la graisse de canard.",
-  "type": "accompagnement",
+  "type": "plat",
   "portions": 4,
   "temps": { "preparation": 15, "cuisson": 24, "repos": 0 },
   "difficulte": "facile",
-  "tags": ["sans-gluten", "automne", "hiver"],
+  "tags": ["sans-gluten"],
   "ingredients": [
     { "nom": "pomme de terre", "quantite": 1, "unite": "kg", "categorie": "fruits-legumes", "precision": "à chair ferme" },
     { "nom": "graisse de canard", "quantite": 3, "unite": "cas", "categorie": "conserves" },

@@ -44,7 +44,7 @@ Le lexique du §6 fait foi. La liste à jour des noms réellement présents dans
 |`portionsUnite`|non|Omis si c'est `personnes`. Sinon `parts`, `pièces`, `pots`…|
 |`temps`|oui|`{ "preparation", "cuisson", "repos" }`, minutes entières, `0` si sans objet. `cuisson` reste cohérent avec la somme des minuteurs de cuisson|
 |`difficulte`|oui|`facile` `moyen` `difficile`|
-|`tags`|oui|kebab-case, parmi : `vegetarien` `vegan` `sans-gluten` `rapide` (≤ 30 min au total) `four` `sans-cuisson` `batch-cooking` `printemps` `ete` `automne` `hiver` `fete`. Tableau vide possible|
+|`tags`|oui|kebab-case, parmi : `vegetarien` `vegan` `sans-gluten` `rapide` (≤ 30 min au total) `four` `sans-cuisson` `batch-cooking` `fete` `poisson` `poulet`. Tableau vide possible|
 |`ingredients`|oui|Voir §3|
 |`etapes`|oui|`{ "texte", "minuteur"? }`, voir §8|
 |`source`|non|URL, ou « Recette familiale », « Livre X p. 42 »|
@@ -184,7 +184,7 @@ Fichier : \_data/gueathub/recettes/gratin-dauphinois.json
   "portions": 4,
   "temps": { "preparation": 20, "cuisson": 75, "repos": 10 },
   "difficulte": "facile",
-  "tags": \["vegetarien", "four", "automne", "hiver"],
+  "tags": \["vegetarien", "four"],
   "ingredients": \[
     { "nom": "pomme de terre", "quantite": 1, "unite": "kg", "categorie": "fruits-legumes", "precision": "à chair ferme" },
     { "nom": "lait entier", "quantite": 50, "unite": "cl", "categorie": "cremerie" },

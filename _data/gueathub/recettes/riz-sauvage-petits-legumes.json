@@ -7,7 +7,7 @@
   "portions": 4,
   "temps": { "preparation": 15, "cuisson": 59, "repos": 0 },
   "difficulte": "facile",
-  "tags": ["vegetarien", "printemps"],
+  "tags": ["vegetarien"],
   "ingredients": [
     { "nom": "riz sauvage", "quantite": 250, "unite": "g", "categorie": "epicerie-salee" },
     { "nom": "oignon", "quantite": 1, "unite": "piece", "categorie": "fruits-legumes" },

@@ -81,7 +81,7 @@ test("filterRecipes : type, tags (tous requis), sélection et recherche", () => 
   const all = [gratin, quiche];
   assert.deepEqual(filterRecipes(all, { type: "plat" }), [quiche]);
   assert.deepEqual(filterRecipes(all, { tags: ["four"] }), [gratin, quiche]);
-  assert.deepEqual(filterRecipes(all, { tags: ["four", "hiver"] }), [gratin]);
+  assert.deepEqual(filterRecipes(all, { tags: ["four", "vegetarien"] }), [gratin]);
   assert.deepEqual(filterRecipes(all, { selectedOnly: true, selectedIds: new Set(["quiche-lorraine"]) }), [quiche]);
   assert.deepEqual(filterRecipes(all, { selectedOnly: true }), []);
   assert.deepEqual(filterRecipes(all, { query: "lardon" }), [quiche]);

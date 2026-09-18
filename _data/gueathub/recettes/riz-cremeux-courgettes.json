@@ -7,7 +7,7 @@
   "portions": 4,
   "temps": { "preparation": 10, "cuisson": 24, "repos": 0 },
   "difficulte": "facile",
-  "tags": ["vegetarien", "sans-gluten", "ete"],
+  "tags": ["vegetarien", "sans-gluten"],
   "ingredients": [
     { "nom": "riz arborio", "quantite": 333, "unite": "g", "categorie": "epicerie-salee" },
     { "nom": "huile d'olive", "quantite": 1, "unite": "cas", "categorie": "huiles-condiments", "placard": true },

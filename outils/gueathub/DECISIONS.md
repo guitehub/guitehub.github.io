@@ -286,3 +286,11 @@ ne tranchait pas ou a été arbitré. Fichier non publié (exclu dans `_config.y
 - **Bouton discret en bas de la fiche** (« Copier le lien de la recette », texte gris, pas de fond) : en PWA
   installée il n'y a pas de barre d'adresse pour partager une recette. Copie seule dans le presse-papiers,
   pas de feuille de partage : ce n'est pas une fonction mise en avant.
+
+## Après la phase 6 — tags sans saisons, poisson et poulet
+
+- **Saisons retirées** du vocabulaire conseillé et des recettes (`printemps` `ete` `automne` `hiver`) : pas
+  utiles pour choisir. **`poisson` et `poulet` ajoutés** pour filtrer par ingrédient principal.
+- **`vegetarien` et `poulet` peuvent cohabiter** quand la viande est facultative (fajitas).
+- **Notes entre les ingrédients et les étapes** (et non plus en bas de fiche) : les alternatives (viande
+  facultative, lardons végétariens…) se lisent avant de cuisiner.

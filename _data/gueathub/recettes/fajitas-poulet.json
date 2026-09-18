@@ -1,15 +1,15 @@
 {
   "schema": 1,
   "id": "fajitas-poulet",
-  "titre": "Fajitas au poulet et poivrons",
-  "description": "Poulet mariné aux épices et saisi entier, poivrons sautés, haricots rouges et maïs, servis avec des tortillas chaudes.",
+  "titre": "Fajitas",
+  "description": "Poivrons sautés, haricots rouges et maïs, avec au choix du poulet ou du bœuf mariné aux épices ou sans viande, servis avec des tortillas chaudes.",
   "type": "plat",
   "portions": 4,
   "temps": { "preparation": 15, "cuisson": 25, "repos": 15 },
   "difficulte": "facile",
-  "tags": [],
+  "tags": ["vegetarien", "poulet"],
   "ingredients": [
-    { "nom": "blanc de poulet", "quantite": 2, "unite": "piece", "categorie": "boucherie-poissonnerie" },
+    { "nom": "blanc de poulet", "quantite": 2, "unite": "piece", "categorie": "boucherie-poissonnerie", "precision": "ou bœuf, ou sans viande", "optionnel": true },
     { "nom": "oignon", "quantite": 1, "unite": "piece", "categorie": "fruits-legumes", "precision": "émincé en demi-lunes" },
     { "nom": "poivron rouge", "quantite": 2, "unite": "piece", "categorie": "fruits-legumes", "precision": "en lanières" },
     { "nom": "poivron jaune", "quantite": 1, "unite": "piece", "categorie": "fruits-legumes", "precision": "en lanières" },
@@ -27,14 +27,14 @@
     { "nom": "poivre", "quantite": null, "unite": null, "categorie": "epices-aromates", "placard": true }
   ],
   "etapes": [
-    { "texte": "Mélanger l'huile d'olive, le paprika fumé, le cumin, le piment, l'ail, l'origan, le sel et le poivre. Enrober les blancs de poulet entiers, sans les couper, et laisser mariner.", "minuteur": 15 },
+    { "texte": "Mélanger l'huile d'olive, le paprika fumé, le cumin, le piment, l'ail, l'origan, le sel et le poivre. Enrober la viande entière (blancs de poulet ou pièce de bœuf, au choix), sans la couper, et laisser mariner. Sans viande, garder cette marinade pour les légumes.", "minuteur": 15 },
     { "texte": "Émincer l'oignon, épépiner les poivrons et les tailler en lanières de 1 cm. Égoutter et rincer les haricots rouges, égoutter le maïs." },
-    { "texte": "Chauffer une poêle à feu vif avec un filet d'huile. Saisir les blancs de poulet entiers sans les déplacer, puis les retourner pour colorer la seconde face.", "minuteur": 10 },
-    { "texte": "Réserver le poulet sur une assiette, couvert d'une feuille d'aluminium, pendant la cuisson des légumes." },
-    { "texte": "Dans la même poêle non lavée, faire revenir l'oignon à feu vif, puis ajouter les poivrons. Les garder marqués mais encore fermes.", "minuteur": 8 },
+    { "texte": "Chauffer une poêle à feu vif avec un filet d'huile. Saisir la viande entière sans la déplacer, puis la retourner pour colorer la seconde face. Sans viande, passer directement aux légumes.", "minuteur": 10 },
+    { "texte": "Réserver la viande sur une assiette, couvert d'une feuille d'aluminium, pendant la cuisson des légumes." },
+    { "texte": "Dans la même poêle non lavée, faire revenir l'oignon à feu vif, puis ajouter les poivrons (sans viande, avec la marinade). Les garder marqués mais encore fermes.", "minuteur": 8 },
     { "texte": "Ajouter les haricots rouges et le maïs, réchauffer en remuant délicatement pour ne pas écraser les haricots. Rectifier l'assaisonnement.", "minuteur": 3 },
-    { "texte": "Trancher le poulet en lanières dans le sens contraire des fibres, le remettre dans la poêle avec le jus rendu, puis déglacer au jus de citron vert.", "minuteur": 2 },
+    { "texte": "Trancher la viande en lanières dans le sens contraire des fibres et la remettre dans la poêle avec le jus rendu. Déglacer au jus de citron vert.", "minuteur": 2 },
     { "texte": "Réchauffer les tortillas dans une poêle sèche, 20 à 30 secondes par face, et les empiler sous un torchon. Servir la poêlée au centre de la table.", "minuteur": 2 }
   ],
-  "notes": "Cuire le poulet avant les légumes et le trancher seulement après repos : entier, il reste juteux. Ne pas surcharger la poêle, quitte à cuire les légumes en deux fois."
+  "notes": "Le poulet est facultatif : le remplacer par du bœuf (bavette, rumsteck) ou s'en passer pour une version végétarienne. Cuire la viande avant les légumes et la trancher seulement après repos : entière, elle reste juteuse. Ne pas surcharger la poêle, quitte à cuire les légumes en deux fois."
 }

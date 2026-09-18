@@ -7,7 +7,7 @@
   "portions": 4,
   "temps": { "preparation": 20, "cuisson": 35, "repos": 10 },
   "difficulte": "facile",
-  "tags": ["vegetarien", "vegan", "sans-gluten", "automne", "hiver"],
+  "tags": ["vegetarien", "vegan", "sans-gluten"],
   "ingredients": [
     { "nom": "riz basmati", "quantite": 300, "unite": "g", "categorie": "epicerie-salee" },
     { "nom": "pois chiche", "quantite": 500, "unite": "g", "categorie": "conserves", "precision": "cuits et égouttés" },

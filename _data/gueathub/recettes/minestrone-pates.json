@@ -7,7 +7,7 @@
   "portions": 4,
   "temps": { "preparation": 20, "cuisson": 42, "repos": 0 },
   "difficulte": "facile",
-  "tags": ["vegetarien", "vegan", "automne"],
+  "tags": ["vegetarien", "vegan"],
   "ingredients": [
     { "nom": "oignon", "quantite": 1, "unite": "piece", "categorie": "fruits-legumes", "precision": "haché" },
     { "nom": "ail", "quantite": 2, "unite": "gousse", "categorie": "fruits-legumes", "precision": "émincé" },

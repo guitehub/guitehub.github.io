@@ -7,7 +7,7 @@
   "portions": 4,
   "temps": { "preparation": 15, "cuisson": 68, "repos": 0 },
   "difficulte": "facile",
-  "tags": [],
+  "tags": ["poulet"],
   "ingredients": [
     { "nom": "cuisse de poulet", "quantite": 4, "unite": "piece", "categorie": "boucherie-poissonnerie" },
     { "nom": "haricot vert", "quantite": 500, "unite": "g", "categorie": "fruits-legumes" },

@@ -7,7 +7,7 @@
   "portions": 4,
   "temps": { "preparation": 20, "cuisson": 49, "repos": 0 },
   "difficulte": "moyen",
-  "tags": ["sans-gluten"],
+  "tags": ["sans-gluten", "poisson"],
   "ingredients": [
     { "nom": "dos de cabillaud", "quantite": 4, "unite": "piece", "categorie": "boucherie-poissonnerie", "precision": "pavé, env. 150 g pièce" },
     { "nom": "riz noir", "quantite": 300, "unite": "g", "categorie": "epicerie-salee", "precision": "vénéré" },

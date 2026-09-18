@@ -20,11 +20,9 @@ const TAGS = {
   four: "Au four",
   "sans-cuisson": "Sans cuisson",
   "batch-cooking": "Batch cooking",
-  printemps: "Printemps",
-  ete: "Été",
-  automne: "Automne",
-  hiver: "Hiver",
   fete: "Fête",
+  poisson: "Poisson",
+  poulet: "Poulet",
 };
 
 export const DIFFICULTIES = { facile: "Facile", moyen: "Moyen", difficile: "Difficile" };

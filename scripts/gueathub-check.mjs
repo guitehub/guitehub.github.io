@@ -27,7 +27,7 @@ const PHOTO_MAX_BYTES = 300 * 1024;
 
 const SUGGESTED_TAGS = new Set([
   "vegetarien", "vegan", "sans-gluten", "rapide", "four", "sans-cuisson", "batch-cooking",
-  "printemps", "ete", "automne", "hiver", "fete",
+  "fete", "poisson", "poulet",
 ]);
 
 const CATEGORIES_SCHEMA = {

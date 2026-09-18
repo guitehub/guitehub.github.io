@@ -7,7 +7,7 @@
   "portions": 4,
   "temps": { "preparation": 15, "cuisson": 20, "repos": 0 },
   "difficulte": "facile",
-  "tags": ["vegetarien", "sans-gluten", "automne", "hiver"],
+  "tags": ["vegetarien", "sans-gluten"],
   "ingredients": [
     { "nom": "oignon", "quantite": 1, "unite": "piece", "categorie": "fruits-legumes" },
     { "nom": "ail", "quantite": 2, "unite": "gousse", "categorie": "fruits-legumes" },
