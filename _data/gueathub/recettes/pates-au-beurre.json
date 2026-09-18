@@ -1,0 +1,25 @@
+{
+  "schema": 1,
+  "id": "pates-au-beurre",
+  "titre": "Pâtes au beurre",
+  "description": "Pâtes simplement enrobées de beurre fondu, prêtes en quelques minutes.",
+  "type": "plat",
+  "portions": 4,
+  "temps": { "preparation": 5, "cuisson": 10, "repos": 0 },
+  "difficulte": "facile",
+  "tags": ["vegetarien", "rapide"],
+  "ingredients": [
+    { "nom": "pâtes", "quantite": 360, "unite": "g", "categorie": "epicerie-salee" },
+    { "nom": "beurre", "quantite": 60, "unite": "g", "categorie": "cremerie" },
+    { "nom": "sel", "quantite": null, "unite": null, "categorie": "epices-aromates", "placard": true },
+    { "nom": "poivre", "quantite": null, "unite": null, "categorie": "epices-aromates", "placard": true }
+  ],
+  "etapes": [
+    { "texte": "Porter une grande casserole d'eau salée à ébullition." },
+    { "texte": "Cuire les pâtes selon l'indication du paquet, jusqu'à ce qu'elles soient al dente.", "minuteur": 10 },
+    { "texte": "Réserver une louche d'eau de cuisson, puis égoutter les pâtes." },
+    { "texte": "Remettre les pâtes dans la casserole hors du feu, ajouter le beurre et mélanger pour bien les enrober, en détendant avec un peu d'eau de cuisson si besoin." },
+    { "texte": "Poivrer et servir aussitôt." }
+  ],
+  "notes": "Garder un peu d'eau de cuisson permet une sauce plus onctueuse et brillante."
+}

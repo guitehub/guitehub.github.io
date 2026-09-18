@@ -1,0 +1,32 @@
+{
+  "schema": 1,
+  "id": "lentilles-vertes-carottes",
+  "titre": "Lentilles vertes aux carottes",
+  "description": "Lentilles vertes mijotées avec carottes, oignon et thym, un plat réconfortant et simple.",
+  "type": "plat",
+  "portions": 4,
+  "temps": { "preparation": 10, "cuisson": 30, "repos": 0 },
+  "difficulte": "facile",
+  "tags": ["vegetarien", "vegan", "sans-gluten"],
+  "ingredients": [
+    { "nom": "lentille verte sèche", "quantite": 300, "unite": "g", "categorie": "epicerie-salee" },
+    { "nom": "carotte", "quantite": 400, "unite": "g", "categorie": "fruits-legumes" },
+    { "nom": "oignon", "quantite": 1, "unite": "piece", "categorie": "fruits-legumes" },
+    { "nom": "ail", "quantite": 2, "unite": "gousse", "categorie": "fruits-legumes" },
+    { "nom": "huile d'olive", "quantite": 2, "unite": "cas", "categorie": "huiles-condiments", "placard": true },
+    { "nom": "bouillon de légumes", "quantite": 1, "unite": "piece", "categorie": "epices-aromates", "precision": "cube", "placard": true },
+    { "nom": "laurier", "quantite": 1, "unite": "feuille", "categorie": "epices-aromates", "placard": true },
+    { "nom": "thym", "quantite": 2, "unite": "brin", "categorie": "fruits-legumes" },
+    { "nom": "sel", "quantite": null, "unite": null, "categorie": "epices-aromates", "placard": true },
+    { "nom": "poivre", "quantite": null, "unite": null, "categorie": "epices-aromates", "placard": true },
+    { "nom": "persil", "quantite": null, "unite": null, "categorie": "fruits-legumes", "precision": "haché, pour servir", "optionnel": true }
+  ],
+  "etapes": [
+    { "texte": "Rincer les lentilles sous l'eau froide et réserver." },
+    { "texte": "Éplucher et émincer l'oignon, peler et hacher l'ail, éplucher les carottes et les couper en rondelles." },
+    { "texte": "Faire chauffer l'huile d'olive dans une cocotte et faire revenir l'oignon jusqu'à ce qu'il devienne translucide.", "minuteur": 5 },
+    { "texte": "Ajouter l'ail, les carottes et les lentilles, mélanger pendant une minute." },
+    { "texte": "Verser le bouillon de légumes dilué, ajouter le laurier et le thym, porter à ébullition puis laisser mijoter à couvert.", "minuteur": 25 },
+    { "texte": "Retirer le laurier et le thym, rectifier l'assaisonnement avec le sel et le poivre, parsemer de persil avant de servir." }
+  ]
+}
