@@ -20,6 +20,8 @@ import {
 
 // Section placard dépliée ou non : conservé pendant la visite.
 let placardOpen = false;
+// Rayons terminés (tout coché) que l'utilisateur a dépliés.
+const doneOpen = new Set();
 
 export function listView(app) {
   const { data, actions, store } = app;
@@ -53,16 +55,31 @@ export function listView(app) {
 
   function sectionBlock(section) {
     const category = data.categoriesById.get(section.categorie);
+    const total = section.lines.length;
     const done = section.lines.filter((line) => line.state === "checked").length;
-    const lines = visible(section.lines);
+    const count = html`<span class="font-normal tabular-nums normal-case" aria-label="${done} sur ${total} cochés">${done}/${total}</span>`;
+
+    // Rayon terminé : replié sur une ligne, dépliable pour décocher.
+    if (done === total) {
+      return html`<section class="mt-3" aria-labelledby="rayon-${section.categorie}" data-section="${section.categorie}">
+        <details class="group rounded-xl border border-line" data-done="${section.categorie}" ${doneOpen.has(section.categorie) ? "open" : ""}>
+          <summary class="flex min-h-11 cursor-pointer list-none items-center gap-2 rounded-xl px-4 text-sm font-semibold tracking-wide text-ink-faint uppercase [&::-webkit-details-marker]:hidden" data-focus="section:${section.categorie}">
+            ${icon(category.icone, "size-4")} <span id="rayon-${section.categorie}" class="flex-1 line-through">${category.libelle}</span>
+            ${icon("check-lg", "size-4 text-accent")} ${count}
+            ${icon("chevron-down", "size-4 transition-transform group-open:rotate-180")}
+          </summary>
+          <ul class="divide-y divide-line border-t border-line">${section.lines.map(lineItem)}</ul>
+        </details>
+      </section>`;
+    }
+
+    doneOpen.delete(section.categorie);
     return html`<section class="mt-6" aria-labelledby="rayon-${section.categorie}" data-section="${section.categorie}">
       <h2 id="rayon-${section.categorie}" class="flex items-center gap-2 px-1 text-sm font-semibold tracking-wide text-ink-soft uppercase">
         ${icon(category.icone, "size-4")} <span class="flex-1">${category.libelle}</span>
-        <span class="font-normal tabular-nums normal-case" aria-label="${done} sur ${section.lines.length} cochés">${done}/${section.lines.length}</span>
+        ${count}
       </h2>
-      ${lines.length > 0
-        ? html`<ul class="mt-2 divide-y divide-line rounded-xl border border-line bg-page">${lines.map(lineItem)}</ul>`
-        : html`<p class="mt-2 rounded-xl border border-dashed border-line px-4 py-3 text-sm text-ink-soft">Tout est coché dans ce rayon.</p>`}
+      <ul class="mt-2 divide-y divide-line rounded-xl border border-line bg-page">${visible(section.lines).map(lineItem)}</ul>
     </section>`;
   }
 
@@ -270,6 +287,11 @@ export function listView(app) {
       placardOpen = target.open;
       return;
     }
+    if (event.type === "toggle" && target.matches("[data-done]")) {
+      if (target.open) doneOpen.add(target.dataset.done);
+      else doneOpen.delete(target.dataset.done);
+      return;
+    }
     if (event.type === "submit" && target.matches('[data-submit="add-manual"]')) {
       event.preventDefault();
       const form = new FormData(target);
@@ -281,10 +303,12 @@ export function listView(app) {
     }
     if (event.type === "change") {
       if (target.matches('[data-change="check"]')) {
-        // Si la ligne disparaît (articles cochés masqués), le focus passe à la ligne voisine.
+        // Si la ligne disparaît (articles cochés masqués, rayon terminé replié), le focus passe
+        // à la ligne voisine, sinon à l'en-tête du rayon replié.
         const item = target.closest("li");
         const neighbour = item.nextElementSibling ?? item.previousElementSibling;
-        app.fallbackFocus = neighbour ? `check:${neighbour.dataset.line}` : null;
+        const section = target.closest("[data-section]")?.dataset.section;
+        app.fallbackFocus = neighbour ? `check:${neighbour.dataset.line}` : section ? `section:${section}` : null;
         actions.toggleCheck(target.dataset.key, target.checked);
       } else if (target.matches('[data-change="hide-checked"]')) {
         actions.setHideChecked(target.checked);
@@ -341,7 +365,9 @@ export function listView(app) {
       renderInto(root.querySelector('[data-region="placard"]'), placardBlock(placard));
     }
     renderInto(root.querySelector('[data-region="progress"]'), progressBlock(sections));
-    root.querySelector(`[data-focus="${CSS.escape(focusKey)}"]`)?.focus({ preventScroll: true });
+    const focusTarget = root.querySelector(`[data-focus="${CSS.escape(focusKey)}"]`);
+    if (focusTarget?.checkVisibility()) focusTarget.focus({ preventScroll: true });
+    else if (section) root.querySelector(`[data-focus="${CSS.escape(`section:${section.categorie}`)}"]`)?.focus({ preventScroll: true });
     return true;
   }
 

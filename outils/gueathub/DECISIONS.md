@@ -267,3 +267,10 @@ ne tranchait pas ou a été arbitré. Fichier non publié (exclu dans `_config.y
 - **Ancien id.** Un ajout manuel déjà enregistré avec `condiments-epices` passe dans « autre » (rayon
   inconnu) ; l'ordre perso des rayons est nettoyé et complété automatiquement.
 - **Placard.** Le bouillon de légumes, le curcuma, le curry et le vinaigre blanc sont `placard: true` dans toutes les recettes.
+
+## Après la phase 6 — rayons terminés repliés
+
+- **Rayon tout coché → replié** sur une ligne (icône, nom barré, coche, `n/n`), plus serré que les autres, à
+  sa place dans l'ordre des rayons (pas de saut de la liste). Un clic le déplie pour décocher ; dès qu'il
+  n'est plus complet, il redevient un rayon normal. Remplace le message « Tout est coché dans ce rayon ».
+- **Focus.** Quand la case cochée disparaît dans le rayon replié, le focus passe à l'en-tête du rayon.
