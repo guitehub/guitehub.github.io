@@ -1,0 +1,36 @@
+{
+  "schema": 1,
+  "id": "fenouil-braise-au-curry",
+  "titre": "Fenouil braisé au curry et riz basmati",
+  "description": "Fenouil fondant braisé dans une sauce curry-lait de coco, servi sur un riz basmati parfumé.",
+  "type": "plat",
+  "portions": 4,
+  "temps": { "preparation": 15, "cuisson": 40, "repos": 0 },
+  "difficulte": "facile",
+  "tags": ["vegetarien", "vegan"],
+  "ingredients": [
+    { "nom": "fenouil", "quantite": 3, "unite": "piece", "categorie": "fruits-legumes" },
+    { "nom": "oignon", "quantite": 1, "unite": "piece", "categorie": "fruits-legumes" },
+    { "nom": "ail", "quantite": 2, "unite": "gousse", "categorie": "fruits-legumes" },
+    { "nom": "gingembre", "quantite": 1, "unite": "cas", "categorie": "fruits-legumes", "precision": "râpé" },
+    { "nom": "curry", "quantite": 2, "unite": "cac", "categorie": "condiments-epices" },
+    { "nom": "curcuma", "quantite": 0.5, "unite": "cac", "categorie": "condiments-epices" },
+    { "nom": "lait de coco", "quantite": 400, "unite": "ml", "categorie": "saveurs-du-monde" },
+    { "nom": "bouillon de légumes", "quantite": 150, "unite": "ml", "categorie": "condiments-epices" },
+    { "nom": "huile d'olive", "quantite": 2, "unite": "cas", "categorie": "condiments-epices", "placard": true },
+    { "nom": "citron vert", "quantite": 1, "unite": "piece", "categorie": "fruits-legumes", "precision": "pressé" },
+    { "nom": "coriandre", "quantite": 2, "unite": "cas", "categorie": "fruits-legumes", "precision": "ciselée" },
+    { "nom": "riz basmati", "quantite": 300, "unite": "g", "categorie": "epicerie-salee" },
+    { "nom": "sel", "quantite": null, "unite": null, "categorie": "condiments-epices", "placard": true },
+    { "nom": "poivre", "quantite": null, "unite": null, "categorie": "condiments-epices", "placard": true }
+  ],
+  "etapes": [
+    { "texte": "Couper le fenouil en quartiers épais, en gardant un peu de base pour qu'ils tiennent. Émincer l'oignon et hacher l'ail." },
+    { "texte": "Faire chauffer l'huile d'olive dans une grande sauteuse et faire dorer les quartiers de fenouil des deux côtés, puis réserver.", "minuteur": 5 },
+    { "texte": "Faire fondre l'oignon dans la même sauteuse, puis ajouter l'ail, le gingembre, le curry et le curcuma et remuer jusqu'à ce que ça embaume.", "minuteur": 4 },
+    { "texte": "Remettre le fenouil dans la sauteuse, verser le lait de coco et le bouillon de légumes, saler et poivrer. Couvrir et laisser mijoter à feu doux jusqu'à ce que le fenouil soit fondant.", "minuteur": 30 },
+    { "texte": "Pendant ce temps, rincer le riz basmati à l'eau claire jusqu'à ce qu'elle soit transparente, puis le cuire selon les indications du paquet.", "minuteur": 12 },
+    { "texte": "Ajouter le jus de citron vert dans la sauteuse, rectifier l'assaisonnement. Servir le fenouil et sa sauce sur le riz basmati, parsemé de coriandre." }
+  ],
+  "notes": "Pour une sauce plus onctueuse, mixer une petite louche de sauce avant de la remettre dans la poêle. Les tiges feuillues du fenouil, si elles sont fraîches, peuvent remplacer la coriandre en garniture."
+}

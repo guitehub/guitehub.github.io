@@ -1,0 +1,35 @@
+{
+  "schema": 1,
+  "id": "cabillaud-beurre-blanc-riz-noir",
+  "titre": "Dos de cabillaud, sauce beurre blanc, riz noir",
+  "description": "Cabillaud poêlé, riz noir vénéré et sauce beurre blanc classique à l'échalote.",
+  "type": "plat",
+  "portions": 4,
+  "temps": { "preparation": 20, "cuisson": 49, "repos": 0 },
+  "difficulte": "moyen",
+  "tags": ["sans-gluten"],
+  "ingredients": [
+    { "nom": "dos de cabillaud", "quantite": 4, "unite": "piece", "categorie": "boucherie-poissonnerie", "precision": "pavé, env. 150 g pièce" },
+    { "nom": "riz noir", "quantite": 300, "unite": "g", "categorie": "epicerie-salee", "precision": "vénéré" },
+    { "nom": "échalote", "quantite": 2, "unite": "piece", "categorie": "fruits-legumes" },
+    { "nom": "vin blanc sec", "quantite": 15, "unite": "cl", "categorie": "boissons" },
+    { "nom": "vinaigre blanc", "quantite": 3, "unite": "cas", "categorie": "condiments-epices" },
+    { "nom": "beurre", "quantite": 150, "unite": "g", "categorie": "cremerie" },
+    { "nom": "huile d'olive", "quantite": 2, "unite": "cas", "categorie": "condiments-epices", "placard": true },
+    { "nom": "sel", "quantite": null, "unite": null, "categorie": "condiments-epices", "placard": true },
+    { "nom": "poivre", "quantite": null, "unite": null, "categorie": "condiments-epices", "placard": true },
+    { "nom": "ciboulette", "quantite": 1, "unite": "botte", "categorie": "fruits-legumes" },
+    { "nom": "citron", "quantite": 1, "unite": "piece", "categorie": "fruits-legumes" }
+  ],
+  "etapes": [
+    { "texte": "Rincer le riz noir et le cuire dans une grande casserole d'eau salée à ébullition.", "minuteur": 35 },
+    { "texte": "Égoutter le riz, couvrir et réserver au chaud." },
+    { "texte": "Faire suer l'échalote ciselée avec le vin blanc et le vinaigre blanc à feu moyen jusqu'à réduction presque complète.", "minuteur": 8 },
+    { "texte": "Baisser le feu au minimum et incorporer le beurre froid petit à petit en fouettant sans cesse, jusqu'à obtenir une sauce mousseuse. Saler légèrement et réserver au bain-marie tiède." },
+    { "texte": "Éponger les pavés de cabillaud, saler et poivrer des deux côtés." },
+    { "texte": "Chauffer l'huile d'olive dans une poêle antiadhésive à feu vif et saisir le cabillaud sans y toucher jusqu'à belle coloration.", "minuteur": 3 },
+    { "texte": "Retourner délicatement les pavés et poursuivre la cuisson à feu moyen jusqu'à ce que la chair soit nacrée.", "minuteur": 3 },
+    { "texte": "Dresser un lit de riz noir dans chaque assiette, poser un pavé de cabillaud, napper de beurre blanc, parsemer de ciboulette et servir avec un quartier de citron." }
+  ],
+  "notes": "Le beurre blanc ne doit jamais bouillir, sinon il tranche : monter le beurre hors du feu ou à feu très doux."
+}
