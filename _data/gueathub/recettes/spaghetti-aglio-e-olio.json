@@ -1,0 +1,27 @@
+{
+  "schema": 1,
+  "id": "spaghetti-aglio-e-olio",
+  "titre": "Spaghetti aglio e olio",
+  "description": "Pâtes italiennes minute à l'ail, à l'huile d'olive et au piment, parsemées de persil frais.",
+  "type": "plat",
+  "portions": 4,
+  "temps": { "preparation": 10, "cuisson": 10, "repos": 0 },
+  "difficulte": "facile",
+  "tags": ["vegetarien", "vegan", "rapide"],
+  "ingredients": [
+    { "nom": "pâtes", "quantite": 350, "unite": "g", "categorie": "epicerie-salee", "precision": "spaghetti" },
+    { "nom": "huile d'olive", "quantite": 8, "unite": "cas", "categorie": "condiments-epices", "placard": true },
+    { "nom": "ail", "quantite": 6, "unite": "gousse", "categorie": "fruits-legumes", "precision": "émincé finement" },
+    { "nom": "piment en poudre", "quantite": 1, "unite": "cac", "categorie": "condiments-epices", "placard": true },
+    { "nom": "persil", "quantite": 1, "unite": "botte", "categorie": "fruits-legumes", "precision": "ciselé", "optionnel": true },
+    { "nom": "sel", "quantite": null, "unite": null, "categorie": "condiments-epices", "placard": true }
+  ],
+  "etapes": [
+    { "texte": "Porter à ébullition une grande casserole d'eau salée et y cuire les pâtes.", "minuteur": 10 },
+    { "texte": "Pendant ce temps, faire chauffer l'huile d'olive dans une grande poêle à feu doux. Ajouter l'ail et le piment en poudre, laisser infuser sans colorer l'ail." },
+    { "texte": "Égoutter les pâtes en réservant un peu d'eau de cuisson. Les verser dans la poêle avec l'huile parfumée, mélanger et ajouter un peu d'eau de cuisson pour lier la sauce." },
+    { "texte": "Parsemer de persil et servir immédiatement." }
+  ],
+  "source": "Recette classique italienne",
+  "notes": "Ne pas laisser l'ail colorer, il deviendrait amer. L'eau de cuisson des pâtes, riche en amidon, permet de lier la sauce sans matière grasse supplémentaire."
+}

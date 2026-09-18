@@ -1,0 +1,41 @@
+{
+  "schema": 1,
+  "id": "curry-legumes-riz-coco",
+  "titre": "Curry de légumes au lait de coco et riz basmati",
+  "description": "Curry de légumes mijotés au lait de coco et à la tomate, servi avec du riz basmati.",
+  "type": "plat",
+  "portions": 4,
+  "temps": { "preparation": 20, "cuisson": 35, "repos": 0 },
+  "difficulte": "facile",
+  "tags": ["vegetarien", "vegan", "batch-cooking"],
+  "ingredients": [
+    { "nom": "riz basmati", "quantite": 300, "unite": "g", "categorie": "epicerie-salee" },
+    { "nom": "oignon", "quantite": 1, "unite": "piece", "categorie": "fruits-legumes" },
+    { "nom": "ail", "quantite": 2, "unite": "gousse", "categorie": "fruits-legumes" },
+    { "nom": "gingembre", "quantite": 20, "unite": "g", "categorie": "fruits-legumes" },
+    { "nom": "carotte", "quantite": 2, "unite": "piece", "categorie": "fruits-legumes" },
+    { "nom": "pomme de terre", "quantite": 300, "unite": "g", "categorie": "fruits-legumes" },
+    { "nom": "chou-fleur", "quantite": 300, "unite": "g", "categorie": "fruits-legumes" },
+    { "nom": "poivron rouge", "quantite": 1, "unite": "piece", "categorie": "fruits-legumes" },
+    { "nom": "pâte de curry rouge", "quantite": 2, "unite": "cas", "categorie": "saveurs-du-monde" },
+    { "nom": "lait de coco", "quantite": 400, "unite": "ml", "categorie": "saveurs-du-monde" },
+    { "nom": "tomates concassées", "quantite": 200, "unite": "g", "categorie": "conserves" },
+    { "nom": "huile neutre", "quantite": 2, "unite": "cas", "categorie": "condiments-epices", "placard": true },
+    { "nom": "bouillon de légumes", "quantite": 150, "unite": "ml", "categorie": "condiments-epices", "placard": true },
+    { "nom": "pois chiche", "quantite": 240, "unite": "g", "categorie": "conserves", "precision": "en boîte, égoutté" },
+    { "nom": "coriandre", "quantite": 1, "unite": "botte", "categorie": "fruits-legumes" },
+    { "nom": "sel", "quantite": null, "unite": null, "categorie": "condiments-epices", "placard": true },
+    { "nom": "citron vert", "quantite": 1, "unite": "piece", "categorie": "fruits-legumes" }
+  ],
+  "etapes": [
+    { "texte": "Émincer l'oignon, écraser l'ail et râper le gingembre. Éplucher et couper en morceaux la carotte et la pomme de terre. Couper le chou-fleur en petits bouquets et le poivron en lanières." },
+    { "texte": "Chauffer l'huile neutre dans une grande cocotte. Faire suer l'oignon, puis ajouter l'ail et le gingembre et cuire brièvement en remuant.", "minuteur": 4 },
+    { "texte": "Incorporer la pâte de curry et cuire une minute en remuant pour la faire légèrement torréfier.", "minuteur": 1 },
+    { "texte": "Ajouter la carotte, la pomme de terre, le chou-fleur, le poivron, le lait de coco, les tomates concassées et le bouillon de légumes. Saler." },
+    { "texte": "Couvrir et laisser mijoter à feu doux jusqu'à ce que les légumes soient tendres, en remuant de temps en temps.", "minuteur": 25 },
+    { "texte": "Incorporer les pois chiches et poursuivre la cuisson à découvert pour épaissir légèrement la sauce.", "minuteur": 5 },
+    { "texte": "Pendant que le curry mijote, rincer le riz puis le cuire selon les instructions du paquet, dans de l'eau salée.", "minuteur": 12 },
+    { "texte": "Rectifier l'assaisonnement du curry. Servir bien chaud sur le riz, parsemé de coriandre ciselée et d'un quartier de citron vert." }
+  ],
+  "source": "Recette familiale"
+}

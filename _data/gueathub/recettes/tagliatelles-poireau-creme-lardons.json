@@ -1,0 +1,34 @@
+{
+  "schema": 1,
+  "id": "tagliatelles-poireau-creme-lardons",
+  "titre": "Tagliatelles poireau, crème et lardons",
+  "description": "Tagliatelles nappées d'une sauce crémeuse aux poireaux fondants et aux lardons dorés, déglacée au vin blanc.",
+  "type": "plat",
+  "portions": 4,
+  "temps": { "preparation": 15, "cuisson": 25, "repos": 0 },
+  "difficulte": "facile",
+  "tags": ["vegetarien"],
+  "ingredients": [
+    { "nom": "tagliatelles", "quantite": 400, "unite": "g", "categorie": "epicerie-salee" },
+    { "nom": "poireau", "quantite": 3, "unite": "piece", "categorie": "fruits-legumes" },
+    { "nom": "oignon", "quantite": 1, "unite": "piece", "categorie": "fruits-legumes" },
+    { "nom": "lardons", "quantite": 200, "unite": "g", "categorie": "frais" },
+    { "nom": "beurre", "quantite": 20, "unite": "g", "categorie": "cremerie" },
+    { "nom": "vin blanc sec", "quantite": 10, "unite": "cl", "categorie": "boissons" },
+    { "nom": "crème liquide entière", "quantite": 25, "unite": "cl", "categorie": "cremerie" },
+    { "nom": "noix de muscade", "quantite": 1, "unite": "pincee", "categorie": "condiments-epices", "precision": "râpée", "placard": true },
+    { "nom": "sel", "quantite": null, "unite": null, "categorie": "condiments-epices", "placard": true },
+    { "nom": "poivre", "quantite": null, "unite": null, "categorie": "condiments-epices", "placard": true }
+  ],
+  "etapes": [
+    { "texte": "Laver les poireaux, retirer la partie verte trop fibreuse, puis les émincer finement en rondelles. Émincer aussi l'oignon." },
+    { "texte": "Faire fondre le beurre dans une grande poêle à feu moyen, puis ajouter l'oignon et les poireaux. Laisser suer doucement en remuant, sans coloration.", "minuteur": 10 },
+    { "texte": "Ajouter les lardons et les faire dorer légèrement avec les poireaux.", "minuteur": 5 },
+    { "texte": "Verser le vin blanc et laisser réduire presque à sec, en grattant bien le fond de la poêle.", "minuteur": 3 },
+    { "texte": "Incorporer la crème, saler légèrement, poivrer et ajouter la muscade. Laisser mijoter à feu doux jusqu'à ce que la sauce nappe la cuillère.", "minuteur": 5 },
+    { "texte": "Pendant ce temps, cuire les tagliatelles dans une grande casserole d'eau bouillante salée jusqu'à ce qu'elles soient al dente.", "minuteur": 9 },
+    { "texte": "Égoutter les tagliatelles en gardant un peu d'eau de cuisson, puis les mélanger directement dans la poêle avec la sauce. Ajuster la texture avec l'eau de cuisson si besoin, rectifier l'assaisonnement et servir immédiatement." }
+  ],
+  "source": "Recette familiale",
+  "notes": "Pour une version totalement végétarienne, remplacer les lardons par des lardons végétaux type « Lardon La Vie », à ajouter de la même façon à l'étape 3."
+}

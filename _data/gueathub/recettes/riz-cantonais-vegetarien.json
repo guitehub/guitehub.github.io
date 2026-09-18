@@ -1,0 +1,35 @@
+{
+  "schema": 1,
+  "id": "riz-cantonais-vegetarien",
+  "titre": "Riz cantonais végétarien",
+  "description": "Riz sauté à l'œuf, petits pois, carotte et oignon nouveau, parfumé à la sauce soja et à l'huile de sésame.",
+  "type": "plat",
+  "portions": 4,
+  "temps": { "preparation": 15, "cuisson": 30, "repos": 0 },
+  "difficulte": "facile",
+  "tags": ["vegetarien"],
+  "ingredients": [
+    { "nom": "riz basmati", "quantite": 300, "unite": "g", "categorie": "epicerie-salee" },
+    { "nom": "œuf", "quantite": 3, "unite": "piece", "categorie": "cremerie" },
+    { "nom": "petit pois surgelé", "quantite": 150, "unite": "g", "categorie": "surgeles" },
+    { "nom": "carotte", "quantite": 2, "unite": "piece", "categorie": "fruits-legumes" },
+    { "nom": "oignon nouveau", "quantite": 3, "unite": "piece", "categorie": "fruits-legumes" },
+    { "nom": "ail", "quantite": 2, "unite": "gousse", "categorie": "fruits-legumes" },
+    { "nom": "sauce soja", "quantite": 3, "unite": "cas", "categorie": "saveurs-du-monde", "placard": true },
+    { "nom": "huile de sésame", "quantite": 1, "unite": "cac", "categorie": "condiments-epices", "placard": true },
+    { "nom": "huile neutre", "quantite": 3, "unite": "cas", "categorie": "condiments-epices", "placard": true },
+    { "nom": "sel", "quantite": null, "unite": null, "categorie": "condiments-epices", "placard": true },
+    { "nom": "poivre", "quantite": null, "unite": null, "categorie": "condiments-epices", "placard": true }
+  ],
+  "etapes": [
+    { "texte": "Cuire le riz dans une grande quantité d'eau salée, puis égoutter et laisser refroidir complètement, idéalement étalé sur une plaque.", "minuteur": 15 },
+    { "texte": "Battre les œufs avec une pincée de sel. Chauffer un filet d'huile neutre dans un wok, verser les œufs et cuire en omelette fine. Réserver et couper en morceaux.", "minuteur": 3 },
+    { "texte": "Faire revenir la carotte et les petits pois dans l'huile neutre restante jusqu'à ce qu'ils soient tendres.", "minuteur": 5 },
+    { "texte": "Ajouter l'ail et la partie blanche de l'oignon nouveau, faire revenir jusqu'à ce que ça embaume.", "minuteur": 1 },
+    { "texte": "Ajouter le riz froid, l'émietter à la spatule et le mélanger avec les légumes en sautant à feu vif.", "minuteur": 4 },
+    { "texte": "Verser la sauce soja et l'huile de sésame, ajouter l'omelette coupée, le sel et le poivre. Bien mélanger et sauter encore quelques instants.", "minuteur": 2 },
+    { "texte": "Parsemer avec le reste de l'oignon nouveau et servir immédiatement, bien chaud." }
+  ],
+  "source": "Adaptation végétarienne maison",
+  "notes": "Utiliser un riz cuit la veille et bien froid pour éviter qu'il ne devienne pâteux. Pour plus de protéines, ajouter des dés de tofu fumé ou de tempeh sautés."
+}

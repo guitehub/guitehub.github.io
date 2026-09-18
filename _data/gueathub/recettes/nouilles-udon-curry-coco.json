@@ -1,0 +1,32 @@
+{
+  "schema": 1,
+  "id": "nouilles-udon-curry-coco",
+  "titre": "Nouilles udon au curry et au lait de coco",
+  "description": "Nouilles et légumes mijotés en une seule casserole dans une sauce coco-curry relevée au beurre de cacahuète.",
+  "type": "plat",
+  "portions": 4,
+  "temps": { "preparation": 10, "cuisson": 10, "repos": 0 },
+  "difficulte": "facile",
+  "tags": ["vegetarien", "vegan", "rapide"],
+  "ingredients": [
+    { "nom": "nouilles udon", "quantite": 400, "unite": "g", "categorie": "saveurs-du-monde" },
+    { "nom": "carotte", "quantite": 2, "unite": "piece", "categorie": "fruits-legumes", "precision": "en bâtonnets" },
+    { "nom": "brocoli", "quantite": 200, "unite": "g", "categorie": "fruits-legumes", "precision": "en petits bouquets" },
+    { "nom": "pousse de soja", "quantite": 150, "unite": "g", "categorie": "fruits-legumes" },
+    { "nom": "épinard", "quantite": 100, "unite": "g", "categorie": "fruits-legumes", "precision": "jeunes pousses" },
+    { "nom": "lait de coco", "quantite": 60, "unite": "cl", "categorie": "saveurs-du-monde" },
+    { "nom": "pâte de curry rouge", "quantite": 2, "unite": "cas", "categorie": "saveurs-du-monde" },
+    { "nom": "beurre de cacahuète", "quantite": 2, "unite": "cas", "categorie": "epicerie-sucree" },
+    { "nom": "sirop d'érable", "quantite": 2, "unite": "cas", "categorie": "epicerie-sucree" },
+    { "nom": "sauce soja", "quantite": 4, "unite": "cas", "categorie": "saveurs-du-monde", "placard": true },
+    { "nom": "oignon nouveau", "quantite": 2, "unite": "piece", "categorie": "fruits-legumes", "precision": "émincé" }
+  ],
+  "etapes": [
+    { "texte": "Tailler la carotte en bâtonnets, détailler le brocoli en petits bouquets et émincer l'oignon nouveau en gardant le vert de côté." },
+    { "texte": "Réunir dans une grande poêle ou une sauteuse les nouilles udon, la carotte, les pousses de soja, le brocoli et les épinards, sans les précuire." },
+    { "texte": "Délayer la pâte de curry et le beurre de cacahuète avec le lait de coco, la sauce soja et le sirop d'érable, puis verser sur les nouilles avec un peu d'eau." },
+    { "texte": "Porter à ébullition puis laisser mijoter à feu moyen en remuant de temps en temps, jusqu'à ce que les nouilles soient tendres et la sauce nappante.", "minuteur": 10 },
+    { "texte": "Parsemer du vert d'oignon nouveau et servir aussitôt." }
+  ],
+  "notes": "Compter environ 5 cl d'eau par personne : la sauce épaissit vite, en rajouter au fil de la cuisson si elle attache. Un trait de citron vert au moment de servir réveille le curry."
+}

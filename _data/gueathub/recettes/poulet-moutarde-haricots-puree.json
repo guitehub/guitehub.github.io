@@ -1,0 +1,36 @@
+{
+  "schema": 1,
+  "id": "poulet-moutarde-haricots-puree",
+  "titre": "Poulet sauce moutarde, haricots verts et purée maison",
+  "description": "Cuisses de poulet mijotées dans une sauce crémeuse à la moutarde, servies avec haricots verts et purée maison.",
+  "type": "plat",
+  "portions": 4,
+  "temps": { "preparation": 15, "cuisson": 68, "repos": 0 },
+  "difficulte": "facile",
+  "tags": [],
+  "ingredients": [
+    { "nom": "cuisse de poulet", "quantite": 4, "unite": "piece", "categorie": "boucherie-poissonnerie" },
+    { "nom": "haricot vert", "quantite": 500, "unite": "g", "categorie": "fruits-legumes" },
+    { "nom": "pomme de terre", "quantite": 800, "unite": "g", "categorie": "fruits-legumes", "precision": "à chair ferme" },
+    { "nom": "moutarde", "quantite": 2, "unite": "cas", "categorie": "condiments-epices", "placard": true },
+    { "nom": "crème liquide entière", "quantite": 20, "unite": "cl", "categorie": "cremerie" },
+    { "nom": "beurre", "quantite": 60, "unite": "g", "categorie": "cremerie" },
+    { "nom": "oignon", "quantite": 1, "unite": "piece", "categorie": "fruits-legumes" },
+    { "nom": "lait entier", "quantite": 10, "unite": "cl", "categorie": "cremerie" },
+    { "nom": "vin blanc sec", "quantite": 10, "unite": "cl", "categorie": "boissons" },
+    { "nom": "huile neutre", "quantite": 1, "unite": "cas", "categorie": "condiments-epices", "placard": true },
+    { "nom": "noix de muscade", "quantite": 1, "unite": "pincee", "categorie": "condiments-epices", "precision": "râpée", "placard": true },
+    { "nom": "sel", "quantite": null, "unite": null, "categorie": "condiments-epices", "placard": true },
+    { "nom": "poivre", "quantite": null, "unite": null, "categorie": "condiments-epices", "placard": true }
+  ],
+  "etapes": [
+    { "texte": "Éplucher les pommes de terre, les couper en morceaux et les cuire à l'eau bouillante salée jusqu'à ce qu'elles soient tendres.", "minuteur": 20 },
+    { "texte": "Saler et poivrer les cuisses de poulet, puis les faire dorer sur toutes les faces dans l'huile neutre chaude.", "minuteur": 8 },
+    { "texte": "Ajouter l'oignon émincé autour du poulet et laisser suer doucement.", "minuteur": 5 },
+    { "texte": "Déglacer au vin blanc, laisser réduire, puis ajouter la moutarde et la crème liquide. Couvrir et laisser mijoter jusqu'à cuisson complète du poulet.", "minuteur": 25 },
+    { "texte": "Équeuter les haricots verts et les cuire à l'eau bouillante salée, encore légèrement croquants.", "minuteur": 10 },
+    { "texte": "Égoutter les pommes de terre, les écraser, puis incorporer le beurre, le lait chaud, la noix de muscade, le sel et le poivre jusqu'à obtenir une purée lisse." },
+    { "texte": "Rectifier l'assaisonnement de la sauce et servir le poulet nappé de sauce avec la purée et les haricots verts bien chauds." }
+  ],
+  "notes": "Une moutarde à l'ancienne apporte du croquant et un peu de piquant supplémentaire à la sauce."
+}

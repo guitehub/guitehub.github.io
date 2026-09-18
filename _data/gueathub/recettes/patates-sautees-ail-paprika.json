@@ -1,0 +1,29 @@
+{
+  "schema": 1,
+  "id": "patates-sautees-ail-paprika",
+  "titre": "Patates sautées à l'ail, paprika et graisse de canard",
+  "description": "Pommes de terre dorées et croustillantes, parfumées à l'ail et au paprika fumé, cuites dans la graisse de canard.",
+  "type": "accompagnement",
+  "portions": 4,
+  "temps": { "preparation": 15, "cuisson": 24, "repos": 0 },
+  "difficulte": "facile",
+  "tags": ["sans-gluten", "automne", "hiver"],
+  "ingredients": [
+    { "nom": "pomme de terre", "quantite": 1, "unite": "kg", "categorie": "fruits-legumes", "precision": "à chair ferme" },
+    { "nom": "graisse de canard", "quantite": 3, "unite": "cas", "categorie": "conserves" },
+    { "nom": "ail", "quantite": 3, "unite": "gousse", "categorie": "fruits-legumes" },
+    { "nom": "paprika fumé", "quantite": 1.5, "unite": "cac", "categorie": "condiments-epices", "placard": true },
+    { "nom": "persil", "quantite": 2, "unite": "cas", "categorie": "fruits-legumes", "precision": "ciselé" },
+    { "nom": "sel", "quantite": null, "unite": null, "categorie": "condiments-epices", "placard": true },
+    { "nom": "poivre", "quantite": null, "unite": null, "categorie": "condiments-epices", "placard": true }
+  ],
+  "etapes": [
+    { "texte": "Éplucher les pommes de terre et les couper en cubes réguliers d'environ 2 cm. Rincer puis bien sécher dans un torchon." },
+    { "texte": "Cuire les cubes de pommes de terre à la vapeur ou à l'eau bouillante salée jusqu'à ce qu'ils soient juste tendres mais encore fermes. Égoutter et laisser sécher.", "minuteur": 9 },
+    { "texte": "Faire fondre la graisse de canard dans une grande poêle à feu moyen-vif jusqu'à ce qu'elle soit bien chaude." },
+    { "texte": "Ajouter les pommes de terre en une seule couche et laisser dorer sans trop remuer.", "minuteur": 10 },
+    { "texte": "Écraser légèrement l'ail et l'ajouter avec le paprika fumé, le sel et le poivre. Mélanger et poursuivre la cuisson jusqu'à ce que les patates soient bien dorées et croustillantes.", "minuteur": 5 },
+    { "texte": "Retirer l'ail s'il est trop coloré, parsemer de persil et servir immédiatement." }
+  ],
+  "notes": "Pour un résultat encore plus croustillant, secouer les pommes de terre encore chaudes dans la passoire après la cuisson vapeur pour « pelucher » légèrement leur surface."
+}
