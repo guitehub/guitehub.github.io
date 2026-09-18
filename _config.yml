@@ -21,6 +21,7 @@ guitehub: https://github.com/guitehub
 # Jekyll 3.10 (build classique de GitHub Pages) cette liste peut les remplacer.
 exclude:
   - README.md
+  - CLAUDE.md
   - Gemfile
   - Gemfile.lock
   - node_modules

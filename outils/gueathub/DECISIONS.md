@@ -125,7 +125,7 @@ ne tranchait pas ou a été arbitré. Fichier non publié (exclu dans `_config.y
 - **`--watch`.** `npm run css:watch` s'utilise dans un terminal : sans terminal attaché (script, CI), la CLI
   Tailwind s'arrête aussitôt ; utiliser alors `--watch=always`. L'avertissement npm sur le script
   d'installation de `@parcel/watcher` est sans effet : le binaire précompilé est utilisé.
-- **Version de l'app** : constante `APP_VERSION` dans `js/main.js` (1.0.0), à incrémenter à la main.
+- **Version de l'app** : constante `APP_VERSION` dans `js/main.js`, à incrémenter à chaque modification de l'app (voir `CLAUDE.md`). 1.1.0 : rayon des épices séparé, rayons terminés repliés.
   La date de génération des recettes (`genere`) est affichée à côté.
 - **Rendu.** Gabarits `html` avec échappement systématique, rendu par `innerHTML` qui restaure le focus
   (attribut `data-focus`) et le défilement. Recherche : seuls filtres, compteur et grille sont redessinés,

@@ -17,7 +17,7 @@ import { recipeView } from "./views/recipe.js";
 import { recipesView } from "./views/recipes.js";
 import { settingsView } from "./views/settings.js";
 
-const APP_VERSION = "1.0.0";
+const APP_VERSION = "1.1.0";
 
 const VIEWS = { recipes: recipesView, recipe: recipeView, list: listView, settings: settingsView };
 
