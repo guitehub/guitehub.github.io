@@ -20,7 +20,7 @@
     { "nom": "sauce soja", "quantite": 4, "unite": "cas", "categorie": "saveurs-du-monde", "placard": true },
     { "nom": "vinaigre de riz", "quantite": 1, "unite": "cas", "categorie": "condiments-epices", "placard": true },
     { "nom": "miel", "quantite": 1, "unite": "cac", "categorie": "epicerie-sucree" },
-    { "nom": "huile de sésame", "quantite": 1, "unite": "cac", "categorie": "condiments-epices", "precision": "grillé" },
+    { "nom": "huile de sésame", "quantite": 1, "unite": "cac", "categorie": "condiments-epices", "precision": "grillé", "placard": true },
     { "nom": "poivre", "quantite": null, "unite": null, "categorie": "condiments-epices", "placard": true }
   ],
   "etapes": [
