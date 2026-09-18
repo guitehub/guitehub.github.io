@@ -5,8 +5,8 @@ title: "/"
 
 # Le Hub de La Guite
 
-Dans l'insondable néant de l'existence, où la quête de sens se perd dans les méandres de l'absurdité, il est inévitable de se heurter à la terrible réalisation que, pour chaque problème qui s'entrelace dans la trame chaotique de notre réalité, aucune solution parfaite ne peut être trouvée, car l'imperfection est intrinsèquement tissée dans la nature même de notre être, nous rappelant sans cesse notre insignifiance face à l'immensité de l'univers qui nous engloutit sans remords ni pitié. -- La haine brute calmait l'âme sage
-{:.blockquote}
+Des builds de PC, des notes de sysadmin tirées du terrain, des apps et outils pratiques.
+Fait d'abord pour mon usage personnel, laissé en libre accès pour qui veut s'en inspirer.
 
 ## Derniers articles
 
