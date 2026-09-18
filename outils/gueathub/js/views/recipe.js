@@ -192,6 +192,11 @@ export function recipeView(app, { id }) {
             <p class="mt-1 whitespace-pre-line">${recipe.notes}</p>
           </section>`
         : ""}
+      <p class="mt-10 text-center">
+        <button type="button" class="inline-flex min-h-11 items-center gap-1.5 rounded-full px-3 text-sm text-ink-soft hover:text-ink" data-action="copy-link" data-focus="copy-link">
+          ${icon("link-45deg", "size-4")} Copier le lien de la recette
+        </button>
+      </p>
     `);
   }
 
@@ -237,6 +242,9 @@ export function recipeView(app, { id }) {
       case "steps-reset":
         app.nextFocus = "step:0";
         actions.resetSteps(recipe.id);
+        break;
+      case "copy-link":
+        actions.copyPageLink();
         break;
       case "timer": {
         const index = Number(button.dataset.index);

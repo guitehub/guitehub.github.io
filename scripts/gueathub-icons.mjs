@@ -22,7 +22,7 @@ const UI_ICONS = [
   // Navigation et actions
   "journal-bookmark", "card-checklist", "gear", "house-door", "arrow-left", "search", "x-lg",
   "plus-lg", "dash-lg", "check-lg", "trash3", "three-dots-vertical", "arrow-up", "arrow-down",
-  "arrow-counterclockwise", "clipboard", "share", "box-arrow-up-right", "chevron-down",
+  "arrow-counterclockwise", "clipboard", "share", "link-45deg", "box-arrow-up-right", "chevron-down",
   // Recettes, minuteurs, écran
   "clock", "stopwatch", "play-fill", "lightbulb", "bar-chart", "tag",
   // Thème et états

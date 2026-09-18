@@ -280,3 +280,9 @@ ne tranchait pas ou a été arbitré. Fichier non publié (exclu dans `_config.y
 - **18 noms ajoutés au §6.1** du convertisseur : ceux des recettes récentes qui n'y figuraient pas.
 - **`cumin moulu` fusionné dans `cumin`** (précision « moulu ») : les deux noms donnaient deux lignes de
   courses. Le cumin rejoint les exceptions vendues uniquement sèches, sans suffixe, dans le convertisseur.
+
+## Après la phase 6 — copier le lien d'une recette
+
+- **Bouton discret en bas de la fiche** (« Copier le lien de la recette », texte gris, pas de fond) : en PWA
+  installée il n'y a pas de barre d'adresse pour partager une recette. Copie seule dans le presse-papiers,
+  pas de feuille de partage : ce n'est pas une fonction mise en avant.

@@ -199,6 +199,12 @@ export function createActions(app) {
 
   // --- Recette --------------------------------------------------------------
 
+  // Sans barre d'adresse (PWA installée), seul moyen de récupérer l'adresse de la page.
+  async function copyPageLink() {
+    if (await writeClipboard(location.href)) app.toast.show("Lien copié");
+    else app.toast.show("Impossible de copier le lien sur cet appareil");
+  }
+
   function toggleStep(recipeId, index, done) {
     store.update((state) => {
       const current = new Set(state.etapesFaites[recipeId] ?? []);
@@ -257,6 +263,7 @@ export function createActions(app) {
     setPlacard,
     removePlacardPref,
     copyList,
+    copyPageLink,
     toggleStep,
     resetSteps,
     moveCategory,
