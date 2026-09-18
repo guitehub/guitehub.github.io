@@ -9,7 +9,7 @@ categories:
   - blog
   - guide
 
-image: 255d9da4-914c-46ca-8e21-ef9ab599785a.png
+image: 255d9da4-914c-46ca-8e21-ef9ab599785a.webp
 ---
 
 # Économie de consommation facile sur CPU AMD AM5 sans perte de performance

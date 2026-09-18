@@ -1,7 +1,6 @@
 ---
 layout: page
 title: Sysadm
-image: bg_hero_sysadm.jpg
 is_main: true
 category : sysadm
 ---

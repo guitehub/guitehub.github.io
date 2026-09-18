@@ -20,6 +20,7 @@ guitehub: https://github.com/guitehub
 # Les exclusions par défaut de Jekyll sont reprises explicitement, car sous
 # Jekyll 3.10 (build classique de GitHub Pages) cette liste peut les remplacer.
 exclude:
+  - README.md
   - Gemfile
   - Gemfile.lock
   - node_modules

@@ -1,7 +1,6 @@
 ---
 layout: page
 title: Builds
-image: bg_hero_build.jpg
 is_main: true
 category: build
 ---

@@ -1,7 +1,6 @@
 ---
 layout: page
 title: Projets
-image: bg_hero_project.jpg
 is_main: true
 category: project
 ---

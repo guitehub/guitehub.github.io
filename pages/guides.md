@@ -1,7 +1,6 @@
 ---
 layout: page
 title: Guides
-image: bg_hero_guide.jpg
 is_main: true
 category: guide
 ---

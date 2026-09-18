@@ -2,46 +2,20 @@
 
 Link : [GuiteHub](https://guitehub.github.io)
 
-## Getting Started
+## Lancer le site en local
 
-### Prerequisites
+Prérequis : Ruby et Bundler (`gem install bundler`).
 
-1. **Install Ruby with DevKit** :  
-   Download and install from [rubyinstaller.org](https://rubyinstaller.org/downloads/).  
-   - During installation, select the option to install **MSYS2**.
+```bash
+bundle install
+bundle exec jekyll serve   # http://localhost:4000
+```
 
-2. **Verify Ruby and Bundler installation** :  
-   ```bash
-   ruby -v
-   gem install bundler
-   ```
+Le `Gemfile` sert au développement local (Jekyll 4). En production, GitHub Pages construit le site
+avec Jekyll 3.10 et ses plugins autorisés : ne rien utiliser qui n'existe qu'en Jekyll 4.
 
-### Installation
-
-1. **Install dependencies** :
-   ```bash
-   bundle install
-   ```
-
-2. **Run the development server** :
-   ```bash
-   bundle exec jekyll serve
-   ```
-
-3. **Open the site** :  
-   Visit [http://localhost:4000](http://localhost:4000) in your browser.
-
-### Troubleshooting
-
-- If errors occur related to `wdm` on Windows, comment out the following line in the `Gemfile` and rerun `bundle install` :
-  ```ruby
-  gem "wdm", "~> 0.1.1", platforms: [:mingw, :x64_mingw, :mswin]
-  ```
-
-- To update all dependencies, run :
-  ```bash
-  bundle update
-  ```
+Outillage Node (`npm ci`) : hooks git qui retirent les métadonnées de toutes les images
+et vérifications de gueathub, détaillés dans [`outils/gueathub/README.md`](outils/gueathub/README.md).
 
 ---
 
