@@ -19,14 +19,14 @@
     { "nom": "tomates concassées", "quantite": 400, "unite": "g", "categorie": "conserves" },
     { "nom": "pois chiche", "quantite": 400, "unite": "g", "categorie": "conserves", "precision": "en conserve, égoutté" },
     { "nom": "pâtes", "quantite": 150, "unite": "g", "categorie": "epicerie-salee", "precision": "courtes" },
-    { "nom": "bouillon de légumes", "quantite": 1.5, "unite": "l", "categorie": "condiments-epices", "placard": true },
-    { "nom": "laurier", "quantite": 2, "unite": "feuille", "categorie": "condiments-epices", "placard": true },
+    { "nom": "bouillon de légumes", "quantite": 1.5, "unite": "l", "categorie": "epices-aromates", "placard": true },
+    { "nom": "laurier", "quantite": 2, "unite": "feuille", "categorie": "epices-aromates", "placard": true },
     { "nom": "romarin", "quantite": 1, "unite": "brin", "categorie": "fruits-legumes" },
-    { "nom": "huile d'olive", "quantite": 1, "unite": "cas", "categorie": "condiments-epices", "placard": true },
+    { "nom": "huile d'olive", "quantite": 1, "unite": "cas", "categorie": "huiles-condiments", "placard": true },
     { "nom": "basilic", "quantite": 1, "unite": "botte", "categorie": "fruits-legumes", "precision": "ciselé" },
     { "nom": "persil", "quantite": 0.5, "unite": "botte", "categorie": "fruits-legumes", "precision": "ciselé" },
-    { "nom": "sel", "quantite": null, "unite": null, "categorie": "condiments-epices", "placard": true },
-    { "nom": "poivre", "quantite": null, "unite": null, "categorie": "condiments-epices", "placard": true }
+    { "nom": "sel", "quantite": null, "unite": null, "categorie": "epices-aromates", "placard": true },
+    { "nom": "poivre", "quantite": null, "unite": null, "categorie": "epices-aromates", "placard": true }
   ],
   "etapes": [
     { "texte": "Chauffer l'huile d'olive dans un grand faitout, faire revenir l'oignon jusqu'à ce qu'il devienne translucide, puis ajouter l'ail et poursuivre une minute.", "minuteur": 5 },

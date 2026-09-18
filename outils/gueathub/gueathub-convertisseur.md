@@ -70,7 +70,7 @@ Ne jamais écrire un champ facultatif à sa valeur par défaut (`false`, chaîne
 * Singulier, minuscules, accents corrects : `œuf`, `pomme de terre`, `tomate`.
 * Sans marque, sans quantité, sans préparation. « 2 oignons émincés » donne `nom: "oignon"` et `precision: "émincé"`.
 * Précis seulement quand ça change l'achat : `oignon rouge` n'est pas `oignon`, `crème liquide entière` n'est pas `crème épaisse`, `lait entier` n'est pas `lait demi-écrémé`. Sinon rester générique : `persil`, pas `persil plat frais`.
-* **Herbes et épices** : le nom nu désigne le produit **frais**, rangé en `fruits-legumes` (`basilic`, `coriandre`, `persil`, `romarin`, `thym`, `menthe`, `ciboulette`). La version sèche porte le suffixe `séché` ou `moulu` et va en `condiments-epices` (`origan séché`, `thym séché`, `cumin moulu`). Exceptions vendues uniquement sèches, sans suffixe : `laurier`, `piment en poudre`, `paprika fumé`, `curry`, `curcuma`, `cannelle`, `noix de muscade`, `herbes de Provence`.
+* **Herbes et épices** : le nom nu désigne le produit **frais**, rangé en `fruits-legumes` (`basilic`, `coriandre`, `persil`, `romarin`, `thym`, `menthe`, `ciboulette`). La version sèche porte le suffixe `séché` ou `moulu` et va en `epices-aromates` (`origan séché`, `thym séché`, `cumin moulu`). Exceptions vendues uniquement sèches, sans suffixe : `laurier`, `piment en poudre`, `paprika fumé`, `curry`, `curcuma`, `cannelle`, `noix de muscade`, `herbes de Provence`.
 * **Légumineuses** : le nom nu désigne la version en boîte, rangée en `conserves` (`pois chiche`, `haricot rouge`, `lentille`, `maïs`). La version sèche porte le suffixe `sec` et va en `epicerie-salee` (`pois chiche sec`, `lentille verte sèche`).
 * **Poivrons** : préciser la couleur seulement si la recette la demande vraiment. Sinon `poivron`.
 * Pluriels tolérés parce que le produit se vend ainsi : `lardons`, `pâtes`, `tomates concassées`, `cacahuète` reste au singulier.
@@ -87,7 +87,8 @@ Ne jamais écrire un champ facultatif à sa valeur par défaut (`false`, chaîne
 |`frais`|lardons, jambon, charcuterie, pâte brisée ou feuilletée, tofu, gnocchis frais|
 |`epicerie-salee`|pâtes, riz, semoule, légumineuses sèches, chapelure|
 |`conserves`|tomates concassées, légumineuses en boîte, thon, olives, cornichons, confits|
-|`condiments-epices`|huiles, vinaigres, sel, poivre, épices, herbes séchées, moutarde, bouillon|
+|`huiles-condiments`|huiles, vinaigres, moutarde, sauces et condiments en bocal (ketchup, harissa, câpres)|
+|`epices-aromates`|sel, poivre, épices, herbes séchées, bouillons et fonds (cube ou poudre)|
 |`saveurs-du-monde`|sauce soja, lait de coco, pâte de curry, nouilles asiatiques, tortillas|
 |`epicerie-sucree`|farine, sucre, chocolat pâtissier, levure, fruits secs, miel, maïzena|
 |`surgeles`|tout produit surgelé|
@@ -109,7 +110,8 @@ Les reprendre **à l'identique** quand il s'agit du même produit.
 |`frais`|chorizo, tofu soyeux|
 |`epicerie-salee`|pâtes, riz arborio|
 |`conserves`|concentré de tomate, graisse de canard, haricot rouge, maïs, pois chiche, tomates concassées|
-|`condiments-epices`|bouillon de légumes, cumin moulu, huile d'olive, huile de sésame, huile neutre, laurier, levure maltée, noix de muscade, origan séché, paprika fumé, piment en poudre, poivre, sel, vinaigre de riz|
+|`huiles-condiments`|huile d'olive, huile de sésame, huile neutre, levure maltée, vinaigre de riz|
+|`epices-aromates`|bouillon de légumes, cumin moulu, laurier, noix de muscade, origan séché, paprika fumé, piment en poudre, poivre, sel|
 |`saveurs-du-monde`|nouilles chinoises, nouilles soba, sauce soja, tortilla de blé|
 |`epicerie-sucree`|cacahuète, miel|
 
@@ -126,7 +128,8 @@ Les reprendre **à l'identique** quand il s'agit du même produit.
 |`boulangerie`|baguette, pain de campagne, pain de mie|
 |`epicerie-salee`|boulgour, chapelure, couscous, lentille verte sèche, polenta, quinoa, riz basmati, riz complet, semoule, spaghetti|
 |`conserves`|anchois, cornichon, lentille, olive noire, olive verte, thon, tomate pelée|
-|`condiments-epices`|bicarbonate, bouillon de volaille, cannelle, câpre, curcuma, curry, fond de veau, gomasio, graines de sésame, harissa, herbes de Provence, ketchup, moutarde, piment d'Espelette, sauce worcestershire, vinaigre balsamique, vinaigre de cidre, vinaigre de vin|
+|`huiles-condiments`|bicarbonate, câpre, gomasio, graines de sésame, harissa, ketchup, moutarde, sauce worcestershire, vinaigre balsamique, vinaigre de cidre, vinaigre de vin|
+|`epices-aromates`|bouillon de volaille, cannelle, curcuma, curry, fond de veau, herbes de Provence, piment d'Espelette|
 |`saveurs-du-monde`|galette de riz, lait de coco, miso, nouilles udon, pâte de curry rouge, pâte miso, riz gluant, sauce nuoc-mâm, sauce poisson, vermicelle de riz|
 |`epicerie-sucree`|amande, amande en poudre, chocolat noir pâtissier, compote de pomme, confiture d'abricot, farine de blé, flocon d'avoine, fruit sec, levure chimique, levure de boulanger, maïzena, noisette, noix, pignon de pin, raisin sec, sucre en poudre, sucre roux, sucre vanillé, vanille|
 |`surgeles`|épinard surgelé, framboise surgelée, petit pois surgelé, pâte feuilletée surgelée|
@@ -187,9 +190,9 @@ Fichier : \_data/gueathub/recettes/gratin-dauphinois.json
     { "nom": "crème liquide entière", "quantite": 25, "unite": "cl", "categorie": "cremerie" },
     { "nom": "ail", "quantite": 1, "unite": "gousse", "categorie": "fruits-legumes" },
     { "nom": "beurre", "quantite": 10, "unite": "g", "categorie": "cremerie", "precision": "pour le plat" },
-    { "nom": "noix de muscade", "quantite": 1, "unite": "pincee", "categorie": "condiments-epices", "precision": "râpée", "placard": true },
-    { "nom": "sel", "quantite": null, "unite": null, "categorie": "condiments-epices", "placard": true },
-    { "nom": "poivre", "quantite": null, "unite": null, "categorie": "condiments-epices", "placard": true }
+    { "nom": "noix de muscade", "quantite": 1, "unite": "pincee", "categorie": "epices-aromates", "precision": "râpée", "placard": true },
+    { "nom": "sel", "quantite": null, "unite": null, "categorie": "epices-aromates", "placard": true },
+    { "nom": "poivre", "quantite": null, "unite": null, "categorie": "epices-aromates", "placard": true }
   ],
   "etapes": \[
     { "texte": "Préchauffer le four à 150 °C. Éplucher les pommes de terre et les couper en rondelles fines, sans les laver." },

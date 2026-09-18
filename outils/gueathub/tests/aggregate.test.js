@@ -320,7 +320,7 @@ test("shoppingListText : sans les cochés, avec « facultatif » et les ajouts ;
     ingredients: [
       ing("rhum ambré", 2, "cas", { categorie: "boissons", optionnel: true }),
       ing("farine", 250, "g", { categorie: "epicerie-sucree" }),
-      ing("sel", null, null, { categorie: "condiments-epices", placard: true }),
+      ing("sel", null, null, { categorie: "epices-aromates", placard: true }),
     ],
   });
   const lines = aggregate([{ id: "a", portions: 4 }], [a], {

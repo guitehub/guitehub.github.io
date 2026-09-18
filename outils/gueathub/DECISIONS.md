@@ -258,3 +258,12 @@ ne tranchait pas ou a été arbitré. Fichier non publié (exclu dans `_config.y
   réencodée par le hook, même au-dessus de 300 Ko (pas de perte de qualité à chaque commit).
 - **Nettoyage.** `url` en https dans `_config.yml` (liens du flux RSS), variables inutilisées retirées,
   thème minima retiré du Gemfile, `.pages.yml` vide et billet modèle de Jekyll supprimés.
+
+## Après la phase 6 — rayon des épices
+
+- **`condiments-epices` scindé** en `huiles-condiments` (« Huiles & condiments » : huiles, vinaigres,
+  moutarde, condiments en bocal) et `epices-aromates` (« Épices & aromates », icône `fire` : sel, poivre,
+  épices, herbes séchées, bouillons et fonds). Recettes, fixtures de test et convertisseur mis à jour.
+- **Ancien id.** Un ajout manuel déjà enregistré avec `condiments-epices` passe dans « autre » (rayon
+  inconnu) ; l'ordre perso des rayons est nettoyé et complété automatiquement.
+- **Placard.** Le bouillon de légumes, le curcuma, le curry et le vinaigre blanc sont `placard: true` dans toutes les recettes.

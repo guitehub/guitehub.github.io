@@ -10,11 +10,11 @@
   "tags": ["vegetarien", "vegan", "rapide"],
   "ingredients": [
     { "nom": "pâtes", "quantite": 350, "unite": "g", "categorie": "epicerie-salee", "precision": "spaghetti" },
-    { "nom": "huile d'olive", "quantite": 8, "unite": "cas", "categorie": "condiments-epices", "placard": true },
+    { "nom": "huile d'olive", "quantite": 8, "unite": "cas", "categorie": "huiles-condiments", "placard": true },
     { "nom": "ail", "quantite": 6, "unite": "gousse", "categorie": "fruits-legumes", "precision": "émincé finement" },
-    { "nom": "piment en poudre", "quantite": 1, "unite": "cac", "categorie": "condiments-epices", "placard": true },
+    { "nom": "piment en poudre", "quantite": 1, "unite": "cac", "categorie": "epices-aromates", "placard": true },
     { "nom": "persil", "quantite": 1, "unite": "botte", "categorie": "fruits-legumes", "precision": "ciselé", "optionnel": true },
-    { "nom": "sel", "quantite": null, "unite": null, "categorie": "condiments-epices", "placard": true }
+    { "nom": "sel", "quantite": null, "unite": null, "categorie": "epices-aromates", "placard": true }
   ],
   "etapes": [
     { "texte": "Porter à ébullition une grande casserole d'eau salée et y cuire les pâtes.", "minuteur": 10 },

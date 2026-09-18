@@ -18,13 +18,13 @@
     { "nom": "ail", "quantite": 2, "unite": "gousse", "categorie": "fruits-legumes", "precision": "écrasé" },
     { "nom": "citron vert", "quantite": 1, "unite": "piece", "categorie": "fruits-legumes", "precision": "pour le jus" },
     { "nom": "tortilla de blé", "quantite": 8, "unite": "piece", "categorie": "saveurs-du-monde" },
-    { "nom": "huile d'olive", "quantite": 3, "unite": "cas", "categorie": "condiments-epices", "placard": true },
-    { "nom": "paprika fumé", "quantite": 2, "unite": "cac", "categorie": "condiments-epices", "placard": true },
-    { "nom": "cumin moulu", "quantite": 1.5, "unite": "cac", "categorie": "condiments-epices", "placard": true },
-    { "nom": "piment en poudre", "quantite": 0.5, "unite": "cac", "categorie": "condiments-epices", "placard": true },
-    { "nom": "origan séché", "quantite": 1, "unite": "cac", "categorie": "condiments-epices", "placard": true },
-    { "nom": "sel", "quantite": null, "unite": null, "categorie": "condiments-epices", "placard": true },
-    { "nom": "poivre", "quantite": null, "unite": null, "categorie": "condiments-epices", "placard": true }
+    { "nom": "huile d'olive", "quantite": 3, "unite": "cas", "categorie": "huiles-condiments", "placard": true },
+    { "nom": "paprika fumé", "quantite": 2, "unite": "cac", "categorie": "epices-aromates", "placard": true },
+    { "nom": "cumin moulu", "quantite": 1.5, "unite": "cac", "categorie": "epices-aromates", "placard": true },
+    { "nom": "piment en poudre", "quantite": 0.5, "unite": "cac", "categorie": "epices-aromates", "placard": true },
+    { "nom": "origan séché", "quantite": 1, "unite": "cac", "categorie": "epices-aromates", "placard": true },
+    { "nom": "sel", "quantite": null, "unite": null, "categorie": "epices-aromates", "placard": true },
+    { "nom": "poivre", "quantite": null, "unite": null, "categorie": "epices-aromates", "placard": true }
   ],
   "etapes": [
     { "texte": "Mélanger l'huile d'olive, le paprika fumé, le cumin, le piment, l'ail, l'origan, le sel et le poivre. Enrober les blancs de poulet entiers, sans les couper, et laisser mariner.", "minuteur": 15 },

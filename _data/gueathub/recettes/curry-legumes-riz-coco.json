@@ -20,11 +20,11 @@
     { "nom": "pâte de curry rouge", "quantite": 2, "unite": "cas", "categorie": "saveurs-du-monde" },
     { "nom": "lait de coco", "quantite": 400, "unite": "ml", "categorie": "saveurs-du-monde" },
     { "nom": "tomates concassées", "quantite": 200, "unite": "g", "categorie": "conserves" },
-    { "nom": "huile neutre", "quantite": 2, "unite": "cas", "categorie": "condiments-epices", "placard": true },
-    { "nom": "bouillon de légumes", "quantite": 150, "unite": "ml", "categorie": "condiments-epices", "placard": true },
+    { "nom": "huile neutre", "quantite": 2, "unite": "cas", "categorie": "huiles-condiments", "placard": true },
+    { "nom": "bouillon de légumes", "quantite": 150, "unite": "ml", "categorie": "epices-aromates", "placard": true },
     { "nom": "pois chiche", "quantite": 240, "unite": "g", "categorie": "conserves", "precision": "en boîte, égoutté" },
     { "nom": "coriandre", "quantite": 1, "unite": "botte", "categorie": "fruits-legumes" },
-    { "nom": "sel", "quantite": null, "unite": null, "categorie": "condiments-epices", "placard": true },
+    { "nom": "sel", "quantite": null, "unite": null, "categorie": "epices-aromates", "placard": true },
     { "nom": "citron vert", "quantite": 1, "unite": "piece", "categorie": "fruits-legumes" }
   ],
   "etapes": [

@@ -12,10 +12,10 @@
     { "nom": "pomme de terre", "quantite": 1, "unite": "kg", "categorie": "fruits-legumes", "precision": "à chair ferme" },
     { "nom": "graisse de canard", "quantite": 3, "unite": "cas", "categorie": "conserves" },
     { "nom": "ail", "quantite": 3, "unite": "gousse", "categorie": "fruits-legumes" },
-    { "nom": "paprika fumé", "quantite": 1.5, "unite": "cac", "categorie": "condiments-epices", "placard": true },
+    { "nom": "paprika fumé", "quantite": 1.5, "unite": "cac", "categorie": "epices-aromates", "placard": true },
     { "nom": "persil", "quantite": 2, "unite": "cas", "categorie": "fruits-legumes", "precision": "ciselé" },
-    { "nom": "sel", "quantite": null, "unite": null, "categorie": "condiments-epices", "placard": true },
-    { "nom": "poivre", "quantite": null, "unite": null, "categorie": "condiments-epices", "placard": true }
+    { "nom": "sel", "quantite": null, "unite": null, "categorie": "epices-aromates", "placard": true },
+    { "nom": "poivre", "quantite": null, "unite": null, "categorie": "epices-aromates", "placard": true }
   ],
   "etapes": [
     { "texte": "Éplucher les pommes de terre et les couper en cubes réguliers d'environ 2 cm. Rincer puis bien sécher dans un torchon." },

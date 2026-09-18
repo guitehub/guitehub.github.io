@@ -18,10 +18,10 @@
     { "nom": "graisse de canard", "quantite": 2, "unite": "cas", "categorie": "conserves" },
     { "nom": "œuf", "quantite": 4, "unite": "piece", "categorie": "cremerie" },
     { "nom": "sauce soja", "quantite": 4, "unite": "cas", "categorie": "saveurs-du-monde", "placard": true },
-    { "nom": "vinaigre de riz", "quantite": 1, "unite": "cas", "categorie": "condiments-epices", "placard": true },
+    { "nom": "vinaigre de riz", "quantite": 1, "unite": "cas", "categorie": "huiles-condiments", "placard": true },
     { "nom": "miel", "quantite": 1, "unite": "cac", "categorie": "epicerie-sucree" },
-    { "nom": "huile de sésame", "quantite": 1, "unite": "cac", "categorie": "condiments-epices", "precision": "grillé", "placard": true },
-    { "nom": "poivre", "quantite": null, "unite": null, "categorie": "condiments-epices", "placard": true }
+    { "nom": "huile de sésame", "quantite": 1, "unite": "cac", "categorie": "huiles-condiments", "precision": "grillé", "placard": true },
+    { "nom": "poivre", "quantite": null, "unite": null, "categorie": "epices-aromates", "placard": true }
   ],
   "etapes": [
     { "texte": "Mélanger dans un bol la sauce soja, le vinaigre de riz, le miel, l'huile de sésame, un peu d'eau et le poivre. Réserver à portée de main : une fois la poêle lancée, tout va très vite." },

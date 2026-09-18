@@ -12,16 +12,16 @@
     { "nom": "cuisse de poulet", "quantite": 4, "unite": "piece", "categorie": "boucherie-poissonnerie" },
     { "nom": "haricot vert", "quantite": 500, "unite": "g", "categorie": "fruits-legumes" },
     { "nom": "pomme de terre", "quantite": 800, "unite": "g", "categorie": "fruits-legumes", "precision": "à chair ferme" },
-    { "nom": "moutarde", "quantite": 2, "unite": "cas", "categorie": "condiments-epices", "placard": true },
+    { "nom": "moutarde", "quantite": 2, "unite": "cas", "categorie": "huiles-condiments", "placard": true },
     { "nom": "crème liquide entière", "quantite": 20, "unite": "cl", "categorie": "cremerie" },
     { "nom": "beurre", "quantite": 60, "unite": "g", "categorie": "cremerie" },
     { "nom": "oignon", "quantite": 1, "unite": "piece", "categorie": "fruits-legumes" },
     { "nom": "lait entier", "quantite": 10, "unite": "cl", "categorie": "cremerie" },
     { "nom": "vin blanc sec", "quantite": 10, "unite": "cl", "categorie": "boissons" },
-    { "nom": "huile neutre", "quantite": 1, "unite": "cas", "categorie": "condiments-epices", "placard": true },
-    { "nom": "noix de muscade", "quantite": 1, "unite": "pincee", "categorie": "condiments-epices", "precision": "râpée", "placard": true },
-    { "nom": "sel", "quantite": null, "unite": null, "categorie": "condiments-epices", "placard": true },
-    { "nom": "poivre", "quantite": null, "unite": null, "categorie": "condiments-epices", "placard": true }
+    { "nom": "huile neutre", "quantite": 1, "unite": "cas", "categorie": "huiles-condiments", "placard": true },
+    { "nom": "noix de muscade", "quantite": 1, "unite": "pincee", "categorie": "epices-aromates", "precision": "râpée", "placard": true },
+    { "nom": "sel", "quantite": null, "unite": null, "categorie": "epices-aromates", "placard": true },
+    { "nom": "poivre", "quantite": null, "unite": null, "categorie": "epices-aromates", "placard": true }
   ],
   "etapes": [
     { "texte": "Éplucher les pommes de terre, les couper en morceaux et les cuire à l'eau bouillante salée jusqu'à ce qu'elles soient tendres.", "minuteur": 20 },

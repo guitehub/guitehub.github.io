@@ -16,9 +16,9 @@
     { "nom": "beurre", "quantite": 20, "unite": "g", "categorie": "cremerie" },
     { "nom": "vin blanc sec", "quantite": 10, "unite": "cl", "categorie": "boissons" },
     { "nom": "crème liquide entière", "quantite": 25, "unite": "cl", "categorie": "cremerie" },
-    { "nom": "noix de muscade", "quantite": 1, "unite": "pincee", "categorie": "condiments-epices", "precision": "râpée", "placard": true },
-    { "nom": "sel", "quantite": null, "unite": null, "categorie": "condiments-epices", "placard": true },
-    { "nom": "poivre", "quantite": null, "unite": null, "categorie": "condiments-epices", "placard": true }
+    { "nom": "noix de muscade", "quantite": 1, "unite": "pincee", "categorie": "epices-aromates", "precision": "râpée", "placard": true },
+    { "nom": "sel", "quantite": null, "unite": null, "categorie": "epices-aromates", "placard": true },
+    { "nom": "poivre", "quantite": null, "unite": null, "categorie": "epices-aromates", "placard": true }
   ],
   "etapes": [
     { "texte": "Laver les poireaux, retirer la partie verte trop fibreuse, puis les émincer finement en rondelles. Émincer aussi l'oignon." },

@@ -16,10 +16,10 @@
     { "nom": "oignon nouveau", "quantite": 3, "unite": "piece", "categorie": "fruits-legumes" },
     { "nom": "ail", "quantite": 2, "unite": "gousse", "categorie": "fruits-legumes" },
     { "nom": "sauce soja", "quantite": 3, "unite": "cas", "categorie": "saveurs-du-monde", "placard": true },
-    { "nom": "huile de sésame", "quantite": 1, "unite": "cac", "categorie": "condiments-epices", "placard": true },
-    { "nom": "huile neutre", "quantite": 3, "unite": "cas", "categorie": "condiments-epices", "placard": true },
-    { "nom": "sel", "quantite": null, "unite": null, "categorie": "condiments-epices", "placard": true },
-    { "nom": "poivre", "quantite": null, "unite": null, "categorie": "condiments-epices", "placard": true }
+    { "nom": "huile de sésame", "quantite": 1, "unite": "cac", "categorie": "huiles-condiments", "placard": true },
+    { "nom": "huile neutre", "quantite": 3, "unite": "cas", "categorie": "huiles-condiments", "placard": true },
+    { "nom": "sel", "quantite": null, "unite": null, "categorie": "epices-aromates", "placard": true },
+    { "nom": "poivre", "quantite": null, "unite": null, "categorie": "epices-aromates", "placard": true }
   ],
   "etapes": [
     { "texte": "Cuire le riz dans une grande quantité d'eau salée, puis égoutter et laisser refroidir complètement, idéalement étalé sur une plaque.", "minuteur": 15 },

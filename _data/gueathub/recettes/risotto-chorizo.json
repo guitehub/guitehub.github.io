@@ -10,12 +10,12 @@
   "tags": ["automne", "hiver"],
   "ingredients": [
     { "nom": "riz arborio", "quantite": 333, "unite": "g", "categorie": "epicerie-salee" },
-    { "nom": "huile d'olive", "quantite": 1, "unite": "cas", "categorie": "condiments-epices", "placard": true },
+    { "nom": "huile d'olive", "quantite": 1, "unite": "cas", "categorie": "huiles-condiments", "placard": true },
     { "nom": "beurre", "quantite": 20, "unite": "g", "categorie": "cremerie" },
     { "nom": "chorizo", "quantite": 225, "unite": "g", "categorie": "frais", "precision": "pelé, en demi-rondelles fines" },
     { "nom": "crème liquide entière", "quantite": 20, "unite": "cl", "categorie": "cremerie" },
-    { "nom": "sel", "quantite": null, "unite": null, "categorie": "condiments-epices", "placard": true },
-    { "nom": "poivre", "quantite": null, "unite": null, "categorie": "condiments-epices", "placard": true }
+    { "nom": "sel", "quantite": null, "unite": null, "categorie": "epices-aromates", "placard": true },
+    { "nom": "poivre", "quantite": null, "unite": null, "categorie": "epices-aromates", "placard": true }
   ],
   "etapes": [
     { "texte": "Mesurer le riz dans un gobelet pour repérer son volume : ce repère sert à doser l'eau pendant toute la cuisson. Faire chauffer de l'eau. Peler le chorizo et le couper en demi-rondelles fines." },

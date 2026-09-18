@@ -13,16 +13,16 @@
     { "nom": "oignon", "quantite": 1, "unite": "piece", "categorie": "fruits-legumes" },
     { "nom": "ail", "quantite": 2, "unite": "gousse", "categorie": "fruits-legumes" },
     { "nom": "gingembre", "quantite": 1, "unite": "cas", "categorie": "fruits-legumes", "precision": "râpé" },
-    { "nom": "curry", "quantite": 2, "unite": "cac", "categorie": "condiments-epices" },
-    { "nom": "curcuma", "quantite": 0.5, "unite": "cac", "categorie": "condiments-epices" },
+    { "nom": "curry", "quantite": 2, "unite": "cac", "categorie": "epices-aromates", "placard": true },
+    { "nom": "curcuma", "quantite": 0.5, "unite": "cac", "categorie": "epices-aromates", "placard": true },
     { "nom": "lait de coco", "quantite": 400, "unite": "ml", "categorie": "saveurs-du-monde" },
-    { "nom": "bouillon de légumes", "quantite": 150, "unite": "ml", "categorie": "condiments-epices" },
-    { "nom": "huile d'olive", "quantite": 2, "unite": "cas", "categorie": "condiments-epices", "placard": true },
+    { "nom": "bouillon de légumes", "quantite": 150, "unite": "ml", "categorie": "epices-aromates", "placard": true },
+    { "nom": "huile d'olive", "quantite": 2, "unite": "cas", "categorie": "huiles-condiments", "placard": true },
     { "nom": "citron vert", "quantite": 1, "unite": "piece", "categorie": "fruits-legumes", "precision": "pressé" },
     { "nom": "coriandre", "quantite": 2, "unite": "cas", "categorie": "fruits-legumes", "precision": "ciselée" },
     { "nom": "riz basmati", "quantite": 300, "unite": "g", "categorie": "epicerie-salee" },
-    { "nom": "sel", "quantite": null, "unite": null, "categorie": "condiments-epices", "placard": true },
-    { "nom": "poivre", "quantite": null, "unite": null, "categorie": "condiments-epices", "placard": true }
+    { "nom": "sel", "quantite": null, "unite": null, "categorie": "epices-aromates", "placard": true },
+    { "nom": "poivre", "quantite": null, "unite": null, "categorie": "epices-aromates", "placard": true }
   ],
   "etapes": [
     { "texte": "Couper le fenouil en quartiers épais, en gardant un peu de base pour qu'ils tiennent. Émincer l'oignon et hacher l'ail." },

@@ -14,7 +14,7 @@
     { "nom": "œuf", "quantite": 3, "unite": "piece", "categorie": "cremerie" },
     { "nom": "crème liquide entière", "quantite": 20, "unite": "cl", "categorie": "cremerie" },
     { "nom": "lait entier", "quantite": 100, "unite": "ml", "categorie": "cremerie" },
-    { "nom": "noix de muscade", "quantite": 1, "unite": "pincee", "categorie": "condiments-epices", "placard": true }
+    { "nom": "noix de muscade", "quantite": 1, "unite": "pincee", "categorie": "epices-aromates", "placard": true }
   ],
   "etapes": [
     { "texte": "Préchauffer le four à 180 °C. Dérouler la pâte dans un moule à tarte et la piquer à la fourchette." },
