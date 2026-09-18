@@ -70,7 +70,7 @@ Ne jamais écrire un champ facultatif à sa valeur par défaut (`false`, chaîne
 * Singulier, minuscules, accents corrects : `œuf`, `pomme de terre`, `tomate`.
 * Sans marque, sans quantité, sans préparation. « 2 oignons émincés » donne `nom: "oignon"` et `precision: "émincé"`.
 * Précis seulement quand ça change l'achat : `oignon rouge` n'est pas `oignon`, `crème liquide entière` n'est pas `crème épaisse`, `lait entier` n'est pas `lait demi-écrémé`. Sinon rester générique : `persil`, pas `persil plat frais`.
-* **Herbes et épices** : le nom nu désigne le produit **frais**, rangé en `fruits-legumes` (`basilic`, `coriandre`, `persil`, `romarin`, `thym`, `menthe`, `ciboulette`). La version sèche porte le suffixe `séché` ou `moulu` et va en `epices-aromates` (`origan séché`, `thym séché`, `cumin moulu`). Exceptions vendues uniquement sèches, sans suffixe : `laurier`, `piment en poudre`, `paprika fumé`, `curry`, `curcuma`, `cannelle`, `noix de muscade`, `herbes de Provence`.
+* **Herbes et épices** : le nom nu désigne le produit **frais**, rangé en `fruits-legumes` (`basilic`, `coriandre`, `persil`, `romarin`, `thym`, `menthe`, `ciboulette`). La version sèche porte le suffixe `séché` ou `moulu` et va en `epices-aromates` (`origan séché`, `thym séché`, `gingembre moulu`). Exceptions vendues uniquement sèches, sans suffixe : `cumin`, `laurier`, `piment en poudre`, `paprika fumé`, `curry`, `curcuma`, `cannelle`, `noix de muscade`, `herbes de Provence`.
 * **Légumineuses** : le nom nu désigne la version en boîte, rangée en `conserves` (`pois chiche`, `haricot rouge`, `lentille`, `maïs`). La version sèche porte le suffixe `sec` et va en `epicerie-salee` (`pois chiche sec`, `lentille verte sèche`).
 * **Poivrons** : préciser la couleur seulement si la recette la demande vraiment. Sinon `poivron`.
 * Pluriels tolérés parce que le produit se vend ainsi : `lardons`, `pâtes`, `tomates concassées`, `cacahuète` reste au singulier.
@@ -104,16 +104,17 @@ Les reprendre **à l'identique** quand il s'agit du même produit.
 
 |Rayon|Noms|
 |-|-|
-|`fruits-legumes`|ail, basilic, carotte, chou blanc, citron, citron vert, coriandre, courgette, céleri branche, oignon, oignon rouge, persil, poivron, poivron jaune, poivron rouge, pomme de terre, romarin|
+|`fruits-legumes`|ail, basilic, carotte, céleri branche, chou blanc, citron, citron vert, coriandre, courgette, oignon, oignon nouveau, oignon rouge, persil, poivron, poivron jaune, poivron rouge, pomme de terre, pousse de soja, romarin|
+|`boulangerie`|naan|
+|`boucherie-poissonnerie`|blanc de poulet, dos de cabillaud|
 |`cremerie`|beurre, crème liquide entière, lait entier, œuf|
-|`boucherie-poissonnerie`|blanc de poulet|
-|`frais`|chorizo, tofu soyeux|
-|`epicerie-salee`|pâtes, riz arborio|
+|`frais`|chorizo, galette de sarrasin, tofu soyeux|
+|`epicerie-salee`|lentille corail, pâtes, riz arborio, riz noir, riz sauvage, tagliatelles|
 |`conserves`|concentré de tomate, graisse de canard, haricot rouge, maïs, pois chiche, tomates concassées|
-|`huiles-condiments`|huile d'olive, huile de sésame, huile neutre, levure maltée, vinaigre de riz|
-|`epices-aromates`|bouillon de légumes, cumin moulu, laurier, noix de muscade, origan séché, paprika fumé, piment en poudre, poivre, sel|
+|`huiles-condiments`|huile d'olive, huile de sésame, huile neutre, levure maltée, vinaigre blanc, vinaigre de riz|
+|`epices-aromates`|bouillon de légumes, cumin, garam masala, gingembre moulu, graines de moutarde, laurier, noix de muscade, origan séché, paprika fumé, piment en flocons, piment en poudre, poivre, sel|
 |`saveurs-du-monde`|nouilles chinoises, nouilles soba, sauce soja, tortilla de blé|
-|`epicerie-sucree`|cacahuète, miel|
+|`epicerie-sucree`|beurre de cacahuète, cacahuète, miel, noix de cajou, sirop d'érable|
 
 ### 6.2 Noms pré-approuvés pour la suite
 

@@ -274,3 +274,9 @@ ne tranchait pas ou a été arbitré. Fichier non publié (exclu dans `_config.y
   sa place dans l'ordre des rayons (pas de saut de la liste). Un clic le déplie pour décocher ; dès qu'il
   n'est plus complet, il redevient un rayon normal. Remplace le message « Tout est coché dans ce rayon ».
 - **Focus.** Quand la case cochée disparaît dans le rayon replié, le focus passe à l'en-tête du rayon.
+
+## Après la phase 6 — lexique du convertisseur
+
+- **18 noms ajoutés au §6.1** du convertisseur : ceux des recettes récentes qui n'y figuraient pas.
+- **`cumin moulu` fusionné dans `cumin`** (précision « moulu ») : les deux noms donnaient deux lignes de
+  courses. Le cumin rejoint les exceptions vendues uniquement sèches, sans suffixe, dans le convertisseur.

@@ -19,7 +19,7 @@
     { "nom": "concentré de tomate", "quantite": 2, "unite": "cas", "categorie": "conserves" },
     { "nom": "bouillon de légumes", "quantite": 400, "unite": "ml", "categorie": "epices-aromates", "placard": true },
     { "nom": "huile d'olive", "quantite": 2, "unite": "cas", "categorie": "huiles-condiments", "placard": true },
-    { "nom": "cumin moulu", "quantite": 2, "unite": "cac", "categorie": "epices-aromates", "placard": true },
+    { "nom": "cumin", "quantite": 2, "unite": "cac", "categorie": "epices-aromates", "precision": "moulu", "placard": true },
     { "nom": "piment en poudre", "quantite": 1, "unite": "cac", "categorie": "epices-aromates", "placard": true },
     { "nom": "paprika fumé", "quantite": 1, "unite": "cac", "categorie": "epices-aromates", "placard": true },
     { "nom": "sel", "quantite": null, "unite": null, "categorie": "epices-aromates", "placard": true },

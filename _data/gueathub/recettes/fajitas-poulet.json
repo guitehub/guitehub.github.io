@@ -20,7 +20,7 @@
     { "nom": "tortilla de blé", "quantite": 8, "unite": "piece", "categorie": "saveurs-du-monde" },
     { "nom": "huile d'olive", "quantite": 3, "unite": "cas", "categorie": "huiles-condiments", "placard": true },
     { "nom": "paprika fumé", "quantite": 2, "unite": "cac", "categorie": "epices-aromates", "placard": true },
-    { "nom": "cumin moulu", "quantite": 1.5, "unite": "cac", "categorie": "epices-aromates", "placard": true },
+    { "nom": "cumin", "quantite": 1.5, "unite": "cac", "categorie": "epices-aromates", "precision": "moulu", "placard": true },
     { "nom": "piment en poudre", "quantite": 0.5, "unite": "cac", "categorie": "epices-aromates", "placard": true },
     { "nom": "origan séché", "quantite": 1, "unite": "cac", "categorie": "epices-aromates", "placard": true },
     { "nom": "sel", "quantite": null, "unite": null, "categorie": "epices-aromates", "placard": true },

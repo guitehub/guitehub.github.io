@@ -17,7 +17,7 @@
     { "nom": "pois chiche", "quantite": 240, "unite": "g", "categorie": "conserves" },
     { "nom": "tomates concassées", "quantite": 400, "unite": "g", "categorie": "conserves" },
     { "nom": "huile d'olive", "quantite": 3, "unite": "cas", "categorie": "huiles-condiments", "placard": true },
-    { "nom": "cumin moulu", "quantite": 1, "unite": "cac", "categorie": "epices-aromates", "placard": true },
+    { "nom": "cumin", "quantite": 1, "unite": "cac", "categorie": "epices-aromates", "precision": "moulu", "placard": true },
     { "nom": "curcuma", "quantite": 1, "unite": "cac", "categorie": "epices-aromates", "placard": true },
     { "nom": "cannelle", "quantite": 0.5, "unite": "cac", "categorie": "epices-aromates", "placard": true },
     { "nom": "gingembre moulu", "quantite": 0.5, "unite": "cac", "categorie": "epices-aromates", "placard": true },

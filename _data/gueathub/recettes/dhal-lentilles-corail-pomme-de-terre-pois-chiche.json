@@ -17,7 +17,7 @@
     { "nom": "gingembre", "quantite": 1, "unite": "piece", "categorie": "fruits-legumes", "precision": "morceau d'environ 3 cm, pelé et râpé" },
     { "nom": "tomates concassées", "quantite": 400, "unite": "g", "categorie": "conserves" },
     { "nom": "lait de coco", "quantite": 400, "unite": "ml", "categorie": "saveurs-du-monde" },
-    { "nom": "cumin moulu", "quantite": 1, "unite": "cac", "categorie": "epices-aromates", "placard": true },
+    { "nom": "cumin", "quantite": 1, "unite": "cac", "categorie": "epices-aromates", "precision": "moulu", "placard": true },
     { "nom": "curcuma", "quantite": 1, "unite": "cac", "categorie": "epices-aromates", "placard": true },
     { "nom": "garam masala", "quantite": 1, "unite": "cac", "categorie": "epices-aromates", "placard": true },
     { "nom": "graines de moutarde", "quantite": 0.5, "unite": "cac", "categorie": "epices-aromates", "optionnel": true, "placard": true },
