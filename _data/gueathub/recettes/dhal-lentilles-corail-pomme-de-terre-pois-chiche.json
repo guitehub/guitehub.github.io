@@ -1,0 +1,39 @@
+{
+  "schema": 1,
+  "id": "dhal-lentilles-corail-pomme-de-terre-pois-chiche",
+  "titre": "Dhal de lentilles corail, pomme de terre et pois chiche",
+  "description": "Lentilles corail, pomme de terre et pois chiche mijotés au lait de coco et aux épices, servis avec du pain naan.",
+  "type": "plat",
+  "portions": 4,
+  "temps": { "preparation": 15, "cuisson": 36, "repos": 0 },
+  "difficulte": "facile",
+  "tags": ["vegetarien", "batch-cooking"],
+  "ingredients": [
+    { "nom": "lentille corail", "quantite": 250, "unite": "g", "categorie": "epicerie-salee" },
+    { "nom": "pomme de terre", "quantite": 300, "unite": "g", "categorie": "fruits-legumes", "precision": "à chair ferme" },
+    { "nom": "pois chiche", "quantite": 240, "unite": "g", "categorie": "conserves" },
+    { "nom": "oignon", "quantite": 1, "unite": "piece", "categorie": "fruits-legumes" },
+    { "nom": "ail", "quantite": 2, "unite": "gousse", "categorie": "fruits-legumes" },
+    { "nom": "gingembre", "quantite": 1, "unite": "piece", "categorie": "fruits-legumes", "precision": "morceau d'environ 3 cm, pelé et râpé" },
+    { "nom": "tomates concassées", "quantite": 400, "unite": "g", "categorie": "conserves" },
+    { "nom": "lait de coco", "quantite": 400, "unite": "ml", "categorie": "saveurs-du-monde" },
+    { "nom": "cumin moulu", "quantite": 1, "unite": "cac", "categorie": "epices-aromates", "placard": true },
+    { "nom": "curcuma", "quantite": 1, "unite": "cac", "categorie": "epices-aromates", "placard": true },
+    { "nom": "garam masala", "quantite": 1, "unite": "cac", "categorie": "epices-aromates", "placard": true },
+    { "nom": "graines de moutarde", "quantite": 0.5, "unite": "cac", "categorie": "epices-aromates", "optionnel": true, "placard": true },
+    { "nom": "huile neutre", "quantite": 2, "unite": "cas", "categorie": "huiles-condiments", "placard": true },
+    { "nom": "sel", "quantite": 1, "unite": "cac", "categorie": "epices-aromates", "placard": true },
+    { "nom": "coriandre", "quantite": 1, "unite": "botte", "categorie": "fruits-legumes", "precision": "pour servir" },
+    { "nom": "naan", "quantite": 4, "unite": "piece", "categorie": "boulangerie", "precision": "à réchauffer avant de servir" }
+  ],
+  "etapes": [
+    { "texte": "Éplucher et émincer finement l'oignon, l'ail et le gingembre. Éplucher la pomme de terre et la couper en dés. Rincer les lentilles corail à l'eau froide jusqu'à ce que l'eau soit claire." },
+    { "texte": "Chauffer l'huile dans une grande casserole à feu moyen. Ajouter les graines de moutarde et laisser crépiter quelques secondes, puis ajouter l'oignon et faire revenir jusqu'à ce qu'il soit translucide.", "minuteur": 5 },
+    { "texte": "Ajouter l'ail, le gingembre, le cumin, le curcuma et le garam masala. Faire revenir en remuant jusqu'à ce que les épices deviennent parfumées.", "minuteur": 1 },
+    { "texte": "Ajouter les lentilles, la pomme de terre, les tomates concassées, le lait de coco et le sel. Compléter avec un peu d'eau si nécessaire pour couvrir. Porter à ébullition puis baisser le feu et laisser mijoter à couvert en remuant de temps en temps, jusqu'à ce que les lentilles et la pomme de terre soient tendres.", "minuteur": 25 },
+    { "texte": "Ajouter les pois chiche et laisser réchauffer. Rectifier l'assaisonnement en sel.", "minuteur": 5 },
+    { "texte": "Réchauffer les naans quelques instants à la poêle ou au four." },
+    { "texte": "Servir le dhal bien chaud, parsemé de coriandre fraîche, accompagné des naans." }
+  ],
+  "notes": "Ce dhal se congèle très bien — penser à en faire une double portion. Pour plus de piquant, ajouter un piment vert fendu avec l'oignon."
+}

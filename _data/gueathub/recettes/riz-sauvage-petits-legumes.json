@@ -1,0 +1,37 @@
+{
+  "schema": 1,
+  "id": "riz-sauvage-petits-legumes",
+  "titre": "Riz sauvage aux petits légumes",
+  "description": "Riz sauvage sauté avec carotte, courgette, poivron et petits pois, relevé de citron et de persil.",
+  "type": "plat",
+  "portions": 4,
+  "temps": { "preparation": 15, "cuisson": 59, "repos": 0 },
+  "difficulte": "facile",
+  "tags": ["vegetarien", "printemps"],
+  "ingredients": [
+    { "nom": "riz sauvage", "quantite": 250, "unite": "g", "categorie": "epicerie-salee" },
+    { "nom": "oignon", "quantite": 1, "unite": "piece", "categorie": "fruits-legumes" },
+    { "nom": "ail", "quantite": 2, "unite": "gousse", "categorie": "fruits-legumes" },
+    { "nom": "carotte", "quantite": 2, "unite": "piece", "categorie": "fruits-legumes" },
+    { "nom": "courgette", "quantite": 1, "unite": "piece", "categorie": "fruits-legumes" },
+    { "nom": "poivron rouge", "quantite": 1, "unite": "piece", "categorie": "fruits-legumes" },
+    { "nom": "petit pois surgelé", "quantite": 150, "unite": "g", "categorie": "surgeles" },
+    { "nom": "huile d'olive", "quantite": 3, "unite": "cas", "categorie": "huiles-condiments", "placard": true },
+    { "nom": "bouillon de légumes", "quantite": 750, "unite": "ml", "categorie": "epices-aromates", "placard": true },
+    { "nom": "persil", "quantite": 0.5, "unite": "botte", "categorie": "fruits-legumes" },
+    { "nom": "citron", "quantite": 1, "unite": "piece", "categorie": "fruits-legumes" },
+    { "nom": "sel", "quantite": null, "unite": null, "categorie": "epices-aromates", "placard": true },
+    { "nom": "poivre", "quantite": null, "unite": null, "categorie": "epices-aromates", "placard": true }
+  ],
+  "etapes": [
+    { "texte": "Rincer le riz sauvage à l'eau froide. Le cuire dans le bouillon de légumes avec une pincée de sel, à couvert, jusqu'à ce que les grains s'ouvrent légèrement et soient tendres.", "minuteur": 45 },
+    { "texte": "Éplucher et émincer finement l'oignon et l'ail. Couper la carotte et la courgette en petits dés, et le poivron en fines lanières." },
+    { "texte": "Faire chauffer l'huile d'olive dans une grande poêle à feu moyen. Faire suer l'oignon jusqu'à ce qu'il devienne translucide, puis ajouter l'ail.", "minuteur": 3 },
+    { "texte": "Ajouter la carotte et le poivron et faire revenir en remuant régulièrement.", "minuteur": 5 },
+    { "texte": "Incorporer la courgette et les petits pois, poursuivre la cuisson jusqu'à ce que les légumes soient tendres mais encore croquants.", "minuteur": 4 },
+    { "texte": "Égoutter le riz sauvage si besoin, l'ajouter à la poêlée de légumes et mélanger à feu doux pour bien réchauffer l'ensemble.", "minuteur": 2 },
+    { "texte": "Hors du feu, ciseler le persil et l'ajouter avec le zeste et un filet de jus de citron. Rectifier l'assaisonnement en sel et poivre, puis servir aussitôt." }
+  ],
+  "source": "Recette maison",
+  "notes": "Sans fromage. Pour varier, remplacer les petits pois par des edamames, ou ajouter des amandes effilées torréfiées pour du croquant. Se garde 2 jours au réfrigérateur."
+}

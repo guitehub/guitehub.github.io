@@ -1,0 +1,31 @@
+{
+  "schema": 1,
+  "id": "galette-complete-fondue-poireau-pommes-de-terre",
+  "titre": "Galette bretonne complète, fondue de poireau et pommes de terre",
+  "description": "Galette de sarrasin garnie jambon, œuf et fromage, accompagnée d'une fondue de poireau et de pommes de terre vapeur.",
+  "type": "plat",
+  "portions": 4,
+  "temps": { "preparation": 15, "cuisson": 40, "repos": 0 },
+  "difficulte": "facile",
+  "tags": [],
+  "ingredients": [
+    { "nom": "galette de sarrasin", "quantite": 4, "unite": "piece", "categorie": "frais" },
+    { "nom": "jambon blanc", "quantite": 4, "unite": "tranche", "categorie": "frais" },
+    { "nom": "œuf", "quantite": 4, "unite": "piece", "categorie": "cremerie" },
+    { "nom": "gruyère râpé", "quantite": 150, "unite": "g", "categorie": "cremerie" },
+    { "nom": "poireau", "quantite": 4, "unite": "piece", "categorie": "fruits-legumes" },
+    { "nom": "crème liquide entière", "quantite": 10, "unite": "cl", "categorie": "cremerie" },
+    { "nom": "beurre", "quantite": 30, "unite": "g", "categorie": "cremerie" },
+    { "nom": "pomme de terre", "quantite": 800, "unite": "g", "categorie": "fruits-legumes" },
+    { "nom": "sel", "quantite": null, "unite": null, "categorie": "epices-aromates", "placard": true },
+    { "nom": "poivre", "quantite": null, "unite": null, "categorie": "epices-aromates", "placard": true }
+  ],
+  "etapes": [
+    { "texte": "Éplucher les pommes de terre, les couper en morceaux et les cuire à l'eau bouillante salée.", "minuteur": 20 },
+    { "texte": "Laver et émincer finement les poireaux." },
+    { "texte": "Faire fondre le beurre dans une poêle, ajouter les poireaux, saler, poivrer et cuire à couvert en remuant.", "minuteur": 15 },
+    { "texte": "Ajouter la crème liquide dans la fondue de poireau, mélanger et réserver au chaud." },
+    { "texte": "Chauffer les galettes de sarrasin dans une poêle, casser un œuf au centre de chacune, répartir le jambon et le gruyère, puis replier les bords en carré.", "minuteur": 5 },
+    { "texte": "Égoutter les pommes de terre et servir aussitôt avec la galette complète et la fondue de poireau." }
+  ]
+}

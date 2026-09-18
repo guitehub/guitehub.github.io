@@ -1,0 +1,41 @@
+{
+  "schema": 1,
+  "id": "semoule-legumes-tajine",
+  "titre": "Semoule aux légumes façon tajine",
+  "description": "Semoule accompagnée d'un tajine de légumes aux épices douces, pois chiche, tomates et raisins secs.",
+  "type": "plat",
+  "portions": 4,
+  "temps": { "preparation": 15, "cuisson": 36, "repos": 5 },
+  "difficulte": "facile",
+  "tags": ["vegetarien", "batch-cooking"],
+  "ingredients": [
+    { "nom": "semoule", "quantite": 300, "unite": "g", "categorie": "epicerie-salee" },
+    { "nom": "carotte", "quantite": 3, "unite": "piece", "categorie": "fruits-legumes" },
+    { "nom": "poivron", "quantite": 2, "unite": "piece", "categorie": "fruits-legumes" },
+    { "nom": "oignon", "quantite": 2, "unite": "piece", "categorie": "fruits-legumes" },
+    { "nom": "ail", "quantite": 2, "unite": "gousse", "categorie": "fruits-legumes" },
+    { "nom": "pois chiche", "quantite": 240, "unite": "g", "categorie": "conserves" },
+    { "nom": "tomates concassées", "quantite": 400, "unite": "g", "categorie": "conserves" },
+    { "nom": "huile d'olive", "quantite": 3, "unite": "cas", "categorie": "huiles-condiments", "placard": true },
+    { "nom": "cumin moulu", "quantite": 1, "unite": "cac", "categorie": "epices-aromates", "placard": true },
+    { "nom": "curcuma", "quantite": 1, "unite": "cac", "categorie": "epices-aromates", "placard": true },
+    { "nom": "cannelle", "quantite": 0.5, "unite": "cac", "categorie": "epices-aromates", "placard": true },
+    { "nom": "gingembre moulu", "quantite": 0.5, "unite": "cac", "categorie": "epices-aromates", "placard": true },
+    { "nom": "raisin sec", "quantite": 40, "unite": "g", "categorie": "epicerie-sucree" },
+    { "nom": "bouillon de légumes", "quantite": 300, "unite": "ml", "categorie": "epices-aromates", "placard": true },
+    { "nom": "beurre", "quantite": 20, "unite": "g", "categorie": "cremerie", "precision": "pour la semoule" },
+    { "nom": "coriandre", "quantite": 0.5, "unite": "botte", "categorie": "fruits-legumes", "precision": "fraîche, ciselée" },
+    { "nom": "sel", "quantite": null, "unite": null, "categorie": "epices-aromates", "placard": true },
+    { "nom": "poivre", "quantite": null, "unite": null, "categorie": "epices-aromates", "placard": true }
+  ],
+  "etapes": [
+    { "texte": "Éplucher et couper les carottes en rondelles épaisses, les poivrons en lanières, et émincer les oignons et l'ail." },
+    { "texte": "Dans une cocotte, chauffer l'huile d'olive à feu moyen. Ajouter les oignons et l'ail, et faire suer jusqu'à ce qu'ils soient translucides.", "minuteur": 5 },
+    { "texte": "Incorporer le cumin, le curcuma, la cannelle et le gingembre, et mélanger une minute pour les torréfier légèrement.", "minuteur": 1 },
+    { "texte": "Ajouter les carottes, les poivrons, les pois chiche, les tomates concassées, les raisins secs et le bouillon de légumes. Saler et poivrer. Couvrir et laisser mijoter à feu doux jusqu'à ce que les légumes soient tendres.", "minuteur": 30 },
+    { "texte": "Pendant ce temps, porter 300 ml d'eau salée à ébullition, la verser sur la semoule, ajouter le beurre, couvrir et laisser gonfler hors du feu. Égrainer à la fourchette.", "minuteur": 5 },
+    { "texte": "Répartir la semoule dans les assiettes, napper du tajine de légumes et parsemer de coriandre." }
+  ],
+  "source": "Recette familiale",
+  "notes": "Le tajine peut se préparer la veille : les épices n'en seront que plus parfumées. Ajouter des amandes effilées torréfiées pour plus de gourmandise."
+}
