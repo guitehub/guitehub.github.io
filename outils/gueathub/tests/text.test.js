@@ -9,6 +9,7 @@ import {
   matchesQuery,
   nearDuplicateKey,
   normalize,
+  pickRandom,
   recipeSearchText,
   sortRecipes,
   totalTime,
@@ -95,4 +96,15 @@ test("sortRecipes : alphabétique par défaut, ou par temps total puis titre, sa
   assert.deepEqual(sortRecipes(input).map((r) => r.titre), ["Aïoli", "Béchamel", "Gratin dauphinois", "Quiche lorraine"]);
   assert.deepEqual(sortRecipes(input, "temps").map((r) => r.titre), ["Aïoli", "Béchamel", "Quiche lorraine", "Gratin dauphinois"]);
   assert.deepEqual(input, [quiche, gratin, quick, alsoQuick]);
+});
+
+test("pickRandom : éléments distincts, au plus count, entrée intacte", () => {
+  const input = ["a", "b", "c", "d"];
+  assert.deepEqual(pickRandom(input, 2, () => 0), ["a", "b"]);
+  assert.deepEqual(pickRandom(input, 2, () => 0.99), ["d", "a"]);
+  assert.deepEqual(pickRandom(input, 10, () => 0.5).sort(), ["a", "b", "c", "d"]);
+  assert.deepEqual(pickRandom(input, 0), []);
+  assert.deepEqual(pickRandom(input, -1), []);
+  assert.equal(new Set(pickRandom(input, 3)).size, 3);
+  assert.deepEqual(input, ["a", "b", "c", "d"]);
 });

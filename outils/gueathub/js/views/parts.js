@@ -38,13 +38,13 @@ export function chip({ label, pressed, action, value = "", focus, count = null }
  * Compteur de portions « − 6 personnes + ».
  * `id` sert aux data-id et aux clés de focus (`${prefix}dec:${id}`).
  */
-export function stepper({ id, value, unitText, label, decAction, incAction, prefix = "", decLabel = "Retirer une portion" }) {
+export function stepper({ id, value, unitText, label, decAction, incAction, prefix = "", decLabel = "Retirer une portion", incLabel = "Ajouter une portion" }) {
   return html`<div class="flex min-h-11 items-center justify-between gap-1 rounded-full border border-line bg-page" role="group" aria-label="${label}">
     <button type="button" class="grid size-11 place-items-center rounded-full text-accent transition-colors hover:bg-soft" data-action="${decAction}" data-id="${id}" data-focus="${prefix}dec:${id}" aria-label="${decLabel}">
       ${icon("dash-lg", "size-4")}
     </button>
     <span class="px-1 text-center text-sm font-semibold whitespace-nowrap tabular-nums" aria-live="polite">${value} <span class="font-normal text-ink-soft">${unitText}</span></span>
-    <button type="button" class="grid size-11 place-items-center rounded-full text-accent transition-colors hover:bg-soft" data-action="${incAction}" data-id="${id}" data-focus="${prefix}inc:${id}" aria-label="Ajouter une portion">
+    <button type="button" class="grid size-11 place-items-center rounded-full text-accent transition-colors hover:bg-soft" data-action="${incAction}" data-id="${id}" data-focus="${prefix}inc:${id}" aria-label="${incLabel}">
       ${icon("plus-lg", "size-4")}
     </button>
   </div>`;

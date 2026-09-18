@@ -294,3 +294,11 @@ ne tranchait pas ou a été arbitré. Fichier non publié (exclu dans `_config.y
 - **`vegetarien` et `poulet` peuvent cohabiter** quand la viande est facultative (fajitas).
 - **Notes entre les ingrédients et les étapes** (et non plus en bas de fiche) : les alternatives (viande
   facultative, lardons végétariens…) se lisent avant de cuisiner.
+
+## Après la phase 6 — sélection aléatoire
+
+- **Section en bas de l'écran « Recettes »** : « Sélection aléatoire pour la semaine », compteur `− N recettes +`
+  (1 à 14, 5 par défaut, gardé pendant la visite) et bouton « Aléatoire » (dé).
+- **Tirage parmi les recettes affichées** (recherche et filtres compris) **hors de la liste** : filtrer
+  « Plats » puis tirer donne des plats, et un second tirage complète sans doublon.
+- **Ajout direct à la liste**, portions par défaut, avec « Annuler » ; le toast nomme les recettes tirées.

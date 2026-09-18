@@ -77,3 +77,14 @@ export function sortRecipes(recipes, mode = "alpha") {
   const compare = mode === "temps" ? (a, b) => totalTime(a) - totalTime(b) || byTitle(a, b) : byTitle;
   return [...recipes].sort(compare);
 }
+
+/** Tire au hasard jusqu'à `count` éléments distincts (copie, entrée intacte). `random` renvoie [0, 1[. */
+export function pickRandom(items, count, random = Math.random) {
+  const pool = [...items];
+  const size = Math.min(Math.max(0, count), pool.length);
+  for (let i = 0; i < size; i++) {
+    const j = i + Math.floor(random() * (pool.length - i));
+    [pool[i], pool[j]] = [pool[j], pool[i]];
+  }
+  return pool.slice(0, size);
+}

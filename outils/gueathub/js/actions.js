@@ -88,6 +88,22 @@ export function createActions(app) {
     );
   }
 
+  /** Ajoute plusieurs recettes à leurs portions par défaut (tirage aléatoire), avec « Annuler ». */
+  function addRecipes(ids, message) {
+    const added = ids.filter((id) => data.recipesById.has(id) && !selectionEntry(id));
+    if (added.length === 0) return;
+    undoable(
+      message,
+      (state) =>
+        withPurgedChecks({
+          ...state,
+          selection: [...state.selection, ...added.map((id) => ({ id, portions: clampPortions(data.recipesById.get(id).portions) }))],
+        }),
+      ["selection", "coches"],
+      { type: "selection" },
+    );
+  }
+
   function removeRecipe(id) {
     const recipe = data.recipesById.get(id);
     undoable(
@@ -253,6 +269,7 @@ export function createActions(app) {
     remaining,
     selectionEntry,
     setPortions,
+    addRecipes,
     removeRecipe,
     toggleCheck,
     uncheckAll,

@@ -1,15 +1,18 @@
 // Écran « Recettes » (#/) : recherche, filtres, tri, grille de cartes.
 
-import { filterRecipes, sortRecipes, totalTime } from "../domain/text.js";
+import { filterRecipes, pickRandom, sortRecipes, totalTime } from "../domain/text.js";
 import { formatDuration } from "../domain/units.js";
 import { TYPES, plural, portionsText, tagLabel } from "../labels.js";
 import { href } from "../router.js";
 import { portionsUnit } from "../domain/scale.js";
 import { html, icon, renderInto } from "../ui/dom.js";
-import { BUTTON_PRIMARY, BUTTON_SECONDARY, chip, container, recipePhoto, stepper } from "./parts.js";
+import { BUTTON_PRIMARY, BUTTON_SECONDARY, SECTION_TITLE, chip, container, recipePhoto, stepper } from "./parts.js";
 
 // Critères conservés pendant la visite (retour depuis une fiche recette).
 const criteria = { query: "", type: null, tags: new Set(), selectedOnly: false, sort: "alpha" };
+// Nombre de recettes du tirage aléatoire, conservé pendant la visite.
+const RANDOM_MAX = 14;
+let randomCount = 5;
 
 export function recipesView(app) {
   const { data, actions, store } = app;
@@ -95,6 +98,41 @@ export function recipesView(app) {
     return html`<ul class="mt-4 grid grid-cols-1 gap-4 min-[400px]:grid-cols-2 lg:grid-cols-3">${recipes.map(card)}</ul>`;
   }
 
+  /** Recettes affichées (filtres compris) qui ne sont pas encore dans la liste. */
+  const randomCandidates = () => visibleRecipes().filter((recipe) => !actions.selectionEntry(recipe.id));
+
+  function randomBlock() {
+    if (data.recipes.length === 0) return "";
+    const available = randomCandidates().length;
+    return html`<section class="mt-8 flex flex-col gap-3 rounded-xl border border-line p-4" aria-labelledby="random-title">
+      <div>
+        <h2 id="random-title" class="${SECTION_TITLE}">Sélection aléatoire pour la semaine</h2>
+        <p class="mt-1 text-sm text-ink-soft">
+          ${available > 0
+            ? `Tirage parmi les recettes affichées qui ne sont pas encore dans ta liste (${available}).`
+            : "Aucune recette affichée hors de la liste : change les filtres pour tirer au sort."}
+        </p>
+      </div>
+      <div class="flex flex-wrap items-center gap-3">
+        <div class="w-full min-[400px]:w-56">
+          ${stepper({
+            id: "random",
+            value: randomCount,
+            unitText: randomCount > 1 ? "recettes" : "recette",
+            label: "Nombre de recettes à tirer",
+            decAction: "random-dec",
+            incAction: "random-inc",
+            decLabel: "Une recette de moins",
+            incLabel: "Une recette de plus",
+          })}
+        </div>
+        <button type="button" class="${BUTTON_PRIMARY} w-full min-[400px]:w-auto" data-action="random" data-focus="random" ${available > 0 ? "" : "disabled"}>
+          ${icon("dice-5", "size-4")} Aléatoire
+        </button>
+      </div>
+    </section>`;
+  }
+
   const countText = () => plural(visibleRecipes().length, "recette");
 
   function render() {
@@ -120,7 +158,8 @@ export function recipesView(app) {
           </label>
         </div>
       </div>
-      <div data-region="results">${resultsBlock()}</div>`,
+      <div data-region="results">${resultsBlock()}</div>
+      <div data-region="random">${randomBlock()}</div>`,
       "wide",
     );
   }
@@ -130,6 +169,7 @@ export function recipesView(app) {
     renderInto(root.querySelector('[data-region="filters"]'), filtersBlock(), { focusKey });
     root.querySelector('[data-region="count"]').textContent = countText();
     renderInto(root.querySelector('[data-region="results"]'), resultsBlock(), { focusKey });
+    renderInto(root.querySelector('[data-region="random"]'), randomBlock(), { focusKey });
   }
 
   function handle(event, root) {
@@ -157,6 +197,18 @@ export function recipesView(app) {
       root.querySelector('[data-input="search"]').value = "";
       refresh(root);
       root.querySelector('[data-input="search"]').focus();
+      return;
+    } else if (action === "random-inc" || action === "random-dec") {
+      randomCount = Math.min(RANDOM_MAX, Math.max(1, randomCount + (action === "random-inc" ? 1 : -1)));
+      refresh(root, button.dataset.focus);
+      return;
+    } else if (action === "random") {
+      const picked = pickRandom(randomCandidates(), randomCount);
+      app.nextFocus = "random";
+      actions.addRecipes(
+        picked.map((recipe) => recipe.id),
+        `${picked.length > 1 ? `${picked.length} recettes ajoutées` : "1 recette ajoutée"} à la liste : ${picked.map((recipe) => recipe.titre).join(", ")}`,
+      );
       return;
     } else if (action === "add") {
       app.nextFocus = `inc:${id}`;

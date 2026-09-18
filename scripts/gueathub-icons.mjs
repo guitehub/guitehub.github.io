@@ -24,7 +24,7 @@ const UI_ICONS = [
   "plus-lg", "dash-lg", "check-lg", "trash3", "three-dots-vertical", "arrow-up", "arrow-down",
   "arrow-counterclockwise", "clipboard", "share", "link-45deg", "box-arrow-up-right", "chevron-down",
   // Recettes, minuteurs, écran
-  "clock", "stopwatch", "play-fill", "lightbulb", "bar-chart", "tag",
+  "clock", "stopwatch", "dice-5", "play-fill", "lightbulb", "bar-chart", "tag",
   // Thème et états
   "sun", "moon-stars", "circle-half", "wifi-off", "exclamation-triangle", "basket3",
   // Types de recettes (voir js/labels.js)
