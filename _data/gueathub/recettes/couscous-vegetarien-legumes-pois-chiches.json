@@ -1,0 +1,41 @@
+{
+  "schema": 1,
+  "id": "couscous-vegetarien-legumes-pois-chiches",
+  "titre": "Couscous végétarien aux légumes et pois chiches",
+  "description": "Semoule moelleuse et ragoût de légumes aux pois chiches, parfumé au cumin, curcuma et paprika fumé.",
+  "type": "plat",
+  "portions": 4,
+  "temps": { "preparation": 20, "cuisson": 36, "repos": 10 },
+  "difficulte": "facile",
+  "tags": ["vegetarien", "vegan"],
+  "ingredients": [
+    { "nom": "semoule", "quantite": 300, "unite": "g", "categorie": "epicerie-salee", "precision": "moyenne" },
+    { "nom": "pois chiche", "quantite": 480, "unite": "g", "categorie": "conserves" },
+    { "nom": "carotte", "quantite": 3, "unite": "piece", "categorie": "fruits-legumes" },
+    { "nom": "courgette", "quantite": 2, "unite": "piece", "categorie": "fruits-legumes" },
+    { "nom": "oignon", "quantite": 2, "unite": "piece", "categorie": "fruits-legumes" },
+    { "nom": "poivron rouge", "quantite": 1, "unite": "piece", "categorie": "fruits-legumes" },
+    { "nom": "tomates concassées", "quantite": 400, "unite": "g", "categorie": "conserves" },
+    { "nom": "bouillon de légumes", "quantite": 1, "unite": "l", "categorie": "epices-aromates", "placard": true },
+    { "nom": "raisin sec", "quantite": 40, "unite": "g", "categorie": "epicerie-sucree" },
+    { "nom": "huile d'olive", "quantite": 3, "unite": "cas", "categorie": "huiles-condiments", "placard": true },
+    { "nom": "cumin", "quantite": 2, "unite": "cac", "categorie": "epices-aromates", "placard": true },
+    { "nom": "curcuma", "quantite": 1, "unite": "cac", "categorie": "epices-aromates", "placard": true },
+    { "nom": "paprika fumé", "quantite": 1, "unite": "cac", "categorie": "epices-aromates", "placard": true },
+    { "nom": "gingembre moulu", "quantite": 1, "unite": "cac", "categorie": "epices-aromates", "placard": true },
+    { "nom": "coriandre", "quantite": 1, "unite": "botte", "categorie": "fruits-legumes" },
+    { "nom": "citron", "quantite": 1, "unite": "piece", "categorie": "fruits-legumes" },
+    { "nom": "sel", "quantite": null, "unite": null, "categorie": "epices-aromates", "placard": true },
+    { "nom": "poivre", "quantite": null, "unite": null, "categorie": "epices-aromates", "placard": true }
+  ],
+  "etapes": [
+    { "texte": "Éplucher et couper les carottes en rondelles épaisses, les courgettes en gros tronçons, émincer les oignons et couper le poivron en lanières." },
+    { "texte": "Dans une grande cocotte, chauffer l'huile d'olive et faire revenir les oignons jusqu'à ce qu'ils soient translucides.", "minuteur": 5 },
+    { "texte": "Ajouter le cumin, le curcuma, le paprika fumé et le gingembre, remuer pour les torréfier légèrement.", "minuteur": 1 },
+    { "texte": "Ajouter les carottes, courgettes, poivron, tomates concassées, pois chiches égouttés, bouillon de légumes, raisins secs, sel et poivre. Couvrir et laisser mijoter jusqu'à ce que les légumes soient tendres.", "minuteur": 30 },
+    { "texte": "Verser la semoule dans un plat, couvrir d'eau bouillante salée à hauteur, couvrir et laisser gonfler.", "minuteur": 10 },
+    { "texte": "Égrainer la semoule à la fourchette avec un filet d'huile d'olive." },
+    { "texte": "Servir la semoule surmontée du ragoût de légumes, parsemée de coriandre ciselée et de quartiers de citron." }
+  ],
+  "notes": "Pour une version traditionnelle avec viande, remplacer une partie des pois chiches par des morceaux d'agneau ou de poulet à saisir avant les légumes. La semoule peut aussi être cuite à la vapeur dans un couscoussier pour plus de moelleux."
+}
