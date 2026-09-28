@@ -1,0 +1,40 @@
+{
+  "schema": 1,
+  "id": "curry-pois-chiche-patate-douce",
+  "titre": "Curry de pois chiches et patate douce",
+  "description": "Curry végétal de pois chiches et patate douce mijotés dans une sauce tomate au gingembre, servi avec du riz basmati.",
+  "type": "plat",
+  "portions": 4,
+  "temps": { "preparation": 15, "cuisson": 32, "repos": 0 },
+  "difficulte": "facile",
+  "tags": ["vegetarien", "vegan", "sans-gluten", "batch-cooking", "automne", "hiver"],
+  "ingredients": [
+    { "nom": "pois chiche", "quantite": 800, "unite": "g", "categorie": "conserves", "precision": "égoutté et rincé", "groupe": "Curry" },
+    { "nom": "tomates concassées", "quantite": 400, "unite": "g", "categorie": "conserves", "groupe": "Curry" },
+    { "nom": "patate douce", "quantite": 600, "unite": "g", "categorie": "fruits-legumes", "groupe": "Curry" },
+    { "nom": "bouillon de légumes", "quantite": 1, "unite": "piece", "categorie": "epices-aromates", "precision": "cube dilué dans 20 cl d'eau chaude", "groupe": "Curry", "placard": true },
+    { "nom": "lait de coco", "quantite": 20, "unite": "cl", "categorie": "saveurs-du-monde", "groupe": "Curry", "optionnel": true },
+    { "nom": "oignon", "quantite": 1, "unite": "piece", "categorie": "fruits-legumes", "precision": "émincé", "groupe": "Curry" },
+    { "nom": "ail", "quantite": 3, "unite": "gousse", "categorie": "fruits-legumes", "precision": "haché", "groupe": "Curry" },
+    { "nom": "gingembre", "quantite": 15, "unite": "g", "categorie": "fruits-legumes", "precision": "râpé", "groupe": "Curry" },
+    { "nom": "curry", "quantite": 2, "unite": "cas", "categorie": "epices-aromates", "groupe": "Curry", "placard": true },
+    { "nom": "huile d'olive", "quantite": 2, "unite": "cas", "categorie": "huiles-condiments", "groupe": "Curry", "placard": true },
+    { "nom": "sel", "quantite": null, "unite": null, "categorie": "epices-aromates", "groupe": "Curry", "placard": true },
+    { "nom": "poivre", "quantite": null, "unite": null, "categorie": "epices-aromates", "groupe": "Curry", "placard": true },
+    { "nom": "riz basmati", "quantite": 300, "unite": "g", "categorie": "epicerie-salee", "groupe": "Pour servir" },
+    { "nom": "persil", "quantite": 0.5, "unite": "botte", "categorie": "fruits-legumes", "precision": "haché", "groupe": "Pour servir" },
+    { "nom": "citron vert", "quantite": 1, "unite": "piece", "categorie": "fruits-legumes", "groupe": "Pour servir", "optionnel": true }
+  ],
+  "etapes": [
+    { "texte": "Émincer l'oignon, hacher l'ail et râper le gingembre. Éplucher la patate douce et la couper en cubes de 2 cm." },
+    { "texte": "Chauffer l'huile dans une sauteuse ou une cocotte à feu moyen et y faire dorer l'oignon.", "minuteur": 5 },
+    { "texte": "Ajouter l'ail et le gingembre et cuire sans laisser brûler.", "minuteur": 1 },
+    { "texte": "Ajouter le curry et remuer pour torréfier les épices et libérer leurs arômes.", "minuteur": 1 },
+    { "texte": "Ajouter la patate douce et bien l'enrober d'épices. Verser les tomates concassées et le bouillon, saler, poivrer. Couvrir et mijoter à feu doux jusqu'à ce que la patate douce soit tendre.", "minuteur": 20 },
+    { "texte": "Pendant ce temps, cuire le riz selon les indications du paquet." },
+    { "texte": "Ajouter les pois chiches et le lait de coco, puis poursuivre la cuisson à découvert pour épaissir légèrement la sauce. Rectifier l'assaisonnement.", "minuteur": 5 },
+    { "texte": "Parsemer de persil haché, arroser d'un filet de jus de citron vert et servir bien chaud avec le riz." }
+  ],
+  "source": "Recette familiale",
+  "notes": "Écraser quelques cubes de patate douce contre la paroi en fin de cuisson pour lier la sauce. Se garde 3 jours au frais et se congèle très bien."
+}
