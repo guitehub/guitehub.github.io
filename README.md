@@ -48,12 +48,12 @@ correspondante, avec un lien vers l'app (voir `_posts/_template-article.md`). Il
 
 Existant :
 
-| App        | Nature | Forme   | Chemin                    |
-|------------|--------|---------|---------------------------|
-| icomkr     | outil  | fichier | `outils/icomkr.html`      |
-| gueathub   | outil  | dossier | `outils/gueathub/`        |
-| Fléchettes | projet | fichier | `projets/flechettes.html` |
-| Yam's      | projet | fichier | `projets/yams.html`       |
+| App            | Nature | Forme   | Chemin                    |
+|----------------|--------|---------|---------------------------|
+| icomkr         | outil  | fichier | `outils/icomkr.html`      |
+| gueathub       | outil  | dossier | `outils/gueathub/`        |
+| Fléchettes     | projet | fichier | `projets/flechettes.html` |
+| Drôle de Yam's | projet | fichier | `projets/yams.html`       |
 
 ---
 
