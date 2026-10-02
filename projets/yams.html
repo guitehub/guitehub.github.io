@@ -1311,23 +1311,45 @@ function openScoreSheet(playerId, lineId){
   }));
 }
 
-/* Saisir dans la colonne du joueur actif fait avancer le tour.
-   Effacer, ou saisir ailleurs, ne le fait pas. Le bonus Yam's non plus :
-   ce n'est pas une des 13 figures, le joueur doit encore en remplir une. */
+/* Joueur suivant après un coup de `from`, qui avait `prevCount` figures avant ce coup.
+   Le premier dans l'ordre de table qui n'a pas plus joué que lui ; à défaut,
+   celui qui a le moins joué. Un absent garde ainsi sa place dans la rotation
+   (on le saute en faisant jouer le suivant), et rattrape son retard à son retour. */
+function nextTurnIndex(g, from, prevCount){
+  const n = g.players.length;
+  const counts = g.players.map(p => filledCount(g.scores[p.id]));
+  let fallback = -1;
+  for (let k = 1; k <= n; k++){
+    const q = (from + k) % n;
+    if (counts[q] >= SCORE_IDS.length) continue;
+    if (counts[q] <= prevCount) return q;
+    if (fallback < 0 || counts[q] < counts[fallback]) fallback = q;
+  }
+  return fallback < 0 ? g.turnIndex : fallback;
+}
+
+/* Remplir une figure vide, dans n'importe quelle colonne, fait tourner la main
+   (voir nextTurnIndex). Corriger une case déjà remplie ne la fait pas tourner ;
+   effacer une figure rend la main à son joueur, qui doit la rejouer. Le bonus
+   Yam's n'y touche pas : ce n'est pas une des 13 figures. */
 function setValue(playerId, lineId, value){
   const g = state.game;
   if (!g) return;
-  g.scores[playerId][lineId] = value;
+  const sc = g.scores[playerId];
+  const was = sc[lineId];
+  const prevCount = filledCount(sc);
+  sc[lineId] = value;
 
   /* Un Yam's dégradé referme le bonus : on ne garde pas de points orphelins. */
-  if (lineId === "yams" && value !== 50 && g.scores[playerId].bonusYams !== null){
-    g.scores[playerId].bonusYams = null;
+  if (lineId === "yams" && value !== 50 && sc.bonusYams !== null){
+    sc.bonusYams = null;
     toast("Bonus Yam's effacé : la ligne Yam's n'est plus à 50.");
   }
 
-  const isActive = g.players[g.turnIndex].id === playerId;
-  if (value !== null && isActive && lineId !== "bonusYams"){
-    g.turnIndex = (g.turnIndex + 1) % g.players.length;
+  if (lineId !== "bonusYams"){
+    const idx = g.players.findIndex(p => p.id === playerId);
+    if (was === null && value !== null) g.turnIndex = nextTurnIndex(g, idx, prevCount);
+    else if (was !== null && value === null) g.turnIndex = idx;
   }
   saveGame();
 
