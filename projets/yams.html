@@ -180,6 +180,10 @@ h1,h2,h3,p{margin:0}
 .val.empty::after{content:"";position:absolute;left:32%;right:32%;bottom:32%;height:1px;background:var(--faint);opacity:.55}
 .val.zero{color:var(--muted)}
 .val.zero::after{content:"";position:absolute;left:26%;right:26%;top:50%;height:1px;background:currentColor;opacity:.5;transform:rotate(-16deg)}
+/* Yam's bonus noté : cases vides à rayer pour finir le tour */
+.val.tostrike::before{content:"";position:absolute;inset:5px;border:1.5px dashed var(--pc);border-radius:8px;opacity:.85}
+.val.empty.tostrike::after{content:"\2715";left:0;right:0;top:0;bottom:0;height:auto;background:none;opacity:.8;
+  display:flex;align-items:center;justify-content:center;font-size:13px;color:var(--pc)}
 .val.sub-line{font-size:15px}
 
 /* ligne calculée : bonus mineure — c'est aussi la césure entre mineure et majeure */
@@ -520,12 +524,14 @@ function sanGame(v){
   let turn = isNum(v.turnIndex) ? Math.floor(v.turnIndex) : 0;
   if (turn < 0 || turn >= players.length) turn = 0;
   const imento = v.imento === true;
+  const pending = (isStr(v.pendingStrike) && seen.has(v.pendingStrike)) ? v.pendingStrike : null;
   return {
     id: v.id,
     startedAt: isNum(v.startedAt) ? v.startedAt : Date.now(),
     imento: imento,
     nextImentoAt: (imento && isNum(v.nextImentoAt)) ? v.nextImentoAt : null,
     turnIndex: turn,
+    pendingStrike: pending,
     players: players,
     scores: scores
   };
@@ -881,7 +887,7 @@ function updateGame(){
   refs.corner.textContent = turnNumber(g) + "/13";
   refs.turnBar.style.setProperty("--pc", active.color);
   refs.turnBar.style.setProperty("--pc-rgb", hexToRgb(active.color));
-  refs.turnName.textContent = "Au tour de " + active.name;
+  refs.turnName.textContent = "Au tour de " + active.name + (g.pendingStrike === active.id ? " · rayer une case" : "");
 
   g.players.forEach(function(p){
     const sc = g.scores[p.id];
@@ -893,6 +899,7 @@ function updateGame(){
       cell.firstChild.textContent = v === null ? "" : String(v);
       cell.classList.toggle("empty", v === null);
       cell.classList.toggle("zero", v === 0);
+      cell.classList.toggle("tostrike", v === null && !line.bonus && g.pendingStrike === p.id);
       cell.setAttribute("aria-label",
         line.label + ", " + p.name + ", " + (v === null ? "vide" : (v === 0 ? "barré" : v + " points")));
     });
@@ -1211,6 +1218,7 @@ function startGame(ids, snapshot){
     imento: state.settings.imento === true,
     nextImentoAt: null,
     turnIndex: 0,
+    pendingStrike: null,
     players: players,
     scores: scores
   };
@@ -1297,7 +1305,8 @@ function openScoreSheet(playerId, lineId){
       onclick:function(){ closeModal(); setValue(playerId, lineId, v); } }, String(v)));
   });
 
-  const actions = [h("button", { class:"btn strike" + (current === 0 ? " sel" : ""),
+  const toStrike = g.pendingStrike === playerId && current === null && !line.bonus;
+  const actions = [h("button", { class:"btn " + (toStrike ? "btn-primary" : "strike" + (current === 0 ? " sel" : "")),
     onclick:function(){ closeModal(); setValue(playerId, lineId, 0); } }, "Barrer")];
   if (current !== null){
     actions.push(h("button", { class:"btn btn-ghost", onclick:function(){ closeModal(); setValue(playerId, lineId, null); } }, "Effacer"));
@@ -1306,7 +1315,7 @@ function openScoreSheet(playerId, lineId){
   openModal(sheetPanel({
     title: line.label,
     sub: p.name + (line.sub ? " · " + line.sub : ""),
-    body: [pills],
+    body: [toStrike ? h("p", { class:"lock", text:"Yam's bonus : " + p.name + " raye une case vide pour finir son tour." }) : null, pills],
     actions: actions
   }));
 }
@@ -1330,26 +1339,40 @@ function nextTurnIndex(g, from, prevCount){
 
 /* Remplir une figure vide, dans n'importe quelle colonne, fait tourner la main
    (voir nextTurnIndex). Corriger une case déjà remplie ne la fait pas tourner ;
-   effacer une figure rend la main à son joueur, qui doit la rejouer. Le bonus
-   Yam's n'y touche pas : ce n'est pas une des 13 figures. */
+   effacer une figure rend la main à son joueur, qui doit la rejouer.
+   Règle de la maison pour le Yam's bonus : le joueur note le bonus, puis raye
+   une case vide dans le même tour. Le bonus garde donc la main et marque ses
+   cases vides « à rayer » (`pendingStrike`) jusqu'à la figure suivante. */
 function setValue(playerId, lineId, value){
   const g = state.game;
   if (!g) return;
   const sc = g.scores[playerId];
   const was = sc[lineId];
   const prevCount = filledCount(sc);
+  const p = g.players.find(x => x.id === playerId);
   sc[lineId] = value;
 
   /* Un Yam's dégradé referme le bonus : on ne garde pas de points orphelins. */
   if (lineId === "yams" && value !== 50 && sc.bonusYams !== null){
     sc.bonusYams = null;
+    if (g.pendingStrike === playerId) g.pendingStrike = null;
     toast("Bonus Yam's effacé : la ligne Yam's n'est plus à 50.");
   }
 
-  if (lineId !== "bonusYams"){
-    const idx = g.players.findIndex(p => p.id === playerId);
-    if (was === null && value !== null) g.turnIndex = nextTurnIndex(g, idx, prevCount);
-    else if (was !== null && value === null) g.turnIndex = idx;
+  const idx = g.players.findIndex(x => x.id === playerId);
+  if (lineId === "bonusYams"){
+    if ((value || 0) > (was || 0)){
+      g.pendingStrike = playerId;
+      g.turnIndex = idx;
+      toast("Bonus noté : " + p.name + " raye une case vide pour finir son tour.");
+    } else if (g.pendingStrike === playerId){
+      g.pendingStrike = null;
+    }
+  } else if (was === null && value !== null){
+    if (g.pendingStrike === playerId) g.pendingStrike = null;
+    g.turnIndex = nextTurnIndex(g, idx, prevCount);
+  } else if (was !== null && value === null){
+    g.turnIndex = idx;
   }
   saveGame();
 
