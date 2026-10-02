@@ -25,9 +25,11 @@
   --danger:#E4665A;
 
   --label-w:clamp(78px,26vw,108px);
-  --row-h:46px;
-  --head-h:58px;
-  --tot-h:54px;
+  /* lignes élastiques : la grille tient sur un écran, et défile seulement s'il est trop court */
+  --row-min:28px;
+  --row-max:46px;
+  --head-h:44px;
+  --tot-h:44px;
 
   --font:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif;
   color-scheme:dark;
@@ -60,7 +62,7 @@ h1,h2,h3,p{margin:0}
 .scroll{flex:1;min-height:0;overflow-y:auto;overscroll-behavior:contain;-webkit-overflow-scrolling:touch}
 
 .bar{padding-top:env(safe-area-inset-top);background:var(--bg);border-bottom:1px solid var(--rule);flex:none}
-.bar-in{display:flex;align-items:center;gap:4px;height:52px;padding:0 6px}
+.bar-in{display:flex;align-items:center;gap:4px;height:46px;padding:0 6px}
 .brand{display:flex;align-items:center;gap:8px;padding-left:6px;font-size:17px;font-weight:700;letter-spacing:-.01em}
 .brand svg{color:var(--muted)}
 .iconbtn{display:inline-flex;align-items:center;justify-content:center;gap:4px;min-width:44px;min-height:44px;padding:0 10px;border-radius:10px;font-size:14px;font-weight:600;color:var(--muted)}
@@ -140,14 +142,14 @@ h1,h2,h3,p{margin:0}
 /* ============================================================
    GRILLE DE PARTIE
    ============================================================ */
-.turn{display:flex;align-items:center;gap:9px;flex:none;height:34px;padding:0 14px;border-bottom:1px solid var(--rule);
+.turn{display:flex;align-items:center;gap:9px;flex:none;height:28px;padding:0 14px;border-bottom:1px solid var(--rule);
   background-color:var(--bg);background-image:linear-gradient(rgb(var(--pc-rgb)/.16),rgb(var(--pc-rgb)/.16))}
 .turn i{width:9px;height:9px;border-radius:50%;background:var(--pc);flex:none}
 .turn span{font-size:13.5px;font-weight:600;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
 
 .sheet{
   flex:1;min-height:0;display:grid;
-  grid-template-rows:var(--head-h) repeat(15,var(--row-h)) var(--tot-h);
+  grid-template-rows:var(--head-h) repeat(15,minmax(var(--row-min),var(--row-max))) var(--tot-h);
   overflow:auto;overscroll-behavior:contain;-webkit-overflow-scrolling:touch;
   scroll-snap-type:x mandatory;scroll-padding-left:var(--label-w);
   background:var(--surface);
@@ -160,7 +162,7 @@ h1,h2,h3,p{margin:0}
 .corner{top:0;z-index:6;display:flex;flex-direction:column;align-items:flex-start;justify-content:center;padding:0 10px;border-bottom:1px solid var(--rule-2)}
 .corner .k{font-size:10.5px;color:var(--faint)}
 .corner .v{font-size:15px;font-weight:700}
-.phead{position:sticky;top:0;z-index:4;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:1px;padding:6px 6px 0;border-bottom:1px solid var(--rule-2);overflow:hidden}
+.phead{position:sticky;top:0;z-index:4;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:0;padding:4px 6px 0;border-bottom:1px solid var(--rule-2);overflow:hidden}
 .phead::before{content:"";position:absolute;left:0;right:0;top:0;height:3px;background:var(--pc);opacity:.3}
 .phead.col-active::before{opacity:1}
 .phead .pn{max-width:100%;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;font-size:14.5px;font-weight:700;color:var(--pc)}
@@ -172,25 +174,25 @@ h1,h2,h3,p{margin:0}
 .lab .die{color:var(--chalk);flex:none}
 .sub .lname{font-size:12px;color:var(--muted);padding-left:10px}
 
-.val{display:flex;align-items:center;justify-content:center;font-size:19px;font-weight:600;color:var(--chalk);
+.val{display:flex;align-items:center;justify-content:center;font-size:17px;font-weight:600;color:var(--chalk);
   font-variant-numeric:tabular-nums;font-feature-settings:"tnum" 1;scroll-snap-align:start}
 .val .v{position:relative;z-index:1}
 .val.empty::after{content:"";position:absolute;left:32%;right:32%;bottom:32%;height:1px;background:var(--faint);opacity:.55}
 .val.zero{color:var(--muted)}
 .val.zero::after{content:"";position:absolute;left:26%;right:26%;top:50%;height:1px;background:currentColor;opacity:.5;transform:rotate(-16deg)}
-.val.sub-line{font-size:16px}
+.val.sub-line{font-size:15px}
 
 /* ligne calculée : bonus mineure — c'est aussi la césure entre mineure et majeure */
 .brow{border-bottom:2px solid var(--rule-2)}
 .blab{background-color:var(--band)}
 .bcell{display:flex;align-items:center;justify-content:center;background-color:var(--band);scroll-snap-align:start;font-size:12.5px;color:var(--muted)}
-.bcell.got{font-size:17px;font-weight:700;color:var(--chalk)}
+.bcell.got{font-size:16px;font-weight:700;color:var(--chalk)}
 
 .totlab{bottom:0;z-index:6;border-top:2px solid var(--rule-2)}
 .totlab .lname{font-size:13px;font-weight:700}
-.tot{position:sticky;bottom:0;z-index:4;display:flex;align-items:center;justify-content:center;border-top:2px solid var(--rule-2);font-size:22px;font-weight:700;color:var(--pc)}
+.tot{position:sticky;bottom:0;z-index:4;display:flex;align-items:center;justify-content:center;border-top:2px solid var(--rule-2);font-size:20px;font-weight:700;color:var(--pc)}
 
-.dots{flex:none;display:flex;align-items:center;justify-content:center;gap:6px;padding:8px 0 max(8px,env(safe-area-inset-bottom));background:var(--bg)}
+.dots{flex:none;display:flex;align-items:center;justify-content:center;gap:6px;padding:5px 0 max(5px,env(safe-area-inset-bottom));background:var(--bg)}
 .dots i{width:18px;height:3px;border-radius:2px;background:var(--pc);opacity:.22;transition:opacity .15s ease}
 .dots i.on{opacity:1}
 
@@ -810,7 +812,7 @@ function buildGame(){
     const band = (rowIndex % 2) === 1;
     rowIndex++;
     const lab = h("div", { class:"cell lab" + (band ? " band" : "") + (line.bonus ? " sub" : "") });
-    if (line.die) lab.append(h("span", { class:"lname", html:dieSVG(line.die, 24), role:"img", "aria-label":line.label }));
+    if (line.die) lab.append(h("span", { class:"lname", html:dieSVG(line.die, 20), role:"img", "aria-label":line.label }));
     else lab.append(h("span", { class:"lname", text:line.label }));
     if (line.hint) lab.append(h("span", { class:"lhint num", text:line.hint }));
     sheet.append(lab);
