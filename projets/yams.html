@@ -114,6 +114,30 @@ h1,h2,h3,p{margin:0}
 .lb-n i{width:9px;height:9px;border-radius:50%;background:var(--pc);flex:none}
 .lb-v{font-size:14px}
 .lb-r .dim{color:var(--muted)}
+.lb-btn{width:100%;text-align:inherit}
+.lb-btn:active{background:var(--surface)}
+
+/* historique d'un joueur, et feuille d'une partie passée */
+.hist{border-top:1px solid var(--rule)}
+.hist-r{display:flex;align-items:center;gap:10px;width:100%;min-height:58px;padding:8px 2px;border-bottom:1px solid var(--rule);text-align:left}
+.hist-r:not(:disabled):active{background:var(--raise)}
+.hist-r:disabled{cursor:default}
+.hist-m{flex:1;min-width:0}
+.hist-d{font-size:14.5px;font-weight:600}
+.hist-s{margin-top:2px;font-size:12.5px;color:var(--muted);overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.hist-t{flex:none;font-size:20px;font-weight:700;color:var(--pc)}
+.hist-c{flex:none;width:20px;color:var(--faint)}
+.hx-wrap{overflow-x:auto;overscroll-behavior:contain}
+.hx{border-collapse:collapse;width:100%;font-size:14px}
+.hx th,.hx td{height:30px;padding:0 8px;border-bottom:1px solid var(--rule);text-align:center;white-space:nowrap}
+.hx th:first-child,.hx td:first-child{position:sticky;left:0;z-index:1;text-align:left;background:var(--surface);font-weight:500;color:var(--muted)}
+.hx td:first-child .die{display:block;color:var(--chalk)}
+.hx thead th{font-weight:700;color:var(--pc)}
+.hx .me{background-image:linear-gradient(rgb(var(--pc-rgb)/.12),rgb(var(--pc-rgb)/.12))}
+.hx .z{color:var(--faint)}
+.hx tr.sep>*{border-bottom:2px solid var(--rule-2)}
+.hx tr.hx-tot>*{height:38px;border-bottom:0;border-top:2px solid var(--rule-2);font-size:17px;font-weight:700}
+.hx tr.hx-tot td:not(:first-child){color:var(--pc)}
 
 .plist{list-style:none;margin:0;padding:0;border-top:1px solid var(--rule)}
 .prow{display:flex;align-items:stretch;border-bottom:1px solid var(--rule)}
@@ -312,7 +336,8 @@ const K = {
 
 const MAX_PLAYERS = 6;
 const MAX_NAME = 14;
-const HISTORY_CAP = 200;          // borne la taille du stockage, sans écran d'historique détaillé
+const HISTORY_CAP = 200;          // borne la taille du stockage : totaux pour les statistiques
+const DETAIL_CAP = 69;            // feuilles complètes gardées pour les dernières parties seulement
 
 /* Palette fixe : 10 teintes, toutes ≥ 4,5:1 sur le fond ardoise. */
 const PALETTE = ["#E5564B","#EE8B3F","#E7BC3E","#A8CC52","#3FC08D","#3FBBD0","#5B9BF0","#A78BFA","#E86AB8","#C9AE8C"];
@@ -536,6 +561,23 @@ function sanGame(v){
     scores: scores
   };
 }
+/* Feuille complète d'une partie terminée : une ligne de cases par joueur.
+   Tout ou rien : une feuille incomplète ne s'affiche pas. */
+function sanSheets(v, results){
+  if (!v || typeof v !== "object") return null;
+  const out = {};
+  for (const r of results){
+    const src = v[r.playerId];
+    if (!src || typeof src !== "object") return null;
+    const row = {};
+    for (const line of LINES){
+      const val = src[line.id];
+      row[line.id] = (isNum(val) && line.values.indexOf(val) >= 0) ? val : null;
+    }
+    out[r.playerId] = row;
+  }
+  return out;
+}
 function sanHistory(v){
   if (!Array.isArray(v)) return null;
   const out = [];
@@ -561,7 +603,8 @@ function sanHistory(v){
       endedAt: isNum(e.endedAt) ? e.endedAt : 0,
       imento: e.imento === true,
       results: results,
-      winnerIds: winners
+      winnerIds: winners,
+      sheets: out.length < DETAIL_CAP ? sanSheets(e.sheets, results) : null
     });
     if (out.length >= HISTORY_CAP) break;
   }
@@ -685,7 +728,8 @@ function renderHome(){
       const lb = h("div", { class:"lb" },
         h("div", { class:"lb-r lb-h" }, h("span", { text:"Joueur" }), h("span", { text:"V" }), h("span", { text:"P" }), h("span", { text:"Record" })));
       st.board.forEach(function(row){
-        lb.append(h("div", { class:"lb-r", style:{ "--pc":row.color } },
+        lb.append(h("button", { class:"lb-r lb-btn", style:{ "--pc":row.color },
+                                "aria-label":"Parties de " + row.name, onclick:function(){ openPlayerHistory(row.id); } },
           h("span", { class:"lb-n" }, h("i", {}), h("span", { text:row.name })),
           h("span", { class:"lb-v num", text:String(row.wins) }),
           h("span", { class:"lb-v num dim", text:String(row.games) }),
@@ -946,6 +990,82 @@ function ensureActiveVisible(smooth){
   const target = Math.max(0, Math.min(left, m.colW * m.n - view));
   if (smooth && !reduceMotion) sheetEl.scrollTo({ left:target, behavior:"smooth" });
   else sheetEl.scrollLeft = target;
+}
+
+/* --- historique d'un joueur -------------------------------- */
+
+function fmtDate(t){
+  if (!t) return "Date inconnue";
+  const d = new Date(t);
+  return d.toLocaleDateString("fr-FR", { day:"numeric", month:"short", year:"numeric" }) +
+         " · " + d.toLocaleTimeString("fr-FR", { hour:"2-digit", minute:"2-digit" });
+}
+function openPlayerHistory(playerId){
+  const p = findPlayer(playerId);
+  if (!p) return;
+  const games = state.history.filter(e => e.results.some(r => r.playerId === playerId));
+  const list = h("div", { class:"hist" });
+  games.forEach(function(e){
+    const me = e.results.find(r => r.playerId === playerId);
+    const n = e.results.length;
+    const place = 1 + e.results.filter(r => r.total > me.total).length;
+    let status;
+    if (n === 1) status = "En solo";
+    else if (e.winnerIds.indexOf(playerId) >= 0) status = e.winnerIds.length > 1 ? "Victoire ex æquo" : "Victoire";
+    else {
+      const w = e.results.find(r => r.playerId === e.winnerIds[0]);
+      status = place + "e sur " + n + (w ? " · " + w.name + " gagne avec " + w.total : "");
+    }
+    list.append(h("button", { class:"hist-r", style:{ "--pc":me.color }, disabled: !e.sheets,
+        onclick:function(){ openGameDetail(e, playerId); } },
+      h("div", { class:"hist-m" },
+        h("div", { class:"hist-d", text:fmtDate(e.endedAt) }),
+        h("div", { class:"hist-s", text: status + (e.sheets ? "" : " · feuille non conservée") })),
+      h("span", { class:"hist-t num", text:String(me.total) }),
+      h("span", { class:"hist-c" }, e.sheets ? icon(IC_CHEV_R, 18) : null)));
+  });
+  openModal(sheetPanel({
+    title: "Parties de " + p.name,
+    sub: games.length + (games.length > 1 ? " parties enregistrées" : " partie enregistrée") + " sur cet appareil",
+    body: [games.length ? list : h("p", { class:"empty", text:"Aucune partie enregistrée." })]
+  }));
+}
+/* Feuille d'une partie terminée, en lecture seule. */
+function openGameDetail(e, backTo){
+  const rs = e.results;
+  const cell = function(tag, r, content, cls){
+    return h(tag, { class:(cls || "") + (r.playerId === backTo ? " me" : ""),
+      style:{ "--pc":r.color, "--pc-rgb":hexToRgb(r.color) } }, content);
+  };
+  const row = function(label, fn, cls){
+    return h("tr", { class:cls || null }, h("td", {}, label), rs.map(r => fn(r, e.sheets[r.playerId])));
+  };
+  const val = function(line){
+    return function(r, sc){
+      const v = sc[line.id];
+      return cell("td", r, v === null ? "" : (v === 0 ? "–" : String(v)), v === 0 ? "z" : "");
+    };
+  };
+  const lineLabel = l => l.die ? h("span", { html:dieSVG(l.die, 18), role:"img", "aria-label":l.label }) : l.label;
+  const body = h("tbody", {});
+  LINES.filter(l => l.sec === "up").forEach(l => body.append(row(lineLabel(l), val(l))));
+  body.append(row("Bonus", function(r, sc){
+    const sub = upperSubtotal(sc), got = sub >= UPPER_TARGET;
+    return cell("td", r, got ? "+" + UPPER_BONUS : sub + "/" + UPPER_TARGET, got ? "" : "z");
+  }, "sep"));
+  LINES.filter(l => l.sec === "low").forEach(l => body.append(row(lineLabel(l), val(l))));
+  body.append(row("Total", (r, sc) => cell("td", r, String(grandTotal(sc))), "hx-tot"));
+
+  const table = h("table", { class:"hx num" },
+    h("thead", {}, h("tr", {}, h("th", {}, ""), rs.map(r => cell("th", r, r.name)))),
+    body);
+  const back = findPlayer(backTo);
+  openModal(sheetPanel({
+    title: "Feuille de la partie",
+    sub: fmtDate(e.endedAt),
+    body: [h("div", { class:"hx-wrap" }, table)],
+    actions: back ? [h("button", { class:"btn btn-ghost", onclick:function(){ openPlayerHistory(backTo); } }, "Parties de " + back.name)] : []
+  }));
 }
 
 /* --- résumé de fin de partie -------------------------------- */
@@ -1409,8 +1529,10 @@ function finishGame(){
     endedAt: Date.now(),
     imento: g.imento === true,
     results: results,
-    winnerIds: results.filter(r => r.total === best).map(r => r.playerId)
+    winnerIds: results.filter(r => r.total === best).map(r => r.playerId),
+    sheets: {}
   };
+  g.players.forEach(function(p){ entry.sheets[p.id] = Object.assign({}, g.scores[p.id]); });
 
   const records = { allTime:[], personal:[] };
   results.forEach(function(r){
@@ -1420,6 +1542,7 @@ function finishGame(){
 
   state.history.unshift(entry);
   if (state.history.length > HISTORY_CAP) state.history.length = HISTORY_CAP;
+  for (let i = DETAIL_CAP; i < state.history.length; i++) state.history[i].sheets = null;
   saveHistory();
 
   imentoStop();                       // le mode imento s'arrête à l'affichage du résumé
