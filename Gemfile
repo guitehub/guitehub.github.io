@@ -21,3 +21,9 @@ gem "wdm", "~> 0.1", :platforms => [:mingw, :x64_mingw, :mswin]
 
 # JRuby : http_parser.rb 0.6.x (les versions suivantes n'ont pas d'équivalent Java).
 gem "http_parser.rb", "~> 0.6.0", :platforms => [:jruby]
+
+# Ruby ≥ 3.4 / 4.0 : bibliothèques sorties des gems par défaut, encore requises par Jekyll 4.3.
+gem "logger"
+gem "csv"
+gem "base64"
+gem "bigdecimal"
