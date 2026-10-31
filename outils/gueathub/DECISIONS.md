@@ -302,3 +302,19 @@ ne tranchait pas ou a été arbitré. Fichier non publié (exclu dans `_config.y
 - **Tirage parmi les recettes affichées** (recherche et filtres compris) **hors de la liste** : filtrer
   « Plats » puis tirer donne des plats, et un second tirage complète sans doublon.
 - **Ajout direct à la liste**, portions par défaut, avec « Annuler » ; le toast nomme les recettes tirées.
+
+## Après la phase 6 — impression d'une recette
+
+- **Bouton discret « Imprimer la recette »** en bas de la fiche, à côté de « Copier le lien », qui ouvre
+  l'impression du navigateur (`window.print()`) ; « Enregistrer en PDF » y est proposé. Une recette à la
+  fois, pas d'impression groupée.
+- **Version papier séparée** (`.print-sheet` dans `js/views/recipe.js`), présente dans le DOM mais visible
+  seulement en `@media print` ; tout le reste de l'app est masqué. Mise en page « livre de cuisine » :
+  serif, noir sur blanc quel que soit le thème, A4, sans photo ni commandes (minuteurs, cases, portions).
+- **Contenu** : type, titre, ligne portions · temps · difficulté, description, ingrédients par groupe
+  (quantité en colonne, précision après une virgule, « (facultatif) »), notes, étapes numérotées, source
+  en pied. Les quantités sont celles des **portions affichées** à l'écran.
+- **Quantité vide pour « au goût »** sur papier (sel, poivre), comme dans un livre de recettes.
+- **Deux colonnes d'ingrédients au-delà de 10**, pour tenir sur une page A4 dans la plupart des cas ; une
+  étape ou un ingrédient n'est jamais coupé entre deux pages.
+- **Icône `printer`** ajoutée à `scripts/gueathub-icons.mjs`.

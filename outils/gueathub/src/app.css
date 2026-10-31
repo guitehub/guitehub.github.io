@@ -67,3 +67,151 @@
     scroll-behavior: auto !important;
   }
 }
+
+/* Impression d'une fiche recette : seule la version papier (.print-sheet, js/views/recipe.js) est imprimée,
+   noir sur blanc quel que soit le thème, en A4. */
+.print-sheet {
+  display: none;
+}
+
+@media print {
+  @page {
+    size: A4;
+    margin: 15mm 16mm;
+  }
+
+  :root,
+  :root[data-theme="dark"] {
+    color-scheme: light;
+  }
+
+  html,
+  body {
+    background: #fff !important;
+    color: #000 !important;
+  }
+
+  /* Tout ce qui entoure la vue (en-tête, bandeaux, minuteurs, toasts, navigation, feuilles) disparaît. */
+  body > :not(main) {
+    display: none !important;
+  }
+
+  main {
+    padding: 0 !important;
+  }
+
+  main > #view > div {
+    max-width: none;
+    padding: 0;
+  }
+
+  .print-sheet {
+    display: block;
+    font-family: Georgia, "Times New Roman", serif;
+    font-size: 11.5pt;
+    line-height: 1.45;
+    color: #000;
+  }
+
+  .print-sheet header {
+    border-bottom: 1.5pt solid #000;
+    padding-bottom: 8pt;
+    margin-bottom: 14pt;
+  }
+
+  .print-sheet .print-kicker {
+    font-size: 9pt;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+  }
+
+  .print-sheet h1 {
+    font-size: 22pt;
+    font-weight: bold;
+    line-height: 1.15;
+    margin: 2pt 0 4pt;
+  }
+
+  .print-sheet .print-meta {
+    font-size: 10pt;
+  }
+
+  .print-sheet .print-description {
+    margin-top: 6pt;
+    font-style: italic;
+  }
+
+  .print-sheet section {
+    margin-bottom: 14pt;
+  }
+
+  .print-sheet h2 {
+    font-size: 13pt;
+    font-weight: bold;
+    border-bottom: 0.5pt solid #888;
+    padding-bottom: 2pt;
+    margin-bottom: 6pt;
+    break-after: avoid;
+  }
+
+  .print-sheet h3 {
+    font-size: 9.5pt;
+    font-weight: bold;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    margin: 4pt 0 2pt;
+    break-after: avoid;
+  }
+
+  .print-sheet .print-columns {
+    columns: 2;
+    column-gap: 24pt;
+  }
+
+  .print-sheet .print-group {
+    margin-bottom: 4pt;
+  }
+
+  .print-sheet .print-ingredients li {
+    display: grid;
+    grid-template-columns: 6.5em 1fr;
+    column-gap: 6pt;
+    padding: 1.5pt 0;
+    break-inside: avoid;
+  }
+
+  .print-sheet .print-qty {
+    font-weight: bold;
+    font-variant-numeric: tabular-nums;
+  }
+
+  .print-sheet .print-notes {
+    white-space: pre-line;
+  }
+
+  .print-sheet .print-steps {
+    list-style: decimal;
+    padding-left: 1.6em;
+  }
+
+  .print-sheet .print-steps li {
+    margin-bottom: 6pt;
+    padding-left: 0.2em;
+    break-inside: avoid;
+  }
+
+  .print-sheet .print-steps li::marker {
+    font-weight: bold;
+  }
+
+  .print-sheet footer {
+    display: flex;
+    justify-content: space-between;
+    gap: 12pt;
+    border-top: 0.5pt solid #888;
+    padding-top: 4pt;
+    font-size: 8.5pt;
+    color: #444;
+    break-inside: avoid;
+  }
+}

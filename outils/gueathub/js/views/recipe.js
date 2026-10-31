@@ -158,9 +158,71 @@ export function recipeView(app, { id }) {
     </section>`;
   }
 
+  // Version papier, visible seulement à l'impression : noir sur blanc, sans photo ni commandes.
+  function printSheet() {
+    const type = TYPES[recipe.type];
+    const times = [
+      ["Préparation", recipe.temps.preparation],
+      ["Cuisson", recipe.temps.cuisson],
+      ["Repos", recipe.temps.repos],
+    ]
+      .filter(([, minutes]) => minutes > 0)
+      .map(([label, minutes]) => `${label} ${formatDuration(minutes)}`);
+    const meta = [
+      portionsText(portions, unit),
+      ...times,
+      `Total ${formatDuration(totalTime(recipe))}`,
+      DIFFICULTIES[recipe.difficulte] ?? recipe.difficulte,
+    ];
+    const groups = recipeIngredientGroups(recipe, portions);
+    const count = groups.reduce((sum, group) => sum + group.ingredients.length, 0);
+    return html`<article class="print-sheet" aria-hidden="true">
+      <header>
+        ${type ? html`<p class="print-kicker">${type.label}</p>` : ""}
+        <h1>${recipe.titre}</h1>
+        <p class="print-meta">${meta.join(" · ")}</p>
+        ${recipe.description ? html`<p class="print-description">${recipe.description}</p>` : ""}
+      </header>
+      <section>
+        <h2>Ingrédients</h2>
+        <div class="${count > 10 ? "print-ingredients print-columns" : "print-ingredients"}">
+          ${groups.map(
+            (group) => html`<div class="print-group">
+              ${group.groupe ? html`<h3>${group.groupe}</h3>` : ""}
+              <ul>
+                ${group.ingredients.map(
+                  (ingredient) => html`<li>
+                    <span class="print-qty">${ingredient.quantiteAffichee ?? ""}</span>
+                    <span>${ingredient.nom}${ingredient.precision ? `, ${ingredient.precision}` : ""}${ingredient.optionnel ? " (facultatif)" : ""}</span>
+                  </li>`,
+                )}
+              </ul>
+            </div>`,
+          )}
+        </div>
+      </section>
+      ${recipe.notes
+        ? html`<section>
+            <h2>Notes</h2>
+            <p class="print-notes">${recipe.notes}</p>
+          </section>`
+        : ""}
+      <section>
+        <h2>Étapes</h2>
+        <ol class="print-steps">
+          ${recipe.etapes.map((step) => html`<li>${step.texte}</li>`)}
+        </ol>
+      </section>
+      <footer>
+        ${recipe.source ? html`<span>Source : ${recipe.source.trim()}</span>` : ""}
+        <span>gueathub</span>
+      </footer>
+    </article>`;
+  }
+
   function render() {
     const type = TYPES[recipe.type];
-    return container(html`
+    return container(html`<div class="print:hidden">
       <a href="${href.recipes()}" class="-ml-2 inline-flex min-h-11 items-center gap-2 rounded-full px-2 text-sm text-ink-soft hover:text-ink" data-focus="back">
         ${icon("arrow-left", "size-4")} Recettes
       </a>
@@ -192,12 +254,16 @@ export function recipeView(app, { id }) {
           </section>`
         : ""}
       ${stepsBlock()}
-      <p class="mt-10 text-center">
+      <p class="mt-10 flex flex-wrap justify-center gap-x-2">
+        <button type="button" class="inline-flex min-h-11 items-center gap-1.5 rounded-full px-3 text-sm text-ink-soft hover:text-ink" data-action="print" data-focus="print">
+          ${icon("printer", "size-4")} Imprimer la recette
+        </button>
         <button type="button" class="inline-flex min-h-11 items-center gap-1.5 rounded-full px-3 text-sm text-ink-soft hover:text-ink" data-action="copy-link" data-focus="copy-link">
           ${icon("link-45deg", "size-4")} Copier le lien de la recette
         </button>
       </p>
-    `);
+    </div>
+    ${printSheet()}`);
   }
 
   async function handle(event) {
@@ -242,6 +308,9 @@ export function recipeView(app, { id }) {
       case "steps-reset":
         app.nextFocus = "step:0";
         actions.resetSteps(recipe.id);
+        break;
+      case "print":
+        window.print();
         break;
       case "copy-link":
         actions.copyPageLink();
