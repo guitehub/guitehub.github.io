@@ -2,10 +2,10 @@
   "schema": 1,
   "id": "riz-sauvage-petits-legumes",
   "titre": "Riz sauvage aux petits légumes",
-  "description": "Riz sauvage sauté avec carotte, courgette, poivron et petits pois, relevé de citron et de persil.",
+  "description": "Riz sauvage sauté à feu vif façon riz frit asiatique, avec carotte, courgette, poivron et petits pois, laqué à la sauce soja salée puis sucrée.",
   "type": "plat",
   "portions": 4,
-  "temps": { "preparation": 15, "cuisson": 59, "repos": 0 },
+  "temps": { "preparation": 15, "cuisson": 61, "repos": 0 },
   "difficulte": "facile",
   "tags": ["vegetarien"],
   "ingredients": [
@@ -16,22 +16,22 @@
     { "nom": "courgette", "quantite": 1, "unite": "piece", "categorie": "fruits-legumes" },
     { "nom": "poivron rouge", "quantite": 1, "unite": "piece", "categorie": "fruits-legumes" },
     { "nom": "petit pois surgelé", "quantite": 150, "unite": "g", "categorie": "surgeles" },
-    { "nom": "huile d'olive", "quantite": 3, "unite": "cas", "categorie": "huiles-condiments", "placard": true },
+    { "nom": "huile d'olive", "quantite": 4, "unite": "cas", "categorie": "huiles-condiments", "placard": true },
     { "nom": "bouillon de légumes", "quantite": 750, "unite": "ml", "categorie": "epices-aromates", "placard": true },
-    { "nom": "persil", "quantite": 0.5, "unite": "botte", "categorie": "fruits-legumes" },
-    { "nom": "citron", "quantite": 1, "unite": "piece", "categorie": "fruits-legumes" },
+    { "nom": "sauce soja", "quantite": 2, "unite": "cas", "categorie": "saveurs-du-monde", "placard": true },
+    { "nom": "sauce soja sucrée", "quantite": 1, "unite": "cas", "categorie": "saveurs-du-monde", "placard": true },
     { "nom": "sel", "quantite": null, "unite": null, "categorie": "epices-aromates", "placard": true },
     { "nom": "poivre", "quantite": null, "unite": null, "categorie": "epices-aromates", "placard": true }
   ],
   "etapes": [
     { "texte": "Rincer le riz sauvage à l'eau froide. Le cuire dans le bouillon de légumes avec une pincée de sel, à couvert, jusqu'à ce que les grains s'ouvrent légèrement et soient tendres.", "minuteur": 45 },
     { "texte": "Éplucher et émincer finement l'oignon et l'ail. Couper la carotte et la courgette en petits dés, et le poivron en fines lanières." },
-    { "texte": "Faire chauffer l'huile d'olive dans une grande poêle à feu moyen. Faire suer l'oignon jusqu'à ce qu'il devienne translucide, puis ajouter l'ail.", "minuteur": 3 },
-    { "texte": "Ajouter la carotte et le poivron et faire revenir en remuant régulièrement.", "minuteur": 5 },
+    { "texte": "Faire bien chauffer l'huile d'olive dans une grande poêle ou un wok à feu vif. Faire revenir l'oignon en remuant jusqu'à ce qu'il commence à dorer, puis ajouter l'ail.", "minuteur": 3 },
+    { "texte": "Ajouter la carotte et le poivron et les saisir à feu vif en remuant sans cesse.", "minuteur": 5 },
     { "texte": "Incorporer la courgette et les petits pois, poursuivre la cuisson jusqu'à ce que les légumes soient tendres mais encore croquants.", "minuteur": 4 },
-    { "texte": "Égoutter le riz sauvage si besoin, l'ajouter à la poêlée de légumes et mélanger à feu doux pour bien réchauffer l'ensemble.", "minuteur": 2 },
-    { "texte": "Hors du feu, ciseler le persil et l'ajouter avec le zeste et un filet de jus de citron. Rectifier l'assaisonnement en sel et poivre, puis servir aussitôt." }
+    { "texte": "Égoutter le riz sauvage si besoin et l'ajouter à la poêlée de légumes. Verser la sauce soja salée et faire sauter le tout à feu vif, en remuant, jusqu'à ce que le riz soit bien enrobé et légèrement grillé.", "minuteur": 4 },
+    { "texte": "Hors du feu, arroser d'un filet de sauce soja sucrée et mélanger. Goûter avant de saler (la sauce soja l'est déjà), poivrer, puis servir aussitôt." }
   ],
   "source": "Recette maison",
-  "notes": "Sans fromage. Pour varier, remplacer les petits pois par des edamames, ou ajouter des amandes effilées torréfiées pour du croquant. Se garde 2 jours au réfrigérateur."
+  "notes": "Sans fromage. La sauce soja sucrée (type kecap manis) ne s'ajoute qu'à la toute fin : elle caraméliserait et brûlerait à feu vif. Pour varier, remplacer les petits pois par des edamames, ou ajouter des amandes effilées torréfiées pour du croquant. Se garde 2 jours au réfrigérateur."
 }
