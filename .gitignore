@@ -13,3 +13,6 @@ node_modules/
 
 # Photos de recettes avant conversion (npm run photos)
 _photos/
+
+# Fichiers de métadonnées du Finder (macOS)
+.DS_Store
