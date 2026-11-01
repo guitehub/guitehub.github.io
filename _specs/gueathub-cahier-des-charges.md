@@ -141,7 +141,7 @@ Les clés JSON sont en français. Le code (variables, fonctions) est en anglais.
 | `portionsUnite` | chaîne | non | Par défaut `personnes` (ex. `parts`, `pièces`, `pots`) |
 | `temps` | objet | oui | `{ preparation, cuisson, repos }` en minutes entières, `0` si sans objet |
 | `difficulte` | enum | oui | `facile` `moyen` `difficile` |
-| `tags` | chaîne[] | oui | kebab-case, peut être vide. Vocabulaire conseillé : `vegetarien` `vegan` `sans-gluten` `rapide` (≤ 30 min au total) `four` `sans-cuisson` `batch-cooking` `printemps` `ete` `automne` `hiver` `fete` |
+| `tags` | chaîne[] | oui | kebab-case, peut être vide. Vocabulaire conseillé : `vegetarien` `vegan` `sans-gluten` `rapide` (≤ 30 min au total) `four` `sans-cuisson` `batch-cooking` `fete` `poisson` `poulet` |
 | `ingredients` | Ingredient[] | oui | Au moins 1 |
 | `etapes` | Etape[] | oui | Au moins 1 |
 | `source` | chaîne | non | URL ou texte libre |
@@ -208,7 +208,7 @@ Tableau ordonné d'objets `{ "id", "libelle", "icone" }`. L'`icone` est un nom B
   "portions": 4,
   "temps": { "preparation": 20, "cuisson": 75, "repos": 10 },
   "difficulte": "facile",
-  "tags": ["vegetarien", "four", "automne", "hiver"],
+  "tags": ["vegetarien", "four"],
   "ingredients": [
     { "nom": "pomme de terre", "quantite": 1, "unite": "kg", "categorie": "fruits-legumes", "precision": "à chair ferme" },
     { "nom": "lait entier", "quantite": 50, "unite": "cl", "categorie": "cremerie" },

@@ -7,7 +7,7 @@
   "portions": 4,
   "temps": { "preparation": 15, "cuisson": 32, "repos": 0 },
   "difficulte": "facile",
-  "tags": ["vegetarien", "vegan", "sans-gluten", "batch-cooking", "automne", "hiver"],
+  "tags": ["vegetarien", "vegan", "sans-gluten", "batch-cooking"],
   "ingredients": [
     { "nom": "pois chiche", "quantite": 800, "unite": "g", "categorie": "conserves", "precision": "égoutté et rincé", "groupe": "Curry" },
     { "nom": "tomates concassées", "quantite": 400, "unite": "g", "categorie": "conserves", "groupe": "Curry" },
