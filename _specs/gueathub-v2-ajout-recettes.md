@@ -40,7 +40,7 @@ pour ce besoin : il ne se justifierait que pour des comptes multi-utilisateurs o
 
 ## Ce que font les hooks, refait dans l'app
 
-Un commit par l'API ne déclenche pas husky, et la CI `gueathub-check` **ne bloque pas** la publication.
+Un commit par l'API ne déclenche pas husky, et la CI `site-check` **ne bloque pas** la publication.
 Tout doit donc être fait avant l'envoi.
 
 | Hook aujourd'hui | Dans l'app |

@@ -116,7 +116,7 @@ outils/gueathub/
 pages/outils.html                  # page « Outils », is_main: true
 _posts/AAAA-MM-JJ-gueathub.md      # article de présentation
 scripts/gueathub-check.mjs         # validation des données
-.github/workflows/gueathub-check.yml
+.github/workflows/site-check.yml
 package.json                       # dev uniquement : tailwind, ajv, (sharp)
 ```
 
@@ -265,7 +265,7 @@ Le tri des recettes se fait côté JS.
   - même `nom` avec un `placard` différent ;
   - tag hors vocabulaire conseillé.
 
-`.github/workflows/gueathub-check.yml` se déclenche sur les push et PR qui touchent `_data/gueathub/**`, `assets/gueathub/**`, `outils/gueathub/**` ou `scripts/**`. Il utilise Node LTS et lance `npm ci`, `npm run check` et `npm test`. Il est indépendant du déploiement Pages : un échec signale le problème mais ne bloque pas la publication.
+`.github/workflows/site-check.yml` se déclenche sur les push et PR qui touchent `_data/gueathub/**`, `assets/**`, `outils/gueathub/**`, `scripts/**` ou `package.json`. Il utilise Node LTS et lance `npm ci`, `npm run check`, la vérification des métadonnées de toutes les images du site et `npm test`. Il est indépendant du déploiement Pages : un échec signale le problème mais ne bloque pas la publication.
 
 ---
 

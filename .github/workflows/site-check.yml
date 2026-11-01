@@ -1,7 +1,7 @@
-# Validation des données et tests de gueathub, et absence de métadonnées dans les images du site.
+# Contrôles du site : validation des données et tests de gueathub, absence de métadonnées dans toutes les images du site.
 # Indépendant du déploiement GitHub Pages : un échec signale le problème
 # mais ne bloque pas la publication.
-name: gueathub-check
+name: site-check
 
 on:
   push:
@@ -12,7 +12,7 @@ on:
       - "scripts/**"
       - "package.json"
       - "package-lock.json"
-      - ".github/workflows/gueathub-check.yml"
+      - ".github/workflows/site-check.yml"
   pull_request:
     paths:
       - "_data/gueathub/**"
@@ -21,7 +21,7 @@ on:
       - "scripts/**"
       - "package.json"
       - "package-lock.json"
-      - ".github/workflows/gueathub-check.yml"
+      - ".github/workflows/site-check.yml"
 
 permissions:
   contents: read
