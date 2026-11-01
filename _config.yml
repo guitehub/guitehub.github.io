@@ -7,6 +7,7 @@ description: /dev/null
 
 baseurl: ""                        # sous-chemin du site (vide : servi à la racine)
 url: "https://guitehub.github.io"  # adresse complète, utilisée pour les liens absolus (flux RSS)
+timezone: Europe/Paris             # dates des articles à l'heure de Paris (sinon UTC : un article du jour est « futur » et masqué avant 1 h ou 2 h)
 
 plugins:
   - jekyll-feed
