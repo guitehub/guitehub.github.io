@@ -6,6 +6,7 @@ categories:
 - guide
 - dev
 author: "La Guite"
+image: "vignette-cle-ssh.svg"
 ---
 
 Le pense-bête de la manip qu'on ne fait qu'une fois par machine, et donc qu'on oublie à chaque fois : créer une clé SSH **ed25519**, la déclarer sur GitHub, vérifier que ça marche, puis installer **Claude Code** dans le terminal.

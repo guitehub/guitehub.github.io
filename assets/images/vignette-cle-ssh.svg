@@ -1,0 +1,17 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 500" role="img" aria-label="Clé SSH dans un terminal">
+  <!-- Bandeau du mémo « clé SSH » : fenêtre de terminal aux couleurs du site,
+       clé key-fill de Bootstrap Icons (MIT). Le centre (500 × 500) reste lisible
+       quand la miniature des listes recadre l'image en carré. -->
+  <rect width="1200" height="500" fill="#16181b"/>
+  <rect x="0" y="0" width="1200" height="56" fill="#1f2226"/>
+  <circle cx="36" cy="28" r="9" fill="#e06c5f"/>
+  <circle cx="66" cy="28" r="9" fill="#e0b34c"/>
+  <circle cx="96" cy="28" r="9" fill="#6fbf73"/>
+  <text x="600" y="36" text-anchor="middle" fill="#6e757d"
+        font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, monospace" font-size="22">~/.ssh</text>
+  <g fill="#e08b4c" transform="translate(368 -10) scale(30)">
+    <path d="M3.5 11.5a3.5 3.5 0 1 1 3.163-5H14L15.5 8 14 9.5l-1-1-1 1-1-1-1 1-1-1-1 1H6.663a3.5 3.5 0 0 1-3.163 2M2.5 9a1 1 0 1 0 0-2 1 1 0 0 0 0 2"/>
+  </g>
+  <text x="600" y="400" text-anchor="middle"
+        font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, monospace" font-size="30"><tspan fill="#e08b4c">$</tspan><tspan fill="#e7e9ec"> ssh-keygen -t ed25519</tspan><tspan fill="#e08b4c">▍</tspan></text>
+</svg>
