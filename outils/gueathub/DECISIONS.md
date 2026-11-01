@@ -327,3 +327,10 @@ ne tranchait pas ou a été arbitré. Fichier non publié (exclu dans `_config.y
   une section à part, toujours affichée après tous les rayons.
 - **Ordre perso conservé** : un utilisateur qui a déjà réordonné ses rayons garde son ordre (voir
   « Rayons » plus haut). 1.6.0.
+
+## Recettes — pas de citron en finition
+
+- **Citron et citron vert de finition retirés** (filet de jus au service, quartier pour servir, trait en fin
+  de cuisson ou déglaçage final) : on ne le fait jamais. Retirés des étapes et des notes, et des
+  ingrédients pour ne plus les ajouter à la liste de courses. Le citron d'une marinade (colombo) ou d'une
+  sauce (soba) reste. Règle ajoutée au cahier des charges (§ 8).

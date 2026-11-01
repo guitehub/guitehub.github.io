@@ -16,7 +16,6 @@
     { "nom": "haricot rouge", "quantite": 400, "unite": "g", "categorie": "conserves", "precision": "en boîte, égoutté et rincé" },
     { "nom": "maïs", "quantite": 285, "unite": "g", "categorie": "conserves", "precision": "en boîte, égoutté" },
     { "nom": "ail", "quantite": 2, "unite": "gousse", "categorie": "fruits-legumes", "precision": "écrasé" },
-    { "nom": "citron vert", "quantite": 1, "unite": "piece", "categorie": "fruits-legumes", "precision": "pour le jus" },
     { "nom": "tortilla de blé", "quantite": 8, "unite": "piece", "categorie": "saveurs-du-monde" },
     { "nom": "huile d'olive", "quantite": 3, "unite": "cas", "categorie": "huiles-condiments", "placard": true },
     { "nom": "paprika fumé", "quantite": 2, "unite": "cac", "categorie": "epices-aromates", "placard": true },
@@ -33,7 +32,7 @@
     { "texte": "Réserver la viande sur une assiette, couvert d'une feuille d'aluminium, pendant la cuisson des légumes." },
     { "texte": "Dans la même poêle non lavée, faire revenir l'oignon à feu vif, puis ajouter les poivrons (sans viande, avec la marinade). Les garder marqués mais encore fermes.", "minuteur": 8 },
     { "texte": "Ajouter les haricots rouges et le maïs, réchauffer en remuant délicatement pour ne pas écraser les haricots. Rectifier l'assaisonnement.", "minuteur": 3 },
-    { "texte": "Trancher la viande en lanières dans le sens contraire des fibres et la remettre dans la poêle avec le jus rendu. Déglacer au jus de citron vert.", "minuteur": 2 },
+    { "texte": "Trancher la viande en lanières dans le sens contraire des fibres et la remettre dans la poêle avec le jus rendu.", "minuteur": 2 },
     { "texte": "Réchauffer les tortillas dans une poêle sèche, 20 à 30 secondes par face, et les empiler sous un torchon. Servir la poêlée au centre de la table.", "minuteur": 2 }
   ],
   "notes": "Le poulet est facultatif : le remplacer par du bœuf (bavette, rumsteck) ou s'en passer pour une version végétarienne. Cuire la viande avant les légumes et la trancher seulement après repos : entière, elle reste juteuse. Ne pas surcharger la poêle, quitte à cuire les légumes en deux fois."

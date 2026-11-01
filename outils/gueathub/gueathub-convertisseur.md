@@ -169,6 +169,7 @@ Unités autorisées : `g` `kg` `ml` `cl` `l` `cac` `cas` `pincee` `piece` `gouss
 * Une action ou un groupe d'actions liées par étape, à l'infinitif (« Préchauffer », « Mélanger »), 300 caractères max.
 * **Ne jamais écrire de quantité dans le texte** : elle ne suivrait pas le changement de portions. Nommer l'ingrédient. Les températures, durées et tailles restent (« 180 °C », « en dés de 1 cm »).
 * `minuteur` en minutes, seulement quand l'étape comporte une attente chronométrable : cuisson, repos, marinade.
+* Pas de citron ni de citron vert en finition (filet de jus au service, quartier pour servir, trait en fin de cuisson) : on ne le fait jamais. Le retirer de la recette source, des étapes, des notes **et** des ingrédients. Le citron qui entre dans une marinade ou une sauce reste.
 
 ## 9\. Exemple de sortie
 

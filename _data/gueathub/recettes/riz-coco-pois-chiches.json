@@ -24,7 +24,6 @@
     { "nom": "piment en flocons", "quantite": 0.5, "unite": "cac", "categorie": "epices-aromates", "placard": true },
     { "nom": "huile d'olive", "quantite": 3, "unite": "cas", "categorie": "huiles-condiments", "placard": true },
     { "nom": "noix de cajou", "quantite": 60, "unite": "g", "categorie": "epicerie-sucree" },
-    { "nom": "citron vert", "quantite": 1, "unite": "piece", "categorie": "fruits-legumes" },
     { "nom": "coriandre", "quantite": 0.5, "unite": "botte", "categorie": "fruits-legumes", "precision": "ciselée" },
     { "nom": "sel", "quantite": null, "unite": null, "categorie": "epices-aromates", "placard": true },
     { "nom": "poivre", "quantite": null, "unite": null, "categorie": "epices-aromates", "placard": true }
@@ -37,7 +36,7 @@
     { "texte": "Verser le riz et remuer pour enrober les grains du mélange épicé. Ajouter les pois chiches et mélanger délicatement.", "minuteur": 2 },
     { "texte": "Verser le lait de coco et le bouillon, saler, porter à frémissement, puis couvrir et cuire à feu minimum sans remuer.", "minuteur": 13 },
     { "texte": "Couper le feu, déposer les poivrons sur le dessus, couvrir de nouveau et laisser reposer : le riz finit de gonfler et la sauce s'épaissit.", "minuteur": 10 },
-    { "texte": "Mélanger à la fourchette, arroser du jus de citron vert, rectifier le sel et le poivre. Servir parsemé de coriandre et de noix de cajou concassées." }
+    { "texte": "Mélanger à la fourchette, rectifier le sel et le poivre. Servir parsemé de coriandre et de noix de cajou concassées." }
   ],
   "notes": "Ne pas remuer pendant la cuisson couverte, sous peine d'obtenir un riz collant plutôt que nappé. Pour une version plus saucée, réserver un peu de lait de coco et l'incorporer à froid au moment de servir."
 }

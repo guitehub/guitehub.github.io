@@ -18,8 +18,7 @@
     { "nom": "huile d'olive", "quantite": 2, "unite": "cas", "categorie": "huiles-condiments", "placard": true },
     { "nom": "sel", "quantite": null, "unite": null, "categorie": "epices-aromates", "placard": true },
     { "nom": "poivre", "quantite": null, "unite": null, "categorie": "epices-aromates", "placard": true },
-    { "nom": "ciboulette", "quantite": 1, "unite": "botte", "categorie": "fruits-legumes" },
-    { "nom": "citron", "quantite": 1, "unite": "piece", "categorie": "fruits-legumes" }
+    { "nom": "ciboulette", "quantite": 1, "unite": "botte", "categorie": "fruits-legumes" }
   ],
   "etapes": [
     { "texte": "Rincer le riz noir et le cuire dans une grande casserole d'eau salée à ébullition.", "minuteur": 35 },
@@ -29,7 +28,7 @@
     { "texte": "Éponger les pavés de cabillaud, saler et poivrer des deux côtés." },
     { "texte": "Chauffer l'huile d'olive dans une poêle antiadhésive à feu vif et saisir le cabillaud sans y toucher jusqu'à belle coloration.", "minuteur": 3 },
     { "texte": "Retourner délicatement les pavés et poursuivre la cuisson à feu moyen jusqu'à ce que la chair soit nacrée.", "minuteur": 3 },
-    { "texte": "Dresser un lit de riz noir dans chaque assiette, poser un pavé de cabillaud, napper de beurre blanc, parsemer de ciboulette et servir avec un quartier de citron." }
+    { "texte": "Dresser un lit de riz noir dans chaque assiette, poser un pavé de cabillaud, napper de beurre blanc, parsemer de ciboulette et servir." }
   ],
   "notes": "Le beurre blanc ne doit jamais bouillir, sinon il tranche : monter le beurre hors du feu ou à feu très doux."
 }

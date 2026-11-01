@@ -25,11 +25,11 @@
     { "nom": "poivre", "quantite": null, "unite": null, "categorie": "epices-aromates", "placard": true }
   ],
   "etapes": [
-    { "texte": "Dans un grand saladier, mélanger le poulet avec la moitié de la poudre de colombo, l'ail, l'oignon, l'échalote, le thym, la moitié du jus de citron vert, du sel et du poivre. Couvrir et laisser mariner au moins 1 h au frais, ou une nuit pour plus de goût.", "minuteur": 60 },
+    { "texte": "Dans un grand saladier, mélanger le poulet avec la moitié de la poudre de colombo, l'ail, l'oignon, l'échalote, le thym, le jus de citron vert, du sel et du poivre. Couvrir et laisser mariner au moins 1 h au frais, ou une nuit pour plus de goût.", "minuteur": 60 },
     { "texte": "Chauffer l'huile dans une cocotte avec les graines de cumin, si utilisées, jusqu'à ce qu'elles crépitent. Retirer le poulet de la marinade, réserver celle-ci, et faire dorer le poulet sur toutes les faces.", "minuteur": 10 },
     { "texte": "Ajouter la marinade réservée, les pommes de terre et la courgette. Saupoudrer du reste de poudre de colombo, mélanger pour bien enrober et faire revenir en remuant.", "minuteur": 5 },
     { "texte": "Verser le bouillon, couvrir et laisser mijoter à feu doux jusqu'à ce que la viande soit tendre et les légumes fondants. Ajouter un peu d'eau en cours de cuisson si la sauce attache.", "minuteur": 40 },
-    { "texte": "Rectifier l'assaisonnement et arroser du reste de jus de citron vert juste avant de servir." }
+    { "texte": "Rectifier l'assaisonnement avant de servir." }
   ],
   "notes": "La poudre de colombo (coriandre, curcuma, cumin, fenugrec, piment), héritée des travailleurs indiens arrivés aux Antilles au XIXe siècle, est plus douce et plus fruitée qu'un curry. Un poulet entier découpé peut remplacer les cuisses, et une aubergine la courgette selon la saison."
 }
