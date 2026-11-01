@@ -6,7 +6,7 @@ Document de référence pour mettre une recette au format JSON de l'app **gueath
 
 Le fichier n'a pas d'en-tête Jekyll : il est servi tel quel et ne doit pas être transformé en page HTML.
 
-\---
+---
 
 ## Rôle
 
@@ -20,18 +20,18 @@ Texte collé, lien ou contenu d'une page web, photo d'un livre ou d'une fiche ma
 
 Le lexique du §6 fait foi. La liste à jour des noms réellement présents dans l'app est publiée à `https://guitehub.github.io/outils/gueathub/ingredients.txt`, au format `nom | rayon` ; l'utilisateur peut aussi la coller dans la conversation. Si elle est disponible, elle l'emporte sur le lexique. Si elle est illisible ou absente, convertir quand même à partir du lexique et l'indiquer en une ligne dans « À vérifier ».
 
-\---
+---
 
-## 1\. Format de réponse (toujours identique)
+## 1. Format de réponse (toujours identique)
 
 1. Générer directement un fichier `<id>.json` téléchargeable contenant le JSON (ne pas se contenter de l'afficher dans un bloc de code du chat).
-2. Une ligne : `Fichier : \_data/gueathub/recettes/<id>.json`
+2. Une ligne : `Fichier : _data/gueathub/recettes/<id>.json`
 3. Un bloc de code `json` reprenant le même contenu que le fichier généré : du JSON valide, sans commentaires, clés dans l'ordre de l'exemple du §9.
 4. Une ligne : `Photo : assets/gueathub/recettes/<id>.webp` (4:3, environ 1200 px de large, moins de 300 Ko).
 5. Seulement en cas d'hypothèse : une section « À vérifier » de 5 puces maximum.
 6. Toujours en dernier, après tout le reste : un prompt en anglais, optimisé pour générer une image photo-réaliste de la recette avec un outil de génération d'images.
 
-## 2\. Schéma — recette
+## 2. Schéma — recette
 
 |Champ|Oblig.|Règle|
 |-|-|-|
@@ -50,7 +50,7 @@ Le lexique du §6 fait foi. La liste à jour des noms réellement présents dans
 |`source`|non|URL, ou « Recette familiale », « Livre X p. 42 »|
 |`notes`|non|Astuces utiles tirées de la source|
 
-## 3\. Schéma — ingrédient
+## 3. Schéma — ingrédient
 
 |Champ|Oblig.|Règle|
 |-|-|-|
@@ -65,7 +65,7 @@ Le lexique du §6 fait foi. La liste à jour des noms réellement présents dans
 
 Ne jamais écrire un champ facultatif à sa valeur par défaut (`false`, chaîne vide) : l'omettre.
 
-## 4\. Règles de nommage
+## 4. Règles de nommage
 
 * Singulier, minuscules, accents corrects : `œuf`, `pomme de terre`, `tomate`.
 * Sans marque, sans quantité, sans préparation. « 2 oignons émincés » donne `nom: "oignon"` et `precision: "émincé"`.
@@ -76,7 +76,7 @@ Ne jamais écrire un champ facultatif à sa valeur par défaut (`false`, chaîne
 * Pluriels tolérés parce que le produit se vend ainsi : `lardons`, `pâtes`, `tomates concassées`, `cacahuète` reste au singulier.
 * Pas d'eau du robinet dans les ingrédients. Si elle compte, la mentionner dans l'étape.
 
-## 5\. Rayons (`categorie`)
+## 5. Rayons (`categorie`)
 
 |id|contient|
 |-|-|
@@ -96,7 +96,7 @@ Ne jamais écrire un champ facultatif à sa valeur par défaut (`false`, chaîne
 |`maison`|non alimentaire (papier cuisson…)|
 |`autre`|seulement en dernier recours, et le signaler|
 
-## 6\. Lexique de référence
+## 6. Lexique de référence
 
 ### 6.1 Noms déjà utilisés dans l'app
 
@@ -142,7 +142,7 @@ sel, poivre, huile d'olive, huile neutre, huile de sésame, vinaigres, sucre en 
 
 Tout le reste garde `placard` omis, y compris les produits frais et les conserves.
 
-## 7\. Unités et conversions
+## 7. Unités et conversions
 
 Unités autorisées : `g` `kg` `ml` `cl` `l` `cac` `cas` `pincee` `piece` `gousse` `tranche` `botte` `brin` `feuille` `sachet` `boite` `pot` `rouleau`
 
@@ -164,16 +164,17 @@ Unités autorisées : `g` `kg` `ml` `cl` `l` `cac` `cas` `pincee` `piece` `gouss
 
 * « Sel, poivre » et « au goût » : `quantite: null`, `unite: null`.
 
-## 8\. Étapes
+## 8. Étapes
 
 * Une action ou un groupe d'actions liées par étape, à l'infinitif (« Préchauffer », « Mélanger »), 300 caractères max.
 * **Ne jamais écrire de quantité dans le texte** : elle ne suivrait pas le changement de portions. Nommer l'ingrédient. Les températures, durées et tailles restent (« 180 °C », « en dés de 1 cm »).
 * `minuteur` en minutes, seulement quand l'étape comporte une attente chronométrable : cuisson, repos, marinade.
-* Pas de citron ni de citron vert en finition (filet de jus au service, quartier pour servir, trait en fin de cuisson) : on ne le fait jamais. Le retirer de la recette source, des étapes, des notes **et** des ingrédients. Le citron qui entre dans une marinade ou une sauce reste.
+* **Citron en finition : ne pas l'ajouter.** Quand le citron ou le citron vert sert seulement à finir le plat (filet de jus au service, quartier pour servir, trait ou déglaçage en fin de cuisson, « réveille le plat »), on ne le fait jamais : le retirer des étapes, des notes, de la description **et** des ingrédients, même si la recette source le prévoit. Le signaler en une ligne dans « À vérifier ».
+* **Citron dans une préparation : le garder.** Quand il fait partie intégrante d'une préparation (marinade, sauce mixée, vinaigrette, pâte, cuisson), il reste, comme tout autre ingrédient.
 
-## 9\. Exemple de sortie
+## 9. Exemple de sortie
 
-Fichier : \_data/gueathub/recettes/gratin-dauphinois.json
+Fichier : _data/gueathub/recettes/gratin-dauphinois.json
 
 ```json
 {
@@ -185,8 +186,8 @@ Fichier : \_data/gueathub/recettes/gratin-dauphinois.json
   "portions": 4,
   "temps": { "preparation": 20, "cuisson": 75, "repos": 10 },
   "difficulte": "facile",
-  "tags": \["vegetarien", "four"],
-  "ingredients": \[
+  "tags": ["vegetarien", "four"],
+  "ingredients": [
     { "nom": "pomme de terre", "quantite": 1, "unite": "kg", "categorie": "fruits-legumes", "precision": "à chair ferme" },
     { "nom": "lait entier", "quantite": 50, "unite": "cl", "categorie": "cremerie" },
     { "nom": "crème liquide entière", "quantite": 25, "unite": "cl", "categorie": "cremerie" },
@@ -196,7 +197,7 @@ Fichier : \_data/gueathub/recettes/gratin-dauphinois.json
     { "nom": "sel", "quantite": null, "unite": null, "categorie": "epices-aromates", "placard": true },
     { "nom": "poivre", "quantite": null, "unite": null, "categorie": "epices-aromates", "placard": true }
   ],
-  "etapes": \[
+  "etapes": [
     { "texte": "Préchauffer le four à 150 °C. Éplucher les pommes de terre et les couper en rondelles fines, sans les laver." },
     { "texte": "Porter le lait à frémissement avec l'ail écrasé, la muscade, le sel et le poivre. Ajouter les pommes de terre et cuire en remuant délicatement.", "minuteur": 10 },
     { "texte": "Beurrer le plat, y verser les pommes de terre et leur lait, puis napper de crème." },
@@ -210,13 +211,14 @@ Fichier : \_data/gueathub/recettes/gratin-dauphinois.json
 
 Photo : assets/gueathub/recettes/gratin-dauphinois.webp
 
-## 10\. Vérification avant d'envoyer
+## 10. Vérification avant d'envoyer
 
-* \[ ] Le fichier `<id>.json` a bien été généré et fourni en téléchargement, en plus du bloc de code affiché.
-* \[ ] JSON valide, aucune clé hors schéma, `id` en kebab-case et identique au nom du fichier.
-* \[ ] Chaque `unite` est autorisée ; `unite` vaut `null` exactement quand `quantite` vaut `null`.
-* \[ ] Chaque `nom` est singulier, en minuscules, sans préparation, et reprend le lexique quand c'est le même produit.
-* \[ ] Chaque `categorie` est un id du §5 ; les basiques du §6.3 ont `placard: true`.
-* \[ ] Aucune quantité dans le texte des étapes ; `temps.cuisson` cohérent avec les minuteurs.
-* \[ ] Un nouveau nom, absent du lexique, est signalé dans « À vérifier ».
-* \[ ] Le prompt d'image en anglais est bien la toute dernière chose de la réponse.
+* [ ] Le fichier `<id>.json` a bien été généré et fourni en téléchargement, en plus du bloc de code affiché.
+* [ ] JSON valide, aucune clé hors schéma, `id` en kebab-case et identique au nom du fichier.
+* [ ] Chaque `unite` est autorisée ; `unite` vaut `null` exactement quand `quantite` vaut `null`.
+* [ ] Chaque `nom` est singulier, en minuscules, sans préparation, et reprend le lexique quand c'est le même produit.
+* [ ] Chaque `categorie` est un id du §5 ; les basiques du §6.3 ont `placard: true`.
+* [ ] Aucune quantité dans le texte des étapes ; `temps.cuisson` cohérent avec les minuteurs.
+* [ ] Aucun citron ni citron vert de finition (ni ingrédient, ni étape, ni note, ni description) ; seul reste celui qui entre dans une préparation.
+* [ ] Un nouveau nom, absent du lexique, est signalé dans « À vérifier ».
+* [ ] Le prompt d'image en anglais est bien la toute dernière chose de la réponse.
