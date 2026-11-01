@@ -318,3 +318,12 @@ ne tranchait pas ou a été arbitré. Fichier non publié (exclu dans `_config.y
 - **Deux colonnes d'ingrédients au-delà de 10**, pour tenir sur une page A4 dans la plupart des cas ; une
   étape ou un ingrédient n'est jamais coupé entre deux pages.
 - **Icône `printer`** ajoutée à `scripts/gueathub-icons.mjs`.
+
+## Après la phase 6 — ordre des rayons
+
+- **Ordre par défaut de `categories.json`** calé sur le parcours en magasin : boissons, épicerie salée,
+  conserves & bocaux d'abord ; frais & traiteur puis boucherie & poissonnerie en dernier (produits à garder
+  au frais) ; les autres rayons entre les deux, dans leur ordre précédent. « À vérifier au placard » reste
+  une section à part, toujours affichée après tous les rayons.
+- **Ordre perso conservé** : un utilisateur qui a déjà réordonné ses rayons garde son ordre (voir
+  « Rayons » plus haut). 1.6.0.

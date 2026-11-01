@@ -261,8 +261,8 @@ test("resolveCategoryOrder : ordre perso nettoyé et complété", () => {
   const cats = [{ id: "a" }, { id: "b" }, { id: "c" }, { id: "autre" }];
   assert.deepEqual(resolveCategoryOrder([], cats), ["a", "b", "c", "autre"]);
   assert.deepEqual(resolveCategoryOrder(["c", "inconnu", "a", "c"], cats), ["c", "a", "b", "autre"]);
-  assert.equal(defaultOrder[0], "fruits-legumes");
-  assert.equal(defaultOrder.at(-1), "autre");
+  assert.equal(defaultOrder[0], "boissons");
+  assert.equal(defaultOrder.at(-1), "boucherie-poissonnerie");
 });
 
 test("buildSections : ordre des rayons perso, rayons vides masqués, rayon inconnu -> autre", () => {
