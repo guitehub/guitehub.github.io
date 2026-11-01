@@ -1,0 +1,35 @@
+{
+  "schema": 1,
+  "id": "colombo-de-poulet",
+  "titre": "Colombo de poulet",
+  "description": "Plat antillais : cuisses de poulet marinées au citron vert, puis mijotées avec pommes de terre et courgette dans la poudre de colombo.",
+  "type": "plat",
+  "portions": 4,
+  "temps": { "preparation": 20, "cuisson": 55, "repos": 60 },
+  "difficulte": "facile",
+  "tags": ["poulet"],
+  "ingredients": [
+    { "nom": "cuisse de poulet", "quantite": 4, "unite": "piece", "categorie": "boucherie-poissonnerie" },
+    { "nom": "poudre de colombo", "quantite": 2, "unite": "cas", "categorie": "epices-aromates", "precision": "en deux fois", "placard": true },
+    { "nom": "ail", "quantite": 2, "unite": "gousse", "categorie": "fruits-legumes", "precision": "écrasé" },
+    { "nom": "oignon", "quantite": 1, "unite": "piece", "categorie": "fruits-legumes", "precision": "émincé" },
+    { "nom": "échalote", "quantite": 1, "unite": "piece", "categorie": "fruits-legumes", "precision": "émincée" },
+    { "nom": "cumin", "quantite": 1, "unite": "cac", "categorie": "epices-aromates", "precision": "en graines", "optionnel": true, "placard": true },
+    { "nom": "thym séché", "quantite": 1, "unite": "cac", "categorie": "epices-aromates", "placard": true },
+    { "nom": "citron vert", "quantite": 1, "unite": "piece", "categorie": "fruits-legumes", "precision": "pressé" },
+    { "nom": "pomme de terre", "quantite": 400, "unite": "g", "categorie": "fruits-legumes", "precision": "à chair ferme, en gros dés" },
+    { "nom": "courgette", "quantite": 1, "unite": "piece", "categorie": "fruits-legumes", "precision": "en rondelles épaisses" },
+    { "nom": "huile neutre", "quantite": 1, "unite": "cas", "categorie": "huiles-condiments", "placard": true },
+    { "nom": "bouillon de volaille", "quantite": 20, "unite": "cl", "categorie": "epices-aromates", "precision": "ou eau", "placard": true },
+    { "nom": "sel", "quantite": null, "unite": null, "categorie": "epices-aromates", "placard": true },
+    { "nom": "poivre", "quantite": null, "unite": null, "categorie": "epices-aromates", "placard": true }
+  ],
+  "etapes": [
+    { "texte": "Dans un grand saladier, mélanger le poulet avec la moitié de la poudre de colombo, l'ail, l'oignon, l'échalote, le thym, la moitié du jus de citron vert, du sel et du poivre. Couvrir et laisser mariner au moins 1 h au frais, ou une nuit pour plus de goût.", "minuteur": 60 },
+    { "texte": "Chauffer l'huile dans une cocotte avec les graines de cumin, si utilisées, jusqu'à ce qu'elles crépitent. Retirer le poulet de la marinade, réserver celle-ci, et faire dorer le poulet sur toutes les faces.", "minuteur": 10 },
+    { "texte": "Ajouter la marinade réservée, les pommes de terre et la courgette. Saupoudrer du reste de poudre de colombo, mélanger pour bien enrober et faire revenir en remuant.", "minuteur": 5 },
+    { "texte": "Verser le bouillon, couvrir et laisser mijoter à feu doux jusqu'à ce que la viande soit tendre et les légumes fondants. Ajouter un peu d'eau en cours de cuisson si la sauce attache.", "minuteur": 40 },
+    { "texte": "Rectifier l'assaisonnement et arroser du reste de jus de citron vert juste avant de servir." }
+  ],
+  "notes": "La poudre de colombo (coriandre, curcuma, cumin, fenugrec, piment), héritée des travailleurs indiens arrivés aux Antilles au XIXe siècle, est plus douce et plus fruitée qu'un curry. Un poulet entier découpé peut remplacer les cuisses, et une aubergine la courgette selon la saison."
+}
