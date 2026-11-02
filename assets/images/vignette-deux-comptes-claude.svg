@@ -1,0 +1,17 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 500" role="img" aria-label="Deux comptes Claude Code dans un terminal">
+  <!-- Bandeau du mémo « deux comptes Claude Code » : même fenêtre de terminal que
+       la vignette clé SSH, flèches arrow-left-right de Bootstrap Icons (MIT). Le centre
+       (500 × 500) reste lisible quand la miniature des listes recadre l'image en carré. -->
+  <rect width="1200" height="500" fill="#16181b"/>
+  <rect x="0" y="0" width="1200" height="56" fill="#1f2226"/>
+  <circle cx="36" cy="28" r="9" fill="#e06c5f"/>
+  <circle cx="66" cy="28" r="9" fill="#e0b34c"/>
+  <circle cx="96" cy="28" r="9" fill="#6fbf73"/>
+  <text x="600" y="36" text-anchor="middle" fill="#6e757d"
+        font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, monospace" font-size="22">~/.zshrc</text>
+  <g fill="#e08b4c" transform="translate(480 90) scale(15)">
+    <path fill-rule="evenodd" d="M1 11.5a.5.5 0 0 0 .5.5h11.793l-3.147 3.146a.5.5 0 0 0 .708.708l4-4a.5.5 0 0 0 0-.708l-4-4a.5.5 0 0 0-.708.708L13.293 11H1.5a.5.5 0 0 0-.5.5m14-7a.5.5 0 0 1-.5.5H2.707l3.147 3.146a.5.5 0 1 1-.708.708l-4-4a.5.5 0 0 1 0-.708l4-4a.5.5 0 1 1 .708.708L2.707 4H14.5a.5.5 0 0 1 .5.5"/>
+  </g>
+  <text x="600" y="400" text-anchor="middle"
+        font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, monospace" font-size="30"><tspan fill="#e08b4c">$</tspan><tspan fill="#e7e9ec"> claude-perso</tspan><tspan fill="#6e757d"> | </tspan><tspan fill="#e7e9ec">claude-pro</tspan><tspan fill="#e08b4c">▍</tspan></text>
+</svg>
