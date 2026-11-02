@@ -1,7 +1,7 @@
 ---
 layout: post
 title: "JSON Helper"
-date: 2026-11-02
+date: 2026-11-01
 author: "La Guite"
 
 categories:
