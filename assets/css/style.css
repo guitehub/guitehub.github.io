@@ -329,6 +329,35 @@ pre code {
   font-weight: 600;
 }
 
+/* --- Encadré tl;dr (articles mémo) ------------------------------------------ */
+/* Markdown : <div class="tldr" markdown="1"><p class="tldr-tag">tl;dr</p> … </div> */
+.tldr {
+  position: relative;
+  background: var(--bg-soft);
+  border: 1px solid var(--border);
+  border-left: 3px solid var(--accent);
+  border-radius: 0.6rem;
+  padding: 1.4rem 1.1rem 1.1rem;
+  margin: 2.2rem 0 1.8rem;
+}
+.tldr .tldr-tag {
+  position: absolute;
+  top: -0.75rem;
+  left: 0.9rem;
+  margin: 0;
+  padding: 0.1rem 0.55rem;
+  background: var(--accent);
+  color: var(--accent-fg);
+  border-radius: 0.35rem;
+  font-family: var(--mono);
+  font-size: 0.78rem;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  line-height: 1.4;
+}
+.tldr .highlight, .tldr pre { margin: 0; }
+.tldr > :last-child { margin-bottom: 0; }
+
 /* --- Bouton « Ouvrir l'app » (articles projets / outils) ------------------- */
 /* Markdown : [Ouvrir Nom <i class="bi bi-arrow-right"></i>](/outils/nom.html){: .app-button} */
 .app-button {

@@ -29,6 +29,21 @@ categories:
 # --- Pour un projet / outil : bouton vers l'app, juste sous le titre ----------
 #     fichier unique : [Ouvrir Nom <i class="bi bi-arrow-right"></i>](/outils/nom.html){: .app-button}
 #     dossier        : [Ouvrir Nom <i class="bi bi-arrow-right"></i>](/outils/nom/){: .app-button}
+#
+# --- Pour un mémo / guide : encadré tl;dr, juste après l'intro ----------------
+#     Les commandes à copier, commentées avec le numéro de la section qui les
+#     explique. Pas d'antisèche en fin d'article (c'est le tl;dr), et pas de
+#     phrase de transition après l'encadré : enchaîner directement sur « --- ».
+#     Exemple : _posts/2026-10-21-cle_ssh_github.md
+#
+#     <div class="tldr" markdown="1">
+#     <p class="tldr-tag">tl;dr</p>
+#
+#     ```bash
+#     commande-1          # 1. ce qu'elle fait
+#     commande-2          # 2. ce qu'elle fait
+#     ```
+#     </div>
 ---
 
 Le contenu de l'article, en **Markdown**.
