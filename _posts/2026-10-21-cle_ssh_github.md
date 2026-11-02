@@ -1,7 +1,7 @@
 ---
 layout: post
-title: "Mémo : clé SSH pour GitHub et Claude Code, sur Windows, macOS et Linux"
-date: 2026-10-31
+title: "Mémo : clé SSH pour GitHub, sur Windows, macOS et Linux"
+date: 2026-10-21
 categories:
 - guide
 - dev
@@ -9,12 +9,22 @@ author: "La Guite"
 image: "vignette-cle-ssh.svg"
 ---
 
-Le pense-bête de la manip qu'on ne fait qu'une fois par machine, et donc qu'on oublie à chaque fois : créer une clé SSH **ed25519**, la déclarer sur GitHub, vérifier que ça marche, puis installer **Claude Code** dans le terminal.
+Pense-bête de la manip que j'oublie à chaque fois : créer une clé SSH **ed25519** au bon format et la passer à l'agent, la déclarer sur GitHub, puis vérifier que ça marche.
 
-Partout où vous voyez `vous@exemple.com`, `utilisateur` ou `depot`, remplacez par vos propres valeurs.
+<div class="tldr" markdown="1">
+<p class="tldr-tag">tl;dr</p>
+
+```bash
+ssh-keygen -t ed25519 -C "vous@exemple.com"   # 2. générer
+ssh-add ~/.ssh/id_ed25519                      # 3. charger (macOS : --apple-use-keychain)
+cat ~/.ssh/id_ed25519.pub                      # 4. copier
+                                               # 5. GitHub > Settings > SSH and GPG keys
+ssh -T git@github.com                          # 6. tester
+git remote set-url origin git@github.com:utilisateur/depot.git   # 7. basculer un dépôt
+```
+</div>
 
 ---
-
 ## 1. Ouvrir un terminal
 
 | Système | Terminal à utiliser |
@@ -189,76 +199,4 @@ Pour un dépôt déjà cloné en HTTPS, vérifiez d'abord l'URL actuelle, puis b
 ```bash
 git remote -v
 git remote set-url origin git@github.com:utilisateur/depot.git
-```
-
----
-
-## 8. Bonus : installer Claude Code dans le terminal
-
-Claude Code demande un compte payant (Pro, Max, Team, Enterprise) ou un compte Console : le plan gratuit de claude.ai ne suffit pas. Il fonctionne sur macOS 13+, Windows 10 (1809+), Ubuntu 20.04+ et Debian 10+.
-
-### Installation
-
-```bash
-# macOS, Linux, WSL
-curl -fsSL https://claude.ai/install.sh | bash
-```
-
-```powershell
-# Windows (PowerShell)
-irm https://claude.ai/install.ps1 | iex
-```
-
-Variantes avec un gestionnaire de paquets :
-
-```bash
-brew install --cask claude-code         # macOS (Homebrew)
-winget install Anthropic.ClaudeCode     # Windows (WinGet)
-```
-
-L'installateur officiel (`install.sh` / `install.ps1`) met Claude Code à jour tout seul. Avec Homebrew ou WinGet, c'est à vous de lancer `brew upgrade claude-code` ou `winget upgrade Anthropic.ClaudeCode`.
-
-Sur Windows, installez aussi [Git for Windows](https://git-scm.com/downloads/win). Claude Code se sert alors de Git Bash pour exécuter ses commandes.
-
-### Vérifier
-
-Ouvrez un **nouveau** terminal, puis :
-
-```bash
-claude --version
-```
-
-Si vous obtenez `command not found` sur macOS ou Linux, le dossier `~/.local/bin` n'est pas dans le `PATH`. Pour l'y ajouter (remplacez `~/.zshrc` par `~/.bashrc` si votre shell est bash) :
-
-```bash
-echo 'export PATH="$HOME/.local/bin:$PATH"' >> ~/.zshrc
-source ~/.zshrc
-```
-
-Sur Windows, le dossier à ajouter au `PATH` est `%USERPROFILE%\.local\bin`.
-
-### Lancer
-
-```bash
-cd chemin/vers/mon-projet
-claude
-```
-
-Au premier lancement, le navigateur s'ouvre pour vous connecter à votre compte. Ensuite, quelques commandes à retenir :
-
-- `/init`, dans la session : analyse le projet et crée un `CLAUDE.md` qui sert de contexte à Claude ;
-- `claude doctor` : diagnostic de l'installation ;
-- `claude update` : force une mise à jour.
-
-Claude Code utilise le Git de la machine. La clé SSH configurée plus haut sert donc aussi quand il fait un `git push`.
-
----
-
-## Antisèche
-
-```bash
-ssh-keygen -t ed25519 -C "vous@exemple.com"   # 1. générer
-ssh-add ~/.ssh/id_ed25519                      # 2. charger (macOS : --apple-use-keychain)
-cat ~/.ssh/id_ed25519.pub                      # 3. copier → GitHub > Settings > SSH keys
-ssh -T git@github.com                          # 4. tester
 ```
