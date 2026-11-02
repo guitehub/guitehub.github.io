@@ -1,8 +1,8 @@
 {
   "schema": 1,
-  "id": "chili-sin-carne-lentilles-pois-chiche",
-  "titre": "Chili sin carne aux lentilles, pois chiche et courgette",
-  "description": "Chili végétarien aux lentilles et pois chiche, poivrons et courgette, mijoté avec cumin et paprika fumé.",
+  "id": "chili-sin-carne",
+  "titre": "Chili sin carne",
+  "description": "Chili végétarien aux haricots rouges, lentilles et pois chiche, poivrons et courgette, mijoté avec cumin et paprika fumé.",
   "type": "plat",
   "portions": 4,
   "temps": { "preparation": 15, "cuisson": 20, "repos": 0 },
@@ -13,6 +13,7 @@
     { "nom": "ail", "quantite": 2, "unite": "gousse", "categorie": "fruits-legumes" },
     { "nom": "poivron rouge", "quantite": 2, "unite": "piece", "categorie": "fruits-legumes" },
     { "nom": "courgette", "quantite": 1, "unite": "piece", "categorie": "fruits-legumes" },
+    { "nom": "haricot rouge", "quantite": 400, "unite": "g", "categorie": "conserves", "precision": "en boîte, égoutté et rincé (ou moitié haricots noirs)" },
     { "nom": "lentille", "quantite": 400, "unite": "g", "categorie": "conserves", "precision": "en boîte, égouttée" },
     { "nom": "pois chiche", "quantite": 400, "unite": "g", "categorie": "conserves", "precision": "égoutté" },
     { "nom": "tomates concassées", "quantite": 800, "unite": "g", "categorie": "conserves" },
@@ -30,10 +31,10 @@
     { "texte": "Émincer l'oignon, hacher l'ail, couper les poivrons en dés et la courgette en dés un peu plus gros." },
     { "texte": "Chauffer l'huile d'olive dans une cocotte. Faire revenir l'oignon et l'ail, puis ajouter les poivrons et poursuivre la cuisson.", "minuteur": 5 },
     { "texte": "Ajouter le cumin, le piment en poudre et le paprika fumé, remuer pour torréfier légèrement les épices." },
-    { "texte": "Ajouter les lentilles égouttées, les pois chiche égouttés, les tomates concassées, le concentré de tomate et le bouillon de légumes. Bien mélanger." },
+    { "texte": "Ajouter les haricots rouges égouttés et rincés, les lentilles égouttées, les pois chiche égouttés, les tomates concassées, le concentré de tomate et le bouillon de légumes. Bien mélanger." },
     { "texte": "Porter à frémissement, couvrir partiellement et laisser mijoter à feu doux. Ajouter la courgette et poursuivre la cuisson jusqu'à ce qu'elle soit tendre mais encore ferme.", "minuteur": 15 },
     { "texte": "Saler, poivrer, rectifier l'assaisonnement et servir parsemé de coriandre fraîche." }
   ],
   "source": "Recette maison",
-  "notes": "Comme les lentilles sont déjà cuites (en boîte), le mijotage sert surtout à lier les saveurs, pas à les attendrir."
+  "notes": "Variante : moitié haricots rouges, moitié haricots noirs (200 g de chaque pour 4 portions). Comme les haricots et les lentilles sont déjà cuits (en boîte), le mijotage sert surtout à lier les saveurs, pas à les attendrir."
 }
