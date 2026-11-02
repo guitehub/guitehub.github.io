@@ -334,3 +334,12 @@ ne tranchait pas ou a été arbitré. Fichier non publié (exclu dans `_config.y
   de cuisson ou déglaçage final) : on ne le fait jamais. Retirés des étapes et des notes, et des
   ingrédients pour ne plus les ajouter à la liste de courses. Le citron d'une marinade (colombo) ou d'une
   sauce (soba) reste. Règle ajoutée au cahier des charges (§ 8).
+
+## Recettes — vue compacte
+
+- **Bascule « Vue détaillée / Vue compacte »** à côté du tri (deux boutons icônes `grid` et
+  `grid-3x3-gap`), conservée pendant la visite comme le tri, pas enregistrée.
+- **Vue compacte** : 3 recettes par ligne dès le mobile (4 dès `sm`, 6 dès `lg`), photo et titre en
+  `text-sm`, sans temps, type ni boutons Ajouter / portions : trop étroit pour le compteur, on ouvre la
+  fiche pour ajouter. Les recettes de la liste gardent le léger surlignage et prennent en plus une
+  pastille cochée sur la photo, plus lisible à cette taille. 1.7.0.

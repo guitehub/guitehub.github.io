@@ -10,6 +10,8 @@ import { BUTTON_PRIMARY, BUTTON_SECONDARY, SECTION_TITLE, chip, container, recip
 
 // Critères conservés pendant la visite (retour depuis une fiche recette).
 const criteria = { query: "", type: null, tags: new Set(), selectedOnly: false, sort: "alpha" };
+// Affichage de la grille, conservé pendant la visite : "cards" (détaillé) ou "compact" (3 par ligne, sans détail).
+let layout = "cards";
 // Nombre de recettes du tirage aléatoire, conservé pendant la visite.
 const RANDOM_MAX = 14;
 let randomCount = 5;
@@ -52,7 +54,7 @@ export function recipesView(app) {
   function card(recipe) {
     const entry = actions.selectionEntry(recipe.id);
     const type = TYPES[recipe.type];
-    return html`<li class="relative flex flex-col overflow-hidden rounded-xl border ${entry ? "border-accent/40 bg-accent/5" : "border-line bg-page"}">
+    return html`<li class="relative flex flex-col overflow-hidden rounded-xl border ${entry ? "border-accent/40 bg-accent/10" : "border-line bg-page"}">
       ${recipePhoto(app, recipe)}
       <div class="flex flex-1 flex-col gap-3 p-4">
         <div class="flex-1">
@@ -84,6 +86,35 @@ export function recipesView(app) {
     </li>`;
   }
 
+  /** Vue compacte : photo et titre seulement, sans boutons ; un repère coché signale les recettes de la liste. */
+  function compactCard(recipe) {
+    const entry = actions.selectionEntry(recipe.id);
+    return html`<li class="relative flex flex-col overflow-hidden rounded-lg border ${entry ? "border-accent/40 bg-accent/10" : "border-line bg-page"}">
+      ${recipePhoto(app, recipe)}
+      ${entry
+        ? html`<span class="absolute top-1.5 right-1.5 grid size-6 place-items-center rounded-full bg-accent text-on-accent shadow-sm">${icon("check-lg", "size-3.5")}<span class="sr-only">Dans la liste</span></span>`
+        : ""}
+      <h2 class="p-2 text-sm leading-snug font-semibold hyphens-auto">
+        <a href="${href.recipe(recipe.id)}" data-focus="open:${recipe.id}"
+          class="after:absolute after:inset-0 after:rounded-lg hover:underline focus-visible:outline-none focus-visible:after:outline-2 focus-visible:after:-outline-offset-2 focus-visible:after:outline-accent">${recipe.titre}</a>
+      </h2>
+    </li>`;
+  }
+
+  function layoutToggle() {
+    const option = (value, iconName, label) =>
+      html`<button type="button" aria-pressed="${layout === value ? "true" : "false"}" aria-label="${label}" title="${label}"
+        data-action="layout" data-value="${value}" data-focus="layout:${value}"
+        class="${layout === value
+          ? "grid size-11 place-items-center rounded-full bg-accent text-on-accent"
+          : "grid size-11 place-items-center rounded-full text-ink-soft transition-colors hover:bg-soft hover:text-ink"}">
+        ${icon(iconName, "size-4")}
+      </button>`;
+    return html`<div class="flex shrink-0 rounded-full border border-line bg-page" role="group" aria-label="Affichage">
+      ${option("cards", "grid", "Vue détaillée")}${option("compact", "grid-3x3-gap", "Vue compacte")}
+    </div>`;
+  }
+
   function resultsBlock() {
     const recipes = visibleRecipes();
     if (data.recipes.length === 0) {
@@ -94,6 +125,9 @@ export function recipesView(app) {
         <p>Aucune recette ne correspond à ta recherche.</p>
         <button type="button" class="${BUTTON_SECONDARY}" data-action="clear-filters" data-focus="clear-filters">Effacer la recherche et les filtres</button>
       </div>`;
+    }
+    if (layout === "compact") {
+      return html`<ul class="mt-4 grid grid-cols-3 gap-2 sm:grid-cols-4 sm:gap-3 lg:grid-cols-6">${recipes.map(compactCard)}</ul>`;
     }
     return html`<ul class="mt-4 grid grid-cols-1 gap-4 min-[400px]:grid-cols-2 lg:grid-cols-3">${recipes.map(card)}</ul>`;
   }
@@ -149,13 +183,16 @@ export function recipesView(app) {
         <div data-region="filters" class="flex flex-col gap-2">${filtersBlock()}</div>
         <div class="flex items-center justify-between gap-3">
           <p data-region="count" class="text-sm text-ink-soft" aria-live="polite">${countText()}</p>
-          <label class="flex items-center gap-2 text-sm text-ink-soft">
-            Trier
-            <select data-change="sort" data-focus="sort" class="min-h-11 rounded-full border border-line bg-page px-3 text-sm text-ink">
-              <option value="alpha" ${criteria.sort === "alpha" ? "selected" : ""}>De A à Z</option>
-              <option value="temps" ${criteria.sort === "temps" ? "selected" : ""}>Temps total</option>
-            </select>
-          </label>
+          <div class="flex items-center gap-2">
+            <label class="flex items-center gap-2 text-sm text-ink-soft">
+              <span class="max-[399px]:sr-only">Trier</span>
+              <select data-change="sort" data-focus="sort" class="min-h-11 rounded-full border border-line bg-page px-3 text-sm text-ink">
+                <option value="alpha" ${criteria.sort === "alpha" ? "selected" : ""}>De A à Z</option>
+                <option value="temps" ${criteria.sort === "temps" ? "selected" : ""}>Temps total</option>
+              </select>
+            </label>
+            <div data-region="layout">${layoutToggle()}</div>
+          </div>
         </div>
       </div>
       <div data-region="results">${resultsBlock()}</div>
@@ -168,6 +205,7 @@ export function recipesView(app) {
   function refresh(root, focusKey) {
     renderInto(root.querySelector('[data-region="filters"]'), filtersBlock(), { focusKey });
     root.querySelector('[data-region="count"]').textContent = countText();
+    renderInto(root.querySelector('[data-region="layout"]'), layoutToggle(), { focusKey });
     renderInto(root.querySelector('[data-region="results"]'), resultsBlock(), { focusKey });
     renderInto(root.querySelector('[data-region="random"]'), randomBlock(), { focusKey });
   }
@@ -191,6 +229,11 @@ export function recipesView(app) {
     if (action === "type") criteria.type = value || null;
     else if (action === "tag") criteria.tags.has(value) ? criteria.tags.delete(value) : criteria.tags.add(value);
     else if (action === "selected") criteria.selectedOnly = !criteria.selectedOnly;
+    else if (action === "layout") {
+      layout = value === "compact" ? "compact" : "cards";
+      refresh(root, button.dataset.focus);
+      return;
+    }
     else if (action === "clear-filters") {
       Object.assign(criteria, { query: "", type: null, selectedOnly: false });
       criteria.tags.clear();
