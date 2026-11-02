@@ -13,6 +13,22 @@ image: "jekyll-logo-dark-solid.jpg"
 
 Ce guide explique comment configurer un environnement de développement pour un site Jekyll sur Windows, en tenant compte des spécificités de cet OS et des éventuels problèmes liés aux dépendances.
 
+<div class="tldr" markdown="1">
+<p class="tldr-tag">tl;dr</p>
+
+```bash
+# 1. installer Ruby 3.2.x avec DevKit (rubyinstaller.org) et Git
+gem update --system                # 2. mettre RubyGems à jour
+gem install bundler                # 2. Bundler
+ridk install                       # 2. outils de compilation (MSYS2)
+gem install jekyll                 # 3. Jekyll
+jekyll new mon-site                # 3. nouveau site (ou git clone, voir 4.)
+cd mon-site
+bundle install                     # 3. dépendances du projet
+bundle exec jekyll serve           # 3. → http://localhost:4000
+```
+</div>
+
 ---
 
 ### **1. Pré-requis**
