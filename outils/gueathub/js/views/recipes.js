@@ -52,7 +52,7 @@ export function recipesView(app) {
   function card(recipe) {
     const entry = actions.selectionEntry(recipe.id);
     const type = TYPES[recipe.type];
-    return html`<li class="relative flex flex-col overflow-hidden rounded-xl border border-line bg-page">
+    return html`<li class="relative flex flex-col overflow-hidden rounded-xl border ${entry ? "border-accent/40 bg-accent/5" : "border-line bg-page"}">
       ${recipePhoto(app, recipe)}
       <div class="flex flex-1 flex-col gap-3 p-4">
         <div class="flex-1">
