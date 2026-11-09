@@ -11,7 +11,7 @@
   "ingredients": [
     { "nom": "cuisse de poulet", "quantite": 4, "unite": "piece", "categorie": "boucherie-poissonnerie" },
     { "nom": "poudre de colombo", "quantite": 2, "unite": "cas", "categorie": "epices-aromates", "precision": "en deux fois", "placard": true },
-    { "nom": "ail", "quantite": 2, "unite": "gousse", "categorie": "fruits-legumes", "precision": "écrasé" },
+    { "nom": "ail", "quantite": 2, "unite": "gousse", "categorie": "fruits-legumes", "precision": "haché" },
     { "nom": "oignon", "quantite": 1, "unite": "piece", "categorie": "fruits-legumes", "precision": "émincé" },
     { "nom": "échalote", "quantite": 1, "unite": "piece", "categorie": "fruits-legumes", "precision": "émincée" },
     { "nom": "cumin", "quantite": 1, "unite": "cac", "categorie": "epices-aromates", "precision": "en graines", "optionnel": true, "placard": true },
@@ -20,16 +20,18 @@
     { "nom": "pomme de terre", "quantite": 400, "unite": "g", "categorie": "fruits-legumes", "precision": "à chair ferme, en gros dés" },
     { "nom": "courgette", "quantite": 1, "unite": "piece", "categorie": "fruits-legumes", "precision": "en rondelles épaisses" },
     { "nom": "huile neutre", "quantite": 1, "unite": "cas", "categorie": "huiles-condiments", "placard": true },
-    { "nom": "bouillon de volaille", "quantite": 20, "unite": "cl", "categorie": "epices-aromates", "precision": "ou eau", "placard": true },
+    { "nom": "bouillon de volaille", "quantite": 40, "unite": "cl", "categorie": "epices-aromates", "precision": "ou eau", "placard": true },
     { "nom": "sel", "quantite": null, "unite": null, "categorie": "epices-aromates", "placard": true },
     { "nom": "poivre", "quantite": null, "unite": null, "categorie": "epices-aromates", "placard": true }
   ],
   "etapes": [
-    { "texte": "Dans un grand saladier, mélanger le poulet avec la moitié de la poudre de colombo, l'ail, l'oignon, l'échalote, le thym, le jus de citron vert, du sel et du poivre. Couvrir et laisser mariner au moins 1 h au frais, ou une nuit pour plus de goût.", "minuteur": 60 },
-    { "texte": "Chauffer l'huile dans une cocotte avec les graines de cumin, si utilisées, jusqu'à ce qu'elles crépitent. Retirer le poulet de la marinade, réserver celle-ci, et faire dorer le poulet sur toutes les faces.", "minuteur": 10 },
-    { "texte": "Ajouter la marinade réservée, les pommes de terre et la courgette. Saupoudrer du reste de poudre de colombo, mélanger pour bien enrober et faire revenir en remuant.", "minuteur": 5 },
-    { "texte": "Verser le bouillon, couvrir et laisser mijoter à feu doux jusqu'à ce que la viande soit tendre et les légumes fondants. Ajouter un peu d'eau en cours de cuisson si la sauce attache.", "minuteur": 40 },
-    { "texte": "Rectifier l'assaisonnement avant de servir." }
+    { "texte": "Marinade : dans un saladier, mélanger le jus du citron vert, la moitié de la poudre de colombo, l'ail, l'oignon, l'échalote, le thym, du sel et du poivre. Ajouter les cuisses et les masser pour bien les enrober. Couvrir et laisser au frais au moins 1 h, idéalement une nuit.", "minuteur": 60 },
+    { "texte": "Sortir les cuisses du saladier. Faire tomber dans le saladier l'oignon, l'échalote et l'ail collés dessus (ils brûleraient à la cuisson), puis éponger les cuisses avec du papier absorbant. Garder le saladier : il contient les aromates et quelques cuillères de jus, qui serviront plus loin." },
+    { "texte": "Chauffer l'huile à feu moyen-vif dans une cocotte. Si vous mettez du cumin, faire griller les graines 30 secondes dans l'huile, jusqu'à ce qu'elles crépitent. Faire dorer les cuisses, côté peau d'abord, puis sur toutes les faces. Les réserver sur une assiette.", "minuteur": 10 },
+    { "texte": "Baisser à feu moyen. Mettre dans la cocotte les aromates du saladier, sans leur jus, et les faire revenir en grattant le fond, jusqu'à ce qu'ils ramollissent. Ajouter les pommes de terre et le reste de poudre de colombo, et remuer 1 min pour faire griller la poudre sans la brûler.", "minuteur": 4 },
+    { "texte": "Remettre les cuisses dans la cocotte. Verser le bouillon et le jus resté dans le saladier : le liquide doit arriver à mi-hauteur de la viande. Porter à frémissement, couvrir et laisser cuire à feu doux.", "minuteur": 25 },
+    { "texte": "Ajouter la courgette en l'enfonçant dans la sauce, couvrir et cuire encore 15 min : la viande doit se détacher de l'os et les pommes de terre s'écraser à la fourchette. Si la sauce est trop liquide, finir 5 min sans couvercle. Si elle attache, ajouter un peu d'eau.", "minuteur": 15 },
+    { "texte": "Goûter la sauce et rectifier en sel et poivre avant de servir." }
   ],
-  "notes": "La poudre de colombo (coriandre, curcuma, cumin, fenugrec, piment), héritée des travailleurs indiens arrivés aux Antilles au XIXe siècle, est plus douce et plus fruitée qu'un curry. Un poulet entier découpé peut remplacer les cuisses, et une aubergine la courgette selon la saison."
+  "notes": "La poudre de colombo (coriandre, curcuma, cumin, fenugrec, piment), héritée des travailleurs indiens arrivés aux Antilles au XIXe siècle, est plus douce et plus fruitée qu'un curry. Un poulet entier découpé peut remplacer les cuisses, et une aubergine la courgette selon la saison. Se sert avec du riz blanc."
 }

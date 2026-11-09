@@ -334,6 +334,11 @@ ne tranchait pas ou a été arbitré. Fichier non publié (exclu dans `_config.y
   de cuisson ou déglaçage final) : on ne le fait jamais. Retirés des étapes et des notes, et des
   ingrédients pour ne plus les ajouter à la liste de courses. Le citron d'une marinade (colombo) ou d'une
   sauce (soba) reste. Règle ajoutée au cahier des charges (§ 8).
+- **Colombo réécrit** : la « marinade réservée » n'était pas définie (il ne reste presque rien après une nuit).
+  Désormais, on fait tomber les aromates collés aux cuisses avant de les dorer, puis on les fait revenir à part,
+  et on ajoute le peu de jus restant avec le bouillon. Le bouillon passe de 20 à 40 cl, assez pour mijoter
+  40 min à couvert. La courgette arrive 15 min avant la fin pour ne pas se défaire. Recoupé avec plusieurs
+  recettes en ligne.
 
 ## Recettes — vue compacte
 
