@@ -14,7 +14,7 @@
     { "nom": "poivron rouge", "quantite": 2, "unite": "piece", "categorie": "fruits-legumes", "precision": "en lanières" },
     { "nom": "poivron jaune", "quantite": 1, "unite": "piece", "categorie": "fruits-legumes", "precision": "en lanières" },
     { "nom": "haricot rouge", "quantite": 400, "unite": "g", "categorie": "conserves", "precision": "en boîte, égoutté et rincé" },
-    { "nom": "maïs", "quantite": 285, "unite": "g", "categorie": "conserves", "precision": "en boîte, égoutté" },
+    { "nom": "maïs", "quantite": 1, "unite": "boite", "categorie": "conserves", "precision": "égoutté" },
     { "nom": "ail", "quantite": 2, "unite": "gousse", "categorie": "fruits-legumes", "precision": "écrasé" },
     { "nom": "tortilla de blé", "quantite": 8, "unite": "piece", "categorie": "saveurs-du-monde" },
     { "nom": "huile d'olive", "quantite": 3, "unite": "cas", "categorie": "huiles-condiments", "placard": true },

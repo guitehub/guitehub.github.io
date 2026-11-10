@@ -1,0 +1,41 @@
+{
+  "schema": 1,
+  "id": "chili-con-carne",
+  "titre": "Chili con carne",
+  "description": "Bœuf haché mijoté avec poivrons, tomates, haricots rouges et maïs, relevé au cumin, au piment et au paprika fumé.",
+  "type": "plat",
+  "portions": 4,
+  "temps": { "preparation": 15, "cuisson": 60, "repos": 0 },
+  "difficulte": "facile",
+  "tags": ["sans-gluten", "batch-cooking"],
+  "ingredients": [
+    { "nom": "bœuf haché", "quantite": 500, "unite": "g", "categorie": "boucherie-poissonnerie", "precision": "15 % de matières grasses" },
+    { "nom": "oignon", "quantite": 1, "unite": "piece", "categorie": "fruits-legumes", "precision": "émincé" },
+    { "nom": "ail", "quantite": 2, "unite": "gousse", "categorie": "fruits-legumes", "precision": "haché" },
+    { "nom": "poivron rouge", "quantite": 1, "unite": "piece", "categorie": "fruits-legumes", "precision": "en dés" },
+    { "nom": "poivron vert", "quantite": 1, "unite": "piece", "categorie": "fruits-legumes", "precision": "en dés" },
+    { "nom": "haricot rouge", "quantite": 400, "unite": "g", "categorie": "conserves", "precision": "en boîte, égoutté et rincé" },
+    { "nom": "maïs", "quantite": 1, "unite": "boite", "categorie": "conserves", "precision": "égoutté" },
+    { "nom": "tomates concassées", "quantite": 400, "unite": "g", "categorie": "conserves" },
+    { "nom": "concentré de tomate", "quantite": 2, "unite": "cas", "categorie": "conserves" },
+    { "nom": "bouillon de bœuf", "quantite": 20, "unite": "cl", "categorie": "epices-aromates", "placard": true },
+    { "nom": "huile d'olive", "quantite": 1, "unite": "cas", "categorie": "huiles-condiments", "placard": true },
+    { "nom": "cumin", "quantite": 2, "unite": "cac", "categorie": "epices-aromates", "precision": "moulu", "placard": true },
+    { "nom": "piment en poudre", "quantite": 1, "unite": "cac", "categorie": "epices-aromates", "placard": true },
+    { "nom": "paprika fumé", "quantite": 1, "unite": "cac", "categorie": "epices-aromates", "placard": true },
+    { "nom": "origan séché", "quantite": 1, "unite": "cac", "categorie": "epices-aromates", "placard": true },
+    { "nom": "sel", "quantite": null, "unite": null, "categorie": "epices-aromates", "placard": true },
+    { "nom": "poivre", "quantite": null, "unite": null, "categorie": "epices-aromates", "placard": true }
+  ],
+  "etapes": [
+    { "texte": "Chauffer l'huile à feu moyen dans une cocotte. Faire revenir l'oignon jusqu'à ce qu'il soit translucide, puis ajouter l'ail et remuer 1 min.", "minuteur": 5 },
+    { "texte": "Monter à feu vif et ajouter le bœuf haché. L'émietter à la spatule et le laisser dorer sans trop remuer, jusqu'à ce qu'il soit à moitié cuit et qu'il ne reste que quelques traces rosées.", "minuteur": 5 },
+    { "texte": "Ajouter les poivrons rouge et vert et poursuivre à feu moyen-vif en remuant, jusqu'à ce qu'ils commencent à ramollir et que le jus de la viande se soit évaporé.", "minuteur": 5 },
+    { "texte": "Ajouter le cumin, le piment, le paprika fumé, l'origan et le concentré de tomate, et remuer 1 min pour faire griller les épices." },
+    { "texte": "Verser les tomates concassées et le bouillon de bœuf, saler, poivrer et mélanger en grattant le fond. Porter à frémissement, couvrir en laissant un jour et laisser mijoter à feu doux en remuant de temps en temps.", "minuteur": 30 },
+    { "texte": "Ajouter les haricots rouges et le maïs, et poursuivre sans couvercle jusqu'à ce que la sauce soit épaisse et nappe la cuillère. Ajouter un peu d'eau si elle attache.", "minuteur": 15 },
+    { "texte": "Goûter et rectifier en sel, poivre et piment avant de servir." }
+  ],
+  "source": "Recette maison",
+  "notes": "Se sert avec du riz blanc ou des tortillas. Encore meilleur réchauffé le lendemain, se garde 3 jours au frais et se congèle bien."
+}
