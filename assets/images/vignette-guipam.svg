@@ -1,0 +1,24 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 500" role="img" aria-label="Plan d'adresses IP avec pastilles de santé">
+  <!-- Bandeau de l'article « GuiPAM » : fenêtre aux couleurs du site, plan d'adresses
+       fictives avec les pastilles de santé (vert, ambre, rouge, rouge foncé).
+       Le centre (500 × 500) reste lisible quand la miniature des listes recadre en carré. -->
+  <rect width="1200" height="500" fill="#16181b"/>
+  <rect x="0" y="0" width="1200" height="56" fill="#1f2226"/>
+  <circle cx="36" cy="28" r="9" fill="#e06c5f"/>
+  <circle cx="66" cy="28" r="9" fill="#e0b34c"/>
+  <circle cx="96" cy="28" r="9" fill="#6fbf73"/>
+  <text x="600" y="36" text-anchor="middle" fill="#6e757d"
+        font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, monospace" font-size="22">GuiPAM</text>
+  <g font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, monospace" font-size="34">
+    <circle cx="450" cy="128" r="14" fill="#22c55e"/>
+    <text x="486" y="140" fill="#e7e9ec">10.20.10.1</text>
+    <circle cx="450" cy="200" r="14" fill="#22c55e"/>
+    <text x="486" y="212" fill="#e7e9ec">10.20.10.10</text>
+    <circle cx="450" cy="272" r="14" fill="#f59e0b"/>
+    <text x="486" y="284" fill="#e7e9ec">10.20.10.11</text>
+    <circle cx="450" cy="344" r="14" fill="#ef4444"/>
+    <text x="486" y="356" fill="#e7e9ec">10.20.10.32</text>
+    <circle cx="450" cy="416" r="14" fill="#7f1d1d"/>
+    <text x="486" y="428" fill="#6e757d">10.20.10.40</text>
+  </g>
+</svg>
