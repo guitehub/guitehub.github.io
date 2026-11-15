@@ -9,14 +9,15 @@ categories:
 #  - build
 #  - guide
 #  - sysadm
-  - project
+#  - project
+  - tool
 
 image: "vignette-flechettes.ico"
 ---
 
 # Fléchettes — scoreur
 
-[Ouvrir Fléchettes <i class="bi bi-arrow-right"></i>](/projets/flechettes.html){: .app-button}
+[Ouvrir Fléchettes <i class="bi bi-arrow-right"></i>](/outils/flechettes.html){: .app-button}
 
 À QUOI ÇA SERT
 --------------

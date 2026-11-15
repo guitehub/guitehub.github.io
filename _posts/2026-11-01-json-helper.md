@@ -9,8 +9,8 @@ categories:
 #  - build
 #  - guide
 #  - sysadm
-#  - project
-  - tool
+  - project
+#  - tool
 
 image: "vignette-json-helper.png"
 ---

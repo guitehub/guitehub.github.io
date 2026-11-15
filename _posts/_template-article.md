@@ -19,8 +19,8 @@ categories:
 #  - build
 #  - guide
 #  - sysadm
-#  - project        # app dans projets/ (voir README « Projets et outils »)
-#  - tool           # app dans outils/
+#  - tool           # s'ouvre et s'utilise sur le site (app dans outils/) — voir README « Projets et outils »
+#  - project        # se construit et se raconte : dépôt, bibliothèque, extension, matériel
 
 # --- Optionnel --------------------------------------------------------------
 # image: "mon-image.jpg"                          # miniature (liste) + visuel d'en-tête, depuis assets/images/
