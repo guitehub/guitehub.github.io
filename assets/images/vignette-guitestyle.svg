@@ -1,0 +1,26 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 500" role="img" aria-label="Nuancier guitestyle">
+  <!-- Bandeau de l'article « guitestyle » : fenêtre aux couleurs du site, nuancier des jetons
+       (thème sombre en haut, clair en bas). Le centre (500 × 500) reste lisible
+       quand la miniature des listes recadre l'image en carré. -->
+  <rect width="1200" height="500" fill="#16181b"/>
+  <rect x="0" y="0" width="1200" height="56" fill="#1f2226"/>
+  <circle cx="36" cy="28" r="9" fill="#e06c5f"/>
+  <circle cx="66" cy="28" r="9" fill="#e0b34c"/>
+  <circle cx="96" cy="28" r="9" fill="#6fbf73"/>
+  <text x="600" y="36" text-anchor="middle" fill="#6e757d"
+        font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, monospace" font-size="22">tokens.css</text>
+  <!-- Thème sombre -->
+  <g stroke="#2b2f34" stroke-width="3">
+    <rect x="390" y="110" width="96" height="96" rx="18" fill="#16181b"/>
+    <rect x="502" y="110" width="96" height="96" rx="18" fill="#a4abb3"/>
+    <rect x="614" y="110" width="96" height="96" rx="18" fill="#e7e9ec"/>
+    <rect x="726" y="110" width="96" height="96" rx="18" fill="#e08b4c"/>
+  <!-- Thème clair -->
+    <rect x="390" y="222" width="96" height="96" rx="18" fill="#ffffff"/>
+    <rect x="502" y="222" width="96" height="96" rx="18" fill="#555b63"/>
+    <rect x="614" y="222" width="96" height="96" rx="18" fill="#14161a"/>
+    <rect x="726" y="222" width="96" height="96" rx="18" fill="#b4531f"/>
+  </g>
+  <text x="600" y="410" text-anchor="middle"
+        font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, monospace" font-size="30"><tspan fill="#a4abb3">color:&#160;</tspan><tspan fill="#e08b4c">var(--accent)</tspan><tspan fill="#a4abb3">;</tspan></text>
+</svg>
