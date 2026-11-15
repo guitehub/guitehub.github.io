@@ -348,3 +348,10 @@ ne tranchait pas ou a été arbitré. Fichier non publié (exclu dans `_config.y
   `text-sm`, sans temps, type ni boutons Ajouter / portions : trop étroit pour le compteur, on ouvre la
   fiche pour ajouter. Les recettes de la liste gardent le léger surlignage et prennent en plus une
   pastille cochée sur la photo, plus lisible à cette taille. 1.7.0.
+
+## guitestyle (1.7.1)
+
+- **Jetons déplacés** de `assets/css/tokens.css` vers `assets/guitestyle/tokens.css`, regroupés avec un
+  `base.css` (reset et typographie extraits de `style.css`) dans le socle `guitestyle`, réutilisable par
+  d'autres projets (doc : `/projets/guitestyle/`). L'app ne charge toujours que `tokens.css` : Tailwind
+  fournit son reset. Chemin mis à jour dans `index.html` et dans le pré-cache de `sw.js`.

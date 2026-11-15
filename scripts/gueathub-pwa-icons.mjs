@@ -19,7 +19,7 @@ const ROOT = resolve(fileURLToPath(new URL("..", import.meta.url)));
 const require = createRequire(import.meta.url);
 const OUT = join(ROOT, "outils/gueathub/icons");
 
-const ACCENT = "#b4531f"; // --accent (thème clair) de assets/css/tokens.css
+const ACCENT = "#b4531f"; // --accent (thème clair) de assets/guitestyle/tokens.css
 const GLYPH_FILE = join(dirname(require.resolve("bootstrap-icons/package.json")), "icons/basket3-fill.svg");
 const glyph = readFileSync(GLYPH_FILE, "utf8").replace(/^[\s\S]*?<svg[^>]*>/, "").replace(/<\/svg>\s*$/, "").trim();
 

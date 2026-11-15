@@ -77,7 +77,7 @@ Contournement exceptionnel : `HUSKY=0 git commit …`. La CI vérifie de toute f
 
 Bon à savoir :
 
-- Les couleurs viennent de `/assets/css/tokens.css`, partagé avec le blog : ne pas les redéfinir ici.
+- Les couleurs viennent de `/assets/guitestyle/tokens.css`, partagé avec le blog : ne pas les redéfinir ici.
 - Avec `jekyll serve`, chaque régénération crée une nouvelle version du service worker : le message
   « Nouvelle version disponible » apparaît après chaque modification.
 - Les choix de conception sont notés dans [`DECISIONS.md`](DECISIONS.md).

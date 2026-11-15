@@ -1,6 +1,6 @@
 /* outils/gueathub/src/app.css — entrée Tailwind (non publiée).
    Compilé vers outils/gueathub/app.css : npm run css:build (ou css:watch).
-   Les couleurs viennent des jetons du blog (assets/css/tokens.css, chargé avant app.css) :
+   Les couleurs viennent des jetons du blog (assets/guitestyle/tokens.css, chargé avant app.css) :
    elles basculent seules en sombre, donc aucune variante dark: pour les couleurs. */
 
 @import "tailwindcss" source(none);

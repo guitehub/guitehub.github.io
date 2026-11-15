@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>guitestyle</title>
+  <meta name="description" content="guitestyle : le socle de style du Hub de la Guite, variables CSS et base typographique à réutiliser dans d'autres projets.">
+
+  <!-- Même anti-FOUC et même clé "theme" que le blog -->
+  <script>
+    (function () {
+      try {
+        var t = localStorage.getItem('theme');
+        if (t) document.documentElement.setAttribute('data-theme', t);
+      } catch (e) {}
+    })();
+  </script>
+
+  <!-- La page utilise ce qu'elle documente -->
+  <link rel="stylesheet" href="/assets/guitestyle/tokens.css">
+  <link rel="stylesheet" href="/assets/guitestyle/base.css">
+
+  <style>
+    .wrap { max-width: var(--measure); margin-inline: auto; padding: 2.5rem var(--pad) 4rem; }
+    header { display: flex; justify-content: space-between; align-items: center; gap: 1rem; flex-wrap: wrap; }
+    header h1 { margin: 0; font-size: 1.9rem; line-height: 1.2; }
+    .version { color: var(--fg-faint); font-family: var(--mono); font-size: 0.9rem; }
+    .lead { color: var(--fg-soft); margin-top: 0.4rem; }
+    h2 { font-size: 1.3rem; margin: 2.8rem 0 0.8rem; }
+    .muted { color: var(--fg-soft); }
+
+    .theme { display: inline-flex; border: 1px solid var(--border); border-radius: 0.5rem; overflow: hidden; }
+    .theme button {
+      font: inherit; font-size: 0.85rem; padding: 0.35rem 0.75rem; cursor: pointer;
+      background: var(--bg); color: var(--fg-soft); border: 0;
+    }
+    .theme button + button { border-left: 1px solid var(--border); }
+    .theme button[aria-pressed="true"] { background: var(--accent); color: var(--accent-fg); }
+
+    .swatches { display: grid; grid-template-columns: repeat(auto-fill, minmax(10.5rem, 1fr)); gap: 0.75rem; }
+    .swatch { border: 1px solid var(--border); border-radius: 0.6rem; overflow: hidden; background: var(--bg); }
+    .swatch .chip { height: 3.2rem; border-bottom: 1px solid var(--border); }
+    .swatch div:last-child { padding: 0.45rem 0.65rem; font-size: 0.82rem; line-height: 1.45; }
+    .swatch code { border: 0; padding: 0; background: none; }
+    .swatch .val { color: var(--fg-faint); font-family: var(--mono); }
+
+    .snippet { position: relative; }
+    .snippet pre { padding-right: 5.5rem; }
+    .copy {
+      position: absolute; top: 0.55rem; right: 0.55rem; font: inherit; font-size: 0.78rem;
+      padding: 0.2rem 0.6rem; border-radius: 0.4rem; cursor: pointer;
+      background: var(--bg); color: var(--fg-soft); border: 1px solid var(--border);
+    }
+    .copy:hover { color: var(--accent); border-color: var(--accent); }
+
+    table { border-collapse: collapse; width: 100%; font-size: 0.93rem; }
+    th, td { text-align: left; padding: 0.45rem 0.6rem; border-bottom: 1px solid var(--border); vertical-align: top; }
+    th { background: var(--bg-soft); font-weight: 600; }
+    .table-scroll { overflow-x: auto; }
+
+    footer { margin-top: 3.5rem; color: var(--fg-faint); font-size: 0.85rem; }
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <header>
+      <div>
+        <h1>guitestyle <span class="version">v1.0.0</span></h1>
+      </div>
+      <div class="theme" role="group" aria-label="Thème">
+        <button type="button" data-set="auto">Auto</button>
+        <button type="button" data-set="light">Clair</button>
+        <button type="button" data-set="dark">Sombre</button>
+      </div>
+    </header>
+    <p class="lead">Le socle de style du <a href="/">Hub de la Guite</a> : des variables CSS et une base typographique,
+      à charger dans n'importe quel projet pour en reprendre l'allure.</p>
+
+    <h2>Utiliser</h2>
+    <p><strong>En direct</strong> : le projet suit chaque modification publiée sur le site.</p>
+    <div class="snippet"><pre><code>&lt;link rel="stylesheet" href="https://guitehub.github.io/assets/guitestyle/tokens.css"&gt;
+&lt;link rel="stylesheet" href="https://guitehub.github.io/assets/guitestyle/base.css"&gt;</code></pre><button class="copy" type="button">Copier</button></div>
+
+    <p><strong>Figé sur une version</strong> : rien ne bouge tant que le projet ne change pas de tag.</p>
+    <div class="snippet"><pre><code>&lt;link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/guitehub/guitehub.github.io@guitestyle-v1.0.0/assets/guitestyle/tokens.css"&gt;
+&lt;link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/guitehub/guitehub.github.io@guitestyle-v1.0.0/assets/guitestyle/base.css"&gt;</code></pre><button class="copy" type="button">Copier</button></div>
+
+    <p>Garder ses propres couleurs, et prendre le reste :</p>
+    <pre><code>:root { --accent: #2a7; }</code></pre>
+    <p class="muted">Le thème suit le système. Pour le forcer : <code>data-theme="light"</code> ou
+      <code>data-theme="dark"</code> sur <code>&lt;html&gt;</code>.</p>
+
+    <h2>Couleurs</h2>
+    <p class="muted">Les valeurs affichées sont celles du thème en cours.</p>
+    <div class="swatches" id="swatches"></div>
+
+    <h2>Polices et mesures</h2>
+    <div class="table-scroll">
+      <table>
+        <thead><tr><th>Variable</th><th>Rôle</th><th>Valeur</th></tr></thead>
+        <tbody id="others"></tbody>
+      </table>
+    </div>
+
+    <h2>Base</h2>
+    <p><code>base.css</code> règle le corps du texte, les <a href="#">liens</a>, la sélection, les images,
+      les filets et le code, comme <code>&lt;code&gt;</code> en ligne ou un bloc :</p>
+    <pre><code>body { font-family: var(--sans); color: var(--fg); }</code></pre>
+    <p>Aucune classe, aucune mise en page : chaque projet garde les siennes.</p>
+    <hr>
+
+    <h2>Fichiers et versions</h2>
+    <div class="table-scroll">
+      <table>
+        <thead><tr><th>Fichier</th><th>Contenu</th><th>Peut changer</th></tr></thead>
+        <tbody>
+          <tr><td><a href="/assets/guitestyle/tokens.css"><code>tokens.css</code></a></td><td>Variables seulement</td><td>Les noms : jamais hors version majeure</td></tr>
+          <tr><td><a href="/assets/guitestyle/base.css"><code>base.css</code></a></td><td>Reset, corps, liens, code</td><td>En version mineure</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p class="muted">Versions semver : correctif pour une valeur ajustée, mineure pour un ajout ou une retouche,
+      majeure pour une variable renommée ou supprimée. Historique : <a href="/assets/guitestyle/CHANGELOG.md">CHANGELOG.md</a>.</p>
+
+    <footer><a href="/">Le Hub de la Guite</a> · <a href="https://github.com/guitehub/guitehub.github.io/tree/main/assets/guitestyle">source</a></footer>
+  </div>
+
+  <script>
+    var COLORS = [
+      ['--bg', 'Fond'], ['--bg-soft', 'Fond secondaire'], ['--fg', 'Texte'], ['--fg-soft', 'Texte atténué'],
+      ['--fg-faint', 'Texte discret'], ['--border', 'Filets'], ['--accent', 'Accent'], ['--accent-fg', 'Texte sur accent'],
+      ['--code-bg', 'Fond du code'], ['--sel', 'Sélection']
+    ];
+    var OTHERS = [
+      ['--sans', 'Police du texte'], ['--mono', 'Police du code'],
+      ['--measure', 'Largeur de lecture'], ['--pad', 'Marge latérale']
+    ];
+    var root = document.documentElement;
+
+    function el(tag, cls, text) {
+      var e = document.createElement(tag);
+      if (cls) e.className = cls;
+      if (text) e.textContent = text;
+      return e;
+    }
+
+    var swatches = document.getElementById('swatches');
+    var vals = {};
+    COLORS.forEach(function (c) {
+      var card = el('div', 'swatch'), chip = el('div', 'chip'), info = el('div');
+      chip.style.background = 'var(' + c[0] + ')';
+      info.appendChild(el('code', '', c[0]));
+      info.appendChild(el('br'));
+      info.appendChild(document.createTextNode(c[1]));
+      info.appendChild(el('br'));
+      vals[c[0]] = info.appendChild(el('span', 'val'));
+      card.appendChild(chip); card.appendChild(info);
+      swatches.appendChild(card);
+    });
+
+    var others = document.getElementById('others');
+    OTHERS.forEach(function (o) {
+      var tr = el('tr'), td = el('td');
+      td.appendChild(el('code', '', o[0]));
+      tr.appendChild(td);
+      tr.appendChild(el('td', '', o[1]));
+      vals[o[0]] = tr.appendChild(el('td', 'muted'));
+      vals[o[0]].style.fontFamily = 'var(' + (o[0] === '--sans' ? '--sans' : '--mono') + ')';
+      others.appendChild(tr);
+    });
+
+    function refresh() {
+      var cs = getComputedStyle(root);
+      Object.keys(vals).forEach(function (k) { vals[k].textContent = cs.getPropertyValue(k).trim().replace(/\s+/g, ' '); });
+      var cur = root.getAttribute('data-theme') || 'auto';
+      document.querySelectorAll('.theme button').forEach(function (b) {
+        b.setAttribute('aria-pressed', String(b.dataset.set === cur));
+      });
+    }
+
+    document.querySelectorAll('.theme button').forEach(function (b) {
+      b.addEventListener('click', function () {
+        var t = b.dataset.set;
+        try {
+          if (t === 'auto') { root.removeAttribute('data-theme'); localStorage.removeItem('theme'); }
+          else { root.setAttribute('data-theme', t); localStorage.setItem('theme', t); }
+        } catch (e) { if (t !== 'auto') root.setAttribute('data-theme', t); }
+        refresh();
+      });
+    });
+    matchMedia('(prefers-color-scheme: dark)').addEventListener('change', refresh);
+
+    document.querySelectorAll('.copy').forEach(function (btn) {
+      btn.addEventListener('click', function () {
+        var text = btn.previousElementSibling.textContent;
+        navigator.clipboard.writeText(text).then(function () {
+          btn.textContent = 'Copié';
+          setTimeout(function () { btn.textContent = 'Copier'; }, 1500);
+        });
+      });
+    });
+
+    refresh();
+  </script>
+</body>
+</html>

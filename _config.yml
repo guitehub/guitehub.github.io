@@ -34,3 +34,4 @@ exclude:
   - outils/gueathub/tests
   - outils/gueathub/README.md
   - outils/gueathub/DECISIONS.md
+  - assets/guitestyle/README.md

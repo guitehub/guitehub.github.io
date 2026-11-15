@@ -1,8 +1,11 @@
 /* =========================================================================
-   Le Hub de la Guite — jetons de design (couleurs, polices, mesures)
-   Source unique, partagée par le blog (_layouts/default.html) et les outils
-   (outils/gueathub/). Clair par défaut, sombre automatique + bascule manuelle
+   guitestyle — tokens.css (v1.0.0)
+   Jetons de design du Hub de la Guite (couleurs, polices, mesures).
+   Source unique, partagée par le blog (_layouts/default.html), les outils
+   (outils/gueathub/) et tout projet qui le charge. Doc : /projets/guitestyle/
+   Clair par défaut, sombre automatique + bascule manuelle
    via data-theme="light" | "dark" sur <html>.
+   Contrat : les NOMS des variables. Renommer ou supprimer = version majeure.
    ========================================================================= */
 
 /* --- Thème : variables ---------------------------------------------------- */

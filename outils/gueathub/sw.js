@@ -21,7 +21,7 @@ const NETWORK_TIMEOUT = 4000;
 
 // Liste générée par Jekyll : tous les fichiers publiés sous /outils/gueathub/.
 const SHELL = [
-  "/assets/css/tokens.css",
+  "/assets/guitestyle/tokens.css",
   RECIPES_URL,
 {%- for file in site.static_files %}
   {%- assign prefix = file.path | slice: 0, 17 %}

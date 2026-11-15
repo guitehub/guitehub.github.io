@@ -3,41 +3,14 @@
    CSS maison, piloté par variables. Clair par défaut, dark auto + toggle.
    ========================================================================= */
 
-/* Jetons (variables de thème) : assets/css/tokens.css, chargé avant ce fichier. */
+/* Socle guitestyle chargé avant ce fichier : assets/guitestyle/tokens.css (variables)
+   puis assets/guitestyle/base.css (reset, typographie, liens, code). Ici : le propre au blog. */
 
-/* --- Reset léger ---------------------------------------------------------- */
-*, *::before, *::after { box-sizing: border-box; }
-
-html { -webkit-text-size-adjust: 100%; }
-
+/* --- Mise en page du corps (pied de page collé en bas) -------------------- */
 body {
-  margin: 0;
-  background: var(--bg);
-  color: var(--fg);
-  font-family: var(--sans);
-  font-size: 1.0625rem;
-  line-height: 1.7;
-  text-rendering: optimizeLegibility;
-  -webkit-font-smoothing: antialiased;
   display: flex;
   flex-direction: column;
   min-height: 100vh;
-}
-
-::selection { background: var(--sel); }
-
-img { max-width: 100%; height: auto; }
-
-a {
-  color: var(--accent);
-  text-decoration: none;
-}
-a:hover { text-decoration: underline; text-underline-offset: 0.15em; }
-
-hr {
-  border: 0;
-  border-top: 1px solid var(--border);
-  margin: 2.5rem 0;
 }
 
 /* --- Conteneur centré ----------------------------------------------------- */
@@ -169,32 +142,7 @@ blockquote, .blockquote {
 }
 .blockquote { font-size: 1.05rem; }
 
-/* --- Code ----------------------------------------------------------------- */
-code, kbd, samp {
-  font-family: var(--mono);
-  font-size: 0.9em;
-}
-:not(pre) > code {
-  background: var(--code-bg);
-  padding: 0.12em 0.4em;
-  border-radius: 0.35em;
-  border: 1px solid var(--border);
-}
-pre {
-  background: var(--code-bg);
-  border: 1px solid var(--border);
-  border-radius: 0.6rem;
-  padding: 1rem 1.1rem;
-  overflow-x: auto;
-  line-height: 1.5;
-  margin: 1.5rem 0;
-}
-pre code {
-  background: none;
-  border: 0;
-  padding: 0;
-  font-size: 0.875rem;
-}
+/* --- Code (le socle est dans guitestyle/base.css) ------------------------ */
 .highlight { margin: 1.5rem 0; }
 .highlight pre { margin: 0; }
 
