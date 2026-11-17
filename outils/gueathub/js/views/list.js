@@ -145,9 +145,9 @@ export function listView(app) {
         ${emptyState({
           iconName: "card-checklist",
           title: "Ta liste est vide.",
-          text: "Choisis des recettes dans le menu pour la remplir.",
+          text: "Choisis des recettes pour la remplir.",
           actionHref: href.recipes(),
-          actionLabel: "Voir le menu",
+          actionLabel: "Voir les recettes",
         })}
         ${manualForm()}`);
     }

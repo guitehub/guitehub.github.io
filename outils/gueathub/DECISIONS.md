@@ -369,3 +369,12 @@ ne tranchait pas ou a été arbitré. Fichier non publié (exclu dans `_config.y
   (portions, voir, retirer) disparaissent, remplacés par l'écran « Recettes ».
 - **Fiche recette** : le lien retour et l'onglet actif suivent l'écran d'origine (« Menu » ou « Recettes »),
   retenu en mémoire pendant la visite.
+
+## Recettes / Menu : noms inversés (1.8.1)
+
+- **« Recettes »** (icône `book`, `#/`) redevient le nom du catalogue complet, **« Menu »** (icône
+  `journal-bookmark`, `#/selection`) celui des recettes choisies. À la maison, « le menu » est ce qu'on a
+  décidé de manger (« le menu de la semaine ») ; « Recettes » seul pour la sélection était ambigu, tout le
+  catalogue étant fait de recettes. Ordre d'usage : on parcourt les recettes, on compose le menu, la liste
+  de courses en découle.
+- Titre de l'écran : « Menu » tout court, sans durée imposée. Adresses inchangées (`#/`, `#/selection`).

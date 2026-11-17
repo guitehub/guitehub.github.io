@@ -18,13 +18,13 @@ import { recipesView } from "./views/recipes.js";
 import { selectionView } from "./views/selection.js";
 import { settingsView } from "./views/settings.js";
 
-const APP_VERSION = "1.8.0";
+const APP_VERSION = "1.8.1";
 
 const VIEWS = { recipes: recipesView, selection: selectionView, recipe: recipeView, list: listView, settings: settingsView };
 
 const NAV = [
-  { route: "recipes", href: href.recipes(), label: "Menu", icon: "book" },
-  { route: "selection", href: href.selection(), label: "Recettes", icon: "journal-bookmark" },
+  { route: "recipes", href: href.recipes(), label: "Recettes", icon: "book" },
+  { route: "selection", href: href.selection(), label: "Menu", icon: "journal-bookmark" },
   { route: "list", href: href.list(), label: "Liste", icon: "card-checklist" },
   { route: "settings", href: href.settings(), label: "Réglages", icon: "gear" },
 ];
@@ -49,7 +49,7 @@ const app = {
   timers: null,
   nextFocus: null,
   fallbackFocus: null,
-  origin: "recipes", // écran (menu ou recettes sélectionnées) d'où l'on ouvre une fiche
+  origin: "recipes", // écran (recettes ou menu) d'où l'on ouvre une fiche
   navigate: (hash) => {
     location.hash = hash;
   },

@@ -1,6 +1,6 @@
-// Routes par hash : #/ (menu), #/selection (recettes sélectionnées), #/recette/:id, #/liste, #/reglages.
+// Routes par hash : #/ (toutes les recettes), #/selection (menu : recettes choisies), #/recette/:id, #/liste, #/reglages.
 
-/** Analyse un hash. Toute adresse inconnue renvoie vers le menu. */
+/** Analyse un hash. Toute adresse inconnue renvoie vers les recettes. */
 export function parseRoute(hash) {
   const path = String(hash).replace(/^#/, "").replace(/^\/?/, "/");
   const recipe = path.match(/^\/recette\/([^/?#]+)\/?$/);

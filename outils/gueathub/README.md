@@ -61,7 +61,7 @@ recettes.json         généré par Jekyll : rayons, photos disponibles, recette
 ingredients.txt       généré par Jekyll : « nom | rayon » des ingrédients existants
 sw.js                 service worker (version = date du build)
 js/domain/            logique pure : unités, portions, liste de courses, recherche
-js/views/             écrans : menu, recettes sélectionnées, fiche, liste, réglages
+js/views/             écrans : recettes, menu, fiche, liste, réglages
 js/ui/                gabarits, panneaux, toasts, minuteurs, thème, icônes
 js/store.js           état local (clé localStorage « gueathub:v1 »)
 src/, tests/          sources Tailwind et tests (non publiés)

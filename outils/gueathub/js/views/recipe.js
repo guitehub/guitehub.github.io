@@ -32,7 +32,7 @@ export function recipeView(app, { id }) {
             iconName: "journal-bookmark",
             title: "Cette recette n'existe pas ou a été retirée",
             actionHref: href.recipes(),
-            actionLabel: "Voir le menu",
+            actionLabel: "Voir les recettes",
           })}`),
     };
   }
@@ -224,7 +224,7 @@ export function recipeView(app, { id }) {
     const type = TYPES[recipe.type];
     return container(html`<div class="print:hidden">
       <a href="${app.origin === "selection" ? href.selection() : href.recipes()}" class="-ml-2 inline-flex min-h-11 items-center gap-2 rounded-full px-2 text-sm text-ink-soft hover:text-ink" data-focus="back">
-        ${icon("arrow-left", "size-4")} ${app.origin === "selection" ? "Recettes" : "Menu"}
+        ${icon("arrow-left", "size-4")} ${app.origin === "selection" ? "Menu" : "Recettes"}
       </a>
       <div class="mt-2">${recipePhoto(app, recipe, true)}</div>
       <header class="mt-5">

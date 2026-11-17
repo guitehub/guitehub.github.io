@@ -1,4 +1,4 @@
-// Écran « Recettes » (#/selection) : les recettes choisies pour la période, avec leurs portions.
+// Écran « Menu » (#/selection) : les recettes choisies pour la période, avec leurs portions.
 
 import { portionsUnit } from "../domain/scale.js";
 import { totalTime } from "../domain/text.js";
@@ -53,21 +53,21 @@ export function selectionView(app) {
   function render() {
     const { selection } = store.state;
     if (selection.length === 0) {
-      return container(html`${viewTitle("Recettes sélectionnées")}
+      return container(html`${viewTitle("Menu")}
         ${emptyState({
           iconName: "journal-bookmark",
-          title: "Aucune recette sélectionnée.",
-          text: "Choisis des recettes dans le menu.",
+          title: "Ton menu est vide.",
+          text: "Choisis des recettes pour le composer.",
           actionHref: href.recipes(),
-          actionLabel: "Voir le menu",
+          actionLabel: "Voir les recettes",
         })}`);
     }
-    return container(html`${viewTitle("Recettes sélectionnées")}
+    return container(html`${viewTitle("Menu")}
       <p class="mt-1 text-sm text-ink-soft">${plural(selection.length, "recette")} pour la liste de courses</p>
       <ul class="mt-4 flex flex-col gap-3">${selection.map(item)}</ul>`);
   }
 
-  /** Focus de repli quand une recette quitte la liste : la voisine, sinon le lien du menu. */
+  /** Focus de repli quand une recette quitte la liste : la voisine, sinon le lien vers les recettes. */
   function focusAfterRemoval(button) {
     const current = button.closest("li");
     const neighbour = current.nextElementSibling ?? current.previousElementSibling;
@@ -91,5 +91,5 @@ export function selectionView(app) {
     }
   }
 
-  return { title: "Recettes sélectionnées", render, handle };
+  return { title: "Menu", render, handle };
 }
