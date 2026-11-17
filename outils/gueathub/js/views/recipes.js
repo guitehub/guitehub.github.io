@@ -1,4 +1,4 @@
-// Écran « Recettes » (#/) : recherche, filtres, tri, grille de cartes.
+// Écran « Menu » (#/) : toutes les recettes, avec recherche, filtres, tri, grille de cartes.
 
 import { filterRecipes, pickRandom, sortRecipes, totalTime } from "../domain/text.js";
 import { formatDuration } from "../domain/units.js";
@@ -171,7 +171,7 @@ export function recipesView(app) {
 
   function render() {
     return container(
-      html`<h1 class="sr-only" tabindex="-1" data-view-title>Recettes</h1>
+      html`<h1 class="sr-only" tabindex="-1" data-view-title>Menu</h1>
       <div class="flex flex-col gap-3">
         <label class="relative block">
           <span class="sr-only">Rechercher une recette ou un ingrédient</span>
@@ -276,5 +276,5 @@ export function recipesView(app) {
     return true;
   }
 
-  return { title: "Recettes", render, handle, update };
+  return { title: "Menu", render, handle, update };
 }

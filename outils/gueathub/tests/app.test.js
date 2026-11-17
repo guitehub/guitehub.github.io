@@ -24,12 +24,13 @@ function memoryStorage(initial = {}) {
 
 // --- Routeur -----------------------------------------------------------------
 
-test("parseRoute : les quatre routes, et repli sur les recettes", () => {
+test("parseRoute : les cinq routes, et repli sur les recettes", () => {
   assert.deepEqual(parseRoute(""), { name: "recipes", params: {} });
   assert.deepEqual(parseRoute("#/"), { name: "recipes", params: {} });
   assert.deepEqual(parseRoute("#/recette/gratin-dauphinois"), { name: "recipe", params: { id: "gratin-dauphinois" } });
   assert.deepEqual(parseRoute("#/recette/cr%C3%AApes/"), { name: "recipe", params: { id: "crêpes" } });
   assert.deepEqual(parseRoute("#/recette/%E0%A4%A"), { name: "recipe", params: { id: "%E0%A4%A" } });
+  assert.deepEqual(parseRoute("#/selection"), { name: "selection", params: {} });
   assert.deepEqual(parseRoute("#/liste"), { name: "list", params: {} });
   assert.deepEqual(parseRoute("#reglages"), { name: "settings", params: {} });
   assert.deepEqual(parseRoute("#/nimporte-quoi"), { name: "recipes", params: {}, redirect: true });

@@ -1,6 +1,6 @@
-// Routes par hash : #/ (recettes), #/recette/:id, #/liste, #/reglages.
+// Routes par hash : #/ (menu), #/selection (recettes sélectionnées), #/recette/:id, #/liste, #/reglages.
 
-/** Analyse un hash. Toute adresse inconnue renvoie vers les recettes. */
+/** Analyse un hash. Toute adresse inconnue renvoie vers le menu. */
 export function parseRoute(hash) {
   const path = String(hash).replace(/^#/, "").replace(/^\/?/, "/");
   const recipe = path.match(/^\/recette\/([^/?#]+)\/?$/);
@@ -13,6 +13,7 @@ export function parseRoute(hash) {
     }
     return { name: "recipe", params: { id } };
   }
+  if (/^\/selection\/?$/.test(path)) return { name: "selection", params: {} };
   if (/^\/liste\/?$/.test(path)) return { name: "list", params: {} };
   if (/^\/reglages\/?$/.test(path)) return { name: "settings", params: {} };
   if (path === "/") return { name: "recipes", params: {} };
@@ -21,6 +22,7 @@ export function parseRoute(hash) {
 
 export const href = {
   recipes: () => "#/",
+  selection: () => "#/selection",
   recipe: (id) => `#/recette/${encodeURIComponent(id)}`,
   list: () => "#/liste",
   settings: () => "#/reglages",

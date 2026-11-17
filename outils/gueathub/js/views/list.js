@@ -14,7 +14,6 @@ import {
   SWITCH,
   container,
   emptyState,
-  stepper,
   viewTitle,
 } from "./parts.js";
 
@@ -146,9 +145,9 @@ export function listView(app) {
         ${emptyState({
           iconName: "card-checklist",
           title: "Ta liste est vide.",
-          text: "Choisis des recettes pour la remplir.",
+          text: "Choisis des recettes dans le menu pour la remplir.",
           actionHref: href.recipes(),
-          actionLabel: "Voir les recettes",
+          actionLabel: "Voir le menu",
         })}
         ${manualForm()}`);
     }
@@ -157,22 +156,6 @@ export function listView(app) {
     return container(html`
       ${viewTitle("Liste de courses")}
       <div class="mt-4" data-region="progress">${progressBlock(sections)}</div>
-
-      ${state.selection.length > 0
-        ? html`<ul class="mt-4 flex flex-wrap gap-2" aria-label="Recettes de la liste">
-            ${state.selection.map((item) => {
-              const recipe = data.recipesById.get(item.id);
-              return html`<li>
-                <button type="button" data-action="recipe-sheet" data-id="${item.id}" data-focus="recipe:${item.id}"
-                  class="inline-flex min-h-11 items-center gap-2 rounded-full border border-line bg-page px-4 text-sm transition-colors hover:bg-soft"
-                  aria-label="${recipe.titre}, ${portionsText(item.portions, portionsUnit(recipe))} : modifier">
-                  <span class="font-medium">${recipe.titre}</span>
-                  <span class="tabular-nums text-ink-soft">${item.portions}</span>
-                </button>
-              </li>`;
-            })}
-          </ul>`
-        : ""}
 
       <div class="mt-4 flex flex-col gap-3 rounded-xl bg-soft p-3">
         <label class="flex min-h-11 cursor-pointer items-center justify-between gap-3 px-1">
@@ -195,46 +178,6 @@ export function listView(app) {
       <div data-region="placard">${placardBlock(placard)}</div>
       ${manualForm()}
     `);
-  }
-
-  function openRecipeSheet(id) {
-    const recipe = data.recipesById.get(id);
-    app.sheet.open({
-      title: recipe.titre,
-      body: () => {
-        const entry = actions.selectionEntry(id);
-        if (!entry) return null;
-        return html`<div class="flex flex-col gap-4">
-          ${stepper({
-            id,
-            value: entry.portions,
-            unitText: portionsText(entry.portions, portionsUnit(recipe)).replace(/^\d+ /, ""),
-            label: "Portions dans la liste",
-            decAction: "sheet-dec",
-            incAction: "sheet-inc",
-            prefix: "sheet-",
-            decLabel: entry.portions <= 1 ? "Retirer de la liste" : "Retirer une portion",
-          })}
-          <div class="grid grid-cols-1 gap-2 min-[400px]:grid-cols-2">
-            <a href="${href.recipe(id)}" class="${BUTTON_SECONDARY}" data-action="sheet-open">${icon("journal-bookmark", "size-4")} Voir la recette</a>
-            <button type="button" class="${BUTTON_SECONDARY}" data-action="sheet-remove">${icon("trash3", "size-4")} Retirer de la liste</button>
-          </div>
-        </div>`;
-      },
-      handle: (event) => {
-        const button = event.target.closest("[data-action]");
-        if (!button) return;
-        const entry = actions.selectionEntry(id);
-        const action = button.dataset.action;
-        if (action === "sheet-open") app.sheet.close();
-        else if (action === "sheet-remove") {
-          app.sheet.close();
-          actions.removeRecipe(id);
-        } else if (entry && (action === "sheet-inc" || action === "sheet-dec")) {
-          actions.setPortions(id, entry.portions + (action === "sheet-inc" ? 1 : -1));
-        }
-      },
-    });
   }
 
   function openDetailsSheet(key) {
@@ -319,9 +262,6 @@ export function listView(app) {
     const button = target.closest("[data-action]");
     if (!button) return;
     switch (button.dataset.action) {
-      case "recipe-sheet":
-        openRecipeSheet(button.dataset.id);
-        break;
       case "details":
         openDetailsSheet(button.dataset.key);
         break;

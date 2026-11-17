@@ -355,3 +355,17 @@ ne tranchait pas ou a été arbitré. Fichier non publié (exclu dans `_config.y
   `base.css` (reset et typographie extraits de `style.css`) dans le socle `guitestyle`, réutilisable par
   d'autres projets (doc : `/projets/guitestyle/`). L'app ne charge toujours que `tokens.css` : Tailwind
   fournit son reset. Chemin mis à jour dans `index.html` et dans le pré-cache de `sw.js`.
+
+## Onglets Menu / Recettes / Liste (1.8.0)
+
+- **Quatre onglets** : « Menu » (ex-« Recettes », toutes les recettes, `#/`, icône `book`), « Recettes »
+  (nouvel écran `#/selection`, icône `journal-bookmark`), « Liste », « Réglages ».
+- **Écran « Recettes »** : les recettes sélectionnées, dans l'ordre d'ajout, chacune avec sa photo, sa
+  description courte, son temps total et son type, puis le compteur de portions, « Voir la recette » et la
+  corbeille (retrait annulable, comme avant). Sous `sm`, le compteur prend sa propre ligne : les trois
+  contrôles ne tiennent pas côte à côte sur un téléphone de 360 px. Pas de total des portions : les unités
+  diffèrent d'une recette à l'autre (personnes, parts, pièces…).
+- **Liste** : ne montre plus que la liste de courses. Les pastilles des recettes en haut et leur panneau
+  (portions, voir, retirer) disparaissent, remplacés par l'écran « Recettes ».
+- **Fiche recette** : le lien retour et l'onglet actif suivent l'écran d'origine (« Menu » ou « Recettes »),
+  retenu en mémoire pendant la visite.

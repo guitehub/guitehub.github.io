@@ -15,14 +15,16 @@ import { listView } from "./views/list.js";
 import { BUTTON_PRIMARY, container } from "./views/parts.js";
 import { recipeView } from "./views/recipe.js";
 import { recipesView } from "./views/recipes.js";
+import { selectionView } from "./views/selection.js";
 import { settingsView } from "./views/settings.js";
 
-const APP_VERSION = "1.7.1";
+const APP_VERSION = "1.8.0";
 
-const VIEWS = { recipes: recipesView, recipe: recipeView, list: listView, settings: settingsView };
+const VIEWS = { recipes: recipesView, selection: selectionView, recipe: recipeView, list: listView, settings: settingsView };
 
 const NAV = [
-  { route: "recipes", href: href.recipes(), label: "Recettes", icon: "journal-bookmark" },
+  { route: "recipes", href: href.recipes(), label: "Menu", icon: "book" },
+  { route: "selection", href: href.selection(), label: "Recettes", icon: "journal-bookmark" },
   { route: "list", href: href.list(), label: "Liste", icon: "card-checklist" },
   { route: "settings", href: href.settings(), label: "Réglages", icon: "gear" },
 ];
@@ -47,6 +49,7 @@ const app = {
   timers: null,
   nextFocus: null,
   fallbackFocus: null,
+  origin: "recipes", // écran (menu ou recettes sélectionnées) d'où l'on ouvre une fiche
   navigate: (hash) => {
     location.hash = hash;
   },
@@ -88,7 +91,7 @@ new ResizeObserver(([entry]) => {
 // --- Navigation -------------------------------------------------------------
 
 function renderNav() {
-  const active = current?.route.name === "recipe" ? "recipes" : current?.route.name;
+  const active = current?.route.name === "recipe" ? app.origin : current?.route.name;
   const remaining = app.actions ? app.actions.remaining() : 0;
   const badge = (className) =>
     remaining > 0
@@ -140,6 +143,7 @@ function renderView() {
 function showRoute(route, { initial = false } = {}) {
   app.sheet.close();
   current?.view.destroy?.();
+  if (route.name === "recipes" || route.name === "selection") app.origin = route.name;
   current = { route, view: VIEWS[route.name](app, route.params) };
   document.title = `${current.view.title} · gueathub`;
   renderNav();

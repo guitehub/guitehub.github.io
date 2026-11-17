@@ -20,7 +20,7 @@ const OUTPUT = join(ROOT, "outils/gueathub/js/ui/icons.js");
 
 const UI_ICONS = [
   // Navigation et actions
-  "journal-bookmark", "card-checklist", "gear", "house-door", "arrow-left", "search", "x-lg",
+  "book", "journal-bookmark", "card-checklist", "gear", "house-door", "arrow-left", "search", "x-lg",
   "plus-lg", "dash-lg", "check-lg", "trash3", "three-dots-vertical", "arrow-up", "arrow-down",
   "arrow-counterclockwise", "clipboard", "share", "link-45deg", "printer", "box-arrow-up-right", "chevron-down",
   "grid", "grid-3x3-gap",
